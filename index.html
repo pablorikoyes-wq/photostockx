@@ -17,7 +17,7 @@
             background: linear-gradient(135deg, #0a0a1a 0%, #0f0f2d 50%, #1a1a3e 100%);
             min-height: 100vh;
             color: white;
-            padding: 16px;
+            padding: 20px;
         }
 
         .container {
@@ -25,7 +25,6 @@
             margin: 0 auto;
         }
 
-        /* Страницы */
         .page {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -40,18 +39,32 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Шапка */
+        /* Шапка с лого слева */
         .header {
-            text-align: center;
-            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
             padding-top: 10px;
         }
 
-        .header-top {
+        .header-left {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            gap: 8px;
+        }
+
+        .header-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-title {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
         }
 
         .close-btn {
@@ -66,169 +79,33 @@
             cursor: pointer;
         }
 
-        .fotostok-title {
-            font-size: 13px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.5);
+        /* Центрированный контент */
+        .center-content {
+            text-align: center;
+            padding: 40px 20px;
         }
 
-        .logo {
-            font-size: 40px;
-            margin-bottom: 5px;
+        .big-logo {
+            font-size: 64px;
+            margin-bottom: 20px;
         }
 
-        h1 {
+        .title {
             font-size: 24px;
             font-weight: 700;
             background: linear-gradient(135deg, #00d4ff, #7b2cbf);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
         }
 
-        /* Экран загрузки */
-        .upload-title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .upload-subtitle {
-            text-align: center;
-            font-size: 12px;
-            color: rgba(255,255,255,0.5);
-            margin-bottom: 24px;
-        }
-
-        /* Квадратная область загрузки (плюсик) */
-        .upload-area {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            text-align: center;
-            cursor: pointer;
-            border: 2px dashed rgba(255,255,255,0.2);
-            transition: all 0.2s;
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .upload-area:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: #00d4ff;
-        }
-
-        /* Контейнер для сетки фотографий */
-        .photos-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 24px;
-        }
-
-        .photo-item {
-            position: relative;
-            aspect-ratio: 1;
-            border-radius: 14px;
-            overflow: hidden;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .remove-photo {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            width: 24px;
-            height: 24px;
-            background: rgba(0,0,0,0.7);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+        .subtitle {
             font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .remove-photo:hover {
-            background: #ff4444;
-        }
-
-        .plus-placeholder {
-            aspect-ratio: 1;
-            border-radius: 14px;
-            background: rgba(255,255,255,0.05);
-            border: 2px dashed rgba(255,255,255,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 32px;
-            color: rgba(255,255,255,0.5);
-            transition: all 0.2s;
-        }
-
-        .plus-placeholder:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: #00d4ff;
-        }
-
-        .counter {
-            text-align: right;
-            font-size: 13px;
-            margin: 12px 0 12px 0;
             color: rgba(255,255,255,0.6);
+            line-height: 1.5;
         }
 
-        .counter span {
-            color: #00d4ff;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        /* Кнопки */
-        .btn-submit {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 12px;
-        }
-
-        .btn-submit:active {
-            transform: scale(0.97);
-        }
-
-        .btn-back {
-            background: rgba(255,255,255,0.08);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.15);
-            padding: 12px;
-            border-radius: 14px;
-            font-size: 15px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .btn-back:active {
-            transform: scale(0.97);
-        }
-
-        /* Статистика на главной */
+        /* Статистика */
         .stats-card {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
@@ -261,6 +138,7 @@
             text-transform: uppercase;
         }
 
+        /* Кнопки */
         .btn-primary {
             width: 100%;
             padding: 14px;
@@ -287,6 +165,54 @@
             cursor: not-allowed;
         }
 
+        /* Две кнопки в ряд */
+        .double-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .double-buttons .btn-secondary {
+            flex: 1;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .double-buttons .btn-accept {
+            flex: 1;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .price {
+            font-size: 42px;
+            font-weight: 800;
+            color: #00d4ff;
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+
+        .commission {
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 20px;
+        }
+
         .footer {
             text-align: center;
             padding-top: 20px;
@@ -297,6 +223,22 @@
         .hidden {
             display: none;
         }
+
+        /* Анимация спиннера */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top-color: #00d4ff;
+            border-radius: 50%;
+            margin: 20px auto;
+            animation: spin 1s linear infinite;
+        }
     </style>
 </head>
 <body>
@@ -304,13 +246,16 @@
         <!-- ГЛАВНАЯ СТРАНИЦА -->
         <div id="mainPage" class="page active">
             <div class="header">
-                <div class="header-top">
-                    <div></div>
-                    <div class="fotostok-title">ФОТОСТОК</div>
-                    <div class="close-btn" id="closeBtn">✕</div>
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
                 </div>
-                <div class="logo">P</div>
-                <h1>PhotoStockX</h1>
+                <div class="close-btn" id="closeBtn">✕</div>
+            </div>
+
+            <div class="center-content">
+                <div class="big-logo">P</div>
+                <div class="title">PhotoStockX</div>
             </div>
 
             <div class="stats-card">
@@ -343,23 +288,103 @@
         <!-- СТРАНИЦА ЗАГРУЗКИ ФОТО -->
         <div id="uploadPage" class="page">
             <div class="header">
-                <div class="header-top">
-                    <div></div>
-                    <div class="fotostok-title">ФОТОСТОК</div>
-                    <div class="close-btn" id="closeBtnUpload">✕</div>
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
                 </div>
+                <div class="close-btn" id="closeBtnUpload">✕</div>
             </div>
 
-            <div class="upload-title">Загрузите фото</div>
-            <div class="upload-subtitle">Выберите до 10 снимков из галереи</div>
+            <div class="center-content">
+                <div class="big-logo">P</div>
+                <div class="title">PhotoStockX</div>
+            </div>
 
-            <!-- Сетка для фото и плюсика -->
-            <div id="photosContainer" class="photos-grid"></div>
+            <div class="upload-title" style="text-align:center; font-size:20px; font-weight:600;">Загрузите фото</div>
+            <div class="upload-subtitle" style="text-align:center; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:24px;">Выберите до 10 снимков из галереи</div>
 
-            <div class="counter">Выбрано: <span id="selectedCount">0</span> / 10</div>
+            <div id="photosContainer" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px;"></div>
 
-            <button class="btn-submit" id="submitBtn">Отправить на проверку</button>
-            <button class="btn-back" id="backToMainBtn">← Назад</button>
+            <div class="counter" style="text-align:right; font-size:13px; margin-bottom:16px;">Выбрано: <span id="selectedCount">0</span> / 10</div>
+
+            <button class="btn-primary" id="submitBtn">Отправить на проверку</button>
+            <button class="btn-disabled" id="backToMainBtn" style="margin-top:8px;">← Назад</button>
+        </div>
+
+        <!-- МОДЕРАЦИЯ (3 сек) -->
+        <div id="moderationPage" class="page">
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnMod">✕</div>
+            </div>
+            <div class="center-content">
+                <div class="big-logo">P</div>
+                <div class="title">PhotoStockX</div>
+                <div class="title" style="font-size:20px; margin-top:30px;">Модерация...</div>
+                <div class="subtitle" style="margin-top:15px;">Искусственный интеллект проверяет качество и уникальность ваших фото</div>
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <!-- ПРОВЕРКА ПРОЙДЕНА (2 сек) -->
+        <div id="successPage" class="page">
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnSuccess">✕</div>
+            </div>
+            <div class="center-content">
+                <div class="big-logo">P</div>
+                <div class="title">PhotoStockX</div>
+                <div class="title" style="font-size:20px; margin-top:30px;">Проверка пройдена!</div>
+                <div class="subtitle" style="margin-top:15px;">Ваши фотографии соответствуют высоким стандартам качества.</div>
+            </div>
+        </div>
+
+        <!-- ПОИСК ПОКУПАТЕЛЯ (13 сек) -->
+        <div id="searchPage" class="page">
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnSearch">✕</div>
+            </div>
+            <div class="center-content">
+                <div class="big-logo">P</div>
+                <div class="title">PhotoStockX</div>
+                <div class="title" style="font-size:20px; margin-top:30px;">Поиск покупателя...</div>
+                <div class="subtitle" style="margin-top:15px;">Найдено 4 потенциальных покупателя из США, ОАЭ и Германии</div>
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <!-- ПРЕДЛОЖЕНИЕ -->
+        <div id="offerPage" class="page">
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnOffer">✕</div>
+            </div>
+            <div class="center-content">
+                <div class="big-logo">P</div>
+                <div class="title">PhotoStockX</div>
+                <div class="title" style="font-size:18px; margin-top:20px;">ПРЕДЛОЖЕНИЕ НАЙДЕНО</div>
+                <div class="subtitle" style="margin-top:20px;">Покупатель готов забрать ваши фото за:</div>
+                <div class="price" id="offerPrice">0 ₽</div>
+                <div class="commission" id="commissionText">Комиссия сервиса 0% для первой продажи</div>
+            </div>
+            <div class="double-buttons">
+                <button class="btn-secondary" id="findNewBtn">Найти нового покупателя</button>
+                <button class="btn-accept" id="acceptBtn">Принять сделку</button>
+            </div>
         </div>
     </div>
 
@@ -371,47 +396,79 @@
         tg.expand();
 
         let selectedPhotos = [];
-        const MAX_PHOTOS = 10;
+        let currentOffer = null;
+        let timers = [];
+
+        function clearAllTimers() {
+            timers.forEach(t => clearTimeout(t));
+            timers = [];
+        }
 
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
 
+        function generatePrice() {
+            return (Math.random() * 2400 + 1600).toFixed(0);
+        }
+
+        function startSellingFlow() {
+            clearAllTimers();
+            
+            // Модерация 3 сек
+            showPage('moderationPage');
+            const t1 = setTimeout(() => {
+                // Проверка пройдена 2 сек
+                showPage('successPage');
+                const t2 = setTimeout(() => {
+                    // Поиск покупателя 13 сек
+                    showPage('searchPage');
+                    const t3 = setTimeout(() => {
+                        // Предложение
+                        currentOffer = generatePrice();
+                        document.getElementById('offerPrice').innerText = currentOffer + ' ₽';
+                        if (window.userSoldPhotos === undefined || window.userSoldPhotos === 0) {
+                            document.getElementById('commissionText').innerHTML = 'Комиссия сервиса 0% для первой продажи';
+                        } else {
+                            document.getElementById('commissionText').innerHTML = 'Комиссия сервиса 15%';
+                        }
+                        showPage('offerPage');
+                    }, 13000);
+                    timers.push(t3);
+                }, 2000);
+                timers.push(t2);
+            }, 3000);
+            timers.push(t1);
+        }
+
+        // === ГАЛЕРЕЯ ===
         function renderPhotosGrid() {
             const container = document.getElementById('photosContainer');
             container.innerHTML = '';
             
-            // Добавляем уже выбранные фото
             selectedPhotos.forEach((photo, idx) => {
                 const div = document.createElement('div');
                 div.className = 'photo-item';
+                div.style.cssText = 'position:relative; aspect-ratio:1; border-radius:14px; overflow:hidden; background:rgba(255,255,255,0.05);';
                 div.innerHTML = `
-                    <img src="${photo.data}">
-                    <div class="remove-photo" data-idx="${idx}">✕</div>
+                    <img src="${photo.data}" style="width:100%; height:100%; object-fit:cover;">
+                    <div class="remove-photo" data-idx="${idx}" style="position:absolute; top:6px; right:6px; width:24px; height:24px; background:rgba(0,0,0,0.7); border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:14px;">✕</div>
                 `;
                 container.appendChild(div);
             });
             
-            // Если есть место для нового фото - показываем плюсик
-            if (selectedPhotos.length < MAX_PHOTOS) {
+            if (selectedPhotos.length < 10) {
                 const plusDiv = document.createElement('div');
                 plusDiv.className = 'plus-placeholder';
+                plusDiv.style.cssText = 'aspect-ratio:1; border-radius:14px; background:rgba(255,255,255,0.05); border:2px dashed rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:32px; color:rgba(255,255,255,0.5);';
                 plusDiv.innerHTML = '➕';
                 plusDiv.onclick = () => document.getElementById('fileInput').click();
                 container.appendChild(plusDiv);
             }
             
-            // Заполняем пустые ячейки (чтобы сетка не прыгала)
-            const totalCells = Math.min(MAX_PHOTOS, Math.max(3, Math.ceil(selectedPhotos.length / 3) * 3));
-            const currentCount = container.children.length;
-            for (let i = currentCount; i < 3 && i < MAX_PHOTOS - selectedPhotos.length + 1; i++) {
-                // Не добавляем пустые ячейки, только если есть место и фото не выбраны
-            }
-            
             document.getElementById('selectedCount').innerText = selectedPhotos.length;
             
-            // Обработчики удаления
             document.querySelectorAll('.remove-photo').forEach(btn => {
                 btn.onclick = (e) => {
                     e.stopPropagation();
@@ -424,7 +481,7 @@
 
         function handleFileSelect(event) {
             const files = Array.from(event.target.files);
-            const remainingSlots = MAX_PHOTOS - selectedPhotos.length;
+            const remainingSlots = 10 - selectedPhotos.length;
             const filesToAdd = files.slice(0, remainingSlots);
             
             filesToAdd.forEach(file => {
@@ -443,15 +500,19 @@
             if (files.length > remainingSlots) {
                 tg.showPopup({
                     title: 'Много фото',
-                    message: `Можно выбрать не более ${MAX_PHOTOS} фото`,
+                    message: `Можно выбрать не более 10 фото`,
                     buttons: [{type: 'ok'}]
                 });
             }
         }
 
-        // Обработчики
+        // === ОБРАБОТЧИКИ ===
         document.getElementById('closeBtn').onclick = () => tg.close();
         document.getElementById('closeBtnUpload').onclick = () => tg.close();
+        document.getElementById('closeBtnMod').onclick = () => tg.close();
+        document.getElementById('closeBtnSuccess').onclick = () => tg.close();
+        document.getElementById('closeBtnSearch').onclick = () => tg.close();
+        document.getElementById('closeBtnOffer').onclick = () => tg.close();
         
         document.getElementById('startSellBtn').onclick = () => {
             showPage('uploadPage');
@@ -459,7 +520,6 @@
         };
         
         document.getElementById('backToMainBtn').onclick = () => showPage('mainPage');
-        
         document.getElementById('fileInput').onchange = handleFileSelect;
         
         document.getElementById('submitBtn').onclick = () => {
@@ -471,14 +531,25 @@
                 });
                 return;
             }
-            tg.showPopup({
-                title: 'Отправлено',
-                message: `Отправлено ${selectedPhotos.length} фото на проверку`,
-                buttons: [{type: 'ok'}]
-            });
+            startSellingFlow();
+        };
+        
+        document.getElementById('findNewBtn').onclick = () => {
+            startSellingFlow();
+        };
+        
+        document.getElementById('acceptBtn').onclick = () => {
+            if (currentOffer) {
+                tg.showPopup({
+                    title: 'Сделка принята!',
+                    message: `Вы получили ${currentOffer} ₽ на баланс`,
+                    buttons: [{type: 'ok'}]
+                });
+                showPage('mainPage');
+            }
         };
 
-        // Живая статистика
+        // Статистика
         let authors = 12434;
         let clients = 18362;
         let totalSold = 1042150;
