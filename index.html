@@ -39,17 +39,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.6; transform: scale(0.98); }
-            50% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0.6; transform: scale(0.98); }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -67,12 +56,6 @@
             background: linear-gradient(135deg, #00d4ff, #7b2cbf);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        h2 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 15px;
         }
 
         .subtitle {
@@ -111,7 +94,6 @@
             color: rgba(255,255,255,0.5);
             margin-top: 5px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .btn {
@@ -133,7 +115,6 @@
         .btn-primary {
             background: linear-gradient(135deg, #00d4ff, #7b2cbf);
             color: white;
-            box-shadow: 0 4px 15px rgba(0,212,255,0.2);
         }
 
         .btn-secondary {
@@ -142,39 +123,24 @@
             border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .btn-outline {
-            background: transparent;
-            color: #00d4ff;
-            border: 1px solid #00d4ff;
-        }
-
         .btn-back {
             background: rgba(255,255,255,0.08);
             color: white;
             margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.15);
         }
 
         .upload-area {
             background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
             border-radius: 24px;
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
             cursor: pointer;
             border: 2px dashed rgba(255,255,255,0.2);
-            transition: all 0.3s;
             margin-bottom: 20px;
-        }
-
-        .upload-area:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: #00d4ff;
         }
 
         .plus-icon {
             font-size: 48px;
-            font-weight: 300;
             color: rgba(255,255,255,0.6);
         }
 
@@ -182,13 +148,11 @@
             text-align: right;
             margin: 10px 0;
             font-size: 14px;
-            color: rgba(255,255,255,0.7);
         }
 
         .counter span {
             color: #00d4ff;
             font-weight: bold;
-            font-size: 18px;
         }
 
         .gallery {
@@ -198,7 +162,6 @@
             margin: 20px 0;
             max-height: 350px;
             overflow-y: auto;
-            padding: 5px;
         }
 
         .gallery-item {
@@ -228,61 +191,10 @@
             justify-content: center;
             cursor: pointer;
             font-size: 14px;
-            transition: all 0.2s;
         }
 
         .remove-btn:hover {
             background: #ff4444;
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #0f0f2d, #1a1a3e);
-            border-radius: 28px;
-            padding: 30px;
-            text-align: center;
-            max-width: 280px;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .modal-icon {
-            font-size: 56px;
-            margin-bottom: 15px;
-        }
-
-        .modal-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .modal-text {
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .modal-btn {
-            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
-            border: none;
-            border-radius: 30px;
-            padding: 12px 30px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
         }
 
         .footer {
@@ -296,31 +208,12 @@
             display: none;
         }
 
-        @keyframes fly {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            50% { transform: translateY(-100px) rotate(10deg); opacity: 0.5; }
-            100% { transform: translateY(-300px) rotate(20deg); opacity: 0; }
-        }
-
-        .flying {
-            animation: fly 0.8s ease forwards;
-            position: fixed;
-            z-index: 2000;
-            font-size: 40px;
-            pointer-events: none;
-        }
-
-        /* Специфичные стили */
         .price {
             font-size: 48px;
             font-weight: 800;
             color: #00d4ff;
             text-align: center;
             margin: 20px 0;
-        }
-
-        .price small {
-            font-size: 16px;
         }
 
         .commission {
@@ -352,11 +245,17 @@
             padding: 15px;
             border-radius: 12px;
             margin-bottom: 20px;
+            font-size: 13px;
         }
 
         .loading {
             text-align: center;
             padding: 40px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .loading-spinner {
@@ -374,16 +273,22 @@
             padding: 40px;
         }
 
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
         .searching-icon {
             font-size: 48px;
             animation: pulse 1.5s ease infinite;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- ГЛАВНАЯ СТРАНИЦА -->
-        <div id="mainPage" class="page">
+        <!-- Главная страница -->
+        <div id="mainPage" class="page active">
             <div class="header">
                 <div class="logo">📸</div>
                 <h1>PhotoStockX</h1>
@@ -393,508 +298,350 @@
             <div class="stats-card">
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-value" id="authors">0</div>
+                        <div class="stat-value" id="authors">12579</div>
                         <div class="stat-label">АВТОРОВ ONLINE</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value" id="clients">0</div>
+                        <div class="stat-value" id="clients">18456</div>
                         <div class="stat-label">КЛИЕНТОВ ONLINE</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value" id="totalSold">0</div>
+                        <div class="stat-value" id="totalSold">1042150</div>
                         <div class="stat-label">ПРОДАНО ВСЕГО</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value" id="todaySold">0</div>
+                        <div class="stat-value" id="todaySold">14244</div>
                         <div class="stat-label">СЕГОДНЯ ПРОДАНО</div>
                     </div>
                 </div>
             </div>
 
-            <button class="btn btn-primary" id="startSellingBtn">🚀 Начать продавать</button>
+            <button class="btn btn-primary" id="startBtn">🚀 Начать продавать</button>
             <button class="btn btn-secondary" id="profileBtn">👤 Мой профиль</button>
 
             <div class="footer">
                 <div>🧠 Нейросеть оценивает ваши кадры</div>
-                <div style="margin-top: 5px;">и находит покупателей за считанные секунды</div>
+                <div>и находит покупателей за считанные секунды</div>
             </div>
         </div>
 
-        <!-- ЗАГРУЗКА ФОТО -->
+        <!-- Загрузка фото -->
         <div id="uploadPage" class="page">
-            <button class="btn btn-back" id="backFromUploadBtn">← Назад</button>
-
+            <button class="btn btn-back" id="backBtn">← Назад</button>
             <div class="header">
                 <div class="logo">📸</div>
                 <h1>Загрузите фото</h1>
-                <div class="subtitle">Выберите до 10 снимков из галереи</div>
             </div>
-
             <div class="upload-area" id="uploadArea">
                 <div class="plus-icon">➕</div>
+                <div>Нажмите, чтобы выбрать фото</div>
             </div>
-
-            <div class="counter">
-                Выбрано: <span id="selectedCount">0</span> / 10
-            </div>
-
+            <div class="counter">Выбрано: <span id="selectedCount">0</span> / 10</div>
             <div class="gallery" id="gallery"></div>
-
             <button class="btn btn-primary" id="submitBtn">📨 Отправить на проверку</button>
         </div>
 
-        <!-- МОДЕРАЦИЯ -->
+        <!-- Модерация -->
         <div id="moderationPage" class="page">
-            <div class="header">
-                <div class="logo">🔍</div>
-                <h1>Модерация...</h1>
-                <div class="subtitle">Искусственный интеллект проверяет качество и уникальность ваших фото</div>
-            </div>
             <div class="loading">
                 <div class="loading-spinner"></div>
+                <h2>Модерация...</h2>
+                <div class="subtitle">ИИ проверяет качество ваших фото</div>
             </div>
         </div>
 
-        <!-- ПРОВЕРКА ПРОЙДЕНА -->
+        <!-- Проверка пройдена -->
         <div id="successPage" class="page">
             <div class="header">
                 <div class="logo">✅</div>
                 <h1>Проверка пройдена!</h1>
-                <div class="subtitle">Ваши фотографии соответствуют высоким стандартам качества.</div>
+                <div class="subtitle">Ваши фото соответствуют стандартам качества</div>
             </div>
             <button class="btn btn-primary" id="findBuyerBtn">🔍 Найти покупателя</button>
-            <button class="btn btn-back" id="backToMainFromSuccessBtn">← На главную</button>
         </div>
 
-        <!-- ПОИСК ПОКУПАТЕЛЯ -->
-        <div id="searchingPage" class="page">
+        <!-- Поиск покупателя -->
+        <div id="searchPage" class="page">
             <div class="searching">
                 <div class="searching-icon">🔍</div>
                 <h2>Поиск покупателя...</h2>
-                <div class="subtitle">Ищем подходящего покупателя для ваших фотографий</div>
+                <div class="subtitle">Ищем подходящего покупателя</div>
                 <div class="loading-spinner" style="margin-top: 30px;"></div>
             </div>
         </div>
 
-        <!-- ПРЕДЛОЖЕНИЕ НАЙДЕНО -->
+        <!-- Предложение -->
         <div id="offerPage" class="page">
             <div class="header">
-                <div class="logo">💎</div>
                 <h1>ПРЕДЛОЖЕНИЕ НАЙДЕНО</h1>
             </div>
             <div class="stats-card">
-                <div style="text-align: center; margin-bottom: 10px; color: rgba(255,255,255,0.6);">Покупатель готов забрать ваши фото за:</div>
+                <div style="text-align:center; margin-bottom:10px;">Покупатель готов забрать ваши фото за:</div>
                 <div class="price" id="offerPrice">0 ₽</div>
-                <div class="commission" id="commissionText">Комиссия сервиса 0% для первой продажи</div>
+                <div class="commission" id="commissionText">Комиссия 0% для первой продажи</div>
             </div>
-            <button class="btn btn-secondary" id="findNewBuyerBtn">🔍 Найти нового покупателя</button>
-            <button class="btn btn-primary" id="acceptDealBtn">✅ Принять сделку</button>
+            <button class="btn btn-secondary" id="newBuyerBtn">Найти нового покупателя</button>
+            <button class="btn btn-primary" id="acceptBtn">Принять сделку</button>
         </div>
 
-        <!-- ФОТО КУПИЛИ -->
+        <!-- Фото купили -->
         <div id="boughtPage" class="page">
             <div class="header">
                 <div class="logo">🎉</div>
                 <h1>Ваши фото купили!</h1>
-                <div class="subtitle">Сделка успешно завершена, средства зачислены на ваш внутренний баланс.</div>
+                <div class="subtitle">Средства зачислены на баланс</div>
             </div>
-            <button class="btn btn-primary" id="goToProfileBtn">👤 Перейти в профиль</button>
+            <button class="btn btn-primary" id="toProfileBtn">Перейти в профиль</button>
         </div>
 
-        <!-- ПРОФИЛЬ -->
+        <!-- Профиль -->
         <div id="profilePage" class="page">
-            <button class="btn btn-back" id="backFromProfileBtn">← Назад</button>
-            
+            <button class="btn btn-back" id="profileBackBtn">← Назад</button>
             <div class="header">
                 <div class="logo">👤</div>
                 <h1>PhotoStockX</h1>
             </div>
-
-            <div class="warning" id="warningBanner">
-                <div>⚠️ Системное уведомление</div>
-                <div style="font-size: 12px; margin-top: 5px;">Для старта новой сессии продаж необходимо вывести текущие средства. В целях безопасности внутренний баланс не подлежит длительному хранению.</div>
-            </div>
-
+            <div class="warning" id="warningMsg">⚠️ Для старта новой продажи необходимо вывести средства</div>
             <div class="stats-card">
-                <div class="info-row">
-                    <span class="info-label">СТАТУС АККАУНТА</span>
-                    <span class="info-value" style="color: #00ff88;">Активный</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">РЕГИСТРАЦИЯ</span>
-                    <span class="info-value" id="regDate">11.05.2026</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">ПРОДАНО ФОТО</span>
-                    <span class="info-value" id="soldPhotosCount">0 шт.</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">ВСЕГО ЗАРАБОТАНО</span>
-                    <span class="info-value" id="totalEarned">0 ₽</span>
-                </div>
+                <div class="info-row"><span class="info-label">СТАТУС</span><span class="info-value" style="color:#00ff88;">Активный</span></div>
+                <div class="info-row"><span class="info-label">РЕГИСТРАЦИЯ</span><span class="info-value" id="regDate">-</span></div>
+                <div class="info-row"><span class="info-label">ПРОДАНО ФОТО</span><span class="info-value" id="soldCount">0 шт.</span></div>
+                <div class="info-row"><span class="info-label">ЗАРАБОТАНО</span><span class="info-value" id="earned">0 ₽</span></div>
             </div>
-
             <div class="stats-card">
-                <div class="info-row">
-                    <span class="info-label">Доступный баланс</span>
-                    <span class="info-value" id="balance">0 ₽</span>
-                </div>
+                <div class="info-row"><span class="info-label">БАЛАНС</span><span class="info-value" id="balance">0 ₽</span></div>
             </div>
-
-            <button class="btn btn-secondary" id="withdrawBtn">💰 Вывести средства</button>
+            <button class="btn btn-secondary" id="withdrawBtn">💸 Вывести средства</button>
             <button class="btn btn-primary" id="uploadMoreBtn">📸 Загрузить еще фото</button>
         </div>
 
-        <!-- ВЫВОД СРЕДСТВ -->
+        <!-- Вывод средств -->
         <div id="withdrawPage" class="page">
-            <button class="btn btn-back" id="backFromWithdrawBtn">← Назад</button>
-            
+            <button class="btn btn-back" id="withdrawBackBtn">← Назад</button>
             <div class="header">
-                <div class="logo">💰</div>
                 <h1>Способ вывода</h1>
             </div>
-
-            <button class="btn btn-secondary" id="withdrawStarsBtn">⭐ Telegram Stars<br><small style="font-size: 12px;">Курс: 1 ₽ = 1 Star</small></button>
-            <button class="btn btn-secondary" id="withdrawCryptoBtn">🪙 Криптовалюта<br><small style="font-size: 12px;">USDT, TON, BTC</small></button>
-            <button class="btn btn-secondary" id="withdrawCardBtn">💳 Банковская карта<br><small style="font-size: 12px;">Любые страны мира</small></button>
+            <button class="btn btn-secondary" id="starsBtn">⭐ Telegram Stars<br><small>1 ₽ = 1 Star</small></button>
+            <button class="btn btn-secondary" id="cryptoBtn">🪙 Криптовалюта<br><small>USDT, TON, BTC</small></button>
+            <button class="btn btn-secondary" id="cardBtn">💳 Банковская карта<br><small>Любые страны</small></button>
         </div>
     </div>
 
     <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
 
     <script>
-        // Telegram Mini App
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
-        tg.MainButton.hide();
 
-        // ---------- ДАННЫЕ ПОЛЬЗОВАТЕЛЯ (сохраняются в localStorage) ----------
+        // Данные пользователя
         let userData = {
-            registered: true,
             regDate: new Date().toLocaleDateString(),
             soldPhotos: 0,
             totalEarned: 0,
-            balance: 0,
-            hasActiveSession: false,
-            currentPhotos: []
+            balance: 0
         };
 
-        // Загрузка данных
-        function loadUserData() {
-            const saved = localStorage.getItem('photostockx_user');
+        function loadData() {
+            const saved = localStorage.getItem('photostockx');
             if (saved) {
                 userData = JSON.parse(saved);
-            } else {
-                userData.regDate = new Date().toLocaleDateString();
-                saveUserData();
             }
+            updateProfile();
         }
 
-        function saveUserData() {
-            localStorage.setItem('photostockx_user', JSON.stringify(userData));
+        function saveData() {
+            localStorage.setItem('photostockx', JSON.stringify(userData));
+            updateProfile();
         }
 
-        // Статистика
+        function updateProfile() {
+            document.getElementById('regDate').innerText = userData.regDate;
+            document.getElementById('soldCount').innerText = userData.soldPhotos + ' шт.';
+            document.getElementById('earned').innerText = userData.totalEarned.toLocaleString() + ' ₽';
+            document.getElementById('balance').innerText = userData.balance.toLocaleString() + ' ₽';
+        }
+
+        // Статистика на главной
         let stats = {
-            authors: 14244,
-            clients: 1856,
+            authors: 12579,
+            clients: 18456,
             totalSold: 1042150,
-            todaySold: 142
+            todaySold: 14244
         };
 
-        // ---------- ФУНКЦИИ СТАТИСТИКИ ----------
-        function updateStatsDisplay() {
+        function updateStats() {
             document.getElementById('authors').innerText = stats.authors.toLocaleString();
             document.getElementById('clients').innerText = stats.clients.toLocaleString();
             document.getElementById('totalSold').innerText = stats.totalSold.toLocaleString();
             document.getElementById('todaySold').innerText = stats.todaySold.toLocaleString();
         }
 
-        // ---------- ПРОФИЛЬ ----------
-        function updateProfileDisplay() {
-            document.getElementById('soldPhotosCount').innerText = userData.soldPhotos + ' шт.';
-            document.getElementById('totalEarned').innerText = userData.totalEarned.toLocaleString() + ' ₽';
-            document.getElementById('balance').innerText = userData.balance.toLocaleString() + ' ₽';
-            document.getElementById('regDate').innerText = userData.regDate;
-        }
-
-        // ---------- ПОКАЗ СТРАНИЦ ----------
+        // Переключение страниц
         function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
 
-        // ---------- ГЕНЕРАЦИЯ ЦЕНЫ ----------
+        // Генерация случайной цены
         function generatePrice() {
-            let price = (Math.random() * 3500 + 1500).toFixed(2);
-            return parseFloat(price);
+            return (Math.random() * 3500 + 1500).toFixed(2);
         }
 
-        let currentOffer = null;
+        let currentPrice = null;
+        let searchTimer = null;
 
-        // ---------- ПОИСК ПОКУПАТЕЛЯ ----------
-        let searchTimeout = null;
-
-        function startSearching(callback) {
-            showPage('searchingPage');
-            if (searchTimeout) clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
+        // Поиск покупателя
+        function startSearch(callback) {
+            showPage('searchPage');
+            if (searchTimer) clearTimeout(searchTimer);
+            searchTimer = setTimeout(() => {
                 if (callback) callback();
             }, 20000);
         }
 
-        function stopSearching() {
-            if (searchTimeout) {
-                clearTimeout(searchTimeout);
-                searchTimeout = null;
-            }
-        }
-
-        // ---------- ПРИНЯТИЕ СДЕЛКИ ----------
-        function acceptDeal(price) {
-            userData.soldPhotos += 1;
-            userData.totalEarned += price;
-            userData.balance += price;
-            stats.totalSold += 1;
-            stats.todaySold += 1;
-            saveUserData();
-            updateStatsDisplay();
-            updateProfileDisplay();
-            showPage('boughtPage');
-        }
-
-        // ---------- ПЕРЕЗАПУСК ПРОЦЕССА ----------
-        function restartSelling() {
-            userData.hasActiveSession = false;
-            userData.currentPhotos = [];
-            saveUserData();
-            showPage('uploadPage');
-        }
-
-        // ---------- ГАЛЕРЕЯ ----------
+        // Галерея
         let selectedPhotos = [];
-        const MAX_PHOTOS = 10;
-
+        
         function renderGallery() {
             const gallery = document.getElementById('gallery');
             gallery.innerHTML = '';
-            
-            selectedPhotos.forEach((photo, index) => {
+            selectedPhotos.forEach((p, i) => {
                 const div = document.createElement('div');
                 div.className = 'gallery-item';
-                div.innerHTML = `
-                    <img src="${photo.data}" alt="photo">
-                    <div class="remove-btn" data-index="${index}">✕</div>
-                `;
+                div.innerHTML = `<img src="${p.data}"><div class="remove-btn" data-idx="${i}">✕</div>`;
                 gallery.appendChild(div);
             });
-            
             document.getElementById('selectedCount').innerText = selectedPhotos.length;
             
             document.querySelectorAll('.remove-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const idx = parseInt(btn.dataset.index);
+                btn.onclick = () => {
+                    const idx = parseInt(btn.dataset.idx);
                     selectedPhotos.splice(idx, 1);
                     renderGallery();
-                });
+                };
             });
         }
 
-        function handleFileSelect(event) {
-            const files = Array.from(event.target.files);
-            const remainingSlots = MAX_PHOTOS - selectedPhotos.length;
-            const filesToAdd = files.slice(0, remainingSlots);
-            
-            filesToAdd.forEach(file => {
+        // Обработчики
+        document.getElementById('startBtn').onclick = () => {
+            if (userData.balance > 0) {
+                showPage('profilePage');
+            } else {
+                showPage('uploadPage');
+            }
+        };
+
+        document.getElementById('profileBtn').onclick = () => {
+            updateProfile();
+            showPage('profilePage');
+        };
+
+        document.getElementById('backBtn').onclick = () => showPage('mainPage');
+        document.getElementById('profileBackBtn').onclick = () => showPage('mainPage');
+        document.getElementById('withdrawBackBtn').onclick = () => showPage('profilePage');
+
+        document.getElementById('uploadArea').onclick = () => document.getElementById('fileInput').click();
+        
+        document.getElementById('fileInput').onchange = (e) => {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
                 if (file.type.startsWith('image/')) {
                     const reader = new FileReader();
-                    reader.onload = (e) => {
-                        selectedPhotos.push({
-                            name: file.name,
-                            data: e.target.result
-                        });
+                    reader.onload = (ev) => {
+                        selectedPhotos.push({ data: ev.target.result });
                         renderGallery();
                     };
                     reader.readAsDataURL(file);
                 }
             });
-            
-            document.getElementById('fileInput').value = '';
-        }
+        };
 
-        // ---------- ОТПРАВКА НА ПРОВЕРКУ ----------
-        function submitForModeration() {
+        document.getElementById('submitBtn').onclick = () => {
             if (selectedPhotos.length === 0) {
-                tg.showPopup({
-                    title: 'Нет фото',
-                    message: 'Выберите хотя бы одно фото для отправки',
-                    buttons: [{type: 'ok'}]
-                });
+                tg.showPopup({ title: 'Ошибка', message: 'Выберите хотя бы одно фото', buttons: [{type: 'ok'}] });
                 return;
             }
-            
-            userData.currentPhotos = selectedPhotos;
-            saveUserData();
-            
             showPage('moderationPage');
-            
             setTimeout(() => {
                 showPage('successPage');
             }, 5000);
-        }
-
-        // ---------- НАЧАЛО ПРОДАЖ ----------
-        function startSellingFlow() {
-            if (userData.balance > 0) {
-                showPage('profilePage');
-                tg.showPopup({
-                    title: 'Внимание',
-                    message: 'У вас есть невыведенные средства. Выведите их для продолжения продаж.',
-                    buttons: [{type: 'ok'}]
-                });
-                return;
-            }
-            
-            if (selectedPhotos.length === 0) {
-                showPage('uploadPage');
-            } else {
-                startSearching(() => {
-                    currentOffer = generatePrice();
-                    document.getElementById('offerPrice').innerText = currentOffer.toFixed(2) + ' ₽';
-                    
-                    let commissionText = '';
-                    if (userData.soldPhotos === 0) {
-                        commissionText = 'Комиссия сервиса 0% для первой продажи';
-                    } else {
-                        commissionText = 'Комиссия сервиса 15%';
-                    }
-                    document.getElementById('commissionText').innerText = commissionText;
-                    
-                    showPage('offerPage');
-                });
-            }
-        }
-
-        // ---------- ИНИЦИАЛИЗАЦИЯ ----------
-        loadUserData();
-        updateStatsDisplay();
-        updateProfileDisplay();
-
-        // Случайная статистика
-        setInterval(() => {
-            stats.authors += Math.floor(Math.random() * 30) - 10;
-            stats.clients += Math.floor(Math.random() * 40) - 15;
-            if (stats.authors < 12000) stats.authors = 12000;
-            if (stats.clients < 1500) stats.clients = 1500;
-            if (stats.clients > 2000) stats.clients = 2000;
-            updateStatsDisplay();
-        }, 10000);
-
-        setInterval(() => {
-            let sales = Math.floor(Math.random() * 3) + 3;
-            stats.totalSold += sales;
-            stats.todaySold += sales;
-            updateStatsDisplay();
-        }, 5000);
-
-        // ---------- ОБРАБОТЧИКИ ----------
-        document.getElementById('startSellingBtn').onclick = () => {
-            if (userData.balance > 0) {
-                showPage('profilePage');
-                tg.showPopup({
-                    title: 'Внимание',
-                    message: 'У вас есть невыведенные средства. Выведите их для продолжения продаж.',
-                    buttons: [{type: 'ok'}]
-                });
-            } else {
-                showPage('uploadPage');
-            }
         };
-        
-        document.getElementById('profileBtn').onclick = () => {
-            updateProfileDisplay();
-            showPage('profilePage');
-        };
-        
-        document.getElementById('backFromUploadBtn').onclick = () => showPage('mainPage');
-        document.getElementById('backFromProfileBtn').onclick = () => showPage('mainPage');
-        document.getElementById('backFromWithdrawBtn').onclick = () => {
-            updateProfileDisplay();
-            showPage('profilePage');
-        };
-        document.getElementById('backToMainFromSuccessBtn').onclick = () => showPage('mainPage');
-        
-        document.getElementById('uploadArea').onclick = () => document.getElementById('fileInput').click();
-        document.getElementById('fileInput').onchange = handleFileSelect;
-        document.getElementById('submitBtn').onclick = submitForModeration;
-        
+
         document.getElementById('findBuyerBtn').onclick = () => {
-            startSearching(() => {
-                currentOffer = generatePrice();
-                document.getElementById('offerPrice').innerText = currentOffer.toFixed(2) + ' ₽';
+            startSearch(() => {
+                currentPrice = generatePrice();
+                document.getElementById('offerPrice').innerText = currentPrice + ' ₽';
                 showPage('offerPage');
             });
         };
-        
-        document.getElementById('findNewBuyerBtn').onclick = () => {
-            startSearching(() => {
-                currentOffer = generatePrice();
-                document.getElementById('offerPrice').innerText = currentOffer.toFixed(2) + ' ₽';
+
+        document.getElementById('newBuyerBtn').onclick = () => {
+            startSearch(() => {
+                currentPrice = generatePrice();
+                document.getElementById('offerPrice').innerText = currentPrice + ' ₽';
                 showPage('offerPage');
             });
         };
-        
-        document.getElementById('acceptDealBtn').onclick = () => {
-            if (currentOffer) {
-                acceptDeal(currentOffer);
+
+        document.getElementById('acceptBtn').onclick = () => {
+            if (currentPrice) {
+                const priceNum = parseFloat(currentPrice);
+                userData.soldPhotos++;
+                userData.totalEarned += priceNum;
+                userData.balance += priceNum;
+                saveData();
+                showPage('boughtPage');
             }
         };
-        
-        document.getElementById('goToProfileBtn').onclick = () => {
-            updateProfileDisplay();
+
+        document.getElementById('toProfileBtn').onclick = () => {
+            updateProfile();
             showPage('profilePage');
         };
-        
+
         document.getElementById('uploadMoreBtn').onclick = () => {
             selectedPhotos = [];
             renderGallery();
             showPage('uploadPage');
         };
-        
+
         document.getElementById('withdrawBtn').onclick = () => showPage('withdrawPage');
-        
-        document.getElementById('withdrawStarsBtn').onclick = () => {
-            tg.showPopup({
-                title: 'Вывод через Telegram Stars',
-                message: `Вывод ${userData.balance.toFixed(2)} ₽ → ${userData.balance.toFixed(0)} Stars\n\nСредства зачислены на ваш Telegram баланс.`,
-                buttons: [{type: 'ok'}]
-            });
+
+        document.getElementById('starsBtn').onclick = () => {
+            tg.showPopup({ title: 'Вывод', message: `Выведено ${userData.balance.toFixed(0)} Stars`, buttons: [{type: 'ok'}] });
             userData.balance = 0;
-            saveUserData();
-            updateProfileDisplay();
+            saveData();
             showPage('profilePage');
         };
-        
-        document.getElementById('withdrawCryptoBtn').onclick = () => {
-            tg.showPopup({
-                title: 'Вывод криптовалютой',
-                message: `Запрос на вывод ${userData.balance.toFixed(2)} ₽ создан. Ссылка на оплату придет в течение 24 часов.`,
-                buttons: [{type: 'ok'}]
-            });
-        };
-        
-        document.getElementById('withdrawCardBtn').onclick = () => {
-            tg.showPopup({
-                title: 'Вывод на карту',
-                message: `Запрос на вывод ${userData.balance.toFixed(2)} ₽ создан. Деньги поступят в течение 3-5 рабочих дней.`,
-                buttons: [{type: 'ok'}]
-            });
+
+        document.getElementById('cryptoBtn').onclick = () => {
+            tg.showPopup({ title: 'Вывод', message: 'Запрос на вывод криптовалюты создан', buttons: [{type: 'ok'}] });
         };
 
-        console.log('PhotoStockX Mini App загружен');
+        document.getElementById('cardBtn').onclick = () => {
+            tg.showPopup({ title: 'Вывод', message: 'Запрос на вывод на карту создан', buttons: [{type: 'ok'}] });
+        };
+
+        // Запуск
+        loadData();
+        updateStats();
+        
+        // Живая статистика
+        setInterval(() => {
+            stats.authors += Math.floor(Math.random() * 20) - 5;
+            stats.clients += Math.floor(Math.random() * 25) - 8;
+            if (stats.authors < 10000) stats.authors = 10000;
+            if (stats.clients < 15000) stats.clients = 15000;
+            updateStats();
+        }, 10000);
+
+        setInterval(() => {
+            const sales = Math.floor(Math.random() * 5) + 2;
+            stats.totalSold += sales;
+            stats.todaySold += sales;
+            updateStats();
+        }, 5000);
     </script>
 </body>
 </html>
