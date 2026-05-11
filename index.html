@@ -25,7 +25,6 @@
             margin: 0 auto;
         }
 
-        /* Шапка */
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -71,7 +70,6 @@
             letter-spacing: -0.5px;
         }
 
-        /* Описание */
         .description {
             background: rgba(255,255,255,0.05);
             border-radius: 20px;
@@ -83,7 +81,6 @@
             text-align: center;
         }
 
-        /* Статистика */
         .stats-card {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
@@ -117,7 +114,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Кнопки */
         .btn {
             width: 100%;
             padding: 16px;
@@ -139,10 +135,19 @@
             color: white;
         }
 
-        .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.2);
+        /* НЕАКТИВНАЯ КНОПКА (прозрачная, нельзя нажать) */
+        .btn-disabled {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: not-allowed;
         }
 
         .footer {
@@ -165,13 +170,11 @@
             <h1>PhotoStockX</h1>
         </div>
 
-        <!-- Описание как на фото -->
         <div class="description">
             Добро пожаловать<br><br>
-            PhotoStockX — это глобальная экосистема для мгновенной продажи ваших мобильных фотографий. Нейросеть оценивает ваши кадры и находит покупателей за считанные секунды.
+            PhotoStockX — это глобальная экосистема для мгновной продажи ваших мобильных фотографий. Нейросеть оценивает ваши кадры и находит покупателей за считанные секунды.
         </div>
 
-        <!-- Статистика -->
         <div class="stats-card">
             <div class="stats-grid">
                 <div class="stat-item">
@@ -193,8 +196,10 @@
             </div>
         </div>
 
-        <!-- Кнопки -->
-        <button class="btn btn-secondary" id="buyBtn">Купить фото (только для авторов)</button>
+        <!-- НЕАКТИВНАЯ КНОПКА - прозрачная, нельзя нажать -->
+        <button class="btn-disabled" id="buyBtn" disabled>Купить фото (только для авторов)</button>
+        
+        <!-- АКТИВНАЯ КНОПКА -->
         <button class="btn btn-primary" id="sellBtn">Начать продавать</button>
 
         <div class="footer">
@@ -210,15 +215,6 @@
         // Закрытие приложения
         document.getElementById('closeBtn').onclick = () => {
             tg.close();
-        };
-
-        // Кнопка "Купить фото"
-        document.getElementById('buyBtn').onclick = () => {
-            tg.showPopup({
-                title: 'Купить фото',
-                message: 'Функция доступна только для авторов. Зарегистрируйтесь как автор.',
-                buttons: [{type: 'ok'}]
-            });
         };
 
         // Кнопка "Начать продавать"
@@ -247,7 +243,6 @@
             document.getElementById('todaySold').innerText = formatNumber(todaySold);
         }
 
-        // Обновление статистики (живые цифры)
         setInterval(() => {
             authors += Math.floor(Math.random() * 15) - 5;
             clients += Math.floor(Math.random() * 20) - 7;
