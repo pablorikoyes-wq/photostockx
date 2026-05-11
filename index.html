@@ -224,7 +224,6 @@
             display: none;
         }
 
-        /* Анимация спиннера */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -386,6 +385,24 @@
                 <button class="btn-accept" id="acceptBtn">Принять сделку</button>
             </div>
         </div>
+
+        <!-- ФОТО КУПИЛИ (после принятия сделки) -->
+        <div id="boughtPage" class="page">
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnBought">✕</div>
+            </div>
+            <div class="center-content">
+                <div class="big-logo">P</div>
+                <div class="title">PhotoStockX</div>
+                <div class="title" style="font-size:22px; margin-top:30px;">Ваши фото купили!</div>
+                <div class="subtitle" style="margin-top:15px;">Сделка успешно завершена, средства зачислены на ваш внутренний баланс.</div>
+                <button class="btn-primary" id="goToProfileBtn" style="margin-top:30px;">👤 Перейти в профиль</button>
+            </div>
+        </div>
     </div>
 
     <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
@@ -416,16 +433,12 @@
         function startSellingFlow() {
             clearAllTimers();
             
-            // Модерация 3 сек
             showPage('moderationPage');
             const t1 = setTimeout(() => {
-                // Проверка пройдена 2 сек
                 showPage('successPage');
                 const t2 = setTimeout(() => {
-                    // Поиск покупателя 13 сек
                     showPage('searchPage');
                     const t3 = setTimeout(() => {
-                        // Предложение
                         currentOffer = generatePrice();
                         document.getElementById('offerPrice').innerText = currentOffer + ' ₽';
                         if (window.userSoldPhotos === undefined || window.userSoldPhotos === 0) {
@@ -442,7 +455,6 @@
             timers.push(t1);
         }
 
-        // === ГАЛЕРЕЯ ===
         function renderPhotosGrid() {
             const container = document.getElementById('photosContainer');
             container.innerHTML = '';
@@ -500,19 +512,20 @@
             if (files.length > remainingSlots) {
                 tg.showPopup({
                     title: 'Много фото',
-                    message: `Можно выбрать не более 10 фото`,
+                    message: 'Можно выбрать не более 10 фото',
                     buttons: [{type: 'ok'}]
                 });
             }
         }
 
-        // === ОБРАБОТЧИКИ ===
+        // Закрытие
         document.getElementById('closeBtn').onclick = () => tg.close();
         document.getElementById('closeBtnUpload').onclick = () => tg.close();
         document.getElementById('closeBtnMod').onclick = () => tg.close();
         document.getElementById('closeBtnSuccess').onclick = () => tg.close();
         document.getElementById('closeBtnSearch').onclick = () => tg.close();
         document.getElementById('closeBtnOffer').onclick = () => tg.close();
+        document.getElementById('closeBtnBought').onclick = () => tg.close();
         
         document.getElementById('startSellBtn').onclick = () => {
             showPage('uploadPage');
@@ -540,13 +553,12 @@
         
         document.getElementById('acceptBtn').onclick = () => {
             if (currentOffer) {
-                tg.showPopup({
-                    title: 'Сделка принята!',
-                    message: `Вы получили ${currentOffer} ₽ на баланс`,
-                    buttons: [{type: 'ok'}]
-                });
-                showPage('mainPage');
+                showPage('boughtPage');
             }
+        };
+        
+        document.getElementById('goToProfileBtn').onclick = () => {
+            showPage('mainPage');
         };
 
         // Статистика
