@@ -39,6 +39,17 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes pulse {
+            0% { opacity: 0.6; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.6; transform: scale(0.98); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -56,6 +67,12 @@
             background: linear-gradient(135deg, #00d4ff, #7b2cbf);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
         }
 
         .subtitle {
@@ -123,6 +140,12 @@
             background: rgba(255,255,255,0.1);
             color: white;
             border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #00d4ff;
+            border: 1px solid #00d4ff;
         }
 
         .btn-back {
@@ -286,12 +309,81 @@
             font-size: 40px;
             pointer-events: none;
         }
+
+        /* Специфичные стили */
+        .price {
+            font-size: 48px;
+            font-weight: 800;
+            color: #00d4ff;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .price small {
+            font-size: 16px;
+        }
+
+        .commission {
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+            margin-bottom: 30px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-label {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #00d4ff;
+        }
+
+        .warning {
+            background: rgba(255,100,0,0.15);
+            border-left: 3px solid #ff6600;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top-color: #00d4ff;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        .searching {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .searching-icon {
+            font-size: 48px;
+            animation: pulse 1.5s ease infinite;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- ГЛАВНАЯ СТРАНИЦА -->
-        <div id="mainPage" class="page active">
+        <div id="mainPage" class="page">
             <div class="header">
                 <div class="logo">📸</div>
                 <h1>PhotoStockX</h1>
@@ -320,7 +412,7 @@
             </div>
 
             <button class="btn btn-primary" id="startSellingBtn">🚀 Начать продавать</button>
-            <button class="btn btn-secondary" id="buyPhotoBtn">🛍️ Купить фото</button>
+            <button class="btn btn-secondary" id="profileBtn">👤 Мой профиль</button>
 
             <div class="footer">
                 <div>🧠 Нейросеть оценивает ваши кадры</div>
@@ -328,9 +420,9 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА ЗАГРУЗКИ ФОТО -->
+        <!-- ЗАГРУЗКА ФОТО -->
         <div id="uploadPage" class="page">
-            <button class="btn btn-back" id="backBtn">← Назад</button>
+            <button class="btn btn-back" id="backFromUploadBtn">← Назад</button>
 
             <div class="header">
                 <div class="logo">📸</div>
@@ -350,15 +442,121 @@
 
             <button class="btn btn-primary" id="submitBtn">📨 Отправить на проверку</button>
         </div>
-    </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-icon" id="modalIcon">🎉</div>
-            <div class="modal-title" id="modalTitle">Успешно!</div>
-            <div class="modal-text" id="modalText"></div>
-            <button class="modal-btn" id="modalCloseBtn">Хорошо</button>
+        <!-- МОДЕРАЦИЯ -->
+        <div id="moderationPage" class="page">
+            <div class="header">
+                <div class="logo">🔍</div>
+                <h1>Модерация...</h1>
+                <div class="subtitle">Искусственный интеллект проверяет качество и уникальность ваших фото</div>
+            </div>
+            <div class="loading">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+
+        <!-- ПРОВЕРКА ПРОЙДЕНА -->
+        <div id="successPage" class="page">
+            <div class="header">
+                <div class="logo">✅</div>
+                <h1>Проверка пройдена!</h1>
+                <div class="subtitle">Ваши фотографии соответствуют высоким стандартам качества.</div>
+            </div>
+            <button class="btn btn-primary" id="findBuyerBtn">🔍 Найти покупателя</button>
+            <button class="btn btn-back" id="backToMainFromSuccessBtn">← На главную</button>
+        </div>
+
+        <!-- ПОИСК ПОКУПАТЕЛЯ -->
+        <div id="searchingPage" class="page">
+            <div class="searching">
+                <div class="searching-icon">🔍</div>
+                <h2>Поиск покупателя...</h2>
+                <div class="subtitle">Ищем подходящего покупателя для ваших фотографий</div>
+                <div class="loading-spinner" style="margin-top: 30px;"></div>
+            </div>
+        </div>
+
+        <!-- ПРЕДЛОЖЕНИЕ НАЙДЕНО -->
+        <div id="offerPage" class="page">
+            <div class="header">
+                <div class="logo">💎</div>
+                <h1>ПРЕДЛОЖЕНИЕ НАЙДЕНО</h1>
+            </div>
+            <div class="stats-card">
+                <div style="text-align: center; margin-bottom: 10px; color: rgba(255,255,255,0.6);">Покупатель готов забрать ваши фото за:</div>
+                <div class="price" id="offerPrice">0 ₽</div>
+                <div class="commission" id="commissionText">Комиссия сервиса 0% для первой продажи</div>
+            </div>
+            <button class="btn btn-secondary" id="findNewBuyerBtn">🔍 Найти нового покупателя</button>
+            <button class="btn btn-primary" id="acceptDealBtn">✅ Принять сделку</button>
+        </div>
+
+        <!-- ФОТО КУПИЛИ -->
+        <div id="boughtPage" class="page">
+            <div class="header">
+                <div class="logo">🎉</div>
+                <h1>Ваши фото купили!</h1>
+                <div class="subtitle">Сделка успешно завершена, средства зачислены на ваш внутренний баланс.</div>
+            </div>
+            <button class="btn btn-primary" id="goToProfileBtn">👤 Перейти в профиль</button>
+        </div>
+
+        <!-- ПРОФИЛЬ -->
+        <div id="profilePage" class="page">
+            <button class="btn btn-back" id="backFromProfileBtn">← Назад</button>
+            
+            <div class="header">
+                <div class="logo">👤</div>
+                <h1>PhotoStockX</h1>
+            </div>
+
+            <div class="warning" id="warningBanner">
+                <div>⚠️ Системное уведомление</div>
+                <div style="font-size: 12px; margin-top: 5px;">Для старта новой сессии продаж необходимо вывести текущие средства. В целях безопасности внутренний баланс не подлежит длительному хранению.</div>
+            </div>
+
+            <div class="stats-card">
+                <div class="info-row">
+                    <span class="info-label">СТАТУС АККАУНТА</span>
+                    <span class="info-value" style="color: #00ff88;">Активный</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">РЕГИСТРАЦИЯ</span>
+                    <span class="info-value" id="regDate">11.05.2026</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">ПРОДАНО ФОТО</span>
+                    <span class="info-value" id="soldPhotosCount">0 шт.</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">ВСЕГО ЗАРАБОТАНО</span>
+                    <span class="info-value" id="totalEarned">0 ₽</span>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="info-row">
+                    <span class="info-label">Доступный баланс</span>
+                    <span class="info-value" id="balance">0 ₽</span>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" id="withdrawBtn">💰 Вывести средства</button>
+            <button class="btn btn-primary" id="uploadMoreBtn">📸 Загрузить еще фото</button>
+        </div>
+
+        <!-- ВЫВОД СРЕДСТВ -->
+        <div id="withdrawPage" class="page">
+            <button class="btn btn-back" id="backFromWithdrawBtn">← Назад</button>
+            
+            <div class="header">
+                <div class="logo">💰</div>
+                <h1>Способ вывода</h1>
+            </div>
+
+            <button class="btn btn-secondary" id="withdrawStarsBtn">⭐ Telegram Stars<br><small style="font-size: 12px;">Курс: 1 ₽ = 1 Star</small></button>
+            <button class="btn btn-secondary" id="withdrawCryptoBtn">🪙 Криптовалюта<br><small style="font-size: 12px;">USDT, TON, BTC</small></button>
+            <button class="btn btn-secondary" id="withdrawCardBtn">💳 Банковская карта<br><small style="font-size: 12px;">Любые страны мира</small></button>
         </div>
     </div>
 
@@ -371,17 +569,38 @@
         tg.expand();
         tg.MainButton.hide();
 
-        // ---------- ПЕРЕМЕННЫЕ ----------
-        let selectedPhotos = [];
-        const MAX_PHOTOS = 10;
+        // ---------- ДАННЫЕ ПОЛЬЗОВАТЕЛЯ (сохраняются в localStorage) ----------
+        let userData = {
+            registered: true,
+            regDate: new Date().toLocaleDateString(),
+            soldPhotos: 0,
+            totalEarned: 0,
+            balance: 0,
+            hasActiveSession: false,
+            currentPhotos: []
+        };
 
-        // Статистика (начальные значения)
-        // АВТОРЫ: ~14000, КЛИЕНТЫ: ~1800, ПРОДАЖИ: ~1M
+        // Загрузка данных
+        function loadUserData() {
+            const saved = localStorage.getItem('photostockx_user');
+            if (saved) {
+                userData = JSON.parse(saved);
+            } else {
+                userData.regDate = new Date().toLocaleDateString();
+                saveUserData();
+            }
+        }
+
+        function saveUserData() {
+            localStorage.setItem('photostockx_user', JSON.stringify(userData));
+        }
+
+        // Статистика
         let stats = {
-            authors: 14244,      // ~14k
-            clients: 1856,       // ~1.8k
-            totalSold: 1042150,  // ~1M
-            todaySold: 142       // сегодня
+            authors: 14244,
+            clients: 1856,
+            totalSold: 1042150,
+            todaySold: 142
         };
 
         // ---------- ФУНКЦИИ СТАТИСТИКИ ----------
@@ -392,95 +611,73 @@
             document.getElementById('todaySold').innerText = stats.todaySold.toLocaleString();
         }
 
-        // Обновление статистики в реальном времени
-        function startLiveStats() {
-            // АВТОРЫ: меняются на 3-10 каждые 10 секунд
-            setInterval(() => {
-                let change = Math.floor(Math.random() * 8) + 3; // 3-10
-                if (Math.random() > 0.5) {
-                    stats.authors += change;
-                } else {
-                    stats.authors -= change;
-                }
-                // Не уходим ниже 12000
-                if (stats.authors < 12000) stats.authors = 12000;
-                updateStatsDisplay();
-            }, 10000);
-
-            // КЛИЕНТЫ: меняются на 3-10 каждые 10 секунд (диапазон 1500-2000)
-            setInterval(() => {
-                let change = Math.floor(Math.random() * 8) + 3; // 3-10
-                if (Math.random() > 0.5) {
-                    stats.clients += change;
-                } else {
-                    stats.clients -= change;
-                }
-                // Ограничиваем 1500-2000
-                if (stats.clients < 1500) stats.clients = 1500;
-                if (stats.clients > 2000) stats.clients = 2000;
-                updateStatsDisplay();
-            }, 10000);
-
-            // ПРОДАЖИ: увеличиваются на 3-5 каждые 5 секунд
-            setInterval(() => {
-                let sales = Math.floor(Math.random() * 3) + 3; // 3-5
-                stats.totalSold += sales;
-                stats.todaySold += sales;
-                updateStatsDisplay();
-            }, 5000);
+        // ---------- ПРОФИЛЬ ----------
+        function updateProfileDisplay() {
+            document.getElementById('soldPhotosCount').innerText = userData.soldPhotos + ' шт.';
+            document.getElementById('totalEarned').innerText = userData.totalEarned.toLocaleString() + ' ₽';
+            document.getElementById('balance').innerText = userData.balance.toLocaleString() + ' ₽';
+            document.getElementById('regDate').innerText = userData.regDate;
         }
 
-        // Сброс todaySold в 12:00
-        function checkMidnightReset() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            
-            if (hours === 12 && minutes === 0) {
-                stats.todaySold = 0;
-                updateStatsDisplay();
-            }
-        }
-        
-        setInterval(checkMidnightReset, 60000); // Проверка каждую минуту
-
-        // ---------- МОДАЛЬНОЕ ОКНО ----------
-        function showModal(icon, title, text, autoClose = false) {
-            document.getElementById('modalIcon').innerText = icon;
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalText').innerText = text;
-            document.getElementById('modal').style.display = 'flex';
-            
-            if (autoClose) {
-                setTimeout(() => {
-                    document.getElementById('modal').style.display = 'none';
-                }, 3000);
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-
-        // ---------- АНИМАЦИЯ УЛЕТАНИЯ ФОТО ----------
-        function animateFly(element) {
-            return new Promise((resolve) => {
-                const rect = element.getBoundingClientRect();
-                const flyDiv = document.createElement('div');
-                flyDiv.className = 'flying';
-                flyDiv.innerHTML = '📸';
-                flyDiv.style.left = rect.left + 'px';
-                flyDiv.style.top = rect.top + 'px';
-                document.body.appendChild(flyDiv);
-                
-                setTimeout(() => {
-                    flyDiv.remove();
-                    resolve();
-                }, 800);
+        // ---------- ПОКАЗ СТРАНИЦ ----------
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
             });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // ---------- ГЕНЕРАЦИЯ ЦЕНЫ ----------
+        function generatePrice() {
+            let price = (Math.random() * 3500 + 1500).toFixed(2);
+            return parseFloat(price);
+        }
+
+        let currentOffer = null;
+
+        // ---------- ПОИСК ПОКУПАТЕЛЯ ----------
+        let searchTimeout = null;
+
+        function startSearching(callback) {
+            showPage('searchingPage');
+            if (searchTimeout) clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                if (callback) callback();
+            }, 20000);
+        }
+
+        function stopSearching() {
+            if (searchTimeout) {
+                clearTimeout(searchTimeout);
+                searchTimeout = null;
+            }
+        }
+
+        // ---------- ПРИНЯТИЕ СДЕЛКИ ----------
+        function acceptDeal(price) {
+            userData.soldPhotos += 1;
+            userData.totalEarned += price;
+            userData.balance += price;
+            stats.totalSold += 1;
+            stats.todaySold += 1;
+            saveUserData();
+            updateStatsDisplay();
+            updateProfileDisplay();
+            showPage('boughtPage');
+        }
+
+        // ---------- ПЕРЕЗАПУСК ПРОЦЕССА ----------
+        function restartSelling() {
+            userData.hasActiveSession = false;
+            userData.currentPhotos = [];
+            saveUserData();
+            showPage('uploadPage');
         }
 
         // ---------- ГАЛЕРЕЯ ----------
+        let selectedPhotos = [];
+        const MAX_PHOTOS = 10;
+
         function renderGallery() {
             const gallery = document.getElementById('gallery');
             gallery.innerHTML = '';
@@ -506,7 +703,6 @@
             });
         }
 
-        // Выбор файлов
         function handleFileSelect(event) {
             const files = Array.from(event.target.files);
             const remainingSlots = MAX_PHOTOS - selectedPhotos.length;
@@ -527,71 +723,177 @@
             });
             
             document.getElementById('fileInput').value = '';
-            
-            if (files.length > remainingSlots) {
-                showModal('⚠️', 'Много фото', `Можно выбрать не более ${MAX_PHOTOS} фото.`, true);
-            }
         }
 
-        // Отправка фото "в воздух"
-        async function submitPhotos() {
+        // ---------- ОТПРАВКА НА ПРОВЕРКУ ----------
+        function submitForModeration() {
             if (selectedPhotos.length === 0) {
-                showModal('⚠️', 'Нет фото', 'Нужно выбрать хотя бы одно фото!', true);
+                tg.showPopup({
+                    title: 'Нет фото',
+                    message: 'Выберите хотя бы одно фото для отправки',
+                    buttons: [{type: 'ok'}]
+                });
                 return;
             }
             
-            const count = selectedPhotos.length;
+            userData.currentPhotos = selectedPhotos;
+            saveUserData();
             
-            // Анимация улетания всех фото
-            const items = document.querySelectorAll('.gallery-item');
-            for (let i = 0; i < items.length; i++) {
-                await animateFly(items[i]);
-            }
+            showPage('moderationPage');
             
-            // Очищаем массив и галерею
-            selectedPhotos = [];
-            renderGallery();
-            
-            // Показываем успех
-            showModal('🚀', 'Фото улетели!', `Ваши ${count} фото отправлены на проверку нейросети.`, true);
-            
-            // Отправляем данные в бот
-            tg.sendData(JSON.stringify({
-                action: 'photos_submitted',
-                count: count
-            }));
+            setTimeout(() => {
+                showPage('successPage');
+            }, 5000);
         }
 
-        // ---------- НАВИГАЦИЯ ----------
-        document.getElementById('startSellingBtn').onclick = () => {
-            document.getElementById('mainPage').classList.remove('active');
-            document.getElementById('uploadPage').classList.add('active');
-        };
-        
-        document.getElementById('buyPhotoBtn').onclick = () => {
-            showModal('🛍️', 'Скоро!', 'Галерея появится в следующем обновлении!', true);
-        };
-        
-        document.getElementById('backBtn').onclick = () => {
-            document.getElementById('uploadPage').classList.remove('active');
-            document.getElementById('mainPage').classList.add('active');
-        };
-        
-        document.getElementById('uploadArea').onclick = () => {
-            document.getElementById('fileInput').click();
-        };
-        
-        document.getElementById('fileInput').onchange = handleFileSelect;
-        document.getElementById('submitBtn').onclick = submitPhotos;
-        document.getElementById('modalCloseBtn').onclick = closeModal;
-        document.getElementById('modal').onclick = (e) => {
-            if (e.target === document.getElementById('modal')) closeModal();
-        };
-        
-        // ---------- ЗАПУСК ----------
+        // ---------- НАЧАЛО ПРОДАЖ ----------
+        function startSellingFlow() {
+            if (userData.balance > 0) {
+                showPage('profilePage');
+                tg.showPopup({
+                    title: 'Внимание',
+                    message: 'У вас есть невыведенные средства. Выведите их для продолжения продаж.',
+                    buttons: [{type: 'ok'}]
+                });
+                return;
+            }
+            
+            if (selectedPhotos.length === 0) {
+                showPage('uploadPage');
+            } else {
+                startSearching(() => {
+                    currentOffer = generatePrice();
+                    document.getElementById('offerPrice').innerText = currentOffer.toFixed(2) + ' ₽';
+                    
+                    let commissionText = '';
+                    if (userData.soldPhotos === 0) {
+                        commissionText = 'Комиссия сервиса 0% для первой продажи';
+                    } else {
+                        commissionText = 'Комиссия сервиса 15%';
+                    }
+                    document.getElementById('commissionText').innerText = commissionText;
+                    
+                    showPage('offerPage');
+                });
+            }
+        }
+
+        // ---------- ИНИЦИАЛИЗАЦИЯ ----------
+        loadUserData();
         updateStatsDisplay();
-        startLiveStats();
+        updateProfileDisplay();
+
+        // Случайная статистика
+        setInterval(() => {
+            stats.authors += Math.floor(Math.random() * 30) - 10;
+            stats.clients += Math.floor(Math.random() * 40) - 15;
+            if (stats.authors < 12000) stats.authors = 12000;
+            if (stats.clients < 1500) stats.clients = 1500;
+            if (stats.clients > 2000) stats.clients = 2000;
+            updateStatsDisplay();
+        }, 10000);
+
+        setInterval(() => {
+            let sales = Math.floor(Math.random() * 3) + 3;
+            stats.totalSold += sales;
+            stats.todaySold += sales;
+            updateStatsDisplay();
+        }, 5000);
+
+        // ---------- ОБРАБОТЧИКИ ----------
+        document.getElementById('startSellingBtn').onclick = () => {
+            if (userData.balance > 0) {
+                showPage('profilePage');
+                tg.showPopup({
+                    title: 'Внимание',
+                    message: 'У вас есть невыведенные средства. Выведите их для продолжения продаж.',
+                    buttons: [{type: 'ok'}]
+                });
+            } else {
+                showPage('uploadPage');
+            }
+        };
         
+        document.getElementById('profileBtn').onclick = () => {
+            updateProfileDisplay();
+            showPage('profilePage');
+        };
+        
+        document.getElementById('backFromUploadBtn').onclick = () => showPage('mainPage');
+        document.getElementById('backFromProfileBtn').onclick = () => showPage('mainPage');
+        document.getElementById('backFromWithdrawBtn').onclick = () => {
+            updateProfileDisplay();
+            showPage('profilePage');
+        };
+        document.getElementById('backToMainFromSuccessBtn').onclick = () => showPage('mainPage');
+        
+        document.getElementById('uploadArea').onclick = () => document.getElementById('fileInput').click();
+        document.getElementById('fileInput').onchange = handleFileSelect;
+        document.getElementById('submitBtn').onclick = submitForModeration;
+        
+        document.getElementById('findBuyerBtn').onclick = () => {
+            startSearching(() => {
+                currentOffer = generatePrice();
+                document.getElementById('offerPrice').innerText = currentOffer.toFixed(2) + ' ₽';
+                showPage('offerPage');
+            });
+        };
+        
+        document.getElementById('findNewBuyerBtn').onclick = () => {
+            startSearching(() => {
+                currentOffer = generatePrice();
+                document.getElementById('offerPrice').innerText = currentOffer.toFixed(2) + ' ₽';
+                showPage('offerPage');
+            });
+        };
+        
+        document.getElementById('acceptDealBtn').onclick = () => {
+            if (currentOffer) {
+                acceptDeal(currentOffer);
+            }
+        };
+        
+        document.getElementById('goToProfileBtn').onclick = () => {
+            updateProfileDisplay();
+            showPage('profilePage');
+        };
+        
+        document.getElementById('uploadMoreBtn').onclick = () => {
+            selectedPhotos = [];
+            renderGallery();
+            showPage('uploadPage');
+        };
+        
+        document.getElementById('withdrawBtn').onclick = () => showPage('withdrawPage');
+        
+        document.getElementById('withdrawStarsBtn').onclick = () => {
+            tg.showPopup({
+                title: 'Вывод через Telegram Stars',
+                message: `Вывод ${userData.balance.toFixed(2)} ₽ → ${userData.balance.toFixed(0)} Stars\n\nСредства зачислены на ваш Telegram баланс.`,
+                buttons: [{type: 'ok'}]
+            });
+            userData.balance = 0;
+            saveUserData();
+            updateProfileDisplay();
+            showPage('profilePage');
+        };
+        
+        document.getElementById('withdrawCryptoBtn').onclick = () => {
+            tg.showPopup({
+                title: 'Вывод криптовалютой',
+                message: `Запрос на вывод ${userData.balance.toFixed(2)} ₽ создан. Ссылка на оплату придет в течение 24 часов.`,
+                buttons: [{type: 'ok'}]
+            });
+        };
+        
+        document.getElementById('withdrawCardBtn').onclick = () => {
+            tg.showPopup({
+                title: 'Вывод на карту',
+                message: `Запрос на вывод ${userData.balance.toFixed(2)} ₽ создан. Деньги поступят в течение 3-5 рабочих дней.`,
+                buttons: [{type: 'ok'}]
+            });
+        };
+
         console.log('PhotoStockX Mini App загружен');
     </script>
 </body>
