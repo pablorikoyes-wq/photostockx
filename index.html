@@ -384,6 +384,33 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
         }
+
+        /* Стили для страницы вывода */
+        .withdraw-option {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .withdraw-option:active {
+            transform: scale(0.98);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .withdraw-option-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .withdraw-option-desc {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
     </style>
 </head>
 <body>
@@ -477,6 +504,40 @@
 
             <button class="btn-secondary" id="withdrawBtn">Вывести средства</button>
             <button class="btn-primary" id="uploadMoreBtn">Загрузить еще фото</button>
+        </div>
+
+        <!-- СТРАНИЦА ВЫВОДА СРЕДСТВ -->
+        <div id="withdrawPage" class="page">
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnWithdraw">✕</div>
+            </div>
+
+            <div class="center-content">
+                <div class="big-logo">P</div>
+                <div class="title">PhotoStockX</div>
+                <div style="font-size:18px; font-weight:600; margin-top:10px;">Способ вывода</div>
+            </div>
+
+            <div class="withdraw-option" id="withdrawStarsBtn">
+                <div class="withdraw-option-title">⭐ Telegram Stars</div>
+                <div class="withdraw-option-desc">Курс: 1 ₽ = 1 Star</div>
+            </div>
+
+            <div class="withdraw-option" id="withdrawCryptoBtn">
+                <div class="withdraw-option-title">🪙 Криптовалюта</div>
+                <div class="withdraw-option-desc">USDT, TON, BTC</div>
+            </div>
+
+            <div class="withdraw-option" id="withdrawCardBtn">
+                <div class="withdraw-option-title">💳 Банковская карта</div>
+                <div class="withdraw-option-desc">Любые страны мира</div>
+            </div>
+
+            <button class="btn-secondary" id="backToProfileBtn" style="margin-top:20px;">← Назад</button>
         </div>
 
         <!-- СТРАНИЦА ЗАГРУЗКИ ФОТО -->
@@ -605,7 +666,7 @@
 
         // === ДАННЫЕ ПРОФИЛЯ ===
         let userData = {
-            hasStarted: false,      // отправлял ли фото хоть раз
+            hasStarted: false,
             regDate: new Date().toLocaleDateString(),
             soldPhotos: 0,
             totalEarned: 0,
@@ -626,7 +687,6 @@
             }
             updateProfileDisplay();
             
-            // Определяем, какую страницу показывать
             if (userData.hasStarted) {
                 showPage('profilePage');
             } else {
@@ -663,7 +723,7 @@
             }
         }
 
-        // === СТАТИСТИКА НА ПРИВЕТСТВЕННОЙ ===
+        // === СТАТИСТИКА ===
         let stats = {
             authors: 12434,
             clients: 18362,
@@ -793,6 +853,7 @@
         document.getElementById('closeBtnSearch').onclick = () => tg.close();
         document.getElementById('closeBtnOffer').onclick = () => tg.close();
         document.getElementById('closeBtnBought').onclick = () => tg.close();
+        document.getElementById('closeBtnWithdraw').onclick = () => tg.close();
 
         document.getElementById('welcomeStartBtn').onclick = () => {
             showPage('uploadPage');
@@ -805,8 +866,43 @@
             showPage('uploadPage');
         };
 
+        document.getElementById('withdrawBtn').onclick = () => {
+            showPage('withdrawPage');
+        };
+
+        document.getElementById('backToProfileBtn').onclick = () => showPage('profilePage');
         document.getElementById('backToProfileFromUploadBtn').onclick = () => showPage('profilePage');
         document.getElementById('toProfileBtn').onclick = () => showPage('profilePage');
+
+        // Кнопки вывода
+        document.getElementById('withdrawStarsBtn').onclick = () => {
+            const amount = userData.balance;
+            tg.showPopup({
+                title: 'Вывод через Telegram Stars',
+                message: `Вывод ${amount} ₽ → ${amount} Stars\n\nСредства зачислены на ваш Telegram баланс.`,
+                buttons: [{type: 'ok'}]
+            });
+            userData.balance = 0;
+            saveUserData();
+            updateProfileDisplay();
+            showPage('profilePage');
+        };
+
+        document.getElementById('withdrawCryptoBtn').onclick = () => {
+            tg.showPopup({
+                title: 'Вывод криптовалюты',
+                message: 'Запрос на вывод создан. Ссылка на оплату придет в течение 24 часов.',
+                buttons: [{type: 'ok'}]
+            });
+        };
+
+        document.getElementById('withdrawCardBtn').onclick = () => {
+            tg.showPopup({
+                title: 'Вывод на карту',
+                message: 'Запрос на вывод создан. Деньги поступят в течение 3-5 рабочих дней.',
+                buttons: [{type: 'ok'}]
+            });
+        };
 
         document.getElementById('fileInput').onchange = handleFileSelect;
 
@@ -819,7 +915,6 @@
                 });
                 return;
             }
-            // Отмечаем, что пользователь отправил фото
             markFirstPhotoSent();
             startSellingFlow();
         };
@@ -834,14 +929,6 @@
                 showPage('boughtPage');
                 selectedPhotos = [];
             }
-        };
-
-        document.getElementById('withdrawBtn').onclick = () => {
-            tg.showPopup({
-                title: 'Вывод средств',
-                message: 'Функция в разработке',
-                buttons: [{type: 'ok'}]
-            });
         };
 
         // === ЖИВАЯ СТАТИСТИКА ===
