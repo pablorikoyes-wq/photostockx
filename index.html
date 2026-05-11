@@ -17,7 +17,7 @@
             background: linear-gradient(135deg, #0a0a1a 0%, #0f0f2d 50%, #1a1a3e 100%);
             min-height: 100vh;
             color: white;
-            padding: 20px;
+            padding: 16px;
         }
 
         .container {
@@ -35,24 +35,19 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-top: 20px;
-        }
-
+        /* Уменьшенные шрифты */
         .logo {
-            font-size: 56px;
-            margin-bottom: 10px;
+            font-size: 40px;
+            margin-bottom: 5px;
         }
 
         h1 {
-            font-size: 32px;
-            font-weight: 800;
+            font-size: 24px;
+            font-weight: 700;
             background: linear-gradient(135deg, #00d4ff, #7b2cbf);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -61,44 +56,41 @@
         .stats-card {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 20px;
-            margin-bottom: 30px;
+            border-radius: 20px;
+            padding: 14px;
+            margin-bottom: 16px;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .stat-item {
-            text-align: center;
+            gap: 12px;
         }
 
         .stat-value {
-            font-size: 28px;
-            font-weight: 800;
+            font-size: 20px;
+            font-weight: 700;
             color: #00d4ff;
         }
 
         .stat-label {
-            font-size: 11px;
+            font-size: 9px;
             color: rgba(255,255,255,0.5);
-            margin-top: 5px;
+            margin-top: 3px;
             text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
         .btn {
             width: 100%;
-            padding: 16px;
+            padding: 12px;
             border: none;
-            border-radius: 16px;
-            font-size: 16px;
+            border-radius: 14px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             transition: all 0.2s ease;
         }
 
@@ -120,276 +112,332 @@
         .btn-back {
             background: rgba(255,255,255,0.08);
             color: white;
+            margin-bottom: 16px;
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        /* Профиль с аватаркой */
+        .profile-avatar {
+            text-align: center;
             margin-bottom: 20px;
+        }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 40px;
+        }
+        .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .profile-id {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .info-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+        }
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00d4ff;
+        }
+
+        .warning {
+            background: rgba(255,100,0,0.12);
+            border-left: 3px solid #ff6600;
+            padding: 10px 12px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 11px;
+        }
+        .warning strong {
+            font-size: 11px;
         }
 
         .upload-area {
             background: rgba(255,255,255,0.05);
-            border-radius: 24px;
-            padding: 40px 20px;
+            border-radius: 20px;
+            padding: 30px 20px;
             text-align: center;
             cursor: pointer;
             border: 2px dashed rgba(255,255,255,0.2);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
-
         .plus-icon {
-            font-size: 48px;
+            font-size: 36px;
             color: rgba(255,255,255,0.6);
+        }
+        .upload-text {
+            font-size: 13px;
+            margin-top: 8px;
         }
 
         .counter {
             text-align: right;
-            margin: 10px 0;
-            font-size: 14px;
+            margin: 8px 0;
+            font-size: 12px;
         }
-
         .counter span {
             color: #00d4ff;
             font-weight: bold;
+            font-size: 14px;
         }
 
         .gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin: 20px 0;
-            max-height: 350px;
+            gap: 8px;
+            margin: 12px 0;
+            max-height: 300px;
             overflow-y: auto;
         }
-
         .gallery-item {
             position: relative;
             aspect-ratio: 1;
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             background: rgba(255,255,255,0.05);
         }
-
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .remove-btn {
             position: absolute;
-            top: 6px;
-            right: 6px;
-            width: 26px;
-            height: 26px;
+            top: 4px;
+            right: 4px;
+            width: 22px;
+            height: 22px;
             background: rgba(0,0,0,0.7);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .price {
-            font-size: 48px;
-            font-weight: 800;
+            font-size: 36px;
+            font-weight: 700;
             color: #00d4ff;
             text-align: center;
-            margin: 20px 0;
+            margin: 12px 0;
         }
-
         .commission {
             text-align: center;
-            color: rgba(255,255,255,0.6);
-            font-size: 12px;
-            margin-bottom: 30px;
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .info-label {
-            color: rgba(255,255,255,0.6);
-        }
-
-        .info-value {
-            font-weight: 600;
-            color: #00d4ff;
-        }
-
-        .warning {
-            background: rgba(255,100,0,0.15);
-            border-left: 3px solid #ff6600;
-            padding: 15px;
-            border-radius: 12px;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
             margin-bottom: 20px;
-            font-size: 13px;
         }
 
         .loading {
             text-align: center;
-            padding: 40px;
+            padding: 30px;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
         .loading-spinner {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border: 3px solid rgba(255,255,255,0.2);
             border-top-color: #00d4ff;
             border-radius: 50%;
-            margin: 0 auto 20px;
+            margin: 0 auto 16px;
             animation: spin 1s linear infinite;
         }
-
         .searching {
             text-align: center;
-            padding: 40px;
+            padding: 30px;
         }
-
+        .searching-icon {
+            font-size: 40px;
+            animation: pulse 1.5s ease infinite;
+            margin-bottom: 16px;
+        }
         @keyframes pulse {
             0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-
-        .searching-icon {
-            font-size: 48px;
-            animation: pulse 1.5s ease infinite;
-            margin-bottom: 20px;
+            50% { opacity: 1; transform: scale(1.05); }
         }
 
         .footer {
             text-align: center;
-            padding-top: 30px;
-            font-size: 11px;
-            color: rgba(255,255,255,0.3);
+            padding-top: 20px;
+            font-size: 9px;
+            color: rgba(255,255,255,0.25);
         }
-
         .hidden {
             display: none;
+        }
+        
+        .section-title {
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        .balance-card {
+            background: rgba(0,212,255,0.08);
+            border-radius: 16px;
+            padding: 12px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .balance-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+        .balance-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Главная страница -->
+        <!-- ГЛАВНАЯ СТРАНИЦА -->
         <div id="mainPage" class="page active">
-            <div class="header">
-                <div class="logo">📸</div>
-                <h1>PhotoStockX</h1>
-                <div class="stats-card">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-value" id="authors">12579</div>
-                            <div class="stat-label">АВТОРОВ ONLINE</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="clients">18456</div>
-                            <div class="stat-label">КЛИЕНТОВ ONLINE</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="totalSold">1042150</div>
-                            <div class="stat-label">ПРОДАНО ВСЕГО</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="todaySold">14244</div>
-                            <div class="stat-label">СЕГОДНЯ ПРОДАНО</div>
-                        </div>
+            <div class="profile-avatar">
+                <div class="avatar">📸</div>
+            </div>
+            <div class="stats-card">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="authors">12 579</div>
+                        <div class="stat-label">АВТОРОВ ONLINE</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="clients">18 456</div>
+                        <div class="stat-label">КЛИЕНТОВ ONLINE</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalSold">1 042 150</div>
+                        <div class="stat-label">ПРОДАНО ВСЕГО</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="todaySold">14 244</div>
+                        <div class="stat-label">СЕГОДНЯ ПРОДАНО</div>
                     </div>
                 </div>
             </div>
             <button class="btn btn-primary" id="startBtn">🚀 Начать продавать</button>
             <button class="btn btn-secondary" id="profileBtn">👤 Мой профиль</button>
-            <div class="footer">🧠 Нейросеть оценивает ваши кадры и находит покупателей</div>
+            <div class="footer">🧠 Нейросеть оценивает ваши кадры</div>
         </div>
 
-        <!-- Загрузка фото -->
+        <!-- ЗАГРУЗКА ФОТО -->
         <div id="uploadPage" class="page">
             <button class="btn btn-back" id="backBtn">← Назад</button>
-            <div class="header">
-                <div class="logo">📸</div>
-                <h1>Загрузите фото</h1>
+            <div class="profile-avatar">
+                <div class="avatar">📸</div>
             </div>
             <div class="upload-area" id="uploadArea">
                 <div class="plus-icon">➕</div>
-                <div>Нажмите, чтобы выбрать фото</div>
+                <div class="upload-text">Выбрать фото</div>
             </div>
             <div class="counter">Выбрано: <span id="selectedCount">0</span> / 10</div>
             <div class="gallery" id="gallery"></div>
             <button class="btn btn-primary" id="submitBtn">📨 Отправить на проверку</button>
         </div>
 
-        <!-- Модерация -->
+        <!-- МОДЕРАЦИЯ -->
         <div id="moderationPage" class="page">
             <div class="loading">
                 <div class="loading-spinner"></div>
-                <h2>Модерация...</h2>
-                <div class="stats-card">Искусственный интеллект проверяет качество и уникальность ваших фото</div>
+                <h1 style="font-size: 18px;">Модерация...</h1>
+                <div style="font-size: 12px; opacity: 0.6;">ИИ проверяет качество ваших фото</div>
             </div>
         </div>
 
-        <!-- Проверка пройдена -->
+        <!-- ПРОВЕРКА ПРОЙДЕНА -->
         <div id="successPage" class="page">
-            <div class="header">
-                <div class="logo">✅</div>
-                <h1>Проверка пройдена!</h1>
-                <div class="stats-card">Ваши фотографии соответствуют высоким стандартам качества.</div>
+            <div class="profile-avatar">
+                <div class="avatar">✅</div>
+            </div>
+            <div class="stats-card">
+                <div style="text-align: center; font-size: 14px; font-weight: 600;">Проверка пройдена!</div>
+                <div style="text-align: center; font-size: 11px; opacity: 0.6;">Ваши фото соответствуют стандартам</div>
             </div>
             <button class="btn btn-primary" id="findBuyerBtn">🔍 Найти покупателя</button>
         </div>
 
-        <!-- Поиск покупателя -->
+        <!-- ПОИСК ПОКУПАТЕЛЯ -->
         <div id="searchPage" class="page">
             <div class="searching">
                 <div class="searching-icon">🔍</div>
-                <h2>Поиск покупателя...</h2>
-                <div class="stats-card">Ищем подходящего покупателя для ваших фотографий</div>
-                <div class="loading-spinner"></div>
+                <h1 style="font-size: 18px;">Поиск покупателя...</h1>
+                <div style="font-size: 12px; opacity: 0.6;">Ищем подходящего покупателя</div>
+                <div class="loading-spinner" style="margin-top: 20px;"></div>
             </div>
         </div>
 
-        <!-- Предложение -->
+        <!-- ПРЕДЛОЖЕНИЕ -->
         <div id="offerPage" class="page">
-            <div class="header">
-                <h1>ПРЕДЛОЖЕНИЕ НАЙДЕНО</h1>
+            <div class="profile-avatar">
+                <div class="avatar">💎</div>
             </div>
             <div class="stats-card">
-                <div style="text-align:center;">Покупатель готов забрать ваши фото за:</div>
+                <div style="text-align: center; font-size: 12px; opacity: 0.7;">Покупатель готов забрать ваши фото за:</div>
                 <div class="price" id="offerPrice">0 ₽</div>
-                <div class="commission" id="commissionText">Комиссия сервиса 0% для первой продажи</div>
+                <div class="commission" id="commissionText">Комиссия 0% для первой продажи</div>
             </div>
-            <button class="btn btn-secondary" id="newBuyerBtn">🔍 Найти нового покупателя</button>
-            <button class="btn btn-primary" id="acceptBtn">✅ Принять сделку</button>
+            <button class="btn btn-secondary" id="newBuyerBtn">Найти нового покупателя</button>
+            <button class="btn btn-primary" id="acceptBtn">Принять сделку</button>
         </div>
 
-        <!-- Фото купили -->
+        <!-- ФОТО КУПИЛИ -->
         <div id="boughtPage" class="page">
-            <div class="header">
-                <div class="logo">🎉</div>
-                <h1>Ваши фото купили!</h1>
-                <div class="stats-card">Сделка успешно завершена, средства зачислены на ваш внутренний баланс.</div>
+            <div class="profile-avatar">
+                <div class="avatar">🎉</div>
+            </div>
+            <div class="stats-card">
+                <div style="text-align: center; font-size: 14px; font-weight: 600;">Ваши фото купили!</div>
+                <div style="text-align: center; font-size: 11px; opacity: 0.6;">Средства зачислены на баланс</div>
             </div>
             <button class="btn btn-primary" id="toProfileBtn">👤 Перейти в профиль</button>
         </div>
 
-        <!-- Профиль (как на фото) -->
+        <!-- ПРОФИЛЬ (КАК НА ФОТО) -->
         <div id="profilePage" class="page">
             <button class="btn btn-back" id="profileBackBtn">← Назад</button>
-            <div class="header">
-                <div class="logo">📸</div>
-                <h1>PhotoStockX</h1>
-            </div>
             
-            <div class="warning">
-                <strong>СИСТЕМНОЕ УВЕДОМЛЕНИЕ</strong><br>
-                Для старта новой сессии продаж необходимо вывести текущие средства. В целях безопасности внутренний баланс не подлежит длительному хранению.
+            <!-- Аватарка пользователя -->
+            <div class="profile-avatar">
+                <div class="avatar" id="userAvatar">👤</div>
+                <div class="profile-name" id="userName">Пользователь</div>
+                <div class="profile-id" id="userId">@user</div>
             </div>
 
+            <!-- Системное уведомление -->
+            <div class="warning">
+                <strong>СИСТЕМНОЕ УВЕДОМЛЕНИЕ</strong><br>
+                Для старта новой сессии продаж необходимо вывести текущие средства.
+            </div>
+
+            <!-- Статистика -->
             <div class="stats-card">
                 <div class="info-row">
                     <span class="info-label">СТАТУС АККАУНТА</span>
@@ -409,26 +457,27 @@
                 </div>
             </div>
 
-            <div class="stats-card">
-                <div class="info-row">
-                    <span class="info-label">Доступный баланс</span>
-                    <span class="info-value" id="balance">0 ₽</span>
-                </div>
+            <!-- Доступный баланс -->
+            <div class="balance-card">
+                <div class="balance-label">Доступный баланс</div>
+                <div class="balance-amount" id="balance">0 ₽</div>
             </div>
 
             <button class="btn btn-secondary" id="withdrawBtn">💸 Вывести средства</button>
             <button class="btn btn-primary" id="uploadMoreBtn">📸 Загрузить еще фото</button>
         </div>
 
-        <!-- Вывод средств -->
+        <!-- ВЫВОД СРЕДСТВ -->
         <div id="withdrawPage" class="page">
             <button class="btn btn-back" id="withdrawBackBtn">← Назад</button>
-            <div class="header">
-                <h1>Способ вывода</h1>
+            <div class="profile-avatar">
+                <div class="avatar">💰</div>
             </div>
-            <button class="btn btn-secondary" id="starsBtn">⭐ Telegram Stars<br><small>Курс: 1 ₽ = 1 Star</small></button>
-            <button class="btn btn-secondary" id="cryptoBtn">🪙 Криптовалюта<br><small>USDT, TON, BTC</small></button>
-            <button class="btn btn-secondary" id="cardBtn">💳 Банковская карта<br><small>Любые страны мира</small></button>
+            <h1 style="font-size: 20px; text-align: center;">Способ вывода</h1>
+            <div style="height: 20px;"></div>
+            <button class="btn btn-secondary" id="starsBtn">⭐ Telegram Stars<br><small style="font-size: 10px;">Курс: 1 ₽ = 1 Star</small></button>
+            <button class="btn btn-secondary" id="cryptoBtn">🪙 Криптовалюта<br><small style="font-size: 10px;">USDT, TON, BTC</small></button>
+            <button class="btn btn-secondary" id="cardBtn">💳 Банковская карта<br><small style="font-size: 10px;">Любые страны мира</small></button>
         </div>
     </div>
 
@@ -438,6 +487,11 @@
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
+
+        // Данные пользователя из Telegram
+        const user = tg.initDataUnsafe?.user;
+        const userName = user?.first_name || 'Пользователь';
+        const userAvatar = user?.first_name?.charAt(0) || '👤';
 
         // === ДАННЫЕ ПОЛЬЗОВАТЕЛЯ (СОХРАНЯЮТСЯ НАВСЕГДА) ===
         let userData = {
@@ -466,6 +520,9 @@
             document.getElementById('soldCount').innerText = userData.soldPhotos + ' шт.';
             document.getElementById('totalEarned').innerText = userData.totalEarned.toLocaleString() + ' ₽';
             document.getElementById('balance').innerText = userData.balance.toLocaleString() + ' ₽';
+            document.getElementById('userName').innerText = userName;
+            document.getElementById('userId').innerText = user?.username ? '@' + user.username : 'Пользователь';
+            document.getElementById('userAvatar').innerHTML = userAvatar;
         }
 
         function addSale(amount) {
@@ -475,13 +532,12 @@
             saveUserData();
             updateProfileDisplay();
             
-            // Обновляем глобальную статистику
             stats.totalSold++;
             stats.todaySold++;
             updateStatsDisplay();
         }
 
-        // === СТАТИСТИКА НА ГЛАВНОЙ ===
+        // === СТАТИСТИКА ===
         let stats = {
             authors: 12579,
             clients: 18456,
@@ -489,11 +545,15 @@
             todaySold: 14244
         };
 
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+
         function updateStatsDisplay() {
-            document.getElementById('authors').innerText = stats.authors.toLocaleString();
-            document.getElementById('clients').innerText = stats.clients.toLocaleString();
-            document.getElementById('totalSold').innerText = stats.totalSold.toLocaleString();
-            document.getElementById('todaySold').innerText = stats.todaySold.toLocaleString();
+            document.getElementById('authors').innerText = formatNumber(stats.authors);
+            document.getElementById('clients').innerText = formatNumber(stats.clients);
+            document.getElementById('totalSold').innerText = formatNumber(stats.totalSold);
+            document.getElementById('todaySold').innerText = formatNumber(stats.todaySold);
         }
 
         // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
@@ -502,7 +562,7 @@
             document.getElementById(pageId).classList.add('active');
         }
 
-        // === ГЕНЕРАЦИЯ ЦЕНЫ (1500-5000 с копейками) ===
+        // === ГЕНЕРАЦИЯ ЦЕНЫ ===
         function generatePrice() {
             return (Math.random() * 3500 + 1500).toFixed(2);
         }
@@ -510,20 +570,13 @@
         let currentPrice = null;
         let searchTimer = null;
 
-        // === ПОИСК ПОКУПАТЕЛЯ (13 СЕКУНД) ===
+        // === ПОИСК ПОКУПАТЕЛЯ (13 СЕК) ===
         function startSearch(callback) {
             showPage('searchPage');
             if (searchTimer) clearTimeout(searchTimer);
             searchTimer = setTimeout(() => {
                 if (callback) callback();
             }, 13000);
-        }
-
-        function stopSearch() {
-            if (searchTimer) {
-                clearTimeout(searchTimer);
-                searchTimer = null;
-            }
         }
 
         // === ГАЛЕРЕЯ ===
@@ -549,7 +602,7 @@
             });
         }
 
-        // === ОБРАБОТЧИКИ СОБЫТИЙ ===
+        // === ОБРАБОТЧИКИ ===
         document.getElementById('startBtn').onclick = () => {
             if (userData.balance > 0) {
                 showPage('profilePage');
@@ -593,7 +646,7 @@
 
         document.getElementById('submitBtn').onclick = () => {
             if (selectedPhotos.length === 0) {
-                tg.showPopup({ title: 'Нет фото', message: 'Выберите хотя бы одно фото!', buttons: [{type: 'ok'}] });
+                tg.showPopup({ title: 'Ошибка', message: 'Выберите хотя бы одно фото', buttons: [{type: 'ok'}] });
                 return;
             }
             showPage('moderationPage');
@@ -606,11 +659,7 @@
             startSearch(() => {
                 currentPrice = generatePrice();
                 document.getElementById('offerPrice').innerText = currentPrice + ' ₽';
-                if (userData.soldPhotos === 0) {
-                    document.getElementById('commissionText').innerHTML = 'Комиссия сервиса 0% для первой продажи';
-                } else {
-                    document.getElementById('commissionText').innerHTML = 'Комиссия сервиса 15%';
-                }
+                document.getElementById('commissionText').innerHTML = userData.soldPhotos === 0 ? 'Комиссия сервиса 0% для первой продажи' : 'Комиссия сервиса 15%';
                 showPage('offerPage');
             });
         };
@@ -625,8 +674,7 @@
 
         document.getElementById('acceptBtn').onclick = () => {
             if (currentPrice) {
-                const amount = parseFloat(currentPrice);
-                addSale(amount);
+                addSale(parseFloat(currentPrice));
                 showPage('boughtPage');
             }
         };
@@ -645,23 +693,17 @@
         document.getElementById('withdrawBtn').onclick = () => showPage('withdrawPage');
 
         document.getElementById('starsBtn').onclick = () => {
-            tg.showPopup({ 
-                title: 'Вывод средств', 
-                message: `Выведено ${userData.balance.toFixed(0)} Telegram Stars`, 
-                buttons: [{type: 'ok'}]
-            });
+            tg.showPopup({ title: 'Вывод', message: `Выведено ${userData.balance.toFixed(0)} Stars`, buttons: [{type: 'ok'}] });
             userData.balance = 0;
             saveUserData();
             updateProfileDisplay();
             showPage('profilePage');
         };
-
         document.getElementById('cryptoBtn').onclick = () => {
-            tg.showPopup({ title: 'Вывод криптовалюты', message: 'Запрос на вывод создан', buttons: [{type: 'ok'}] });
+            tg.showPopup({ title: 'Вывод', message: 'Запрос на вывод создан', buttons: [{type: 'ok'}] });
         };
-
         document.getElementById('cardBtn').onclick = () => {
-            tg.showPopup({ title: 'Вывод на карту', message: 'Запрос на вывод создан', buttons: [{type: 'ok'}] });
+            tg.showPopup({ title: 'Вывод', message: 'Запрос на вывод создан', buttons: [{type: 'ok'}] });
         };
 
         // === ЖИВАЯ СТАТИСТИКА ===
