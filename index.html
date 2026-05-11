@@ -25,7 +25,6 @@
             margin: 0 auto;
         }
 
-        /* СТРАНИЦЫ */
         .page {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -40,7 +39,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ХЕДЕР */
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -66,7 +64,6 @@
             margin-top: 5px;
         }
 
-        /* СТАТИСТИКА */
         .stats-card {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
@@ -100,7 +97,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* КНОПКИ */
         .btn {
             width: 100%;
             padding: 16px;
@@ -136,12 +132,11 @@
             border: 1px solid rgba(255,255,255,0.15);
         }
 
-        /* СТРАНИЦА ЗАГРУЗКИ ФОТО */
         .upload-area {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
             border-radius: 24px;
-            padding: 40px 20px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
             border: 2px dashed rgba(255,255,255,0.2);
@@ -154,25 +149,15 @@
             border-color: #00d4ff;
         }
 
-        .upload-icon {
+        .plus-icon {
             font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        .upload-text {
-            font-size: 16px;
-            color: rgba(255,255,255,0.8);
-        }
-
-        .upload-hint {
-            font-size: 12px;
-            color: rgba(255,255,255,0.4);
-            margin-top: 8px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.6);
         }
 
         .counter {
-            text-align: center;
-            margin: 15px 0;
+            text-align: right;
+            margin: 10px 0;
             font-size: 14px;
             color: rgba(255,255,255,0.7);
         }
@@ -183,7 +168,6 @@
             font-size: 18px;
         }
 
-        /* ГАЛЕРЕЯ */
         .gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -228,7 +212,6 @@
             background: #ff4444;
         }
 
-        /* МОДАЛЬНОЕ ОКНО */
         .modal {
             position: fixed;
             top: 0;
@@ -290,45 +273,18 @@
             display: none;
         }
 
-        /* БЛОК "СКОРО" */
-        .soon-overlay {
+        @keyframes fly {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-100px) rotate(10deg); opacity: 0.5; }
+            100% { transform: translateY(-300px) rotate(20deg); opacity: 0; }
+        }
+
+        .flying {
+            animation: fly 0.8s ease forwards;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(15px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            cursor: pointer;
-        }
-
-        .soon-card {
-            background: rgba(255,255,255,0.1);
-            border-radius: 32px;
-            padding: 30px;
-            text-align: center;
-            backdrop-filter: blur(20px);
-        }
-
-        .soon-icon {
-            font-size: 64px;
-            margin-bottom: 10px;
-        }
-
-        .soon-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .soon-sub {
-            font-size: 14px;
-            color: rgba(255,255,255,0.6);
-            margin-top: 8px;
+            z-index: 2000;
+            font-size: 40px;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -383,9 +339,7 @@
             </div>
 
             <div class="upload-area" id="uploadArea">
-                <div class="upload-icon">➕</div>
-                <div class="upload-text">Нажмите, чтобы выбрать фото</div>
-                <div class="upload-hint">Поддерживаются JPEG, PNG</div>
+                <div class="plus-icon">➕</div>
             </div>
 
             <div class="counter">
@@ -421,18 +375,16 @@
         let selectedPhotos = [];
         const MAX_PHOTOS = 10;
 
-        // Статистика
+        // Статистика (начальные значения)
+        // АВТОРЫ: ~14000, КЛИЕНТЫ: ~1800, ПРОДАЖИ: ~1M
         let stats = {
-            authors: 12579,
-            clients: 18456,
-            totalSold: 1042150,
-            todaySold: 14244
+            authors: 14244,      // ~14k
+            clients: 1856,       // ~1.8k
+            totalSold: 1042150,  // ~1M
+            todaySold: 142       // сегодня
         };
 
-        // Последняя дата обновления
-        let lastDate = new Date().toLocaleDateString();
-
-        // ---------- СТАТИСТИКА ----------
+        // ---------- ФУНКЦИИ СТАТИСТИКИ ----------
         function updateStatsDisplay() {
             document.getElementById('authors').innerText = stats.authors.toLocaleString();
             document.getElementById('clients').innerText = stats.clients.toLocaleString();
@@ -440,53 +392,92 @@
             document.getElementById('todaySold').innerText = stats.todaySold.toLocaleString();
         }
 
-        function resetTodayStats() {
-            const today = new Date().toLocaleDateString();
-            if (today !== lastDate) {
+        // Обновление статистики в реальном времени
+        function startLiveStats() {
+            // АВТОРЫ: меняются на 3-10 каждые 10 секунд
+            setInterval(() => {
+                let change = Math.floor(Math.random() * 8) + 3; // 3-10
+                if (Math.random() > 0.5) {
+                    stats.authors += change;
+                } else {
+                    stats.authors -= change;
+                }
+                // Не уходим ниже 12000
+                if (stats.authors < 12000) stats.authors = 12000;
+                updateStatsDisplay();
+            }, 10000);
+
+            // КЛИЕНТЫ: меняются на 3-10 каждые 10 секунд (диапазон 1500-2000)
+            setInterval(() => {
+                let change = Math.floor(Math.random() * 8) + 3; // 3-10
+                if (Math.random() > 0.5) {
+                    stats.clients += change;
+                } else {
+                    stats.clients -= change;
+                }
+                // Ограничиваем 1500-2000
+                if (stats.clients < 1500) stats.clients = 1500;
+                if (stats.clients > 2000) stats.clients = 2000;
+                updateStatsDisplay();
+            }, 10000);
+
+            // ПРОДАЖИ: увеличиваются на 3-5 каждые 5 секунд
+            setInterval(() => {
+                let sales = Math.floor(Math.random() * 3) + 3; // 3-5
+                stats.totalSold += sales;
+                stats.todaySold += sales;
+                updateStatsDisplay();
+            }, 5000);
+        }
+
+        // Сброс todaySold в 12:00
+        function checkMidnightReset() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            
+            if (hours === 12 && minutes === 0) {
                 stats.todaySold = 0;
-                lastDate = today;
                 updateStatsDisplay();
             }
         }
+        
+        setInterval(checkMidnightReset, 60000); // Проверка каждую минуту
 
-        function liveStats() {
-            // Проверка нового дня
-            resetTodayStats();
-            
-            // Изменение онлайн
-            stats.authors += Math.floor(Math.random() * 30) - 10;
-            stats.clients += Math.floor(Math.random() * 40) - 15;
-            
-            // Ограничения
-            if (stats.authors < 8000) stats.authors = 8000;
-            if (stats.clients < 12000) stats.clients = 12000;
-            
-            // Добавление продаж (5-10% шанс)
-            if (Math.random() < 0.08) {
-                const sales = Math.floor(Math.random() * 5) + 1;
-                stats.totalSold += sales;
-                stats.todaySold += sales;
-            }
-            
-            updateStatsDisplay();
-        }
-
-        // Запуск статистики (каждые 3 секунды)
-        setInterval(liveStats, 3000);
-
-        // Проверка нового дня каждый час
-        setInterval(resetTodayStats, 3600000);
-
-        // ---------- ПОКАЗ МОДАЛКИ ----------
-        function showModal(icon, title, text) {
+        // ---------- МОДАЛЬНОЕ ОКНО ----------
+        function showModal(icon, title, text, autoClose = false) {
             document.getElementById('modalIcon').innerText = icon;
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalText').innerText = text;
             document.getElementById('modal').style.display = 'flex';
+            
+            if (autoClose) {
+                setTimeout(() => {
+                    document.getElementById('modal').style.display = 'none';
+                }, 3000);
+            }
         }
 
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
+        }
+
+        // ---------- АНИМАЦИЯ УЛЕТАНИЯ ФОТО ----------
+        function animateFly(element) {
+            return new Promise((resolve) => {
+                const rect = element.getBoundingClientRect();
+                const flyDiv = document.createElement('div');
+                flyDiv.className = 'flying';
+                flyDiv.innerHTML = '📸';
+                flyDiv.style.left = rect.left + 'px';
+                flyDiv.style.top = rect.top + 'px';
+                document.body.appendChild(flyDiv);
+                
+                setTimeout(() => {
+                    flyDiv.remove();
+                    resolve();
+                }, 800);
+            });
         }
 
         // ---------- ГАЛЕРЕЯ ----------
@@ -506,7 +497,6 @@
             
             document.getElementById('selectedCount').innerText = selectedPhotos.length;
             
-            // Обработчики удаления
             document.querySelectorAll('.remove-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const idx = parseInt(btn.dataset.index);
@@ -539,83 +529,60 @@
             document.getElementById('fileInput').value = '';
             
             if (files.length > remainingSlots) {
-                showModal('⚠️', 'Много фото', `Можно выбрать не более ${MAX_PHOTOS} фото.`);
+                showModal('⚠️', 'Много фото', `Можно выбрать не более ${MAX_PHOTOS} фото.`, true);
             }
         }
 
         // Отправка фото "в воздух"
-        function submitPhotos() {
+        async function submitPhotos() {
             if (selectedPhotos.length === 0) {
-                showModal('⚠️', 'Нет фото', 'Выберите хотя бы одно фото для отправки!');
+                showModal('⚠️', 'Нет фото', 'Нужно выбрать хотя бы одно фото!', true);
                 return;
             }
             
             const count = selectedPhotos.length;
             
-            // Анимация улетания
+            // Анимация улетания всех фото
             const items = document.querySelectorAll('.gallery-item');
-            items.forEach(item => {
-                item.style.animation = 'fadeIn 0.3s ease reverse';
-            });
+            for (let i = 0; i < items.length; i++) {
+                await animateFly(items[i]);
+            }
             
-            // Очищаем фото
+            // Очищаем массив и галерею
             selectedPhotos = [];
             renderGallery();
             
-            // Сообщение об успехе
-            showModal('🚀', 'Фото улетели!', `Ваши ${count} фото отправлены на проверку нейросети. Результаты придут в ближайшее время.`);
+            // Показываем успех
+            showModal('🚀', 'Фото улетели!', `Ваши ${count} фото отправлены на проверку нейросети.`, true);
             
-            // Отправляем данные в бот (опционально)
+            // Отправляем данные в бот
             tg.sendData(JSON.stringify({
                 action: 'photos_submitted',
                 count: count
             }));
         }
 
-        // ---------- СТРАНИЦА "СКОРО" ----------
-        function showSoon() {
-            const soonDiv = document.createElement('div');
-            soonDiv.className = 'soon-overlay';
-            soonDiv.innerHTML = `
-                <div class="soon-card">
-                    <div class="soon-icon">🔒</div>
-                    <div class="soon-text">Скоро будет доступно</div>
-                    <div class="soon-sub">Функция в разработке</div>
-                </div>
-            `;
-            soonDiv.onclick = () => soonDiv.remove();
-            document.body.appendChild(soonDiv);
-        }
-
         // ---------- НАВИГАЦИЯ ----------
-        // Кнопка "Начать продавать" (затемнено - пока не готово)
         document.getElementById('startSellingBtn').onclick = () => {
-            showSoon();
+            document.getElementById('mainPage').classList.remove('active');
+            document.getElementById('uploadPage').classList.add('active');
         };
         
-        // Кнопка "Купить фото" (затемнено)
         document.getElementById('buyPhotoBtn').onclick = () => {
-            showSoon();
+            showModal('🛍️', 'Скоро!', 'Галерея появится в следующем обновлении!', true);
         };
         
-        // Назад
         document.getElementById('backBtn').onclick = () => {
             document.getElementById('uploadPage').classList.remove('active');
             document.getElementById('mainPage').classList.add('active');
         };
         
-        // Область загрузки
         document.getElementById('uploadArea').onclick = () => {
             document.getElementById('fileInput').click();
         };
         
-        // Выбор файлов
         document.getElementById('fileInput').onchange = handleFileSelect;
-        
-        // Отправка
         document.getElementById('submitBtn').onclick = submitPhotos;
-        
-        // Закрытие модалки
         document.getElementById('modalCloseBtn').onclick = closeModal;
         document.getElementById('modal').onclick = (e) => {
             if (e.target === document.getElementById('modal')) closeModal();
@@ -623,6 +590,7 @@
         
         // ---------- ЗАПУСК ----------
         updateStatsDisplay();
+        startLiveStats();
         
         console.log('PhotoStockX Mini App загружен');
     </script>
