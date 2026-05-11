@@ -58,12 +58,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .subtitle {
-            font-size: 13px;
-            color: rgba(255,255,255,0.5);
-            margin-top: 5px;
-        }
-
         .stats-card {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
@@ -193,21 +187,6 @@
             font-size: 14px;
         }
 
-        .remove-btn:hover {
-            background: #ff4444;
-        }
-
-        .footer {
-            text-align: center;
-            padding-top: 30px;
-            font-size: 11px;
-            color: rgba(255,255,255,0.3);
-        }
-
-        .hidden {
-            display: none;
-        }
-
         .price {
             font-size: 48px;
             font-weight: 800;
@@ -283,6 +262,17 @@
             animation: pulse 1.5s ease infinite;
             margin-bottom: 20px;
         }
+
+        .footer {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -292,37 +282,30 @@
             <div class="header">
                 <div class="logo">📸</div>
                 <h1>PhotoStockX</h1>
-                <div class="subtitle">Глобальная экосистема для продажи фото</div>
-            </div>
-
-            <div class="stats-card">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value" id="authors">12579</div>
-                        <div class="stat-label">АВТОРОВ ONLINE</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="clients">18456</div>
-                        <div class="stat-label">КЛИЕНТОВ ONLINE</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="totalSold">1042150</div>
-                        <div class="stat-label">ПРОДАНО ВСЕГО</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="todaySold">14244</div>
-                        <div class="stat-label">СЕГОДНЯ ПРОДАНО</div>
+                <div class="stats-card">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="authors">12579</div>
+                            <div class="stat-label">АВТОРОВ ONLINE</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="clients">18456</div>
+                            <div class="stat-label">КЛИЕНТОВ ONLINE</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalSold">1042150</div>
+                            <div class="stat-label">ПРОДАНО ВСЕГО</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="todaySold">14244</div>
+                            <div class="stat-label">СЕГОДНЯ ПРОДАНО</div>
+                        </div>
                     </div>
                 </div>
             </div>
-
             <button class="btn btn-primary" id="startBtn">🚀 Начать продавать</button>
             <button class="btn btn-secondary" id="profileBtn">👤 Мой профиль</button>
-
-            <div class="footer">
-                <div>🧠 Нейросеть оценивает ваши кадры</div>
-                <div>и находит покупателей за считанные секунды</div>
-            </div>
+            <div class="footer">🧠 Нейросеть оценивает ваши кадры и находит покупателей</div>
         </div>
 
         <!-- Загрузка фото -->
@@ -346,7 +329,7 @@
             <div class="loading">
                 <div class="loading-spinner"></div>
                 <h2>Модерация...</h2>
-                <div class="subtitle">ИИ проверяет качество ваших фото</div>
+                <div class="stats-card">Искусственный интеллект проверяет качество и уникальность ваших фото</div>
             </div>
         </div>
 
@@ -355,7 +338,7 @@
             <div class="header">
                 <div class="logo">✅</div>
                 <h1>Проверка пройдена!</h1>
-                <div class="subtitle">Ваши фото соответствуют стандартам качества</div>
+                <div class="stats-card">Ваши фотографии соответствуют высоким стандартам качества.</div>
             </div>
             <button class="btn btn-primary" id="findBuyerBtn">🔍 Найти покупателя</button>
         </div>
@@ -365,8 +348,8 @@
             <div class="searching">
                 <div class="searching-icon">🔍</div>
                 <h2>Поиск покупателя...</h2>
-                <div class="subtitle">Ищем подходящего покупателя</div>
-                <div class="loading-spinner" style="margin-top: 30px;"></div>
+                <div class="stats-card">Ищем подходящего покупателя для ваших фотографий</div>
+                <div class="loading-spinner"></div>
             </div>
         </div>
 
@@ -376,12 +359,12 @@
                 <h1>ПРЕДЛОЖЕНИЕ НАЙДЕНО</h1>
             </div>
             <div class="stats-card">
-                <div style="text-align:center; margin-bottom:10px;">Покупатель готов забрать ваши фото за:</div>
+                <div style="text-align:center;">Покупатель готов забрать ваши фото за:</div>
                 <div class="price" id="offerPrice">0 ₽</div>
-                <div class="commission" id="commissionText">Комиссия 0% для первой продажи</div>
+                <div class="commission" id="commissionText">Комиссия сервиса 0% для первой продажи</div>
             </div>
-            <button class="btn btn-secondary" id="newBuyerBtn">Найти нового покупателя</button>
-            <button class="btn btn-primary" id="acceptBtn">Принять сделку</button>
+            <button class="btn btn-secondary" id="newBuyerBtn">🔍 Найти нового покупателя</button>
+            <button class="btn btn-primary" id="acceptBtn">✅ Принять сделку</button>
         </div>
 
         <!-- Фото купили -->
@@ -389,28 +372,50 @@
             <div class="header">
                 <div class="logo">🎉</div>
                 <h1>Ваши фото купили!</h1>
-                <div class="subtitle">Средства зачислены на баланс</div>
+                <div class="stats-card">Сделка успешно завершена, средства зачислены на ваш внутренний баланс.</div>
             </div>
-            <button class="btn btn-primary" id="toProfileBtn">Перейти в профиль</button>
+            <button class="btn btn-primary" id="toProfileBtn">👤 Перейти в профиль</button>
         </div>
 
-        <!-- Профиль -->
+        <!-- Профиль (как на фото) -->
         <div id="profilePage" class="page">
             <button class="btn btn-back" id="profileBackBtn">← Назад</button>
             <div class="header">
-                <div class="logo">👤</div>
+                <div class="logo">📸</div>
                 <h1>PhotoStockX</h1>
             </div>
-            <div class="warning" id="warningMsg">⚠️ Для старта новой продажи необходимо вывести средства</div>
-            <div class="stats-card">
-                <div class="info-row"><span class="info-label">СТАТУС</span><span class="info-value" style="color:#00ff88;">Активный</span></div>
-                <div class="info-row"><span class="info-label">РЕГИСТРАЦИЯ</span><span class="info-value" id="regDate">-</span></div>
-                <div class="info-row"><span class="info-label">ПРОДАНО ФОТО</span><span class="info-value" id="soldCount">0 шт.</span></div>
-                <div class="info-row"><span class="info-label">ЗАРАБОТАНО</span><span class="info-value" id="earned">0 ₽</span></div>
+            
+            <div class="warning">
+                <strong>СИСТЕМНОЕ УВЕДОМЛЕНИЕ</strong><br>
+                Для старта новой сессии продаж необходимо вывести текущие средства. В целях безопасности внутренний баланс не подлежит длительному хранению.
             </div>
+
             <div class="stats-card">
-                <div class="info-row"><span class="info-label">БАЛАНС</span><span class="info-value" id="balance">0 ₽</span></div>
+                <div class="info-row">
+                    <span class="info-label">СТАТУС АККАУНТА</span>
+                    <span class="info-value" style="color: #00ff88;">Активный</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">РЕГИСТРАЦИЯ</span>
+                    <span class="info-value" id="regDate">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">ПРОДАНО ФОТО</span>
+                    <span class="info-value" id="soldCount">0 шт.</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">ВСЕГО ЗАРАБОТАНО</span>
+                    <span class="info-value" id="totalEarned">0 ₽</span>
+                </div>
             </div>
+
+            <div class="stats-card">
+                <div class="info-row">
+                    <span class="info-label">Доступный баланс</span>
+                    <span class="info-value" id="balance">0 ₽</span>
+                </div>
+            </div>
+
             <button class="btn btn-secondary" id="withdrawBtn">💸 Вывести средства</button>
             <button class="btn btn-primary" id="uploadMoreBtn">📸 Загрузить еще фото</button>
         </div>
@@ -421,9 +426,9 @@
             <div class="header">
                 <h1>Способ вывода</h1>
             </div>
-            <button class="btn btn-secondary" id="starsBtn">⭐ Telegram Stars<br><small>1 ₽ = 1 Star</small></button>
+            <button class="btn btn-secondary" id="starsBtn">⭐ Telegram Stars<br><small>Курс: 1 ₽ = 1 Star</small></button>
             <button class="btn btn-secondary" id="cryptoBtn">🪙 Криптовалюта<br><small>USDT, TON, BTC</small></button>
-            <button class="btn btn-secondary" id="cardBtn">💳 Банковская карта<br><small>Любые страны</small></button>
+            <button class="btn btn-secondary" id="cardBtn">💳 Банковская карта<br><small>Любые страны мира</small></button>
         </div>
     </div>
 
@@ -434,7 +439,7 @@
         tg.ready();
         tg.expand();
 
-        // Данные пользователя
+        // === ДАННЫЕ ПОЛЬЗОВАТЕЛЯ (СОХРАНЯЮТСЯ НАВСЕГДА) ===
         let userData = {
             regDate: new Date().toLocaleDateString(),
             soldPhotos: 0,
@@ -442,27 +447,41 @@
             balance: 0
         };
 
-        function loadData() {
-            const saved = localStorage.getItem('photostockx');
+        function loadUserData() {
+            const saved = localStorage.getItem('photostockx_user');
             if (saved) {
                 userData = JSON.parse(saved);
+            } else {
+                saveUserData();
             }
-            updateProfile();
+            updateProfileDisplay();
         }
 
-        function saveData() {
-            localStorage.setItem('photostockx', JSON.stringify(userData));
-            updateProfile();
+        function saveUserData() {
+            localStorage.setItem('photostockx_user', JSON.stringify(userData));
         }
 
-        function updateProfile() {
+        function updateProfileDisplay() {
             document.getElementById('regDate').innerText = userData.regDate;
             document.getElementById('soldCount').innerText = userData.soldPhotos + ' шт.';
-            document.getElementById('earned').innerText = userData.totalEarned.toLocaleString() + ' ₽';
+            document.getElementById('totalEarned').innerText = userData.totalEarned.toLocaleString() + ' ₽';
             document.getElementById('balance').innerText = userData.balance.toLocaleString() + ' ₽';
         }
 
-        // Статистика на главной
+        function addSale(amount) {
+            userData.soldPhotos++;
+            userData.totalEarned += amount;
+            userData.balance += amount;
+            saveUserData();
+            updateProfileDisplay();
+            
+            // Обновляем глобальную статистику
+            stats.totalSold++;
+            stats.todaySold++;
+            updateStatsDisplay();
+        }
+
+        // === СТАТИСТИКА НА ГЛАВНОЙ ===
         let stats = {
             authors: 12579,
             clients: 18456,
@@ -470,20 +489,20 @@
             todaySold: 14244
         };
 
-        function updateStats() {
+        function updateStatsDisplay() {
             document.getElementById('authors').innerText = stats.authors.toLocaleString();
             document.getElementById('clients').innerText = stats.clients.toLocaleString();
             document.getElementById('totalSold').innerText = stats.totalSold.toLocaleString();
             document.getElementById('todaySold').innerText = stats.todaySold.toLocaleString();
         }
 
-        // Переключение страниц
+        // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
 
-        // Генерация случайной цены
+        // === ГЕНЕРАЦИЯ ЦЕНЫ (1500-5000 с копейками) ===
         function generatePrice() {
             return (Math.random() * 3500 + 1500).toFixed(2);
         }
@@ -491,25 +510,32 @@
         let currentPrice = null;
         let searchTimer = null;
 
-        // Поиск покупателя
+        // === ПОИСК ПОКУПАТЕЛЯ (13 СЕКУНД) ===
         function startSearch(callback) {
             showPage('searchPage');
             if (searchTimer) clearTimeout(searchTimer);
             searchTimer = setTimeout(() => {
                 if (callback) callback();
-            }, 20000);
+            }, 13000);
         }
 
-        // Галерея
+        function stopSearch() {
+            if (searchTimer) {
+                clearTimeout(searchTimer);
+                searchTimer = null;
+            }
+        }
+
+        // === ГАЛЕРЕЯ ===
         let selectedPhotos = [];
         
         function renderGallery() {
             const gallery = document.getElementById('gallery');
             gallery.innerHTML = '';
-            selectedPhotos.forEach((p, i) => {
+            selectedPhotos.forEach((photo, idx) => {
                 const div = document.createElement('div');
                 div.className = 'gallery-item';
-                div.innerHTML = `<img src="${p.data}"><div class="remove-btn" data-idx="${i}">✕</div>`;
+                div.innerHTML = `<img src="${photo.data}"><div class="remove-btn" data-idx="${idx}">✕</div>`;
                 gallery.appendChild(div);
             });
             document.getElementById('selectedCount').innerText = selectedPhotos.length;
@@ -523,23 +549,31 @@
             });
         }
 
-        // Обработчики
+        // === ОБРАБОТЧИКИ СОБЫТИЙ ===
         document.getElementById('startBtn').onclick = () => {
             if (userData.balance > 0) {
                 showPage('profilePage');
+                tg.showPopup({
+                    title: 'Внимание',
+                    message: 'У вас есть невыведенные средства. Выведите их для продолжения продаж.',
+                    buttons: [{type: 'ok'}]
+                });
             } else {
                 showPage('uploadPage');
             }
         };
 
         document.getElementById('profileBtn').onclick = () => {
-            updateProfile();
+            updateProfileDisplay();
             showPage('profilePage');
         };
 
         document.getElementById('backBtn').onclick = () => showPage('mainPage');
         document.getElementById('profileBackBtn').onclick = () => showPage('mainPage');
-        document.getElementById('withdrawBackBtn').onclick = () => showPage('profilePage');
+        document.getElementById('withdrawBackBtn').onclick = () => {
+            updateProfileDisplay();
+            showPage('profilePage');
+        };
 
         document.getElementById('uploadArea').onclick = () => document.getElementById('fileInput').click();
         
@@ -559,7 +593,7 @@
 
         document.getElementById('submitBtn').onclick = () => {
             if (selectedPhotos.length === 0) {
-                tg.showPopup({ title: 'Ошибка', message: 'Выберите хотя бы одно фото', buttons: [{type: 'ok'}] });
+                tg.showPopup({ title: 'Нет фото', message: 'Выберите хотя бы одно фото!', buttons: [{type: 'ok'}] });
                 return;
             }
             showPage('moderationPage');
@@ -572,6 +606,11 @@
             startSearch(() => {
                 currentPrice = generatePrice();
                 document.getElementById('offerPrice').innerText = currentPrice + ' ₽';
+                if (userData.soldPhotos === 0) {
+                    document.getElementById('commissionText').innerHTML = 'Комиссия сервиса 0% для первой продажи';
+                } else {
+                    document.getElementById('commissionText').innerHTML = 'Комиссия сервиса 15%';
+                }
                 showPage('offerPage');
             });
         };
@@ -586,17 +625,14 @@
 
         document.getElementById('acceptBtn').onclick = () => {
             if (currentPrice) {
-                const priceNum = parseFloat(currentPrice);
-                userData.soldPhotos++;
-                userData.totalEarned += priceNum;
-                userData.balance += priceNum;
-                saveData();
+                const amount = parseFloat(currentPrice);
+                addSale(amount);
                 showPage('boughtPage');
             }
         };
 
         document.getElementById('toProfileBtn').onclick = () => {
-            updateProfile();
+            updateProfileDisplay();
             showPage('profilePage');
         };
 
@@ -609,39 +645,44 @@
         document.getElementById('withdrawBtn').onclick = () => showPage('withdrawPage');
 
         document.getElementById('starsBtn').onclick = () => {
-            tg.showPopup({ title: 'Вывод', message: `Выведено ${userData.balance.toFixed(0)} Stars`, buttons: [{type: 'ok'}] });
+            tg.showPopup({ 
+                title: 'Вывод средств', 
+                message: `Выведено ${userData.balance.toFixed(0)} Telegram Stars`, 
+                buttons: [{type: 'ok'}]
+            });
             userData.balance = 0;
-            saveData();
+            saveUserData();
+            updateProfileDisplay();
             showPage('profilePage');
         };
 
         document.getElementById('cryptoBtn').onclick = () => {
-            tg.showPopup({ title: 'Вывод', message: 'Запрос на вывод криптовалюты создан', buttons: [{type: 'ok'}] });
+            tg.showPopup({ title: 'Вывод криптовалюты', message: 'Запрос на вывод создан', buttons: [{type: 'ok'}] });
         };
 
         document.getElementById('cardBtn').onclick = () => {
-            tg.showPopup({ title: 'Вывод', message: 'Запрос на вывод на карту создан', buttons: [{type: 'ok'}] });
+            tg.showPopup({ title: 'Вывод на карту', message: 'Запрос на вывод создан', buttons: [{type: 'ok'}] });
         };
 
-        // Запуск
-        loadData();
-        updateStats();
-        
-        // Живая статистика
+        // === ЖИВАЯ СТАТИСТИКА ===
         setInterval(() => {
             stats.authors += Math.floor(Math.random() * 20) - 5;
             stats.clients += Math.floor(Math.random() * 25) - 8;
             if (stats.authors < 10000) stats.authors = 10000;
             if (stats.clients < 15000) stats.clients = 15000;
-            updateStats();
+            updateStatsDisplay();
         }, 10000);
 
         setInterval(() => {
             const sales = Math.floor(Math.random() * 5) + 2;
             stats.totalSold += sales;
             stats.todaySold += sales;
-            updateStats();
+            updateStatsDisplay();
         }, 5000);
+
+        // === ЗАПУСК ===
+        loadUserData();
+        updateStatsDisplay();
     </script>
 </body>
 </html>
