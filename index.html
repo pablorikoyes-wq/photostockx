@@ -39,12 +39,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Шапка с лого слева */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             padding-top: 10px;
         }
 
@@ -79,72 +78,118 @@
             cursor: pointer;
         }
 
-        /* Центрированный контент */
-        .center-content {
+        .profile-section {
             text-align: center;
-            padding: 40px 20px;
+            margin-bottom: 24px;
         }
 
-        .big-logo {
-            font-size: 64px;
-            margin-bottom: 20px;
-        }
-
-        .title {
-            font-size: 24px;
-            font-weight: 700;
+        .avatar {
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #00d4ff, #7b2cbf);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 40px;
         }
 
-        .subtitle {
-            font-size: 14px;
-            color: rgba(255,255,255,0.6);
-            line-height: 1.5;
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
 
-        /* Статистика */
+        .profile-username {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .warning {
+            background: rgba(255,100,0,0.12);
+            border-left: 3px solid #ff6600;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            font-size: 12px;
+        }
+
+        .warning-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
         .stats-card {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 16px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        .stat-item {
-            text-align: center;
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
         }
 
         .stat-value {
-            font-size: 20px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #00d4ff;
+        }
+
+        .balance-card {
+            background: rgba(0,212,255,0.08);
+            border-radius: 20px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .balance-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 8px;
+        }
+
+        .balance-amount {
+            font-size: 32px;
             font-weight: 800;
             color: #00d4ff;
         }
 
-        .stat-label {
-            font-size: 9px;
-            color: rgba(255,255,255,0.5);
-            margin-top: 3px;
-            text-transform: uppercase;
-        }
-
-        /* Кнопки */
         .btn-primary {
             width: 100%;
             padding: 14px;
             background: linear-gradient(135deg, #00d4ff, #7b2cbf);
             color: white;
             border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 14px;
             font-size: 16px;
             font-weight: 600;
@@ -165,14 +210,123 @@
             cursor: not-allowed;
         }
 
-        /* Две кнопки в ряд */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value-large {
+            font-size: 20px;
+            font-weight: 800;
+            color: #00d4ff;
+        }
+
+        .stat-label-small {
+            font-size: 9px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 3px;
+            text-transform: uppercase;
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 9px;
+            color: rgba(255,255,255,0.2);
+        }
+
+        .upload-area {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px dashed rgba(255,255,255,0.2);
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .photo-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 14px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-photo {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 24px;
+            height: 24px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .counter {
+            text-align: right;
+            font-size: 13px;
+            margin-bottom: 16px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .counter span {
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top-color: #00d4ff;
+            border-radius: 50%;
+            margin: 20px auto;
+            animation: spin 1s linear infinite;
+        }
+
         .double-buttons {
             display: flex;
             gap: 12px;
             margin-top: 20px;
         }
 
-        .double-buttons .btn-secondary {
+        .double-buttons .btn-secondary-half {
             flex: 1;
             background: rgba(255,255,255,0.08);
             color: white;
@@ -185,7 +339,7 @@
             text-align: center;
         }
 
-        .double-buttons .btn-accept {
+        .double-buttons .btn-accept-half {
             flex: 1;
             background: linear-gradient(135deg, #00d4ff, #7b2cbf);
             color: white;
@@ -210,46 +364,38 @@
             text-align: center;
             font-size: 12px;
             color: rgba(255,255,255,0.5);
+        }
+
+        .center-content {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .big-logo {
+            font-size: 64px;
             margin-bottom: 20px;
         }
 
-        .footer {
-            text-align: center;
-            padding-top: 20px;
-            font-size: 9px;
-            color: rgba(255,255,255,0.2);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255,255,255,0.2);
-            border-top-color: #00d4ff;
-            border-radius: 50%;
-            margin: 20px auto;
-            animation: spin 1s linear infinite;
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- ГЛАВНАЯ СТРАНИЦА -->
-        <div id="mainPage" class="page active">
+        <!-- НАЧАЛЬНАЯ СТРАНИЦА (только до первой отправки фото) -->
+        <div id="welcomePage" class="page">
             <div class="header">
                 <div class="header-left">
                     <span class="header-logo">P</span>
                     <span class="header-title">ФОТОСТОК</span>
                 </div>
-                <div class="close-btn" id="closeBtn">✕</div>
+                <div class="close-btn" id="closeBtnWelcome">✕</div>
             </div>
 
             <div class="center-content">
@@ -260,28 +406,77 @@
             <div class="stats-card">
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-value" id="authors">12 434</div>
-                        <div class="stat-label">АВТОРОВ ONLINE</div>
+                        <div class="stat-value-large" id="welcomeAuthors">12 434</div>
+                        <div class="stat-label-small">АВТОРОВ ONLINE</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value" id="clients">18 362</div>
-                        <div class="stat-label">КЛИЕНТОВ ONLINE</div>
+                        <div class="stat-value-large" id="welcomeClients">18 362</div>
+                        <div class="stat-label-small">КЛИЕНТОВ ONLINE</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value" id="totalSold">1 042 150</div>
-                        <div class="stat-label">ПРОДАНО ВСЕГО</div>
+                        <div class="stat-value-large" id="welcomeTotalSold">1 042 150</div>
+                        <div class="stat-label-small">ПРОДАНО ВСЕГО</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value" id="todaySold">14 249</div>
-                        <div class="stat-label">СЕГОДНЯ ПРОДАНО</div>
+                        <div class="stat-value-large" id="welcomeTodaySold">14 249</div>
+                        <div class="stat-label-small">СЕГОДНЯ ПРОДАНО</div>
                     </div>
                 </div>
             </div>
 
             <button class="btn-disabled" disabled>Купить фото (только для авторов)</button>
-            <button class="btn-primary" id="startSellBtn">Начать продавать</button>
+            <button class="btn-primary" id="welcomeStartBtn">Начать продавать</button>
 
             <div class="footer">🧠 Нейросеть оценивает ваши кадры</div>
+        </div>
+
+        <!-- ПРОФИЛЬ (постоянный, после первой отправки) -->
+        <div id="profilePage" class="page">
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnProfile">✕</div>
+            </div>
+
+            <div class="profile-section">
+                <div class="avatar" id="userAvatar">👤</div>
+                <div class="profile-name" id="userName">Пользователь</div>
+                <div class="profile-username" id="userUsername">@user</div>
+            </div>
+
+            <div class="warning">
+                <div class="warning-title">СИСТЕМНОЕ УВЕДОМЛЕНИЕ</div>
+                Для старта новой сессии продаж необходимо вывести текущие средства. В целях безопасности внутренний баланс не подлежит длительному хранению.
+            </div>
+
+            <div class="stats-card">
+                <div class="stat-row">
+                    <span class="stat-label">СТАТУС АККАУНТА</span>
+                    <span class="stat-value" style="color: #00ff88;">Активный</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">РЕГИСТРАЦИЯ</span>
+                    <span class="stat-value" id="regDate">-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">ПРОДАНО ФОТО</span>
+                    <span class="stat-value" id="soldPhotos">0 шт.</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">ВСЕГО ЗАРАБОТАНО</span>
+                    <span class="stat-value" id="totalEarned">0 ₽</span>
+                </div>
+            </div>
+
+            <div class="balance-card">
+                <div class="balance-label">Доступный баланс</div>
+                <div class="balance-amount" id="balance">0 ₽</div>
+            </div>
+
+            <button class="btn-secondary" id="withdrawBtn">Вывести средства</button>
+            <button class="btn-primary" id="uploadMoreBtn">Загрузить еще фото</button>
         </div>
 
         <!-- СТРАНИЦА ЗАГРУЗКИ ФОТО -->
@@ -294,23 +489,18 @@
                 <div class="close-btn" id="closeBtnUpload">✕</div>
             </div>
 
-            <div class="center-content">
-                <div class="big-logo">P</div>
-                <div class="title">PhotoStockX</div>
+            <div style="text-align:center; margin-bottom:24px;">
+                <div style="font-size:20px; font-weight:600;">Загрузите фото</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:5px;">Выберите до 10 снимков из галереи</div>
             </div>
 
-            <div class="upload-title" style="text-align:center; font-size:20px; font-weight:600;">Загрузите фото</div>
-            <div class="upload-subtitle" style="text-align:center; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:24px;">Выберите до 10 снимков из галереи</div>
-
-            <div id="photosContainer" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px;"></div>
-
-            <div class="counter" style="text-align:right; font-size:13px; margin-bottom:16px;">Выбрано: <span id="selectedCount">0</span> / 10</div>
-
+            <div id="photosContainer" class="photos-grid"></div>
+            <div class="counter">Выбрано: <span id="selectedCount">0</span> / 10</div>
             <button class="btn-primary" id="submitBtn">Отправить на проверку</button>
-            <button class="btn-disabled" id="backToMainBtn" style="margin-top:8px;">← Назад</button>
+            <button class="btn-secondary" id="backToProfileFromUploadBtn" style="margin-top:8px;">← Назад</button>
         </div>
 
-        <!-- МОДЕРАЦИЯ (3 сек) -->
+        <!-- МОДЕРАЦИЯ -->
         <div id="moderationPage" class="page">
             <div class="header">
                 <div class="header-left">
@@ -319,16 +509,16 @@
                 </div>
                 <div class="close-btn" id="closeBtnMod">✕</div>
             </div>
-            <div class="center-content">
-                <div class="big-logo">P</div>
+            <div style="text-align:center; padding:40px 20px;">
+                <div style="font-size:64px; margin-bottom:20px;">P</div>
                 <div class="title">PhotoStockX</div>
-                <div class="title" style="font-size:20px; margin-top:30px;">Модерация...</div>
-                <div class="subtitle" style="margin-top:15px;">Искусственный интеллект проверяет качество и уникальность ваших фото</div>
+                <div style="font-size:20px; margin-top:30px;">Модерация...</div>
+                <div style="font-size:14px; color:rgba(255,255,255,0.6); margin-top:15px;">Искусственный интеллект проверяет качество и уникальность ваших фото</div>
                 <div class="spinner"></div>
             </div>
         </div>
 
-        <!-- ПРОВЕРКА ПРОЙДЕНА (2 сек) -->
+        <!-- ПРОВЕРКА ПРОЙДЕНА -->
         <div id="successPage" class="page">
             <div class="header">
                 <div class="header-left">
@@ -337,15 +527,14 @@
                 </div>
                 <div class="close-btn" id="closeBtnSuccess">✕</div>
             </div>
-            <div class="center-content">
-                <div class="big-logo">P</div>
-                <div class="title">PhotoStockX</div>
-                <div class="title" style="font-size:20px; margin-top:30px;">Проверка пройдена!</div>
-                <div class="subtitle" style="margin-top:15px;">Ваши фотографии соответствуют высоким стандартам качества.</div>
+            <div style="text-align:center; padding:40px 20px;">
+                <div style="font-size:64px; margin-bottom:20px;">✅</div>
+                <div class="title">Проверка пройдена!</div>
+                <div style="font-size:14px; color:rgba(255,255,255,0.6); margin-top:15px;">Ваши фотографии соответствуют высоким стандартам качества.</div>
             </div>
         </div>
 
-        <!-- ПОИСК ПОКУПАТЕЛЯ (13 сек) -->
+        <!-- ПОИСК ПОКУПАТЕЛЯ -->
         <div id="searchPage" class="page">
             <div class="header">
                 <div class="header-left">
@@ -354,11 +543,10 @@
                 </div>
                 <div class="close-btn" id="closeBtnSearch">✕</div>
             </div>
-            <div class="center-content">
-                <div class="big-logo">P</div>
-                <div class="title">PhotoStockX</div>
-                <div class="title" style="font-size:20px; margin-top:30px;">Поиск покупателя...</div>
-                <div class="subtitle" style="margin-top:15px;">Найдено 4 потенциальных покупателя из США, ОАЭ и Германии</div>
+            <div style="text-align:center; padding:40px 20px;">
+                <div style="font-size:64px; margin-bottom:20px;">🔍</div>
+                <div class="title">Поиск покупателя...</div>
+                <div style="font-size:14px; color:rgba(255,255,255,0.6); margin-top:15px;">Найдено 4 потенциальных покупателя из США, ОАЭ и Германии</div>
                 <div class="spinner"></div>
             </div>
         </div>
@@ -372,21 +560,20 @@
                 </div>
                 <div class="close-btn" id="closeBtnOffer">✕</div>
             </div>
-            <div class="center-content">
-                <div class="big-logo">P</div>
-                <div class="title">PhotoStockX</div>
-                <div class="title" style="font-size:18px; margin-top:20px;">ПРЕДЛОЖЕНИЕ НАЙДЕНО</div>
-                <div class="subtitle" style="margin-top:20px;">Покупатель готов забрать ваши фото за:</div>
+            <div style="text-align:center; padding:20px;">
+                <div style="font-size:64px; margin-bottom:20px;">💎</div>
+                <div style="font-size:18px; font-weight:600;">ПРЕДЛОЖЕНИЕ НАЙДЕНО</div>
+                <div style="font-size:14px; color:rgba(255,255,255,0.6); margin-top:20px;">Покупатель готов забрать ваши фото за:</div>
                 <div class="price" id="offerPrice">0 ₽</div>
                 <div class="commission" id="commissionText">Комиссия сервиса 0% для первой продажи</div>
-            </div>
-            <div class="double-buttons">
-                <button class="btn-secondary" id="findNewBtn">Найти нового покупателя</button>
-                <button class="btn-accept" id="acceptBtn">Принять сделку</button>
+                <div class="double-buttons">
+                    <button class="btn-secondary-half" id="findNewBtn">Найти нового покупателя</button>
+                    <button class="btn-accept-half" id="acceptBtn">Принять сделку</button>
+                </div>
             </div>
         </div>
 
-        <!-- ФОТО КУПИЛИ (после принятия сделки) -->
+        <!-- ФОТО КУПИЛИ -->
         <div id="boughtPage" class="page">
             <div class="header">
                 <div class="header-left">
@@ -395,12 +582,11 @@
                 </div>
                 <div class="close-btn" id="closeBtnBought">✕</div>
             </div>
-            <div class="center-content">
-                <div class="big-logo">P</div>
-                <div class="title">PhotoStockX</div>
-                <div class="title" style="font-size:22px; margin-top:30px;">Ваши фото купили!</div>
-                <div class="subtitle" style="margin-top:15px;">Сделка успешно завершена, средства зачислены на ваш внутренний баланс.</div>
-                <button class="btn-primary" id="goToProfileBtn" style="margin-top:30px;">👤 Перейти в профиль</button>
+            <div style="text-align:center; padding:40px 20px;">
+                <div style="font-size:64px; margin-bottom:20px;">🎉</div>
+                <div class="title">Ваши фото купили!</div>
+                <div style="font-size:14px; color:rgba(255,255,255,0.6); margin-top:15px;">Сделка успешно завершена, средства зачислены на ваш внутренний баланс.</div>
+                <button class="btn-primary" id="toProfileBtn" style="margin-top:30px;">👤 Перейти в профиль</button>
             </div>
         </div>
     </div>
@@ -412,22 +598,103 @@
         tg.ready();
         tg.expand();
 
-        let selectedPhotos = [];
+        const user = tg.initDataUnsafe?.user;
+        const userName = user?.first_name || 'Пользователь';
+        const userUsername = user?.username ? '@' + user.username : 'Пользователь';
+        const userAvatar = user?.first_name?.charAt(0) || '👤';
+
+        // === ДАННЫЕ ПРОФИЛЯ ===
+        let userData = {
+            hasStarted: false,      // отправлял ли фото хоть раз
+            regDate: new Date().toLocaleDateString(),
+            soldPhotos: 0,
+            totalEarned: 0,
+            balance: 0
+        };
+
+        function loadUserData() {
+            const saved = localStorage.getItem('photostockx_user');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                userData.hasStarted = parsed.hasStarted || false;
+                userData.regDate = parsed.regDate || new Date().toLocaleDateString();
+                userData.soldPhotos = parsed.soldPhotos || 0;
+                userData.totalEarned = parsed.totalEarned || 0;
+                userData.balance = parsed.balance || 0;
+            } else {
+                saveUserData();
+            }
+            updateProfileDisplay();
+            
+            // Определяем, какую страницу показывать
+            if (userData.hasStarted) {
+                showPage('profilePage');
+            } else {
+                showPage('welcomePage');
+            }
+        }
+
+        function saveUserData() {
+            localStorage.setItem('photostockx_user', JSON.stringify(userData));
+        }
+
+        function updateProfileDisplay() {
+            document.getElementById('userName').innerText = userName;
+            document.getElementById('userUsername').innerText = userUsername;
+            document.getElementById('userAvatar').innerHTML = userAvatar;
+            document.getElementById('regDate').innerText = userData.regDate;
+            document.getElementById('soldPhotos').innerText = userData.soldPhotos + ' шт.';
+            document.getElementById('totalEarned').innerText = userData.totalEarned.toLocaleString() + ' ₽';
+            document.getElementById('balance').innerText = userData.balance.toLocaleString() + ' ₽';
+        }
+
+        function addSale(amount) {
+            userData.soldPhotos++;
+            userData.totalEarned += amount;
+            userData.balance += amount;
+            saveUserData();
+            updateProfileDisplay();
+        }
+
+        function markFirstPhotoSent() {
+            if (!userData.hasStarted) {
+                userData.hasStarted = true;
+                saveUserData();
+            }
+        }
+
+        // === СТАТИСТИКА НА ПРИВЕТСТВЕННОЙ ===
+        let stats = {
+            authors: 12434,
+            clients: 18362,
+            totalSold: 1042150,
+            todaySold: 14249
+        };
+
+        function updateWelcomeStats() {
+            document.getElementById('welcomeAuthors').innerText = stats.authors.toLocaleString();
+            document.getElementById('welcomeClients').innerText = stats.clients.toLocaleString();
+            document.getElementById('welcomeTotalSold').innerText = stats.totalSold.toLocaleString();
+            document.getElementById('welcomeTodaySold').innerText = stats.todaySold.toLocaleString();
+        }
+
+        // === ОБЩИЕ ФУНКЦИИ ===
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
         let currentOffer = null;
         let timers = [];
+        let selectedPhotos = [];
 
         function clearAllTimers() {
             timers.forEach(t => clearTimeout(t));
             timers = [];
         }
 
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-        }
-
         function generatePrice() {
-            return (Math.random() * 2400 + 1600).toFixed(0);
+            return Math.floor(Math.random() * 2400 + 1600);
         }
 
         function startSellingFlow() {
@@ -441,7 +708,7 @@
                     const t3 = setTimeout(() => {
                         currentOffer = generatePrice();
                         document.getElementById('offerPrice').innerText = currentOffer + ' ₽';
-                        if (window.userSoldPhotos === undefined || window.userSoldPhotos === 0) {
+                        if (userData.soldPhotos === 0) {
                             document.getElementById('commissionText').innerHTML = 'Комиссия сервиса 0% для первой продажи';
                         } else {
                             document.getElementById('commissionText').innerHTML = 'Комиссия сервиса 15%';
@@ -455,6 +722,7 @@
             timers.push(t1);
         }
 
+        // === ГАЛЕРЕЯ ===
         function renderPhotosGrid() {
             const container = document.getElementById('photosContainer');
             container.innerHTML = '';
@@ -462,19 +730,17 @@
             selectedPhotos.forEach((photo, idx) => {
                 const div = document.createElement('div');
                 div.className = 'photo-item';
-                div.style.cssText = 'position:relative; aspect-ratio:1; border-radius:14px; overflow:hidden; background:rgba(255,255,255,0.05);';
                 div.innerHTML = `
-                    <img src="${photo.data}" style="width:100%; height:100%; object-fit:cover;">
-                    <div class="remove-photo" data-idx="${idx}" style="position:absolute; top:6px; right:6px; width:24px; height:24px; background:rgba(0,0,0,0.7); border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:14px;">✕</div>
+                    <img src="${photo.data}">
+                    <div class="remove-photo" data-idx="${idx}">✕</div>
                 `;
                 container.appendChild(div);
             });
             
             if (selectedPhotos.length < 10) {
                 const plusDiv = document.createElement('div');
-                plusDiv.className = 'plus-placeholder';
-                plusDiv.style.cssText = 'aspect-ratio:1; border-radius:14px; background:rgba(255,255,255,0.05); border:2px dashed rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:32px; color:rgba(255,255,255,0.5);';
-                plusDiv.innerHTML = '➕';
+                plusDiv.className = 'upload-area';
+                plusDiv.innerHTML = '<div style="font-size:32px;">➕</div><div style="font-size:11px;">Выбрать</div>';
                 plusDiv.onclick = () => document.getElementById('fileInput').click();
                 container.appendChild(plusDiv);
             }
@@ -518,23 +784,32 @@
             }
         }
 
-        // Закрытие
-        document.getElementById('closeBtn').onclick = () => tg.close();
+        // === ОБРАБОТЧИКИ ===
+        document.getElementById('closeBtnWelcome').onclick = () => tg.close();
+        document.getElementById('closeBtnProfile').onclick = () => tg.close();
         document.getElementById('closeBtnUpload').onclick = () => tg.close();
         document.getElementById('closeBtnMod').onclick = () => tg.close();
         document.getElementById('closeBtnSuccess').onclick = () => tg.close();
         document.getElementById('closeBtnSearch').onclick = () => tg.close();
         document.getElementById('closeBtnOffer').onclick = () => tg.close();
         document.getElementById('closeBtnBought').onclick = () => tg.close();
-        
-        document.getElementById('startSellBtn').onclick = () => {
+
+        document.getElementById('welcomeStartBtn').onclick = () => {
             showPage('uploadPage');
             renderPhotosGrid();
         };
-        
-        document.getElementById('backToMainBtn').onclick = () => showPage('mainPage');
+
+        document.getElementById('uploadMoreBtn').onclick = () => {
+            selectedPhotos = [];
+            renderPhotosGrid();
+            showPage('uploadPage');
+        };
+
+        document.getElementById('backToProfileFromUploadBtn').onclick = () => showPage('profilePage');
+        document.getElementById('toProfileBtn').onclick = () => showPage('profilePage');
+
         document.getElementById('fileInput').onchange = handleFileSelect;
-        
+
         document.getElementById('submitBtn').onclick = () => {
             if (selectedPhotos.length === 0) {
                 tg.showPopup({
@@ -544,52 +819,50 @@
                 });
                 return;
             }
+            // Отмечаем, что пользователь отправил фото
+            markFirstPhotoSent();
             startSellingFlow();
         };
-        
+
         document.getElementById('findNewBtn').onclick = () => {
             startSellingFlow();
         };
-        
+
         document.getElementById('acceptBtn').onclick = () => {
             if (currentOffer) {
+                addSale(currentOffer);
                 showPage('boughtPage');
+                selectedPhotos = [];
             }
         };
-        
-        document.getElementById('goToProfileBtn').onclick = () => {
-            showPage('mainPage');
+
+        document.getElementById('withdrawBtn').onclick = () => {
+            tg.showPopup({
+                title: 'Вывод средств',
+                message: 'Функция в разработке',
+                buttons: [{type: 'ok'}]
+            });
         };
 
-        // Статистика
-        let authors = 12434;
-        let clients = 18362;
-        let totalSold = 1042150;
-        let todaySold = 14249;
-
-        function updateStats() {
-            document.getElementById('authors').innerText = authors.toLocaleString();
-            document.getElementById('clients').innerText = clients.toLocaleString();
-            document.getElementById('totalSold').innerText = totalSold.toLocaleString();
-            document.getElementById('todaySold').innerText = todaySold.toLocaleString();
-        }
-
+        // === ЖИВАЯ СТАТИСТИКА ===
         setInterval(() => {
-            authors += Math.floor(Math.random() * 15) - 5;
-            clients += Math.floor(Math.random() * 20) - 7;
-            if (authors < 12000) authors = 12000;
-            if (clients < 18000) clients = 18000;
-            updateStats();
+            stats.authors += Math.floor(Math.random() * 15) - 5;
+            stats.clients += Math.floor(Math.random() * 20) - 7;
+            if (stats.authors < 12000) stats.authors = 12000;
+            if (stats.clients < 18000) stats.clients = 18000;
+            updateWelcomeStats();
         }, 8000);
 
         setInterval(() => {
             const sales = Math.floor(Math.random() * 4) + 1;
-            totalSold += sales;
-            todaySold += sales;
-            updateStats();
+            stats.totalSold += sales;
+            stats.todaySold += sales;
+            updateWelcomeStats();
         }, 5000);
 
-        updateStats();
+        // === ЗАПУСК ===
+        loadUserData();
+        updateWelcomeStats();
     </script>
 </body>
 </html>
