@@ -1,74 +1,630 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>PhotoStockX</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>PhotoStockX</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #0f3460);
-            color: white;
-            text-align: center;
-            padding: 50px 20px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1 { font-size: 48px; }
-        .stats { background: rgba(255,255,255,0.1); border-radius: 20px; padding: 20px; margin: 30px auto; max-width: 400px; }
-        .stat { font-size: 32px; font-weight: bold; color: #00d4ff; }
-        button {
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #0f0f2d 50%, #1a1a3e 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* СТРАНИЦЫ */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ХЕДЕР */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+
+        .logo {
+            font-size: 56px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 5px;
+        }
+
+        /* СТАТИСТИКА */
+        .stats-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #00d4ff;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* КНОПКИ */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-primary {
             background: linear-gradient(135deg, #00d4ff, #7b2cbf);
             color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,212,255,0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.08);
+            color: white;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        /* СТРАНИЦА ЗАГРУЗКИ ФОТО */
+        .upload-area {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px 20px;
+            text-align: center;
             cursor: pointer;
-            margin: 10px;
+            border: 2px dashed rgba(255,255,255,0.2);
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .upload-area:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #00d4ff;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            font-size: 16px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 8px;
+        }
+
+        .counter {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .counter span {
+            color: #00d4ff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* ГАЛЕРЕЯ */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+            max-height: 350px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 26px;
+            height: 26px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .remove-btn:hover {
+            background: #ff4444;
+        }
+
+        /* МОДАЛЬНОЕ ОКНО */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #0f0f2d, #1a1a3e);
+            border-radius: 28px;
+            padding: 30px;
+            text-align: center;
+            max-width: 280px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .modal-icon {
+            font-size: 56px;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .modal-text {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            border: none;
+            border-radius: 30px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* БЛОК "СКОРО" */
+        .soon-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        .soon-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 32px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .soon-icon {
+            font-size: 64px;
+            margin-bottom: 10px;
+        }
+
+        .soon-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .soon-sub {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 8px;
         }
     </style>
 </head>
 <body>
-    <div style="font-size: 64px;">📸</div>
-    <h1>PhotoStockX</h1>
-    <p>Глобальная экосистема для продажи фото</p>
-    <div class="stats">
-        <div class="stat" id="authors">12579</div>
-        <div>АВТОРОВ ONLINE</div>
-        <div class="stat" id="clients">18456</div>
-        <div>КЛИЕНТОВ ONLINE</div>
-        <div class="stat" id="total">1042150</div>
-        <div>ПРОДАНО ВСЕГО</div>
-        <div class="stat" id="today">14244</div>
-        <div>СЕГОДНЯ ПРОДАНО</div>
+    <div class="container">
+        <!-- ГЛАВНАЯ СТРАНИЦА -->
+        <div id="mainPage" class="page active">
+            <div class="header">
+                <div class="logo">📸</div>
+                <h1>PhotoStockX</h1>
+                <div class="subtitle">Глобальная экосистема для продажи фото</div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="authors">0</div>
+                        <div class="stat-label">АВТОРОВ ONLINE</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="clients">0</div>
+                        <div class="stat-label">КЛИЕНТОВ ONLINE</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalSold">0</div>
+                        <div class="stat-label">ПРОДАНО ВСЕГО</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="todaySold">0</div>
+                        <div class="stat-label">СЕГОДНЯ ПРОДАНО</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="startSellingBtn">🚀 Начать продавать</button>
+            <button class="btn btn-secondary" id="buyPhotoBtn">🛍️ Купить фото</button>
+
+            <div class="footer">
+                <div>🧠 Нейросеть оценивает ваши кадры</div>
+                <div style="margin-top: 5px;">и находит покупателей за считанные секунды</div>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА ЗАГРУЗКИ ФОТО -->
+        <div id="uploadPage" class="page">
+            <button class="btn btn-back" id="backBtn">← Назад</button>
+
+            <div class="header">
+                <div class="logo">📸</div>
+                <h1>Загрузите фото</h1>
+                <div class="subtitle">Выберите до 10 снимков из галереи</div>
+            </div>
+
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">➕</div>
+                <div class="upload-text">Нажмите, чтобы выбрать фото</div>
+                <div class="upload-hint">Поддерживаются JPEG, PNG</div>
+            </div>
+
+            <div class="counter">
+                Выбрано: <span id="selectedCount">0</span> / 10
+            </div>
+
+            <div class="gallery" id="gallery"></div>
+
+            <button class="btn btn-primary" id="submitBtn">📨 Отправить на проверку</button>
+        </div>
     </div>
-    <button id="sellBtn">🚀 Начать продавать</button>
-    <button id="buyBtn">🛍️ Купить фото</button>
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon" id="modalIcon">🎉</div>
+            <div class="modal-title" id="modalTitle">Успешно!</div>
+            <div class="modal-text" id="modalText"></div>
+            <button class="modal-btn" id="modalCloseBtn">Хорошо</button>
+        </div>
+    </div>
+
+    <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
+
     <script>
+        // Telegram Mini App
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
-        let authors = 12579, clients = 18456, total = 1042150, today = 14244;
-        function update() {
-            document.getElementById('authors').innerText = authors;
-            document.getElementById('clients').innerText = clients;
-            document.getElementById('total').innerText = total;
-            document.getElementById('today').innerText = today;
+        tg.MainButton.hide();
+
+        // ---------- ПЕРЕМЕННЫЕ ----------
+        let selectedPhotos = [];
+        const MAX_PHOTOS = 10;
+
+        // Статистика
+        let stats = {
+            authors: 12579,
+            clients: 18456,
+            totalSold: 1042150,
+            todaySold: 14244
+        };
+
+        // Последняя дата обновления
+        let lastDate = new Date().toLocaleDateString();
+
+        // ---------- СТАТИСТИКА ----------
+        function updateStatsDisplay() {
+            document.getElementById('authors').innerText = stats.authors.toLocaleString();
+            document.getElementById('clients').innerText = stats.clients.toLocaleString();
+            document.getElementById('totalSold').innerText = stats.totalSold.toLocaleString();
+            document.getElementById('todaySold').innerText = stats.todaySold.toLocaleString();
         }
-        setInterval(() => {
-            authors += Math.floor(Math.random() * 10) - 3;
-            clients += Math.floor(Math.random() * 15) - 5;
-            if (authors < 8000) authors = 8000;
-            if (clients < 12000) clients = 12000;
-            if (Math.random() < 0.2) {
-                let s = Math.floor(Math.random() * 5) + 1;
-                total += s;
-                today += s;
+
+        function resetTodayStats() {
+            const today = new Date().toLocaleDateString();
+            if (today !== lastDate) {
+                stats.todaySold = 0;
+                lastDate = today;
+                updateStatsDisplay();
             }
-            update();
-        }, 5000);
-        document.getElementById('sellBtn').onclick = () => tg.showAlert('Скоро здесь будет загрузка фото!');
-        document.getElementById('buyBtn').onclick = () => tg.showAlert('Галерея появится в следующем обновлении!');
+        }
+
+        function liveStats() {
+            // Проверка нового дня
+            resetTodayStats();
+            
+            // Изменение онлайн
+            stats.authors += Math.floor(Math.random() * 30) - 10;
+            stats.clients += Math.floor(Math.random() * 40) - 15;
+            
+            // Ограничения
+            if (stats.authors < 8000) stats.authors = 8000;
+            if (stats.clients < 12000) stats.clients = 12000;
+            
+            // Добавление продаж (5-10% шанс)
+            if (Math.random() < 0.08) {
+                const sales = Math.floor(Math.random() * 5) + 1;
+                stats.totalSold += sales;
+                stats.todaySold += sales;
+            }
+            
+            updateStatsDisplay();
+        }
+
+        // Запуск статистики (каждые 3 секунды)
+        setInterval(liveStats, 3000);
+
+        // Проверка нового дня каждый час
+        setInterval(resetTodayStats, 3600000);
+
+        // ---------- ПОКАЗ МОДАЛКИ ----------
+        function showModal(icon, title, text) {
+            document.getElementById('modalIcon').innerText = icon;
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalText').innerText = text;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // ---------- ГАЛЕРЕЯ ----------
+        function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+            
+            selectedPhotos.forEach((photo, index) => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = `
+                    <img src="${photo.data}" alt="photo">
+                    <div class="remove-btn" data-index="${index}">✕</div>
+                `;
+                gallery.appendChild(div);
+            });
+            
+            document.getElementById('selectedCount').innerText = selectedPhotos.length;
+            
+            // Обработчики удаления
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(btn.dataset.index);
+                    selectedPhotos.splice(idx, 1);
+                    renderGallery();
+                });
+            });
+        }
+
+        // Выбор файлов
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            const remainingSlots = MAX_PHOTOS - selectedPhotos.length;
+            const filesToAdd = files.slice(0, remainingSlots);
+            
+            filesToAdd.forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        selectedPhotos.push({
+                            name: file.name,
+                            data: e.target.result
+                        });
+                        renderGallery();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            document.getElementById('fileInput').value = '';
+            
+            if (files.length > remainingSlots) {
+                showModal('⚠️', 'Много фото', `Можно выбрать не более ${MAX_PHOTOS} фото.`);
+            }
+        }
+
+        // Отправка фото "в воздух"
+        function submitPhotos() {
+            if (selectedPhotos.length === 0) {
+                showModal('⚠️', 'Нет фото', 'Выберите хотя бы одно фото для отправки!');
+                return;
+            }
+            
+            const count = selectedPhotos.length;
+            
+            // Анимация улетания
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                item.style.animation = 'fadeIn 0.3s ease reverse';
+            });
+            
+            // Очищаем фото
+            selectedPhotos = [];
+            renderGallery();
+            
+            // Сообщение об успехе
+            showModal('🚀', 'Фото улетели!', `Ваши ${count} фото отправлены на проверку нейросети. Результаты придут в ближайшее время.`);
+            
+            // Отправляем данные в бот (опционально)
+            tg.sendData(JSON.stringify({
+                action: 'photos_submitted',
+                count: count
+            }));
+        }
+
+        // ---------- СТРАНИЦА "СКОРО" ----------
+        function showSoon() {
+            const soonDiv = document.createElement('div');
+            soonDiv.className = 'soon-overlay';
+            soonDiv.innerHTML = `
+                <div class="soon-card">
+                    <div class="soon-icon">🔒</div>
+                    <div class="soon-text">Скоро будет доступно</div>
+                    <div class="soon-sub">Функция в разработке</div>
+                </div>
+            `;
+            soonDiv.onclick = () => soonDiv.remove();
+            document.body.appendChild(soonDiv);
+        }
+
+        // ---------- НАВИГАЦИЯ ----------
+        // Кнопка "Начать продавать" (затемнено - пока не готово)
+        document.getElementById('startSellingBtn').onclick = () => {
+            showSoon();
+        };
+        
+        // Кнопка "Купить фото" (затемнено)
+        document.getElementById('buyPhotoBtn').onclick = () => {
+            showSoon();
+        };
+        
+        // Назад
+        document.getElementById('backBtn').onclick = () => {
+            document.getElementById('uploadPage').classList.remove('active');
+            document.getElementById('mainPage').classList.add('active');
+        };
+        
+        // Область загрузки
+        document.getElementById('uploadArea').onclick = () => {
+            document.getElementById('fileInput').click();
+        };
+        
+        // Выбор файлов
+        document.getElementById('fileInput').onchange = handleFileSelect;
+        
+        // Отправка
+        document.getElementById('submitBtn').onclick = submitPhotos;
+        
+        // Закрытие модалки
+        document.getElementById('modalCloseBtn').onclick = closeModal;
+        document.getElementById('modal').onclick = (e) => {
+            if (e.target === document.getElementById('modal')) closeModal();
+        };
+        
+        // ---------- ЗАПУСК ----------
+        updateStatsDisplay();
+        
+        console.log('PhotoStockX Mini App загружен');
     </script>
 </body>
 </html>
