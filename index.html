@@ -23,6 +23,11 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
+        /* Скрываем нативный интерфейс выбора файлов */
+        input[type="file"] {
+            display: none;
+        }
+        
         .header {
             display: flex;
             align-items: center;
@@ -103,13 +108,10 @@
 </head>
 <body>
     <div class="container">
-        <!-- ПРОФИЛЬ (главный экран) -->
+        <!-- ПРОФИЛЬ -->
         <div id="profilePage" class="page active">
             <div class="header">
-                <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
-                </div>
+                <div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div>
                 <div class="close-btn" id="closeBtnProfile">✕</div>
             </div>
             <div class="profile-section">
@@ -117,35 +119,22 @@
                 <div class="profile-name" id="userName">Пользователь</div>
                 <div class="profile-username" id="userUsername">@user</div>
             </div>
-            <div class="warning">
-                <div class="warning-title">СИСТЕМНОЕ УВЕДОМЛЕНИЕ</div>
-                Для старта новой сессии продаж необходимо вывести текущие средства. В целях безопасности внутренний баланс не подлежит длительному хранению.
-            </div>
+            <div class="warning"><div class="warning-title">СИСТЕМНОЕ УВЕДОМЛЕНИЕ</div>Для старта новой сессии продаж необходимо вывести текущие средства. В целях безопасности внутренний баланс не подлежит длительному хранению.</div>
             <div class="stats-card">
                 <div class="stat-row"><span class="stat-label">СТАТУС АККАУНТА</span><span class="stat-value" style="color:#00ff88;">Активный</span></div>
                 <div class="stat-row"><span class="stat-label">РЕГИСТРАЦИЯ</span><span class="stat-value" id="regDate">-</span></div>
                 <div class="stat-row"><span class="stat-label">ПРОДАНО ФОТО</span><span class="stat-value" id="soldPhotos">0 шт.</span></div>
                 <div class="stat-row"><span class="stat-label">ВСЕГО ЗАРАБОТАНО</span><span class="stat-value" id="totalEarned">0 ₽</span></div>
             </div>
-            <div class="balance-card">
-                <div class="balance-label">Доступный баланс</div>
-                <div class="balance-amount" id="balance">0 ₽</div>
-            </div>
+            <div class="balance-card"><div class="balance-label">Доступный баланс</div><div class="balance-amount" id="balance">0 ₽</div></div>
             <button class="btn-secondary" id="withdrawBtn">Вывести средства</button>
             <button class="btn-primary" id="uploadMoreBtn">Загрузить еще фото</button>
         </div>
 
         <!-- ВЫБОР СПОСОБА ВЫВОДА -->
         <div id="withdrawPage" class="page">
-            <div class="header">
-                <div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div>
-                <div class="close-btn" id="closeBtnWithdraw">✕</div>
-            </div>
-            <div class="center-content">
-                <div class="big-logo">P</div>
-                <div class="title">PhotoStockX</div>
-                <div style="font-size:18px; font-weight:600; margin-top:10px;">Способ вывода</div>
-            </div>
+            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnWithdraw">✕</div></div>
+            <div class="center-content"><div class="big-logo">P</div><div class="title">PhotoStockX</div><div style="font-size:18px; font-weight:600; margin-top:10px;">Способ вывода</div></div>
             <div class="withdraw-option" id="starsOptionBtn"><div class="withdraw-option-title">⭐ Telegram Stars</div><div class="withdraw-option-desc">Курс: 1 ₽ = 1 Star</div></div>
             <div class="withdraw-option" id="cryptoOptionBtn"><div class="withdraw-option-title">🪙 Криптовалюта</div><div class="withdraw-option-desc">USDT, TON, BTC</div></div>
             <div class="withdraw-option" id="cardOptionBtn"><div class="withdraw-option-title">💳 Банковская карта</div><div class="withdraw-option-desc">Любые страны мира</div></div>
@@ -154,25 +143,15 @@
 
         <!-- TELEGRAM STARS -->
         <div id="starsWithdrawPage" class="page">
-            <div class="header">
-                <div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div>
-                <div class="close-btn" id="closeBtnStars">✕</div>
-            </div>
+            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnStars">✕</div></div>
             <div class="center-content"><div class="big-logo">P</div><div class="title">PhotoStockX</div><div style="font-size:18px; font-weight:600; margin-top:10px;">Данные платежа</div></div>
-            <div class="form-card">
-                <div class="stars-amount" id="starsAmount">0 ★</div>
-                <div class="stars-hint">Зачисление мгновенно на ваш Telegram аккаунт</div>
-                <button class="btn-primary" id="confirmStarsBtn">Подтвердить вывод</button>
-            </div>
+            <div class="form-card"><div class="stars-amount" id="starsAmount">0 ★</div><div class="stars-hint">Зачисление мгновенно на ваш Telegram аккаунт</div><button class="btn-primary" id="confirmStarsBtn">Подтвердить вывод</button></div>
             <button class="btn-secondary" id="backToWithdrawFromStarsBtn">← Назад</button>
         </div>
 
         <!-- КРИПТОВАЛЮТА -->
         <div id="cryptoWithdrawPage" class="page">
-            <div class="header">
-                <div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div>
-                <div class="close-btn" id="closeBtnCrypto">✕</div>
-            </div>
+            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnCrypto">✕</div></div>
             <div class="center-content"><div class="big-logo">P</div><div class="title">PhotoStockX</div><div style="font-size:18px; font-weight:600; margin-top:10px;">Данные платежа</div></div>
             <div class="form-card">
                 <div class="form-label">ВЫБЕРИТЕ МОНЕТУ</div>
@@ -186,16 +165,13 @@
 
         <!-- БАНКОВСКАЯ КАРТА -->
         <div id="cardWithdrawPage" class="page">
-            <div class="header">
-                <div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div>
-                <div class="close-btn" id="closeBtnCard">✕</div>
-            </div>
+            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnCard">✕</div></div>
             <div class="center-content"><div class="big-logo">P</div><div class="title">PhotoStockX</div><div style="font-size:18px; font-weight:600; margin-top:10px;">Данные платежа</div></div>
             <div class="form-card">
                 <div class="form-label">СТРАНА БАНКА</div>
                 <select class="form-select" id="countrySelect"><option value="Россия">Россия</option><option value="Казахстан">Казахстан</option><option value="Узбекистан">Узбекистан</option><option value="Европа(SEPA)">Европа (SEPA)</option><option value="Другая страна">Другая страна</option></select>
                 <div class="form-label">НОМЕР КАРТЫ</div>
-                <input type="text" class="form-input" id="cardNumber" placeholder="0000 0000 0000 0000">
+                <input type="text" class="form-input" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
                 <div style="font-size:11px; color:rgba(255,255,255,0.4); margin-bottom:20px;">Имя владельца карты не требуется</div>
                 <button class="btn-primary" id="confirmCardBtn">Подтвердить вывод</button>
             </div>
@@ -259,7 +235,7 @@
             regDate: new Date().toLocaleDateString(),
             soldPhotos: 0,
             totalEarned: 0,
-            balance: 5617
+            balance: 0
         };
 
         function loadUserData() {
@@ -364,17 +340,8 @@
         }
 
         // Закрытие
-        document.getElementById('closeBtnProfile').onclick = () => tg.close();
-        document.getElementById('closeBtnWithdraw').onclick = () => tg.close();
-        document.getElementById('closeBtnStars').onclick = () => tg.close();
-        document.getElementById('closeBtnCrypto').onclick = () => tg.close();
-        document.getElementById('closeBtnCard').onclick = () => tg.close();
-        document.getElementById('closeBtnUpload').onclick = () => tg.close();
-        document.getElementById('closeBtnMod').onclick = () => tg.close();
-        document.getElementById('closeBtnSuccess').onclick = () => tg.close();
-        document.getElementById('closeBtnSearch').onclick = () => tg.close();
-        document.getElementById('closeBtnOffer').onclick = () => tg.close();
-        document.getElementById('closeBtnBought').onclick = () => tg.close();
+        const closeBtns = ['closeBtnProfile','closeBtnWithdraw','closeBtnStars','closeBtnCrypto','closeBtnCard','closeBtnUpload','closeBtnMod','closeBtnSuccess','closeBtnSearch','closeBtnOffer','closeBtnBought'];
+        closeBtns.forEach(id => { document.getElementById(id).onclick = () => tg.close(); });
 
         // Навигация
         document.getElementById('withdrawBtn').onclick = () => showPage('withdrawPage');
@@ -402,7 +369,7 @@
         document.getElementById('confirmCryptoBtn').onclick = () => {
             let addr = document.getElementById('walletAddress').value;
             if (!addr) { tg.showPopup({ title: 'Ошибка', message: 'Введите адрес кошелька', buttons: [{type:'ok'}] }); return; }
-            tg.showPopup({ title: 'Вывод', message: `Запрос на вывод ${userData.balance} ₽ на ${addr} создан`, buttons: [{type:'ok'}] });
+            tg.showPopup({ title: 'Вывод', message: `Запрос на вывод ${userData.balance} ₽ создан`, buttons: [{type:'ok'}] });
         };
         document.getElementById('confirmCardBtn').onclick = () => {
             let card = document.getElementById('cardNumber').value.replace(/\s/g, '');
