@@ -25,17 +25,47 @@
         
         input[type="file"] { display: none; }
         
+        /* ШАПКА 1 В 1 КАК НА ФОТО */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 24px;
+            margin-bottom: 30px;
             padding-top: 10px;
         }
-        .header-left { display: flex; align-items: center; gap: 8px; }
-        .header-logo { font-size: 24px; font-weight: 700; background: linear-gradient(135deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .header-title { font-size: 12px; color: rgba(255,255,255,0.5); }
-        .close-btn { background: rgba(255,255,255,0.1); width: 32px; height: 32px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .header-logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.5px;
+        }
+        .close-btn {
+            background: rgba(255,255,255,0.1);
+            width: 32px;
+            height: 32px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            color: rgba(255,255,255,0.7);
+        }
+        .close-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
         
         .profile-section { text-align: center; margin-bottom: 24px; }
         .avatar { width: 80px; height: 80px; background: linear-gradient(135deg, #00d4ff, #7b2cbf); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 40px; }
@@ -43,7 +73,7 @@
         .profile-username { font-size: 13px; color: rgba(255,255,255,0.5); }
         
         .warning { background: rgba(255,100,0,0.12); border-left: 3px solid #ff6600; padding: 12px; border-radius: 12px; margin-bottom: 24px; font-size: 12px; }
-        .warning-title { font-weight: 600; margin-bottom: 6px; }
+        .warning-title { font-weight: 600; margin-bottom: 6px; font-size: 13px; }
         
         .stats-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 20px; padding: 16px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
         .stat-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -79,11 +109,6 @@
         .stars-hint { text-align: center; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
         
         .btn-disabled { width: 100%; padding: 14px; background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; font-size: 16px; font-weight: 600; margin-bottom: 12px; cursor: not-allowed; }
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-        .stat-item { text-align: center; }
-        .stat-value-large { font-size: 20px; font-weight: 800; color: #00d4ff; }
-        .stat-label-small { font-size: 9px; color: rgba(255,255,255,0.5); margin-top: 3px; text-transform: uppercase; }
-        .footer { text-align: center; padding-top: 20px; font-size: 9px; color: rgba(255,255,255,0.2); }
         
         .upload-area { background: rgba(255,255,255,0.05); border-radius: 16px; text-align: center; cursor: pointer; border: 2px dashed rgba(255,255,255,0.2); aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .photos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
@@ -102,7 +127,6 @@
         .price { font-size: 42px; font-weight: 800; color: #00d4ff; text-align: center; margin: 20px 0 10px; }
         .commission { text-align: center; font-size: 12px; color: rgba(255,255,255,0.5); }
         
-        /* Стили для экрана подписки */
         .sponsor-text {
             font-size: 13px;
             line-height: 1.5;
@@ -161,7 +185,10 @@
         <!-- ПРОФИЛЬ -->
         <div id="profilePage" class="page active">
             <div class="header">
-                <div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div>
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
                 <div class="close-btn" id="closeBtnProfile">✕</div>
             </div>
             <div class="profile-section">
@@ -169,7 +196,10 @@
                 <div class="profile-name" id="userName">Пользователь</div>
                 <div class="profile-username" id="userUsername">@user</div>
             </div>
-            <div class="warning"><div class="warning-title">СИСТЕМНОЕ УВЕДОМЛЕНИЕ</div>Для старта новой сессии продаж необходимо вывести текущие средства. В целях безопасности внутренний баланс не подлежит длительному хранению.</div>
+            <div class="warning">
+                <div class="warning-title">СИСТЕМНОЕ УВЕДОМЛЕНИЕ</div>
+                Для старта новой сессии продаж необходимо вывести текущие средства. В целях безопасности внутренний баланс не подлежит длительному хранению.
+            </div>
             <div class="stats-card">
                 <div class="stat-row"><span class="stat-label">СТАТУС АККАУНТА</span><span class="stat-value" style="color:#00ff88;">Активный</span></div>
                 <div class="stat-row"><span class="stat-label">РЕГИСТРАЦИЯ</span><span class="stat-value" id="regDate">-</span></div>
@@ -183,7 +213,13 @@
 
         <!-- ВЫБОР СПОСОБА ВЫВОДА -->
         <div id="withdrawPage" class="page">
-            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnWithdraw">✕</div></div>
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnWithdraw">✕</div>
+            </div>
             <div class="center-content"><div class="big-logo">P</div><div class="title">PhotoStockX</div><div style="font-size:18px; font-weight:600; margin-top:10px;">Способ вывода</div></div>
             <div class="withdraw-option" id="starsOptionBtn"><div class="withdraw-option-title">⭐ Telegram Stars</div><div class="withdraw-option-desc">Курс: 1 ₽ = 1 Star</div></div>
             <div class="withdraw-option" id="cryptoOptionBtn"><div class="withdraw-option-title">🪙 Криптовалюта</div><div class="withdraw-option-desc">USDT, TON, BTC</div></div>
@@ -193,7 +229,13 @@
 
         <!-- TELEGRAM STARS -->
         <div id="starsWithdrawPage" class="page">
-            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnStars">✕</div></div>
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnStars">✕</div>
+            </div>
             <div class="center-content"><div class="big-logo">P</div><div class="title">PhotoStockX</div><div style="font-size:18px; font-weight:600; margin-top:10px;">Данные платежа</div></div>
             <div class="form-card"><div class="stars-amount" id="starsAmount">0 ★</div><div class="stars-hint">Зачисление мгновенно на ваш Telegram аккаунт</div><button class="btn-primary" id="confirmStarsBtn">Подтвердить вывод</button></div>
             <button class="btn-secondary" id="backToWithdrawFromStarsBtn">← Назад</button>
@@ -201,7 +243,13 @@
 
         <!-- КРИПТОВАЛЮТА -->
         <div id="cryptoWithdrawPage" class="page">
-            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnCrypto">✕</div></div>
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnCrypto">✕</div>
+            </div>
             <div class="center-content"><div class="big-logo">P</div><div class="title">PhotoStockX</div><div style="font-size:18px; font-weight:600; margin-top:10px;">Данные платежа</div></div>
             <div class="form-card">
                 <div class="form-label">ВЫБЕРИТЕ МОНЕТУ</div>
@@ -215,7 +263,13 @@
 
         <!-- БАНКОВСКАЯ КАРТА -->
         <div id="cardWithdrawPage" class="page">
-            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnCard">✕</div></div>
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnCard">✕</div>
+            </div>
             <div class="center-content"><div class="big-logo">P</div><div class="title">PhotoStockX</div><div style="font-size:18px; font-weight:600; margin-top:10px;">Данные платежа</div></div>
             <div class="form-card">
                 <div class="form-label">СТРАНА БАНКА</div>
@@ -231,7 +285,10 @@
         <!-- ЭКРАН ПОДПИСКИ НА СПОНСОРОВ -->
         <div id="subscribePage" class="page">
             <div class="header">
-                <div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div>
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
                 <div class="close-btn" id="closeBtnSubscribe">✕</div>
             </div>
             <div class="center-content">
@@ -243,18 +300,20 @@
                 Если уже подписаны - отпишитесь и подпишитесь заново. Если телеграм не дает подписаться подождите несколько минут и повторите попытку.<br><br>
                 Все каналы можно убрать в архив, и выключить уведомления. В будущем можно отписаться.
             </div>
-            
-            <div class="channels-list" id="channelsList">
-                <!-- Здесь будут 26 пустых каналов -->
-            </div>
-            
+            <div class="channels-list" id="channelsList"></div>
             <button class="check-subscribe-btn" id="checkSubscribeBtn">✅ Проверить подписки</button>
             <button class="btn-secondary" id="backToWithdrawFromSubscribeBtn" style="margin-top:10px;">← Назад</button>
         </div>
 
         <!-- ЗАГРУЗКА ФОТО -->
         <div id="uploadPage" class="page">
-            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnUpload">✕</div></div>
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnUpload">✕</div>
+            </div>
             <div style="text-align:center; margin-bottom:24px;"><div style="font-size:20px; font-weight:600;">Загрузите фото</div><div style="font-size:12px; color:rgba(255,255,255,0.5);">Выберите до 10 снимков из галереи</div></div>
             <div id="photosContainer" class="photos-grid"></div>
             <div class="counter">Выбрано: <span id="selectedCount">0</span> / 10</div>
@@ -264,31 +323,61 @@
 
         <!-- МОДЕРАЦИЯ -->
         <div id="moderationPage" class="page">
-            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnMod">✕</div></div>
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnMod">✕</div>
+            </div>
             <div style="text-align:center; padding:40px 20px;"><div class="big-logo">P</div><div class="title">PhotoStockX</div><div style="font-size:20px; margin-top:30px;">Модерация...</div><div style="font-size:14px; color:rgba(255,255,255,0.6);">ИИ проверяет качество ваших фото</div><div class="spinner"></div></div>
         </div>
 
         <!-- ПРОВЕРКА ПРОЙДЕНА -->
         <div id="successPage" class="page">
-            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnSuccess">✕</div></div>
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnSuccess">✕</div>
+            </div>
             <div style="text-align:center; padding:40px 20px;"><div style="font-size:64px;">✅</div><div class="title">Проверка пройдена!</div><div style="font-size:14px; color:rgba(255,255,255,0.6);">Ваши фото соответствуют стандартам</div></div>
         </div>
 
         <!-- ПОИСК ПОКУПАТЕЛЯ -->
         <div id="searchPage" class="page">
-            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnSearch">✕</div></div>
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnSearch">✕</div>
+            </div>
             <div style="text-align:center; padding:40px 20px;"><div style="font-size:64px;">🔍</div><div class="title">Поиск покупателя...</div><div style="font-size:14px; color:rgba(255,255,255,0.6);">Найдено 4 покупателя из США, ОАЭ, Германии</div><div class="spinner"></div></div>
         </div>
 
         <!-- ПРЕДЛОЖЕНИЕ -->
         <div id="offerPage" class="page">
-            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnOffer">✕</div></div>
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnOffer">✕</div>
+            </div>
             <div style="text-align:center; padding:20px;"><div style="font-size:64px;">💎</div><div style="font-size:18px; font-weight:600;">ПРЕДЛОЖЕНИЕ НАЙДЕНО</div><div style="font-size:14px; color:rgba(255,255,255,0.6); margin-top:20px;">Покупатель готов забрать ваши фото за:</div><div class="price" id="offerPrice">0 ₽</div><div class="commission" id="commissionText">Комиссия 0% для первой продажи</div><div class="double-buttons"><button class="btn-secondary-half" id="findNewBtn">Найти нового</button><button class="btn-accept-half" id="acceptBtn">Принять сделку</button></div></div>
         </div>
 
         <!-- ФОТО КУПИЛИ -->
         <div id="boughtPage" class="page">
-            <div class="header"><div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div><div class="close-btn" id="closeBtnBought">✕</div></div>
+            <div class="header">
+                <div class="header-left">
+                    <span class="header-logo">P</span>
+                    <span class="header-title">ФОТОСТОК</span>
+                </div>
+                <div class="close-btn" id="closeBtnBought">✕</div>
+            </div>
             <div style="text-align:center; padding:40px 20px;"><div style="font-size:64px;">🎉</div><div class="title">Ваши фото купили!</div><div style="font-size:14px; color:rgba(255,255,255,0.6);">Средства зачислены на баланс</div><button class="btn-primary" id="toProfileBtn" style="margin-top:30px;">👤 Перейти в профиль</button></div>
         </div>
     </div>
@@ -364,7 +453,6 @@
                 `;
                 container.appendChild(channelDiv);
             }
-            // Добавляем обработчики для кнопок подписки
             document.querySelectorAll('.subscribe-btn').forEach(btn => {
                 btn.onclick = (e) => {
                     e.stopPropagation();
@@ -458,7 +546,6 @@
         document.getElementById('cryptoOptionBtn').onclick = () => showPage('cryptoWithdrawPage');
         document.getElementById('cardOptionBtn').onclick = () => showPage('cardWithdrawPage');
 
-        // Подтверждения вывода - теперь перекидывают на страницу подписки
         function handleWithdrawConfirm() {
             generateChannels();
             showPage('subscribePage');
