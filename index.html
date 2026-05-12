@@ -36,20 +36,29 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
-        .header-logo {
-            font-size: 28px;
+        .logo-box {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #00d4ff, #0088cc);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-p {
+            font-size: 22px;
             font-weight: 700;
-            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
         }
-        .header-title {
-            font-size: 14px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.6);
-            letter-spacing: 0.5px;
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+        .logo-text .x-blue {
+            color: #00d4ff;
         }
         .close-btn {
             background: rgba(255,255,255,0.1);
@@ -63,10 +72,8 @@
             cursor: pointer;
             color: rgba(255,255,255,0.7);
         }
-        .close-btn:hover {
-            background: rgba(255,255,255,0.2);
-        }
         
+        /* ОСТАЛЬНЫЕ СТИЛИ */
         .profile-section { text-align: center; margin-bottom: 24px; }
         .avatar { width: 80px; height: 80px; background: linear-gradient(135deg, #00d4ff, #7b2cbf); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 40px; }
         .profile-name { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
@@ -186,8 +193,10 @@
         <div id="profilePage" class="page active">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnProfile">✕</div>
             </div>
@@ -215,8 +224,10 @@
         <div id="withdrawPage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnWithdraw">✕</div>
             </div>
@@ -231,8 +242,10 @@
         <div id="starsWithdrawPage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnStars">✕</div>
             </div>
@@ -245,8 +258,10 @@
         <div id="cryptoWithdrawPage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnCrypto">✕</div>
             </div>
@@ -265,8 +280,10 @@
         <div id="cardWithdrawPage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnCard">✕</div>
             </div>
@@ -286,8 +303,10 @@
         <div id="subscribePage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnSubscribe">✕</div>
             </div>
@@ -309,8 +328,10 @@
         <div id="uploadPage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnUpload">✕</div>
             </div>
@@ -325,8 +346,10 @@
         <div id="moderationPage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnMod">✕</div>
             </div>
@@ -337,8 +360,10 @@
         <div id="successPage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnSuccess">✕</div>
             </div>
@@ -349,8 +374,10 @@
         <div id="searchPage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnSearch">✕</div>
             </div>
@@ -361,8 +388,10 @@
         <div id="offerPage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnOffer">✕</div>
             </div>
@@ -373,8 +402,10 @@
         <div id="boughtPage" class="page">
             <div class="header">
                 <div class="header-left">
-                    <span class="header-logo">P</span>
-                    <span class="header-title">ФОТОСТОК</span>
+                    <div class="logo-box">
+                        <span class="logo-p">P</span>
+                    </div>
+                    <span class="logo-text">PhotoStock<span class="x-blue">X</span></span>
                 </div>
                 <div class="close-btn" id="closeBtnBought">✕</div>
             </div>
