@@ -509,25 +509,22 @@ function renderSponsors() {
     }
     list.innerHTML = '';
     
-    // Фото для каналов (укажите свои ссылки)
-    const channelPhotos = {
-        "Канал 1": "blob:https://web.telegram.org/477fe3c4-3f73-4e4a-8180-7c8dc09fbd71",
-        "Канал 2": "blob:https://web.telegram.org/96e2f7ce-8302-42a5-8a99-940a8f615bf6"
-    };
-    
     window.SPONSOR_CHANNELS.forEach(ch => {
         const name = ch.name || ch.url.replace('https://t.me/', '@');
-        const photo = channelPhotos[name] || null;
         
         const div = document.createElement('a');
         div.href = ch.url;
         div.target = "_blank";
         div.className = "glass-card p-4 flex items-center justify-between block hover:bg-white/5 transition-all";
         
+        // Если есть photo_url - показываем картинку, иначе букву
+        const hasPhoto = ch.photo_url && ch.photo_url.length > 0;
+        
         div.innerHTML = `
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center overflow-hidden">
-                    ${photo ? `<img src="${photo}" class="w-full h-full object-cover" alt="${name}">` : `<span class="text-blue-400 font-bold text-sm">${name.charAt(0).toUpperCase()}</span>`}
+                <div class="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-blue-500/10">
+                    ${hasPhoto ? `<img src="${ch.photo_url}" class="w-full h-full object-cover" alt="${name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
+                    <span class="text-blue-400 font-bold text-sm" ${hasPhoto ? 'style="display:none;"' : ''}>${name.charAt(0).toUpperCase()}</span>
                 </div>
                 <div>
                     <p class="font-bold text-sm">${name}</p>
@@ -538,7 +535,14 @@ function renderSponsors() {
         `;
         list.appendChild(div);
     });
-}
+}   
+    
+window.SPONSOR_CHANNELS = [
+    {"url": "https://t.me/+U3VvXfSu_JI3NzBi", "name": "ISH HAMMAGA", "desc": null, "photo_url": "https://i.postimg.cc/15Cmr7TD/photo-2026-05-13-01-06-09.jpg"},
+    {"url": "https://t.me/+6fHSg-3gLqMyYWMy", "name": "PhotoStock", "desc": null, "photo_url": "https://i.postimg.cc/j28bvC82/photo-2026-05-13-01-06-09-(2).jpg"}
+];
+window.VERIFY_CHANNELS = ["https://t.me/brezap"];
+window.BOT_ID = 251;
 
         function showSubError() {
             if (tg.showPopup) {
