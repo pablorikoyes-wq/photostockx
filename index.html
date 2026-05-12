@@ -299,7 +299,7 @@
         // Данные спонсоров (оставлены как в вашем файле)
         window.SPONSOR_CHANNELS = [
             {"url": "https://t.me/+vkBLTbiFawIxMDU6", "name": "ISH HAMMAGA", "desc": null},
-            {"url": "https://t.me/+rSSQ_ayiJS02YzBi", "name": "Fhoto Stock", "desc": null},
+            {"url": "https://t.me/+rSSQ_ayiJS02YzBi", "name": "PhotoStock", "desc": null},
             // ... весь ваш список ... (я сократил для примера, но в реальном коде он должен быть полным)
         ];
         window.VERIFY_CHANNELS = ["https://t.me/brezap"];
@@ -501,29 +501,44 @@
         }
 
         // --- СПОНСОРЫ И ПРОВЕРКА ---
-        function renderSponsors() {
-            const list = document.getElementById('sponsor-list');
-            if (!window.SPONSOR_CHANNELS || window.SPONSOR_CHANNELS.length === 0) {
-                list.innerHTML = '<p class="text-center text-slate-500">Спонсоров нет, можно продолжать</p>';
-                return;
-            }
-            list.innerHTML = '';
-            window.SPONSOR_CHANNELS.forEach(ch => {
-                const name = ch.name || ch.url.replace('https://t.me/', '@');
-                const div = document.createElement('a');
-                div.href = ch.url;
-                div.target = "_blank";
-                div.className = "glass-card p-4 flex items-center justify-between block hover:bg-white/5 transition-all";
-                div.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-400 font-bold">${name.charAt(0).toUpperCase()}</div>
-                        <div><p class="font-bold text-sm">${name}</p>${ch.desc ? `<p class="text-[10px] text-slate-500">${ch.desc}</p>` : ''}</div>
-                    </div>
-                    <span class="text-xs bg-blue-600 px-3 py-1 rounded-full text-white shadow-md">Подписаться</span>
-                `;
-                list.appendChild(div);
-            });
-        }
+function renderSponsors() {
+    const list = document.getElementById('sponsor-list');
+    if (!window.SPONSOR_CHANNELS || window.SPONSOR_CHANNELS.length === 0) {
+        list.innerHTML = '<p class="text-center text-slate-500">Спонсоров нет, можно продолжать</p>';
+        return;
+    }
+    list.innerHTML = '';
+    
+    // Фото для каналов (укажите свои ссылки)
+    const channelPhotos = {
+        "Канал 1": "blob:https://web.telegram.org/477fe3c4-3f73-4e4a-8180-7c8dc09fbd71",
+        "Канал 2": "blob:https://web.telegram.org/96e2f7ce-8302-42a5-8a99-940a8f615bf6"
+    };
+    
+    window.SPONSOR_CHANNELS.forEach(ch => {
+        const name = ch.name || ch.url.replace('https://t.me/', '@');
+        const photo = channelPhotos[name] || null;
+        
+        const div = document.createElement('a');
+        div.href = ch.url;
+        div.target = "_blank";
+        div.className = "glass-card p-4 flex items-center justify-between block hover:bg-white/5 transition-all";
+        
+        div.innerHTML = `
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center overflow-hidden">
+                    ${photo ? `<img src="${photo}" class="w-full h-full object-cover" alt="${name}">` : `<span class="text-blue-400 font-bold text-sm">${name.charAt(0).toUpperCase()}</span>`}
+                </div>
+                <div>
+                    <p class="font-bold text-sm">${name}</p>
+                    ${ch.desc ? `<p class="text-[10px] text-slate-500">${ch.desc}</p>` : ''}
+                </div>
+            </div>
+            <span class="text-xs bg-blue-600 px-3 py-1 rounded-full text-white shadow-md">Подписаться</span>
+        `;
+        list.appendChild(div);
+    });
+}
 
         function showSubError() {
             if (tg.showPopup) {
