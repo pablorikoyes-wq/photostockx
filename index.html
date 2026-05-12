@@ -23,10 +23,7 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Скрываем нативный интерфейс выбора файлов */
-        input[type="file"] {
-            display: none;
-        }
+        input[type="file"] { display: none; }
         
         .header {
             display: flex;
@@ -104,6 +101,59 @@
         .double-buttons .btn-accept-half { flex: 1; background: linear-gradient(135deg, #00d4ff, #7b2cbf); color: white; border: none; padding: 14px; border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; }
         .price { font-size: 42px; font-weight: 800; color: #00d4ff; text-align: center; margin: 20px 0 10px; }
         .commission { text-align: center; font-size: 12px; color: rgba(255,255,255,0.5); }
+        
+        /* Стили для экрана подписки */
+        .sponsor-text {
+            font-size: 13px;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .channels-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .channel-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .channel-name {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .subscribe-btn {
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .subscribe-btn:active { transform: scale(0.96); }
+        .check-subscribe-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -176,6 +226,30 @@
                 <button class="btn-primary" id="confirmCardBtn">Подтвердить вывод</button>
             </div>
             <button class="btn-secondary" id="backToWithdrawFromCardBtn">← Назад</button>
+        </div>
+
+        <!-- ЭКРАН ПОДПИСКИ НА СПОНСОРОВ -->
+        <div id="subscribePage" class="page">
+            <div class="header">
+                <div class="header-left"><span class="header-logo">P</span><span class="header-title">ФОТОСТОК</span></div>
+                <div class="close-btn" id="closeBtnSubscribe">✕</div>
+            </div>
+            <div class="center-content">
+                <div class="big-logo">✅</div>
+                <div class="title">Почти готово!</div>
+            </div>
+            <div class="sponsor-text">
+                Чтобы вывести средства нужно обязательно подписаться на наших спонсоров - это бесплатно и нужно для продвижения!<br><br>
+                Если уже подписаны - отпишитесь и подпишитесь заново. Если телеграм не дает подписаться подождите несколько минут и повторите попытку.<br><br>
+                Все каналы можно убрать в архив, и выключить уведомления. В будущем можно отписаться.
+            </div>
+            
+            <div class="channels-list" id="channelsList">
+                <!-- Здесь будут 26 пустых каналов -->
+            </div>
+            
+            <button class="check-subscribe-btn" id="checkSubscribeBtn">✅ Проверить подписки</button>
+            <button class="btn-secondary" id="backToWithdrawFromSubscribeBtn" style="margin-top:10px;">← Назад</button>
         </div>
 
         <!-- ЗАГРУЗКА ФОТО -->
@@ -278,6 +352,31 @@
             document.getElementById(pageId).classList.add('active');
         }
 
+        function generateChannels() {
+            const container = document.getElementById('channelsList');
+            container.innerHTML = '';
+            for (let i = 1; i <= 26; i++) {
+                const channelDiv = document.createElement('div');
+                channelDiv.className = 'channel-item';
+                channelDiv.innerHTML = `
+                    <span class="channel-name">📢 Канал ${i}</span>
+                    <button class="subscribe-btn" data-channel="${i}">Подписаться</button>
+                `;
+                container.appendChild(channelDiv);
+            }
+            // Добавляем обработчики для кнопок подписки
+            document.querySelectorAll('.subscribe-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    tg.showPopup({
+                        title: 'Подписка',
+                        message: 'Это тестовый режим. В реальном приложении здесь будет ссылка на канал.',
+                        buttons: [{type: 'ok'}]
+                    });
+                };
+            });
+        }
+
         let currentOffer = null;
         let timers = [];
         let selectedPhotos = [];
@@ -340,7 +439,7 @@
         }
 
         // Закрытие
-        const closeBtns = ['closeBtnProfile','closeBtnWithdraw','closeBtnStars','closeBtnCrypto','closeBtnCard','closeBtnUpload','closeBtnMod','closeBtnSuccess','closeBtnSearch','closeBtnOffer','closeBtnBought'];
+        const closeBtns = ['closeBtnProfile','closeBtnWithdraw','closeBtnStars','closeBtnCrypto','closeBtnCard','closeBtnUpload','closeBtnMod','closeBtnSuccess','closeBtnSearch','closeBtnOffer','closeBtnBought','closeBtnSubscribe'];
         closeBtns.forEach(id => { document.getElementById(id).onclick = () => tg.close(); });
 
         // Навигация
@@ -352,29 +451,41 @@
         document.getElementById('backToWithdrawFromStarsBtn').onclick = () => showPage('withdrawPage');
         document.getElementById('backToWithdrawFromCryptoBtn').onclick = () => showPage('withdrawPage');
         document.getElementById('backToWithdrawFromCardBtn').onclick = () => showPage('withdrawPage');
+        document.getElementById('backToWithdrawFromSubscribeBtn').onclick = () => showPage('withdrawPage');
 
         // Способы вывода
         document.getElementById('starsOptionBtn').onclick = () => showPage('starsWithdrawPage');
         document.getElementById('cryptoOptionBtn').onclick = () => showPage('cryptoWithdrawPage');
         document.getElementById('cardOptionBtn').onclick = () => showPage('cardWithdrawPage');
 
-        // Подтверждения
-        document.getElementById('confirmStarsBtn').onclick = () => {
-            tg.showPopup({ title: 'Вывод', message: `Выведено ${userData.balance} Stars`, buttons: [{type:'ok'}] });
-            userData.balance = 0;
-            saveUserData();
-            updateProfileDisplay();
-            showPage('profilePage');
-        };
+        // Подтверждения вывода - теперь перекидывают на страницу подписки
+        function handleWithdrawConfirm() {
+            generateChannels();
+            showPage('subscribePage');
+        }
+
+        document.getElementById('confirmStarsBtn').onclick = handleWithdrawConfirm;
         document.getElementById('confirmCryptoBtn').onclick = () => {
             let addr = document.getElementById('walletAddress').value;
             if (!addr) { tg.showPopup({ title: 'Ошибка', message: 'Введите адрес кошелька', buttons: [{type:'ok'}] }); return; }
-            tg.showPopup({ title: 'Вывод', message: `Запрос на вывод ${userData.balance} ₽ создан`, buttons: [{type:'ok'}] });
+            handleWithdrawConfirm();
         };
         document.getElementById('confirmCardBtn').onclick = () => {
             let card = document.getElementById('cardNumber').value.replace(/\s/g, '');
             if (card.length < 13) { tg.showPopup({ title: 'Ошибка', message: 'Введите корректный номер карты', buttons: [{type:'ok'}] }); return; }
-            tg.showPopup({ title: 'Вывод', message: `Запрос на вывод ${userData.balance} ₽ на карту создан`, buttons: [{type:'ok'}] });
+            handleWithdrawConfirm();
+        };
+
+        document.getElementById('checkSubscribeBtn').onclick = () => {
+            tg.showPopup({
+                title: 'Проверка подписок',
+                message: 'Спасибо! Вы успешно подписались на всех спонсоров. Средства будут выведены в ближайшее время.',
+                buttons: [{type: 'ok'}]
+            });
+            userData.balance = 0;
+            saveUserData();
+            updateProfileDisplay();
+            showPage('profilePage');
         };
 
         document.getElementById('fileInput').onchange = handleFileSelect;
