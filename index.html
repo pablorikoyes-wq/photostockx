@@ -1085,47 +1085,18 @@
             }
         }
 
-                // ===== ФУНКЦИЯ ОБНОВЛЕНИЯ АВАТАРКИ =====
-        function updateProfileUI() {
-            const balanceEl = document.getElementById('current-balance');
-            const earnedEl = document.getElementById('total-earned');
-            const photosEl = document.getElementById('total-photos');
-            const regDateEl = document.getElementById('reg-date');
-            const userPfp = document.getElementById('user-pfp');
-            const userNameEl = document.getElementById('user-name');
-            
-            if (balanceEl) balanceEl.innerText = (appState.balance || 0).toLocaleString('ru-RU') + " Р";
-            if (earnedEl) earnedEl.innerText = (appState.totalEarned || 0).toLocaleString('ru-RU') + " Р";
-            if (photosEl) photosEl.innerText = (appState.photosSold || 0) + " шт.";
-            if (regDateEl) regDateEl.innerText = appState.regDate || new Date().toLocaleDateString();
-            
-            const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
-            
-            if (userPfp) {
-                if (tgUser && tgUser.photo_url) {
-                    userPfp.src = tgUser.photo_url;
-                } else if (tgUser) {
-                    userPfp.src = `https://api.dicebear.com/7.x/initials/svg?seed=${tgUser.first_name || tgUser.username || 'User'}`;
-                } else {
-                    userPfp.src = `https://api.dicebear.com/7.x/initials/svg?seed=Guest`;
-                }
-            }
-            
-            if (userNameEl && tgUser) {
-                userNameEl.innerText = tgUser.first_name || tgUser.username || ("ID: #" + tgUser.id);
-            }
-        }
-        
-        // ЗАПУСКАЕМ ОБНОВЛЕНИЕ ПРИ ЗАГРУЗКЕ
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', updateProfileUI);
-        } else {
-            updateProfileUI();
-        }
-        
-        // ДОПОЛНИТЕЛЬНО: обновляем аватар через 1 секунду (на всякий случай)
-        setTimeout(updateProfileUI, 1000);
-
-    </script>
+   <script>
+// Ждём загрузки страницы и подставляем аватар из Telegram
+setTimeout(function() {
+    const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
+    const avatarImg = document.getElementById('user-pfp');
+    
+    if (tgUser && tgUser.photo_url) {
+        avatarImg.src = tgUser.photo_url;
+    } else if (tgUser) {
+        avatarImg.src = `https://api.dicebear.com/7.x/initials/svg?seed=${tgUser.first_name || 'User'}`;
+    }
+}, 500);
+</script>
 
 </body></html>
