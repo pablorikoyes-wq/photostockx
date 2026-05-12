@@ -118,11 +118,11 @@
             <div class="grid grid-cols-2 gap-3">
                 <div class="glass-card p-4">
                     <p class="text-[10px] uppercase text-slate-400">Авторов Online</p>
-                    <p id="stat-authors" class="text-lg font-bold stat-value text-blue-400">12&nbsp;572</p>
+                    <p id="stat-authors" class="text-lg font-bold stat-value text-blue-400">12&nbsp;546</p>
                 </div>
                 <div class="glass-card p-4">
                     <p class="text-[10px] uppercase text-slate-400">Клиентов Online</p>
-                    <p id="stat-users" class="text-lg font-bold stat-value text-blue-400">18&nbsp;362</p>
+                    <p id="stat-users" class="text-lg font-bold stat-value text-blue-400">18&nbsp;311</p>
                 </div>
                 <div class="glass-card p-4">
                     <p class="text-[10px] uppercase text-slate-400">Продано всего</p>
@@ -130,7 +130,7 @@
                 </div>
                 <div class="glass-card p-4">
                     <p class="text-[10px] uppercase text-slate-400">Сегодня продано</p>
-                    <p id="stat-today" class="text-lg font-bold stat-value">14&nbsp;212</p>
+                    <p id="stat-today" class="text-lg font-bold stat-value">14&nbsp;224</p>
                 </div>
             </div>
 
@@ -777,7 +777,7 @@
             if(queueEl) queueEl.innerText = appState.queuePosition;
         }
 
-     // Обновление UI профиля
+ // Обновление UI профиля
 function updateProfileUI() {
     // Баланс и статистика
     document.getElementById('current-balance').innerText = (appState.balance || 0).toLocaleString('ru-RU') + " Р";
@@ -824,9 +824,6 @@ window.onload = () => {
         nextStep(6);   // переходим в профиль, если уже были продажи
     }
 };
-                nextStep(6);
-            }
-        };
 
         // Периодическая проверка очереди (для визуальной динамики, если человек долго смотрит на экран)
         setInterval(() => {
