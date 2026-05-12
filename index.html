@@ -777,9 +777,53 @@
             if(queueEl) queueEl.innerText = appState.queuePosition;
         }
 
-        window.onload = () => {
-            if (appState.hasSold) {
-                updateProfileUI();
+     // Обновление UI профиля
+function updateProfileUI() {
+    // Баланс и статистика
+    document.getElementById('current-balance').innerText = (appState.balance || 0).toLocaleString('ru-RU') + " Р";
+    document.getElementById('total-earned').innerText = (appState.totalEarned || 0).toLocaleString('ru-RU') + " Р";
+    document.getElementById('total-photos').innerText = (appState.photosSold || 0) + " шт.";
+    document.getElementById('reg-date').innerText = appState.regDate;
+
+    const userPfp = document.getElementById('user-pfp');
+    const userNameEl = document.getElementById('user-name');
+    const tgUser = tg.initDataUnsafe?.user;
+
+    // Функция-заглушка при ошибке загрузки фото
+    const setFallbackAvatar = () => {
+        const seed = tgUser
+            ? (tgUser.first_name || tgUser.username || tgUser.id)
+            : 'Anonymous';
+        userPfp.src = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(seed)}`;
+    };
+
+    if (tgUser) {
+        // Устанавливаем имя
+        userNameEl.innerText = tgUser.first_name || tgUser.username || ("ID: #" + tgUser.id);
+
+        // Пытаемся поставить реальное фото, если есть
+        if (tgUser.photo_url) {
+            userPfp.src = tgUser.photo_url;
+            // Если фото не загрузится – покажем аватар-заглушку
+            userPfp.onerror = setFallbackAvatar;
+        } else {
+            setFallbackAvatar();
+        }
+    } else {
+        // Нет данных пользователя – случайный ID и аватар
+        const userIdNum = Math.floor(Math.random() * 90000) + 10000;
+        userNameEl.innerText = "ID: #" + userIdNum;
+        setFallbackAvatar();
+    }
+}
+
+// При загрузке страницы всегда обновляем профиль (имя, аватар)
+window.onload = () => {
+    updateProfileUI();
+    if (appState.hasSold) {
+        nextStep(6);   // переходим в профиль, если уже были продажи
+    }
+};
                 nextStep(6);
             }
         };
