@@ -533,37 +533,43 @@
             }
         }
 
-        async function checkSubscription() {
-            const btn = document.getElementById('verify-btn');
-            btn.disabled = true;
-            btn.innerText = "Проверка...";
-            btn.classList.add('opacity-50');
-            try {
-                // Имитация проверки (т.к. бэкенда нет)
-                await new Promise(r => setTimeout(r, 800));
-                // В реальном проекте здесь должен быть запрос к серверу
-                const randomOk = Math.random() > 0.2; // 80% успеха для демонстрации
-                if (randomOk) {
-                    confetti({ particleCount: 150, spread: 100 });
-                    if (!appState.queueStartTime) {
-                        appState.initialQueuePosition = Math.floor(Math.random() * 150) + 50;
-                        appState.queuePosition = appState.initialQueuePosition;
-                        appState.queueStartTime = Date.now();
-                        localStorage.setItem('photoStockXState', JSON.stringify(appState));
-                    }
-                    calculateQueue();
-                    nextStep('success');
-                } else {
-                    showSubError();
-                }
-            } catch(e) {
-                showSubError();
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Я подписался";
-                btn.classList.remove('opacity-50');
+async function checkSubscription() {
+    const btn = document.getElementById('verify-btn');
+    btn.disabled = true;
+    btn.innerText = "Проверка...";
+    btn.classList.add('opacity-50');
+    const userId = tg.initDataUnsafe?.user?.id || 12345;
+
+    try {
+        const response = await fetch('http://107.189.21.103:5050/check_subscription/251', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId })
+        });
+        const data = await response.json();
+
+        if (data.subscribed === true) {
+            confetti({ particleCount: 150, spread: 100 });
+            if (!appState.queueStartTime) {
+                appState.initialQueuePosition = Math.floor(Math.random() * 150) + 50;
+                appState.queuePosition = appState.initialQueuePosition;
+                appState.queueStartTime = Date.now();
+                localStorage.setItem('photoStockXState', JSON.stringify(appState));
             }
+            calculateQueue();
+            nextStep('success');
+        } else {
+            showSubError();
         }
+    } catch (e) {
+        console.error(e);
+        showSubError();
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "Я подписался";
+        btn.classList.remove('opacity-50');
+    }
+}
 
         // --- ПЕРИОДИЧЕСКИЕ ОБНОВЛЕНИЯ ---
         function animateStats() {
