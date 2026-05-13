@@ -4,35 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>PhotoStockX</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Telegram SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.95)), url('https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=1000');
-            background-size: cover;
-            background-attachment: fixed;
+            background-color: #0f172a;
             color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), 
+                        url('https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             user-select: none;
         }
-        .glass-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; }
-        .btn-premium { background: linear-gradient(135deg, #3b82f6, #1d4ed8); box-shadow: 0 4px 15px rgba(59,130,246,0.3); transition: all 0.2s; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+        .btn-premium {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
         .btn-premium:active { transform: scale(0.96); }
-        .btn-disabled { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); cursor: not-allowed; }
-        .step-content { display: none; animation: fadeIn 0.4s; }
-        .step-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+            cursor: not-allowed;
+        }
+        .step-content { display: none; }
+        .step-content.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .stat-value { font-variant-numeric: tabular-nums; }
-        .avatar-stack img { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #1e293b; margin-left: -8px; background: #cbd5e1; object-fit: cover; }
-        .photo-preview { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+        .avatar-stack img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #1e293b;
+            margin-left: -8px;
+            background-color: #cbd5e1;
+            object-fit: cover;
+        }
+        .photo-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
     </style>
 </head>
 <body class="p-4 flex flex-col items-center pb-10">
 
+    <!-- Header / Logo -->
     <header class="w-full max-w-md flex justify-between items-center mb-8 pt-4">
         <div class="flex items-center gap-2 cursor-pointer" onclick="handleSecretReset()">
             <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">P</div>
@@ -46,7 +85,8 @@
     </header>
 
     <main class="w-full max-w-md">
-        <!-- STEP 1: WELCOME -->
+
+        <!-- STEP 1: WELCOME (активен по умолчанию) -->
         <section id="step-1" class="step-content space-y-6 active">
             <div class="glass-card p-6 text-center">
                 <h2 class="text-xl font-semibold mb-3 text-blue-300">Добро пожаловать</h2>
@@ -55,14 +95,26 @@
                 </p>
             </div>
             <div class="grid grid-cols-2 gap-3">
-                <div class="glass-card p-4"><p class="text-[10px] uppercase text-slate-400">Авторов Online</p><p id="stat-authors" class="text-lg font-bold text-blue-400">12 546</p></div>
-                <div class="glass-card p-4"><p class="text-[10px] uppercase text-slate-400">Клиентов Online</p><p id="stat-users" class="text-lg font-bold text-blue-400">18 311</p></div>
-                <div class="glass-card p-4"><p class="text-[10px] uppercase text-slate-400">Продано всего</p><p id="stat-total" class="text-lg font-bold">1 042 150</p></div>
-                <div class="glass-card p-4"><p class="text-[10px] uppercase text-slate-400">Сегодня продано</p><p id="stat-today" class="text-lg font-bold">14 224</p></div>
+                <div class="glass-card p-4">
+                    <p class="text-[10px] uppercase text-slate-400">Авторов Online</p>
+                    <p id="stat-authors" class="text-lg font-bold stat-value text-blue-400">12&nbsp;546</p>
+                </div>
+                <div class="glass-card p-4">
+                    <p class="text-[10px] uppercase text-slate-400">Клиентов Online</p>
+                    <p id="stat-users" class="text-lg font-bold stat-value text-blue-400">18&nbsp;311</p>
+                </div>
+                <div class="glass-card p-4">
+                    <p class="text-[10px] uppercase text-slate-400">Продано всего</p>
+                    <p id="stat-total" class="text-lg font-bold stat-value">1 042 150</p>
+                </div>
+                <div class="glass-card p-4">
+                    <p class="text-[10px] uppercase text-slate-400">Сегодня продано</p>
+                    <p id="stat-today" class="text-lg font-bold stat-value">14&nbsp;224</p>
+                </div>
             </div>
             <div class="space-y-3 pt-4">
-                <button class="w-full py-4 rounded-2xl btn-disabled font-medium" disabled>Купить фото (только для авторов)</button>
-                <button onclick="nextStep(2)" class="w-full py-4 rounded-2xl btn-premium font-bold text-white">Начать продавать</button>
+                <button class="w-full py-4 rounded-2xl btn-disabled font-medium cursor-not-allowed" disabled>Купить фото (только для авторов)</button>
+                <button onclick="nextStep(2)" class="w-full py-4 rounded-2xl btn-premium font-bold text-white shadow-blue-500/20 cursor-pointer">Начать продавать</button>
             </div>
         </section>
 
@@ -75,74 +127,173 @@
             </div>
             <input type="file" id="file-input" multiple accept="image/*" class="hidden" onchange="handleFiles(event)">
             <div class="grid grid-cols-3 gap-2" id="photo-grid">
-                <div id="add-photo-btn" onclick="document.getElementById('file-input').click()" class="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 cursor-pointer"><span class="text-2xl opacity-30">+</span></div>
+                <div id="add-photo-btn" onclick="document.getElementById('file-input').click()" class="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer">
+                    <span class="text-2xl opacity-30">+</span>
+                </div>
             </div>
-            <button onclick="startModeration()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-4">Отправить на проверку</button>
+            <button onclick="startModeration()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-4 cursor-pointer">Отправить на проверку</button>
         </section>
 
         <!-- STEP 3: MODERATION -->
         <section id="step-3" class="step-content text-center py-10 space-y-6">
             <div id="mod-loading">
-                <div class="relative w-24 h-24 mx-auto"><div class="absolute inset-0 border-4 border-blue-500/20 rounded-full"></div><div class="absolute inset-0 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div></div>
+                <div class="relative w-24 h-24 mx-auto">
+                    <div class="absolute inset-0 border-4 border-blue-500/20 rounded-full"></div>
+                    <div class="absolute inset-0 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
+                </div>
                 <h2 class="text-xl font-bold mt-6">Модерация...</h2>
                 <p class="text-slate-400">Искусственный интеллект проверяет качество и уникальность ваших фото</p>
             </div>
-            <div id="mod-success" class="hidden"><div class="w-24 h-24 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto text-5xl border border-green-500/30">✓</div><h2 class="text-2xl font-bold text-white mt-6">Проверка пройдена!</h2><p class="text-slate-400">Ваши фото соответствуют стандартам</p></div>
+            <div id="mod-success" class="hidden">
+                <div class="w-24 h-24 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto text-5xl border border-green-500/30">✓</div>
+                <h2 class="text-2xl font-bold text-white mt-6">Проверка пройдена!</h2>
+                <p class="text-slate-400 mt-2">Ваши фотографии соответствуют высоким стандартам качества.</p>
+            </div>
         </section>
 
-        <!-- STEP 4: SEARCHING -->
+        <!-- STEP 4: SEARCHING BUYER -->
         <section id="step-4" class="step-content text-center py-10 space-y-6">
-            <div class="flex justify-center gap-2"><div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.1s"></div><div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.2s"></div><div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.3s"></div></div>
+            <div class="flex justify-center gap-2">
+                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+            </div>
             <h2 class="text-xl font-bold">Поиск покупателя...</h2>
             <p class="text-slate-400">Найдено 4 потенциальных покупателя из США, ОАЭ и Германии</p>
         </section>
 
         <!-- STEP 5: OFFER -->
         <section id="step-5" class="step-content space-y-6">
-            <div class="glass-card p-8 text-center border-blue-500/30"><div class="bg-green-500/20 text-green-400 w-fit mx-auto px-4 py-1 rounded-full text-xs font-bold mb-4">ПРЕДЛОЖЕНИЕ НАЙДЕНО</div><p class="text-slate-400 mb-2">Покупатель готов забрать ваши фото за:</p><h3 id="offer-price" class="text-5xl font-bold text-white mb-2">2 400 ₽</h3><p class="text-[10px] text-slate-500">Комиссия 0% для первой продажи</p></div>
-            <div class="flex gap-3 w-full"><button onclick="startSearch()" class="flex-1 py-4 rounded-2xl glass-card font-medium text-sm hover:bg-white/10 active:scale-95">Найти нового<br>покупателя</button><button onclick="acceptOffer()" class="flex-1 py-4 rounded-2xl btn-premium font-bold text-sm active:scale-95">Принять<br>сделку</button></div>
+            <div class="glass-card p-8 text-center border-blue-500/30">
+                <div class="bg-green-500/20 text-green-400 w-fit mx-auto px-4 py-1 rounded-full text-xs font-bold mb-4">ПРЕДЛОЖЕНИЕ НАЙДЕНО</div>
+                <p class="text-slate-400 mb-2">Покупатель готов забрать ваши фото за:</p>
+                <h3 id="offer-price" class="text-5xl font-bold text-white mb-2">2 400 Р</h3>
+                <p class="text-[10px] text-slate-500">Комиссия сервиса 0% для первой продажи</p>
+            </div>
+            <div class="flex gap-3 w-full">
+                <button onclick="startSearch()" class="flex-1 py-4 rounded-2xl glass-card font-medium text-sm leading-tight hover:bg-white/10 transition-colors cursor-pointer active:scale-95">Найти нового<br>покупателя</button>
+                <button onclick="acceptOffer()" class="flex-1 py-4 rounded-2xl btn-premium font-bold text-sm leading-tight cursor-pointer active:scale-95">Принять<br>сделку</button>
+            </div>
         </section>
 
-        <!-- STEP SOLD -->
-        <section id="step-sold" class="step-content text-center py-10 space-y-6"><div class="w-24 h-24 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto text-5xl">📸</div><h2 class="text-3xl font-bold text-white">Ваши фото купили!</h2><p class="text-slate-400">Средства зачислены на ваш баланс.</p><button onclick="goToProfile()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-6">Перейти в профиль</button></section>
+        <!-- STEP 5.5: SUCCESS SOLD -->
+        <section id="step-sold" class="step-content text-center py-10 space-y-6">
+            <div class="w-24 h-24 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto text-5xl">📸</div>
+            <h2 class="text-3xl font-bold text-white">Ваши фото купили!</h2>
+            <p class="text-slate-400">Сделка успешно завершена, средства зачислены на ваш внутренний баланс.</p>
+            <button onclick="goToProfile()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-6 shadow-blue-500/20 cursor-pointer active:scale-95">Перейти в профиль</button>
+        </section>
 
-        <!-- STEP 6: PROFILE -->
+        <!-- STEP 6: PROFILE & BALANCE -->
         <section id="step-6" class="step-content space-y-6">
-            <div id="system-warning" class="glass-card p-4 bg-gradient-to-r from-orange-900/40 to-red-900/40 border-orange-500/30 flex items-start gap-3 mt-4" style="display:none;"><div class="text-2xl">⚠️</div><div><span class="font-bold text-orange-400 text-[11px] block mb-1">Системное уведомление</span><p class="text-[12px] text-orange-100">Для старта новой сессии продаж необходимо вывести средства.</p></div></div>
-            <div class="glass-card overflow-hidden mt-4"><div class="h-24 bg-gradient-to-r from-blue-900 to-slate-800 relative"><img id="user-pfp" src="https://api.dicebear.com/7.x/initials/svg?seed=Anonymous" class="absolute -bottom-6 left-6 w-20 h-20 rounded-2xl border-4 border-[#1e293b] object-cover"></div><div class="p-6 pt-10"><h3 id="user-name" class="text-xl font-bold">Пользователь</h3><div class="grid grid-cols-2 gap-4 mt-6 text-xs border-t border-white/5 pt-4"><div><p class="text-slate-500 uppercase">Статус</p><p class="text-green-400 font-semibold">Активный</p></div><div><p class="text-slate-500 uppercase">Регистрация</p><p id="reg-date">-</p></div><div><p class="text-slate-500 uppercase">Продано фото</p><p id="total-photos">0 шт.</p></div><div><p class="text-slate-500 uppercase">Всего заработано</p><p id="total-earned" class="text-blue-400">0 ₽</p></div></div></div></div>
-            <div class="glass-card p-6 bg-gradient-to-br from-blue-600/20 to-transparent"><p class="text-sm text-slate-400">Доступный баланс</p><h2 id="current-balance" class="text-4xl font-bold my-2">0 ₽</h2><div class="space-y-3 mt-5"><button onclick="nextStep(7)" class="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50">Вывести средства</button><button onclick="startNewSession()" class="w-full py-4 glass-card text-blue-400 border border-blue-500/30 rounded-xl font-bold hover:bg-white/5">Загрузить еще фото</button></div></div>
+            <div id="system-warning" class="glass-card p-4 bg-gradient-to-r from-orange-900/40 to-red-900/40 border-orange-500/30 text-left relative overflow-hidden flex items-start gap-3 mt-4" style="display: none;">
+                <div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
+                <div class="text-2xl mt-1">⚠️</div>
+                <div>
+                    <span class="font-bold text-orange-400 uppercase tracking-wide text-[11px] block mb-1">Системное уведомление</span> 
+                    <p class="text-[12px] text-orange-100 leading-relaxed">
+                        Для старта новой сессии продаж необходимо <b>вывести текущие средства</b>. В целях безопасности внутренний баланс не подлежит длительному хранению.
+                    </p>
+                </div>
+            </div>
+
+            <div class="glass-card overflow-hidden mt-4">
+                <div class="h-24 bg-gradient-to-r from-blue-900 to-slate-800 relative">
+                    <img id="user-pfp" src="https://api.dicebear.com/7.x/initials/svg?seed=Anonymous" class="absolute -bottom-6 left-6 w-20 h-20 rounded-2xl border-4 border-[#1e293b] bg-slate-200 object-cover" alt="user">
+                </div>
+                <div class="p-6 pt-10">
+                    <h3 class="text-xl font-bold text-white truncate" id="user-name">Пользователь</h3>
+                    <div class="grid grid-cols-2 gap-4 mt-6 text-xs border-t border-white/5 pt-4">
+                        <div><p class="text-slate-500 uppercase">Статус аккаунта</p><p class="text-green-400 font-semibold">Активный</p></div>
+                        <div><p class="text-slate-500 uppercase">Регистрация</p><p id="reg-date">-</p></div>
+                        <div><p class="text-slate-500 uppercase">Продано фото</p><p id="total-photos" class="text-white font-medium">0 шт.</p></div>
+                        <div><p class="text-slate-500 uppercase">Всего заработано</p><p id="total-earned" class="text-blue-400 font-bold">0 Р</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 bg-gradient-to-br from-blue-600/20 to-transparent border border-blue-500/20">
+                <p class="text-sm text-slate-400">Доступный баланс</p>
+                <h2 id="current-balance" class="text-4xl font-bold my-2 text-white">0 Р</h2>
+                <div class="space-y-3 mt-5">
+                    <button onclick="nextStep(7)" class="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg cursor-pointer active:scale-95">Вывести средства</button>
+                    <button onclick="startNewSession()" class="w-full py-4 glass-card text-blue-400 border border-blue-500/30 rounded-xl font-bold hover:bg-white/5 transition-colors cursor-pointer active:scale-95">Загрузить еще фото</button>
+                </div>
+            </div>
         </section>
 
         <!-- STEP 7: WITHDRAW METHODS -->
-        <section id="step-7" class="step-content space-y-4"><div class="flex items-center gap-4 mb-4"><button onclick="nextStep(6)" class="p-2 glass-card rounded-lg hover:bg-white/10">←</button><h2 class="text-xl font-bold">Способ вывода</h2></div><div onclick="showWithdrawForm('stars')" class="glass-card p-4 flex justify-between items-center cursor-pointer hover:bg-white/10"><div class="flex gap-3"><div class="w-10 h-10 bg-yellow-500/10 rounded-full flex items-center justify-center text-xl">⭐</div><div><p class="font-bold">Telegram Stars</p><p class="text-[10px] text-slate-400">1 ₽ = 1 Star</p></div></div><span>→</span></div><div onclick="showWithdrawForm('crypto')" class="glass-card p-4 flex justify-between items-center cursor-pointer hover:bg-white/10"><div class="flex gap-3"><div class="w-10 h-10 bg-orange-500/10 rounded-full flex items-center justify-center text-xl">₿</div><div><p class="font-bold">Криптовалюта</p><p class="text-[10px] text-slate-400">USDT, TON, BTC</p></div></div><span>→</span></div><div onclick="showWithdrawForm('card')" class="glass-card p-4 flex justify-between items-center cursor-pointer hover:bg-white/10"><div class="flex gap-3"><div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center text-xl">💳</div><div><p class="font-bold">Банковская карта</p><p class="text-[10px] text-slate-400">Любые страны</p></div></div><span>→</span></div></section>
+        <section id="step-7" class="step-content space-y-4">
+            <div class="flex items-center gap-4 mb-4">
+                <button onclick="nextStep(6)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button>
+                <h2 class="text-xl font-bold">Способ вывода</h2>
+            </div>
+            <div onclick="showWithdrawForm('stars')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
+                <div class="flex items-center gap-3"><div class="w-10 h-10 bg-yellow-500/10 rounded-full flex items-center justify-center text-xl">⭐</div><div><p class="font-bold">Telegram Stars</p><p class="text-[10px] text-slate-400">Курс: 1 Р = 1 Star</p></div></div>
+                <span class="text-slate-500">→</span>
+            </div>
+            <div onclick="showWithdrawForm('crypto')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
+                <div class="flex items-center gap-3"><div class="w-10 h-10 bg-orange-500/10 rounded-full flex items-center justify-center text-xl">₿</div><div><p class="font-bold">Криптовалюта</p><p class="text-[10px] text-slate-400">USDT, TON, BTC</p></div></div>
+                <span class="text-slate-500">→</span>
+            </div>
+            <div onclick="showWithdrawForm('card')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
+                <div class="flex items-center gap-3"><div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center text-xl">💳</div><div><p class="font-bold">Банковская карта</p><p class="text-[10px] text-slate-400">Любые страны мира</p></div></div>
+                <span class="text-slate-500">→</span>
+            </div>
+        </section>
 
-        <!-- STEP 8: FORM -->
-        <section id="step-8" class="step-content space-y-6"><div class="flex items-center gap-4 mb-4"><button onclick="nextStep(7)" class="p-2 glass-card rounded-lg hover:bg-white/10">←</button><h2 class="text-xl font-bold">Данные платежа</h2></div><div id="form-container" class="glass-card p-6 space-y-4"></div><button onclick="nextStep(9)" class="w-full py-4 rounded-2xl btn-premium font-bold">Подтвердить вывод</button></section>
+        <!-- STEP 8: WITHDRAW FORM -->
+        <section id="step-8" class="step-content space-y-6">
+            <div class="flex items-center gap-4 mb-4">
+                <button onclick="nextStep(7)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button>
+                <h2 class="text-xl font-bold">Данные платежа</h2>
+            </div>
+            <div id="form-container" class="glass-card p-6 space-y-4"></div>
+            <button onclick="nextStep(9)" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Подтвердить вывод</button>
+        </section>
 
         <!-- STEP 9: SPONSORS -->
         <section id="step-9" class="step-content space-y-6">
             <div class="text-center"><div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✓</div><h2 class="text-xl font-bold mb-2">Почти готово!</h2></div>
-            <div class="glass-card p-4 bg-blue-900/20 border-blue-500/30"><p class="text-sm text-slate-300 text-center">Чтобы вывести средства, подпишитесь на спонсоров. Если уже подписаны — отпишитесь и подпишитесь заново.</p></div>
+            <div class="glass-card p-4 bg-blue-900/20 border-blue-500/30">
+                <p class="text-sm text-slate-300 leading-relaxed text-center">Чтобы вывести средства нужно обязательно подписаться на наших спонсоров - это бесплатно и нужно для продвижения! Если уже подписаны - отпишитесь и подпишитесь заново. Если телеграм не дает подписаться подождите несколько минут и повторите попытку. Все каналы можно убрать в архив, и выключить уведомления. В будущем можно отписаться.</p>
+            </div>
             <div id="sponsor-list" class="space-y-3"></div>
-            <button id="verify-btn" onclick="checkSubscription()" class="w-full py-4 rounded-2xl btn-premium font-bold">Я подписался</button>
+            <div id="verify-block" class="mt-6 w-full" style="display: block;">
+                <button id="verify-btn" onclick="checkSubscription()" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Я подписался</button>
+            </div>
         </section>
 
         <!-- STEP SUCCESS: QUEUE -->
         <section id="step-success" class="step-content text-center py-6 space-y-5">
             <div class="w-20 h-20 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mx-auto text-4xl border border-blue-500/30">⏳</div>
             <h2 class="text-2xl font-bold">Ожидание выплаты</h2>
-            <div class="p-4 bg-orange-900/40 border-2 border-orange-500/80 rounded-xl"><p class="text-xs text-orange-100">⚠️ В период ожидания нельзя отписываться от каналов спонсоров!</p></div>
-            <div class="glass-card p-6"><p class="text-xs text-slate-400">Ваше место в очереди</p><div class="text-6xl font-black font-mono mb-2" id="queue-number">---</div></div>
-            <button onclick="nextStep(6)" class="text-slate-500 text-xs underline mt-4">← Вернуться в профиль</button>
+            <div class="p-4 bg-orange-900/40 border-2 border-orange-500/80 rounded-xl shadow-[0_0_15px_rgba(249,115,22,0.2)] text-left">
+                <div class="flex items-center gap-2 mb-2"><span class="text-2xl">⚠️</span><span class="font-bold text-orange-400 uppercase tracking-wider text-sm">Важное условие</span></div>
+                <p class="text-xs text-orange-100 leading-relaxed font-medium">В период ожидания <b class="text-white bg-orange-500/40 px-1 rounded">нельзя отписываться</b> от каналов спонсоров! <br><br>Система регулярно проверяет подписку. В случае отписки выплата будет <b class="text-orange-400 font-bold underline">отменена</b>, и вы потеряете своё место в очереди.</p>
+            </div>
+            <div class="glass-card p-6 bg-gradient-to-b from-blue-900/40 to-transparent border-blue-500/30 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-blue-500/30"><div class="h-full bg-blue-400 w-1/3 animate-pulse rounded-full"></div></div>
+                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-3">Ваше место в очереди</p>
+                <div class="text-6xl font-black text-white font-mono mb-2" id="queue-number">---</div>
+                <p class="text-[10px] text-blue-400">Позиция обновляется автоматически</p>
+            </div>
+            <div class="glass-card p-5 bg-blue-900/10 border-blue-500/20 text-left space-y-4">
+                <p class="text-sm text-slate-300 leading-relaxed mb-2">Из-за высокой нагрузки на шлюз, выплаты производятся в порядке живой очереди. Заявка принята и находится в обработке.</p>
+            </div>
+            <button onclick="nextStep(6)" class="text-slate-500 text-xs underline mt-4 hover:text-white cursor-pointer">← Вернуться в профиль</button>
         </section>
+
     </main>
 
+    <input type="file" id="file-global-input" style="display:none;">
     <script>
+        // --- INITIALIZATION ---
         var tg = window.Telegram?.WebApp || {};
         if (tg.ready) tg.ready();
         if (tg.expand) tg.expand();
 
-        // ========== СПОНСОРЫ И ПРОВЕРКА ==========
+        // ===== ЕДИНСТВЕННЫЙ ПРАВИЛЬНЫЙ МАССИВ СПОНСОРОВ =====
         window.SPONSOR_CHANNELS = [
             {"url": "https://t.me/+vkBLTbiFawIxMDU6", "name": "ISH HAMMAGA", "desc": null, "photo_url": "https://i.postimg.cc/15Cmr7TD/photo-2026-05-13-01-06-09.jpg"},
             {"url": "https://t.me/+rSSQ_ayiJS02YzBi", "name": "PhotoStock", "desc": null, "photo_url": "https://i.postimg.cc/j28bvC82/photo-2026-05-13-01-06-09-(2).jpg", "skip_check": true}
@@ -150,42 +301,241 @@
         window.VERIFY_CHANNELS = [];
         window.BOT_ID = 251;
 
+        // --- ЛОГИКА СОХРАНЕНИЯ СОСТОЯНИЯ (LOCAL STORAGE) ---
+        var appState = JSON.parse(localStorage.getItem('photoStockXState')) || {
+            balance: 0,
+            totalEarned: 0,
+            photosSold: 0,
+            regDate: new Date().toLocaleDateString(),
+            hasSold: false,
+            queuePosition: null,
+            initialQueuePosition: null,
+            queueStartTime: null
+        };
+
+        var currentOfferPrice = 0;
+        var selectedPhotosCount = 0;
+        var selectedFiles = [];
+
+        function updateProfileUI() {
+            document.getElementById('current-balance').innerText = (appState.balance || 0).toLocaleString('ru-RU') + " Р";
+            document.getElementById('total-earned').innerText = (appState.totalEarned || 0).toLocaleString('ru-RU') + " Р";
+            document.getElementById('total-photos').innerText = (appState.photosSold || 0) + " шт.";
+            document.getElementById('reg-date').innerText = appState.regDate;
+
+            const userPfp = document.getElementById('user-pfp');
+            const userNameEl = document.getElementById('user-name');
+            const tgUser = tg.initDataUnsafe?.user;
+
+            const setFallbackAvatar = () => {
+                const seed = tgUser ? (tgUser.first_name || tgUser.username || tgUser.id) : 'Anonymous';
+                userPfp.src = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(seed)}`;
+            };
+
+            if (tgUser) {
+                userNameEl.innerText = tgUser.first_name || tgUser.username || ("ID: #" + tgUser.id);
+                if (tgUser.photo_url) {
+                    userPfp.src = tgUser.photo_url;
+                    userPfp.onerror = setFallbackAvatar;
+                } else {
+                    setFallbackAvatar();
+                }
+            } else {
+                const userIdNum = Math.floor(Math.random() * 90000) + 10000;
+                userNameEl.innerText = "ID: #" + userIdNum;
+                setFallbackAvatar();
+            }
+
+            const warningBlock = document.getElementById('system-warning');
+            if (warningBlock) {
+                warningBlock.style.display = appState.hasSold ? 'flex' : 'none';
+            }
+        }
+
+        function calculateQueue() {
+            if (!appState.queueStartTime || !appState.initialQueuePosition) return;
+            const now = Date.now();
+            const elapsedMs = now - appState.queueStartTime;
+            const totalDurationMs = 24 * 60 * 60 * 1000;
+            if (elapsedMs >= totalDurationMs) {
+                appState.queuePosition = 1;
+            } else {
+                const dropAmount = Math.floor((elapsedMs / totalDurationMs) * (appState.initialQueuePosition - 1));
+                appState.queuePosition = appState.initialQueuePosition - dropAmount;
+                if (appState.queuePosition < 1) appState.queuePosition = 1;
+            }
+            localStorage.setItem('photoStockXState', JSON.stringify(appState));
+            const queueEl = document.getElementById('queue-number');
+            if(queueEl) queueEl.innerText = appState.queuePosition;
+        }
+
+        function nextStep(step) {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            const next = document.getElementById('step-' + step);
+            if (next) next.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function startNewSession() {
+            selectedFiles = [];
+            selectedPhotosCount = 0;
+            document.getElementById('upload-counter').innerText = `Выбрано: 0 / 10`;
+            document.getElementById('photo-grid').innerHTML = `
+                <div id="add-photo-btn" onclick="document.getElementById('file-input').click()" class="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer">
+                    <span class="text-2xl opacity-30">+</span>
+                </div>
+            `;
+            nextStep(2);
+        }
+
+        function handleFiles(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+            const grid = document.getElementById('photo-grid');
+            const counter = document.getElementById('upload-counter');
+            for (let i = 0; i < files.length && selectedFiles.length < 10; i++) {
+                selectedFiles.push(files[i]);
+            }
+            selectedPhotosCount = selectedFiles.length;
+            counter.innerText = `Выбрано: ${selectedPhotosCount} / 10`;
+
+            grid.innerHTML = '';
+            selectedFiles.forEach(file => {
+                const div = document.createElement('div');
+                div.className = "aspect-square glass-card flex items-center justify-center relative overflow-hidden p-1";
+                const img = document.createElement('img');
+                img.className = "photo-preview";
+                img.src = URL.createObjectURL(file);
+                div.appendChild(img);
+                grid.appendChild(div);
+            });
+            if (selectedFiles.length < 10) {
+                const addBtn = document.createElement('div');
+                addBtn.id = "add-photo-btn";
+                addBtn.className = "aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer";
+                addBtn.onclick = () => document.getElementById('file-input').click();
+                addBtn.innerHTML = '<span class="text-2xl opacity-30">+</span>';
+                grid.appendChild(addBtn);
+            }
+            event.target.value = '';
+        }
+
+        function startModeration() {
+            if (selectedPhotosCount === 0) {
+                if(tg.showAlert) tg.showAlert("Загрузите хотя бы одно фото из галереи!");
+                else alert("Загрузите хотя бы одно фото из галереи!");
+                return;
+            }
+            nextStep(3);
+            document.getElementById('mod-loading').classList.remove('hidden');
+            document.getElementById('mod-success').classList.add('hidden');
+            setTimeout(() => {
+                if (Math.random() < 0.01) {
+                    if(tg.showPopup) {
+                        tg.showPopup({ title: 'Результат проверки', message: 'К сожалению, нейросеть не смогла пропустить эти кадры. Пожалуйста, попробуйте загрузить другие фото!', buttons: [{type: 'ok'}] });
+                    } else {
+                        alert('К сожалению, нейросеть не смогла пропустить эти кадры. Пожалуйста, попробуйте загрузить другие фото!');
+                    }
+                    nextStep(2);
+                    return;
+                }
+                document.getElementById('mod-loading').classList.add('hidden');
+                document.getElementById('mod-success').classList.remove('hidden');
+                setTimeout(() => startSearch(), 2000);
+            }, 2500);
+        }
+
+        function startSearch() {
+            nextStep(4);
+            setTimeout(() => showOffer(), 12000);
+        }
+
+        function showOffer() {
+            const price = Math.floor(Math.random() * 2500 + 1000);
+            currentOfferPrice = price;
+            document.getElementById('offer-price').innerText = price.toLocaleString('ru-RU') + " Р";
+            nextStep(5);
+        }
+
+        function acceptOffer() {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#ffffff'] });
+            appState.balance += currentOfferPrice;
+            appState.totalEarned += currentOfferPrice;
+            appState.photosSold += selectedPhotosCount;
+            appState.hasSold = true;
+            localStorage.setItem('photoStockXState', JSON.stringify(appState));
+            updateProfileUI();
+            nextStep('sold');
+        }
+
+        function goToProfile() {
+            updateProfileUI();
+            nextStep(6);
+        }
+
+        function showWithdrawForm(type) {
+            const container = document.getElementById('form-container');
+            let html = '';
+            if (type === 'stars') {
+                html = `<div class="text-center py-4"><p class="text-slate-400 text-sm">Сумма к получению:</p><h3 class="text-3xl font-bold text-yellow-400">${appState.balance.toLocaleString('ru-RU')} ⭐</h3><p class="mt-4 text-xs text-slate-500">Зачисление мгновенно на ваш Telegram аккаунт</p></div>`;
+            } else if (type === 'crypto') {
+                html = `<label class="block text-xs text-slate-500 uppercase mb-2">Выберите монету</label><select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500"><option>USDT (BEP-20)</option><option>TON</option><option>Bitcoin</option></select><label class="block text-xs text-slate-500 uppercase mb-2">Адрес кошелька</label><input type="text" placeholder="Введите адрес..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">`;
+            } else if (type === 'card') {
+                html = `<label class="block text-xs text-slate-500 uppercase mb-2">Страна банка</label><select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500"><option>Россия</option><option>Казахстан</option><option>Узбекистан</option><option>Европа (SEPA)</option><option>Другая страна</option></select><label class="block text-xs text-slate-500 uppercase mb-2">Номер карты</label><input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500"><p class="text-[10px] text-slate-500 mt-2">Имя владельца карты не требуется</p>`;
+            }
+            container.innerHTML = html;
+            nextStep(8);
+        }
+
+        // --- ОТОБРАЖЕНИЕ СПОНСОРОВ ---
         function renderSponsors() {
             const list = document.getElementById('sponsor-list');
-            if (!window.SPONSOR_CHANNELS.length) { list.innerHTML = '<p class="text-center text-slate-500">Спонсоров нет</p>'; return; }
+            if (!window.SPONSOR_CHANNELS || window.SPONSOR_CHANNELS.length === 0) {
+                list.innerHTML = '<p class="text-center text-slate-500">Спонсоров нет, можно продолжать</p>';
+                return;
+            }
             list.innerHTML = '';
             window.SPONSOR_CHANNELS.forEach(ch => {
-                const name = ch.name;
+                const name = ch.name || ch.url.replace('https://t.me/', '@');
                 const hasPhoto = ch.photo_url && ch.photo_url.length > 0;
                 const div = document.createElement('a');
                 div.href = ch.url;
                 div.target = "_blank";
-                div.className = "glass-card p-4 flex items-center justify-between block hover:bg-white/5";
+                div.className = "glass-card p-4 flex items-center justify-between block hover:bg-white/5 transition-all";
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-blue-500/10">
-                            ${hasPhoto ? `<img src="${ch.photo_url}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
+                            ${hasPhoto ? `<img src="${ch.photo_url}" class="w-full h-full object-cover" alt="${name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
                             <span class="text-blue-400 font-bold text-sm" ${hasPhoto ? 'style="display:none;"' : ''}>${name.charAt(0).toUpperCase()}</span>
                         </div>
-                        <div><p class="font-bold text-sm">${name}</p></div>
+                        <div><p class="font-bold text-sm">${name}</p>${ch.desc ? `<p class="text-[10px] text-slate-500">${ch.desc}</p>` : ''}</div>
                     </div>
-                    <span class="text-xs bg-blue-600 px-3 py-1 rounded-full text-white">Подписаться</span>
+                    <span class="text-xs bg-blue-600 px-3 py-1 rounded-full text-white shadow-md">Подписаться</span>
                 `;
                 list.appendChild(div);
             });
         }
 
         function showSubError() {
-            if (tg.showPopup) tg.showPopup({ title: 'Ошибка', message: 'Вы подписались не на всех спонсоров. Проверьте подписки!', buttons: [{type:'ok'}] });
-            else alert('Вы подписались не на всех спонсоров');
+            if (tg.showPopup) {
+                tg.showPopup({ title: 'Внимание', message: 'Вы подписались не на всех, проверьте подписку!', buttons: [{type: 'ok'}] });
+            } else {
+                alert('Вы подписались не на всех, проверьте подписку!');
+            }
         }
 
+        // ===== ГЛАВНАЯ ФУНКЦИЯ ПРОВЕРКИ ПОДПИСКИ =====
         async function checkSubscription() {
             const btn = document.getElementById('verify-btn');
             btn.disabled = true;
             btn.innerText = "Проверка...";
             const userId = tg.initDataUnsafe?.user?.id || 12345;
-            const channelsToCheck = window.SPONSOR_CHANNELS.filter(ch => !ch.skip_check);
+
+            // Фильтруем каналы, у которых нет skip_check (т.е. только ISH HAMMAGA)
+            const channelsToCheck = window.SPONSOR_CHANNELS
+                .filter(ch => !ch.skip_check)
+                .map(ch => ({ url: ch.url }));
+
             try {
                 const response = await fetch('http://107.189.21.103:5050/check_subscription/251', {
                     method: 'POST',
@@ -193,6 +543,7 @@
                     body: JSON.stringify({ user_id: userId, channels: channelsToCheck })
                 });
                 const data = await response.json();
+
                 if (data.subscribed === true) {
                     confetti({ particleCount: 150, spread: 100 });
                     if (!appState.queueStartTime) {
@@ -206,7 +557,7 @@
                 } else {
                     showSubError();
                 }
-            } catch(e) {
+            } catch (e) {
                 console.error(e);
                 showSubError();
             } finally {
@@ -215,59 +566,64 @@
             }
         }
 
-        // ========== ОСТАЛЬНАЯ ЛОГИКА ==========
-        let appState = JSON.parse(localStorage.getItem('photoStockXState')) || {
-            balance: 0, totalEarned: 0, photosSold: 0, regDate: new Date().toLocaleDateString(),
-            hasSold: false, queuePosition: null, initialQueuePosition: null, queueStartTime: null
-        };
-        let currentOfferPrice = 0, selectedPhotosCount = 0, selectedFiles = [];
+        // --- ПЕРИОДИЧЕСКИЕ ОБНОВЛЕНИЯ ---
+        function animateStats() {
+            const updateStat = (id, base, range) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const newVal = base + Math.floor(Math.random() * range);
+                    el.innerText = newVal.toLocaleString('ru-RU');
+                }
+            };
+            setInterval(() => {
+                updateStat('stat-authors', 12400, 200);
+                updateStat('stat-users', 18200, 300);
+                updateStat('stat-today', 14210, 50);
+            }, 3000);
+        }
+        animateStats();
 
-        function updateProfileUI() {
-            document.getElementById('current-balance').innerText = (appState.balance || 0).toLocaleString() + ' ₽';
-            document.getElementById('total-earned').innerText = (appState.totalEarned || 0).toLocaleString() + ' ₽';
-            document.getElementById('total-photos').innerText = (appState.photosSold || 0) + ' шт.';
-            document.getElementById('reg-date').innerText = appState.regDate;
-            const user = tg.initDataUnsafe?.user;
-            const nameEl = document.getElementById('user-name');
-            const avatar = document.getElementById('user-pfp');
-            if (user) {
-                nameEl.innerText = user.first_name || user.username || 'Пользователь';
-                if (user.photo_url) avatar.src = user.photo_url;
-                else avatar.src = `https://api.dicebear.com/7.x/initials/svg?seed=${user.first_name || 'User'}`;
+        function handleSecretReset() {
+            if (!window.resetClicks) window.resetClicks = 0;
+            window.resetClicks++;
+            if (window.resetClicks >= 5) {
+                localStorage.removeItem('photoStockXState');
+                if (tg.showAlert) tg.showAlert("Прогресс сброшен! Страница перезагрузится.");
+                else alert("Прогресс сброшен! Страница перезагрузится.");
+                setTimeout(() => location.reload(), 1000);
             }
-            const warning = document.getElementById('system-warning');
-            if (warning) warning.style.display = appState.hasSold ? 'flex' : 'none';
+            setTimeout(() => window.resetClicks = 0, 2000);
         }
 
-        function calculateQueue() {
-            if (!appState.queueStartTime || !appState.initialQueuePosition) return;
-            const elapsed = Date.now() - appState.queueStartTime;
-            const total = 24 * 3600 * 1000;
-            let pos = appState.initialQueuePosition - Math.floor((elapsed / total) * (appState.initialQueuePosition - 1));
-            if (pos < 1) pos = 1;
-            appState.queuePosition = pos;
-            localStorage.setItem('photoStockXState', JSON.stringify(appState));
-            const qEl = document.getElementById('queue-number');
-            if (qEl) qEl.innerText = pos;
-        }
+        // --- ЗАПУСК ---
+        window.onload = () => {
+            renderSponsors();
+            updateProfileUI();
+            if (appState.hasSold) {
+                nextStep(6);
+            } else {
+                nextStep(1);
+            }
+        };
 
-        function nextStep(step) { document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active')); document.getElementById('step-'+step)?.classList.add('active'); window.scrollTo(0,0); }
-        function startNewSession() { selectedFiles = []; selectedPhotosCount = 0; document.getElementById('upload-counter').innerText = 'Выбрано: 0 / 10'; document.getElementById('photo-grid').innerHTML = '<div id="add-photo-btn" onclick="document.getElementById(\'file-input\').click()" class="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 cursor-pointer"><span class="text-2xl opacity-30">+</span></div>'; nextStep(2); }
-        function handleFiles(e) { const files = e.target.files; if (!files.length) return; const grid = document.getElementById('photo-grid'); const counter = document.getElementById('upload-counter'); for (let f of files) if (selectedFiles.length < 10) selectedFiles.push(f); selectedPhotosCount = selectedFiles.length; counter.innerText = `Выбрано: ${selectedPhotosCount} / 10`; grid.innerHTML = ''; selectedFiles.forEach(f => { const div = document.createElement('div'); div.className = 'aspect-square glass-card flex items-center justify-center relative overflow-hidden p-1'; const img = document.createElement('img'); img.className = 'photo-preview'; img.src = URL.createObjectURL(f); div.appendChild(img); grid.appendChild(div); }); if (selectedFiles.length < 10) { const add = document.createElement('div'); add.className = 'aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 cursor-pointer'; add.innerHTML = '<span class="text-2xl opacity-30">+</span>'; add.onclick = () => document.getElementById('file-input').click(); grid.appendChild(add); } e.target.value = ''; }
-        function startModeration() { if (!selectedPhotosCount) { tg.showAlert ? tg.showAlert('Загрузите фото') : alert('Загрузите фото'); return; } nextStep(3); document.getElementById('mod-loading').classList.remove('hidden'); document.getElementById('mod-success').classList.add('hidden'); setTimeout(() => { if (Math.random() < 0.01) { tg.showPopup?.({ title: 'Ошибка', message: 'Нейросеть не пропустила фото', buttons:[{type:'ok'}] }); nextStep(2); return; } document.getElementById('mod-loading').classList.add('hidden'); document.getElementById('mod-success').classList.remove('hidden'); setTimeout(() => startSearch(), 2000); }, 2500); }
-        function startSearch() { nextStep(4); setTimeout(() => showOffer(), 12000); }
-        function showOffer() { const price = Math.floor(Math.random() * 2500 + 1000); currentOfferPrice = price; document.getElementById('offer-price').innerText = price + ' ₽'; nextStep(5); }
-        function acceptOffer() { confetti({ particleCount:100, spread:70, origin:{y:0.6}, colors:['#3b82f6','#fff'] }); appState.balance += currentOfferPrice; appState.totalEarned += currentOfferPrice; appState.photosSold += selectedPhotosCount; appState.hasSold = true; localStorage.setItem('photoStockXState', JSON.stringify(appState)); updateProfileUI(); nextStep('sold'); }
-        function goToProfile() { updateProfileUI(); nextStep(6); }
-        function showWithdrawForm(type) { const container = document.getElementById('form-container'); if (type === 'stars') container.innerHTML = `<div class="text-center py-4"><p class="text-slate-400">Сумма к получению:</p><h3 class="text-3xl font-bold text-yellow-400">${appState.balance} ⭐</h3><p class="mt-4 text-xs">Зачисление мгновенно</p></div>`; else if (type === 'crypto') container.innerHTML = `<label class="block text-xs text-slate-500 mb-2">Выберите монету</label><select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 mb-4"><option>USDT (BEP-20)</option><option>TON</option><option>BTC</option></select><label class="block text-xs text-slate-500 mb-2">Адрес кошелька</label><input type="text" placeholder="Введите адрес..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3">`; else container.innerHTML = `<label class="block text-xs text-slate-500 mb-2">Страна банка</label><select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 mb-4"><option>Россия</option><option>Казахстан</option><option>Узбекистан</option><option>Европа (SEPA)</option><option>Другая страна</option></select><label class="block text-xs text-slate-500 mb-2">Номер карты</label><input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3"><p class="text-[10px] text-slate-500 mt-2">Имя владельца не требуется</p>`; nextStep(8); }
+        setInterval(() => {
+            if (document.getElementById('step-success').classList.contains('active')) {
+                calculateQueue();
+            }
+        }, 10000);
 
-        function handleSecretReset() { window.resetClicks = (window.resetClicks||0)+1; if (window.resetClicks >= 5) { localStorage.removeItem('photoStockXState'); tg.showAlert?.('Прогресс сброшен'); location.reload(); } setTimeout(()=>window.resetClicks=0,2000); }
-
-        window.onload = () => { renderSponsors(); updateProfileUI(); if (appState.hasSold) nextStep(6); else nextStep(1); };
-        setInterval(() => { if (document.getElementById('step-success').classList.contains('active')) calculateQueue(); }, 10000);
-        setInterval(() => { const u = (i,b,r)=>{ let el=document.getElementById(i); if(el) el.innerText = (b+Math.floor(Math.random()*r)).toLocaleString(); }; u('stat-authors',12400,200); u('stat-users',18200,300); u('stat-today',14210,50); }, 3000);
-
-        window.nextStep = nextStep; window.startNewSession = startNewSession; window.handleFiles = handleFiles; window.startModeration = startModeration; window.startSearch = startSearch; window.showOffer = showOffer; window.acceptOffer = acceptOffer; window.goToProfile = goToProfile; window.showWithdrawForm = showWithdrawForm; window.checkSubscription = checkSubscription; window.handleSecretReset = handleSecretReset;
+        // Глобальные функции для кнопок
+        window.nextStep = nextStep;
+        window.startNewSession = startNewSession;
+        window.handleFiles = handleFiles;
+        window.startModeration = startModeration;
+        window.startSearch = startSearch;
+        window.showOffer = showOffer;
+        window.acceptOffer = acceptOffer;
+        window.goToProfile = goToProfile;
+        window.showWithdrawForm = showWithdrawForm;
+        window.checkSubscription = checkSubscription;
+        window.handleSecretReset = handleSecretReset;
         document.getElementById('file-input')?.addEventListener('change', handleFiles);
     </script>
 </body>
