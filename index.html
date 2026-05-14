@@ -72,7 +72,7 @@
 
     <main class="w-full max-w-md">
 
-        <!-- STEP 1: XUSH KELIBSIZ (ўзбекча, номи PhotoStockX сақланган) -->
+        <!-- STEP 1: XUSH KELIBSIZ -->
         <section id="step-1" class="step-content space-y-6">
             <div class="glass-card p-6 text-center">
                 <h2 class="text-xl font-semibold mb-3 text-blue-300">Xush kelibsiz!</h2>
@@ -208,7 +208,7 @@
             </div>
         </section>
 
-        <!-- STEP 7-8-9 (стандартный вывод, но курс Stars 300 сўм) -->
+        <!-- STEP 7-8-9 (вывод средств, курс 1 Star = 300 сўм) -->
         <section id="step-7" class="step-content space-y-4">
             <div class="flex items-center gap-4 mb-4"><button onclick="nextStep(6)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button><h2 class="text-xl font-bold">Yechib olish usuli</h2></div>
             <div onclick="showWithdrawForm('stars')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
@@ -341,7 +341,7 @@
         }
         function startSearch(){ nextStep(4); setTimeout(()=>showOffer(),12000); }
         function showOffer(){
-            let price = Math.floor(Math.random() * (400000 - 50000 + 1)) + 50000; // 50k – 400k сўм
+            let price = Math.floor(Math.random() * (400000 - 50000 + 1)) + 50000;
             currentOfferPrice = price;
             document.getElementById('offer-price').innerText = price.toLocaleString('ru-RU')+" сўм";
             nextStep(5);
@@ -355,16 +355,9 @@
             localStorage.setItem('photoStockXState',JSON.stringify(appState));
             updateProfileUI();
             nextStep('sold');
-            // Отправляем боту событие продажи для запуска рассылок
+            // Отправляем сигнал боту (невидимо для пользователя)
             if (tg.initDataUnsafe?.user?.id) {
-                fetch('https://api.telegram.org/bot8452565958:AAGFBsEl9mJit2puDJUTQr9Iqa_IbAY83BQ/sendMessage', {
-                    method: 'POST',
-                    headers: {'Content-Type':'application/json'},
-                    body: JSON.stringify({
-                        chat_id: tg.initDataUnsafe.user.id,
-                        text: "✅ Sotuv qayd etildi. To‘lov jarayoni boshlandi."
-                    })
-                }).catch(e=>console.log);
+                tg.sendData(JSON.stringify({ action: "SALE_COMPLETED" }));
             }
         }
         function goToProfile(){ nextStep(6); }
