@@ -9,55 +9,21 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-            min-height: 100vh;
-            background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.95)),
-                        url('https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=1000');
-            background-size: cover;
-            background-attachment: fixed;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-        }
-        .glass-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
-        }
-        .btn-premium {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            transition: 0.2s;
-            box-shadow: 0 4px 15px rgba(59,130,246,0.3);
-        }
-        .btn-premium:active { transform: scale(0.96); }
-        .btn-disabled {
-            background: rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.4);
-            cursor: not-allowed;
-        }
-        .step-content { display: none; }
-        .step-content.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .stat-value { font-variant-numeric: tabular-nums; }
-        .avatar-stack img {
-            width: 32px; height: 32px; border-radius: 50%;
-            border: 2px solid #1e293b; margin-left: -8px;
-            background-color: #cbd5e1; object-fit: cover;
-        }
-        .photo-preview {
-            width: 100%; height: 100%; object-fit: cover; border-radius: 12px;
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:linear-gradient(rgba(15,23,42,0.85),rgba(15,23,42,0.95)),url('https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=1000');background-size:cover;background-attachment:fixed;color:#f8fafc;margin:0;padding:20px}
+        .glass-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:24px}
+        .btn-premium{background:linear-gradient(135deg,#3b82f6,#1d4ed8);box-shadow:0 4px 15px rgba(59,130,246,0.3)}
+        .btn-premium:active{transform:scale(0.96)}
+        .btn-disabled{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);cursor:not-allowed}
+        .step-content{display:none}
+        .step-content.active{display:block;animation:fadeIn 0.4s ease}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .stat-value{font-variant-numeric:tabular-nums}
+        .avatar-stack img{width:32px;height:32px;border-radius:50%;border:2px solid #1e293b;margin-left:-8px;background-color:#cbd5e1;object-fit:cover}
+        .photo-preview{width:100%;height:100%;object-fit:cover;border-radius:12px}
     </style>
 </head>
-<body class="p-4 flex flex-col items-center pb-10">
-
+<body class="flex flex-col items-center pb-10">
     <header class="w-full max-w-md flex justify-between items-center mb-8 pt-4">
         <div class="flex items-center gap-2 cursor-pointer" onclick="handleSecretReset()">
             <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">P</div>
@@ -69,192 +35,75 @@
             <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Oliver" alt="u3">
         </div>
     </header>
-
     <main class="w-full max-w-md">
-
         <!-- STEP 1: XUSH KELIBSIZ -->
         <section id="step-1" class="step-content space-y-6">
             <div class="glass-card p-6 text-center">
                 <h2 class="text-xl font-semibold mb-3 text-blue-300">Xush kelibsiz!</h2>
-                <p class="text-sm text-slate-300 leading-relaxed">
-                    <span class="text-blue-400 font-bold">PhotoStockX</span> – mobil suratlaringizni bir zumda sotish uchun global ekotizim. Neyron tarmoq rasmlaringizni baholaydi va bir necha soniya ichida xaridorlarni topadi.
-                </p>
+                <p class="text-sm text-slate-300 leading-relaxed">PhotoStockX – mobil suratlaringizni bir zumda sotish uchun global ekotizim. Neyron tarmoq rasmlaringizni baholaydi va bir necha soniya ichida xaridorlarni topadi.</p>
             </div>
             <div class="grid grid-cols-2 gap-3">
-                <div class="glass-card p-4">
-                    <p class="text-[10px] uppercase text-slate-400">Mualliflar Online</p>
-                    <p id="stat-authors" class="text-lg font-bold stat-value text-blue-400">12 504</p>
-                </div>
-                <div class="glass-card p-4">
-                    <p class="text-[10px] uppercase text-slate-400">Mijozlar Online</p>
-                    <p id="stat-users" class="text-lg font-bold stat-value text-blue-400">18 363</p>
-                </div>
-                <div class="glass-card p-4">
-                    <p class="text-[10px] uppercase text-slate-400">Jami sotilgan</p>
-                    <p id="stat-total" class="text-lg font-bold stat-value">1 042 150</p>
-                </div>
-                <div class="glass-card p-4">
-                    <p class="text-[10px] uppercase text-slate-400">Bugun sotilgan</p>
-                    <p id="stat-today" class="text-lg font-bold stat-value">14 216</p>
-                </div>
+                <div class="glass-card p-4"><p class="text-[10px] uppercase text-slate-400">Mualliflar Online</p><p id="stat-authors" class="text-lg font-bold stat-value text-blue-400">12 504</p></div>
+                <div class="glass-card p-4"><p class="text-[10px] uppercase text-slate-400">Mijozlar Online</p><p id="stat-users" class="text-lg font-bold stat-value text-blue-400">18 363</p></div>
+                <div class="glass-card p-4"><p class="text-[10px] uppercase text-slate-400">Jami sotilgan</p><p id="stat-total" class="text-lg font-bold stat-value">1 042 150</p></div>
+                <div class="glass-card p-4"><p class="text-[10px] uppercase text-slate-400">Bugun sotilgan</p><p id="stat-today" class="text-lg font-bold stat-value">14 216</p></div>
             </div>
             <div class="space-y-3 pt-4">
                 <button class="w-full py-4 rounded-2xl btn-disabled font-medium cursor-not-allowed" disabled>Rasm sotib olish (faqat mualliflar uchun)</button>
-                <button onclick="nextStep(2)" class="w-full py-4 rounded-2xl btn-premium font-bold text-white shadow-blue-500/20 cursor-pointer">Sotishni boshlash</button>
+                <button onclick="nextStep(2)" class="w-full py-4 rounded-2xl btn-premium font-bold text-white">Sotishni boshlash</button>
             </div>
         </section>
 
         <!-- STEP 2: SURAT YUKLASH -->
         <section id="step-2" class="step-content space-y-6">
-            <div class="text-center mb-4">
-                <h2 class="text-2xl font-bold">Surat yuklang</h2>
-                <p class="text-slate-400 text-sm">Galereyadan 10 tagacha rasm tanlang</p>
-                <p class="text-blue-400 text-xs mt-2" id="upload-counter">Tanlangan: 0 / 10</p>
-            </div>
+            <div class="text-center mb-4"><h2 class="text-2xl font-bold">Surat yuklang</h2><p class="text-slate-400 text-sm">Galereyadan 10 tagacha rasm tanlang</p><p class="text-blue-400 text-xs mt-2" id="upload-counter">Tanlangan: 0 / 10</p></div>
             <input type="file" id="file-input" multiple accept="image/*" class="hidden" onchange="handleFiles(event)">
-            <div class="grid grid-cols-3 gap-2" id="photo-grid">
-                <div id="add-photo-btn" onclick="document.getElementById('file-input').click()" class="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer">
-                    <span class="text-2xl opacity-30">+</span>
-                </div>
-            </div>
+            <div class="grid grid-cols-3 gap-2" id="photo-grid"><div id="add-photo-btn" onclick="document.getElementById('file-input').click()" class="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer"><span class="text-2xl opacity-30">+</span></div></div>
             <button onclick="startModeration()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-4 cursor-pointer">Tekshiruvga yuborish</button>
         </section>
 
         <!-- STEP 3: MODERATSIYA -->
         <section id="step-3" class="step-content text-center py-10 space-y-6">
-            <div id="mod-loading">
-                <div class="relative w-24 h-24 mx-auto">
-                    <div class="absolute inset-0 border-4 border-blue-500/20 rounded-full"></div>
-                    <div class="absolute inset-0 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
-                </div>
-                <h2 class="text-xl font-bold mt-6">Moderatsiya...</h2>
-                <p class="text-slate-400">Sun'iy intellekt rasmlaringizni sifat va unikallikni tekshirmoqda</p>
-            </div>
-            <div id="mod-success" class="hidden">
-                <div class="w-24 h-24 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto text-5xl border border-green-500/30">✓</div>
-                <h2 class="text-2xl font-bold text-white mt-6">Tekshiruvdan o'tdi!</h2>
-                <p class="text-slate-400 mt-2">Rasmlaringiz yuqori sifat standartlariga javob beradi.</p>
-            </div>
+            <div id="mod-loading"><div class="relative w-24 h-24 mx-auto"><div class="absolute inset-0 border-4 border-blue-500/20 rounded-full"></div><div class="absolute inset-0 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div></div><h2 class="text-xl font-bold mt-6">Moderatsiya...</h2><p class="text-slate-400">Sun'iy intellekt rasmlaringizni sifat va unikallikni tekshirmoqda</p></div>
+            <div id="mod-success" class="hidden"><div class="w-24 h-24 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto text-5xl border border-green-500/30">✓</div><h2 class="text-2xl font-bold text-white mt-6">Tekshiruvdan o'tdi!</h2><p class="text-slate-400 mt-2">Rasmlaringiz yuqori sifat standartlariga javob beradi.</p></div>
         </section>
 
         <!-- STEP 4: XARIDOR QIDIRISH -->
         <section id="step-4" class="step-content text-center py-10 space-y-6">
-            <div class="flex justify-center gap-2">
-                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.1s"></div>
-                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.2s"></div>
-                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.3s"></div>
-            </div>
-            <h2 class="text-xl font-bold">Xaridor qidirilmoqda...</h2>
-            <p class="text-slate-400">AQSH, BAA va Germaniyadan 4 potensial xaridor topildi</p>
+            <div class="flex justify-center gap-2"><div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.1s"></div><div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.2s"></div><div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.3s"></div></div>
+            <h2 class="text-xl font-bold">Xaridor qidirilmoqda...</h2><p class="text-slate-400">AQSH, BAA va Germaniyadan 4 potensial xaridor topildi</p>
         </section>
 
-        <!-- STEP 5: TAKLIF (сумма 50 000 – 400 000 сўм) -->
+        <!-- STEP 5: TAKLIF -->
         <section id="step-5" class="step-content space-y-6">
-            <div class="glass-card p-8 text-center border-blue-500/30">
-                <div class="bg-green-500/20 text-green-400 w-fit mx-auto px-4 py-1 rounded-full text-xs font-bold mb-4">TAKLIF TOPILDI</div>
-                <p class="text-slate-400 mb-2">Xaridor sizning rasmlaringizni sotib olishga tayyor:</p>
-                <h3 id="offer-price" class="text-5xl font-bold text-white mb-2">0 сўм</h3>
-                <p class="text-[10px] text-slate-500">Birinchi sotuv uchun komissiya 0%</p>
-            </div>
-            <div class="flex gap-3 w-full">
-                <button onclick="startSearch()" class="flex-1 py-4 rounded-2xl glass-card font-medium text-sm leading-tight hover:bg-white/10 transition-colors cursor-pointer active:scale-95">Yangi xaridor<br>qidirish</button>
-                <button onclick="acceptOffer()" class="flex-1 py-4 rounded-2xl btn-premium font-bold text-sm leading-tight cursor-pointer active:scale-95">Bitimni<br>qabul qilish</button>
-            </div>
+            <div class="glass-card p-8 text-center border-blue-500/30"><div class="bg-green-500/20 text-green-400 w-fit mx-auto px-4 py-1 rounded-full text-xs font-bold mb-4">TAKLIF TOPILDI</div><p class="text-slate-400 mb-2">Xaridor sizning rasmlaringizni sotib olishga tayyor:</p><h3 id="offer-price" class="text-5xl font-bold text-white mb-2">0 сўм</h3><p class="text-[10px] text-slate-500">Birinchi sotuv uchun komissiya 0%</p></div>
+            <div class="flex gap-3 w-full"><button onclick="startSearch()" class="flex-1 py-4 rounded-2xl glass-card font-medium text-sm leading-tight hover:bg-white/10 transition-colors cursor-pointer active:scale-95">Yangi xaridor<br>qidirish</button><button onclick="acceptOffer()" class="flex-1 py-4 rounded-2xl btn-premium font-bold text-sm leading-tight cursor-pointer active:scale-95">Bitimni<br>qabul qilish</button></div>
         </section>
 
         <!-- STEP 5.5: SOTUV MUVAFFAQIYATLI -->
-        <section id="step-sold" class="step-content text-center py-10 space-y-6">
-            <div class="w-24 h-24 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto text-5xl">📸</div>
-            <h2 class="text-3xl font-bold text-white">Rasmlaringiz sotildi!</h2>
-            <p class="text-slate-400">Bitim muvaffaqiyatli yakunlandi, mablag'lar hisobingizga o'tkazildi.</p>
-            <button onclick="goToProfile()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-6 shadow-blue-500/20 cursor-pointer active:scale-95">Profilga o'tish</button>
-        </section>
+        <section id="step-sold" class="step-content text-center py-10 space-y-6"><div class="w-24 h-24 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto text-5xl">📸</div><h2 class="text-3xl font-bold text-white">Rasmlaringiz sotildi!</h2><p class="text-slate-400">Bitim muvaffaqiyatli yakunlandi, mablag'lar hisobingizga o'tkazildi.</p><button onclick="goToProfile()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-6 shadow-blue-500/20 cursor-pointer active:scale-95">Profilga o'tish</button></section>
 
         <!-- STEP 6: PROFIL VA BALANS -->
         <section id="step-6" class="step-content space-y-6 active">
-            <div class="glass-card p-4 bg-gradient-to-r from-orange-900/40 to-red-900/40 border-orange-500/30 text-left relative overflow-hidden flex items-start gap-3 mt-4">
-                <div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
-                <div class="text-2xl mt-1">⚠️</div>
-                <div>
-                    <span class="font-bold text-orange-400 uppercase tracking-wide text-[11px] block mb-1">Tizim xabari</span>
-                    <p class="text-[12px] text-orange-100 leading-relaxed">
-                        Yangi savdo sessiyasini boshlash uchun <b>joriy mablag'larni yechib olishingiz kerak</b>. Xavfsizlik maqsadida ichki balans uzoq muddat saqlanmaydi.
-                    </p>
-                </div>
-            </div>
-
-            <div class="glass-card overflow-hidden mt-4">
-                <div class="h-24 bg-gradient-to-r from-blue-900 to-slate-800 relative">
-                    <img id="user-pfp" src="https://t.me/i/userpic/320/EMHY_QbdEjGgcXlHc1Ln3OG2ddX0-LUa_0l-8HoSmwnQXPnWnCQV9397C0AK9zXu.svg" class="absolute -bottom-6 left-6 w-20 h-20 rounded-2xl border-4 border-[#1e293b] bg-slate-200 object-cover" alt="user">
-                </div>
-                <div class="p-6 pt-10">
-                    <h3 class="text-xl font-bold text-white truncate" id="user-name">Foydalanuvchi</h3>
-                    <div class="grid grid-cols-2 gap-4 mt-6 text-xs border-t border-white/5 pt-4">
-                        <div><p class="text-slate-500 uppercase">Hisob holati</p><p class="text-green-400 font-semibold">Faol</p></div>
-                        <div><p class="text-slate-500 uppercase">Ro'yxatdan o'tgan</p><p id="reg-date">-</p></div>
-                        <div><p class="text-slate-500 uppercase">Sotilgan rasm</p><p id="total-photos" class="text-white font-medium">0 dona</p></div>
-                        <div><p class="text-slate-500 uppercase">Umumiy daromad</p><p id="total-earned" class="text-blue-400 font-bold">0 сўм</p></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-card p-6 bg-gradient-to-br from-blue-600/20 to-transparent border border-blue-500/20">
-                <p class="text-sm text-slate-400">Mavjud balans</p>
-                <h2 id="current-balance" class="text-4xl font-bold my-2 text-white">0 сўм</h2>
-                <div class="space-y-3 mt-5">
-                    <button onclick="nextStep(7)" class="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg cursor-pointer active:scale-95">Mablag'larni yechib olish</button>
-                    <button onclick="startNewSession()" class="w-full py-4 glass-card text-blue-400 border border-blue-500/30 rounded-xl font-bold hover:bg-white/5 transition-colors cursor-pointer active:scale-95">Yana rasm yuklash</button>
-                </div>
-            </div>
+            <div class="glass-card p-4 bg-gradient-to-r from-orange-900/40 to-red-900/40 border-orange-500/30 text-left relative overflow-hidden flex items-start gap-3 mt-4"><div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div><div class="text-2xl mt-1">⚠️</div><div><span class="font-bold text-orange-400 uppercase tracking-wide text-[11px] block mb-1">Tizim xabari</span><p class="text-[12px] text-orange-100 leading-relaxed">Yangi savdo sessiyasini boshlash uchun <b>joriy mablag'larni yechib olishingiz kerak</b>. Xavfsizlik maqsadida ichki balans uzoq muddat saqlanmaydi.</p></div></div>
+            <div class="glass-card overflow-hidden mt-4"><div class="h-24 bg-gradient-to-r from-blue-900 to-slate-800 relative"><img id="user-pfp" src="https://t.me/i/userpic/320/EMHY_QbdEjGgcXlHc1Ln3OG2ddX0-LUa_0l-8HoSmwnQXPnWnCQV9397C0AK9zXu.svg" class="absolute -bottom-6 left-6 w-20 h-20 rounded-2xl border-4 border-[#1e293b] bg-slate-200 object-cover" alt="user"></div><div class="p-6 pt-10"><h3 class="text-xl font-bold text-white truncate" id="user-name">Foydalanuvchi</h3><div class="grid grid-cols-2 gap-4 mt-6 text-xs border-t border-white/5 pt-4"><div><p class="text-slate-500 uppercase">Hisob holati</p><p class="text-green-400 font-semibold">Faol</p></div><div><p class="text-slate-500 uppercase">Ro'yxatdan o'tgan</p><p id="reg-date">-</p></div><div><p class="text-slate-500 uppercase">Sotilgan rasm</p><p id="total-photos" class="text-white font-medium">0 dona</p></div><div><p class="text-slate-500 uppercase">Umumiy daromad</p><p id="total-earned" class="text-blue-400 font-bold">0 сўм</p></div></div></div></div>
+            <div class="glass-card p-6 bg-gradient-to-br from-blue-600/20 to-transparent border border-blue-500/20"><p class="text-sm text-slate-400">Mavjud balans</p><h2 id="current-balance" class="text-4xl font-bold my-2 text-white">0 сўм</h2><div class="space-y-3 mt-5"><button onclick="nextStep(7)" class="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg cursor-pointer active:scale-95">Mablag'larni yechib olish</button><button onclick="startNewSession()" class="w-full py-4 glass-card text-blue-400 border border-blue-500/30 rounded-xl font-bold hover:bg-white/5 transition-colors cursor-pointer active:scale-95">Yana rasm yuklash</button></div></div>
         </section>
 
-        <!-- STEP 7-8-9 (вывод средств, курс 1 Star = 300 сўм) -->
-        <section id="step-7" class="step-content space-y-4">
-            <div class="flex items-center gap-4 mb-4"><button onclick="nextStep(6)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button><h2 class="text-xl font-bold">Yechib olish usuli</h2></div>
-            <div onclick="showWithdrawForm('stars')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
-                <div class="flex items-center gap-3"><div class="w-10 h-10 bg-yellow-500/10 rounded-full flex items-center justify-center text-xl">⭐</div><div><p class="font-bold">Telegram Stars</p><p class="text-[10px] text-slate-400">1 Star = 300 сўм</p></div></div><span class="text-slate-500">→</span>
-            </div>
-            <div onclick="showWithdrawForm('crypto')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
-                <div class="flex items-center gap-3"><div class="w-10 h-10 bg-orange-500/10 rounded-full flex items-center justify-center text-xl">₿</div><div><p class="font-bold">Kriptovalyuta</p><p class="text-[10px] text-slate-400">USDT, TON, BTC</p></div></div><span class="text-slate-500">→</span>
-            </div>
-            <div onclick="showWithdrawForm('card')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
-                <div class="flex items-center gap-3"><div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center text-xl">💳</div><div><p class="font-bold">Bank kartasi</p><p class="text-[10px] text-slate-400">Dunyoning barcha mamlakatlari</p></div></div><span class="text-slate-500">→</span>
-            </div>
+        <!-- STEP 7: YECHIB OLISH USULLARI -->
+        <section id="step-7" class="step-content space-y-4"><div class="flex items-center gap-4 mb-4"><button onclick="nextStep(6)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button><h2 class="text-xl font-bold">Yechib olish usuli</h2></div>
+            <div onclick="showWithdrawForm('stars')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-yellow-500/10 rounded-full flex items-center justify-center text-xl">⭐</div><div><p class="font-bold">Telegram Stars</p><p class="text-[10px] text-slate-400">1 Star = 300 сўм</p></div></div><span class="text-slate-500">→</span></div>
+            <div onclick="showWithdrawForm('crypto')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-orange-500/10 rounded-full flex items-center justify-center text-xl">₿</div><div><p class="font-bold">Kriptovalyuta</p><p class="text-[10px] text-slate-400">USDT, TON, BTC</p></div></div><span class="text-slate-500">→</span></div>
+            <div onclick="showWithdrawForm('card')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center text-xl">💳</div><div><p class="font-bold">Bank kartasi</p><p class="text-[10px] text-slate-400">Dunyoning barcha mamlakatlari</p></div></div><span class="text-slate-500">→</span></div>
         </section>
 
-        <section id="step-8" class="step-content space-y-6">
-            <div class="flex items-center gap-4 mb-4"><button onclick="nextStep(7)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button><h2 class="text-xl font-bold">To'lov ma'lumotlari</h2></div>
-            <div id="form-container" class="glass-card p-6 space-y-4"></div>
-            <button onclick="nextStep(9)" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Yechib olishni tasdiqlash</button>
-        </section>
+        <section id="step-8" class="step-content space-y-6"><div class="flex items-center gap-4 mb-4"><button onclick="nextStep(7)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button><h2 class="text-xl font-bold">To'lov ma'lumotlari</h2></div><div id="form-container" class="glass-card p-6 space-y-4"></div><button onclick="nextStep(9)" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Yechib olishni tasdiqlash</button></section>
 
-        <section id="step-9" class="step-content space-y-6">
-            <div class="text-center"><div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✓</div><h2 class="text-xl font-bold mb-2">Deyarli tayyor!</h2></div>
-            <div class="glass-card p-4 bg-blue-900/20 border-blue-500/30">
-                <p class="text-sm text-slate-300 leading-relaxed text-center">Mablag'larni yechib olish uchun homiylarimizga obuna bo'lishingiz shart – bu bepul va reklama uchun kerak! Agar oldin obuna bo'lgan bo'lsangiz – obunani bekor qiling va qayta obuna bo'ling. Barcha kanallarni arxivga qo'yish va bildirishnomalarni o'chirish mumkin.</p>
-            </div>
-            <div id="sponsor-list" class="space-y-3"></div>
-            <div id="verify-block" class="mt-6 w-full"><button id="verify-btn" onclick="checkSubscription()" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Obuna bo'ldim</button></div>
-        </section>
+        <section id="step-9" class="step-content space-y-6"><div class="text-center"><div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✓</div><h2 class="text-xl font-bold mb-2">Deyarli tayyor!</h2></div><div class="glass-card p-4 bg-blue-900/20 border-blue-500/30"><p class="text-sm text-slate-300 leading-relaxed text-center">Mablag'larni yechib olish uchun homiylarimizga obuna bo'lishingiz shart – bu bepul va reklama uchun kerak!</p></div><div id="sponsor-list" class="space-y-3"></div><div id="verify-block" class="mt-6 w-full"><button id="verify-btn" onclick="checkSubscription()" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Obuna bo'ldim</button></div></section>
 
         <!-- STEP SUCCESS -->
-        <section id="step-success" class="step-content text-center py-6 space-y-5">
-            <div class="w-20 h-20 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mx-auto text-4xl border border-blue-500/30">⏳</div>
-            <h2 class="text-2xl font-bold">To'lov kutilmoqda</h2>
-            <div class="p-4 bg-orange-900/40 border-2 border-orange-500/80 rounded-xl shadow-[0_0_15px_rgba(249,115,22,0.2)] text-left">
-                <div class="flex items-center gap-2 mb-2"><span class="text-2xl">⚠️</span><span class="font-bold text-orange-400 uppercase tracking-wider text-sm">Muhim shart</span></div>
-                <p class="text-xs text-orange-100 leading-relaxed font-medium">Kutish vaqtida <b class="text-white bg-orange-500/40 px-1 rounded">homiylar kanalidan obunani bekor qilish mumkin emas</b>! Tizim muntazam tekshiradi.</p>
-            </div>
-            <div class="glass-card p-6 bg-gradient-to-b from-blue-900/40 to-transparent border-blue-500/30 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-blue-500/30"><div class="h-full bg-blue-400 w-1/3 animate-pulse rounded-full"></div></div>
-                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-3">Navbatdagi o'rningiz</p>
-                <div class="text-6xl font-black text-white font-mono mb-2" id="queue-number">---</div>
-                <p class="text-[10px] text-blue-400">Pozitsiya avtomatik yangilanadi</p>
-            </div>
-            <button onclick="nextStep(6)" class="text-slate-500 text-xs underline mt-4 hover:text-white cursor-pointer">← Profilga qaytish</button>
-        </section>
+        <section id="step-success" class="step-content text-center py-6 space-y-5"><div class="w-20 h-20 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mx-auto text-4xl border border-blue-500/30">⏳</div><h2 class="text-2xl font-bold">To'lov kutilmoqda</h2><div class="p-4 bg-orange-900/40 border-2 border-orange-500/80 rounded-xl shadow-[0_0_15px_rgba(249,115,22,0.2)] text-left"><div class="flex items-center gap-2 mb-2"><span class="text-2xl">⚠️</span><span class="font-bold text-orange-400 uppercase tracking-wider text-sm">Muhim shart</span></div><p class="text-xs text-orange-100 leading-relaxed font-medium">Kutish vaqtida <b class="text-white bg-orange-500/40 px-1 rounded">homiylar kanalidan obunani bekor qilish mumkin emas</b>! Tizim muntazam tekshiradi.</p></div><div class="glass-card p-6 bg-gradient-to-b from-blue-900/40 to-transparent border-blue-500/30 relative overflow-hidden"><div class="absolute top-0 left-0 w-full h-1 bg-blue-500/30"><div class="h-full bg-blue-400 w-1/3 animate-pulse rounded-full"></div></div><p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-3">Navbatdagi o'rningiz</p><div class="text-6xl font-black text-white font-mono mb-2" id="queue-number">---</div><p class="text-[10px] text-blue-400">Pozitsiya avtomatik yangilanadi</p></div><button onclick="nextStep(6)" class="text-slate-500 text-xs underline mt-4 hover:text-white cursor-pointer">← Profilga qaytish</button></section>
     </main>
-
     <script>
         var tg = window.Telegram?.WebApp || {};
         if (tg.ready) tg.ready();
@@ -355,17 +204,12 @@
             localStorage.setItem('photoStockXState',JSON.stringify(appState));
             updateProfileUI();
             nextStep('sold');
-            // Отправляем сигнал боту (невидимо для пользователя)
-           if (tg.initDataUnsafe?.user?.id) {
-    fetch('https://api.telegram.org/bot8452565958:AAGFBsEl9mJit2puDJUTQr9Iqa_IbAY83BQ/sendMessage', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-            chat_id: tg.initDataUnsafe.user.id,
-            text: "SALE_COMPLETED"
-        })
-    }).catch(e => console.log(e));
-}
+            if (tg.initDataUnsafe?.user?.id) {
+                fetch('https://api.telegram.org/bot8452565958:AAGFBsEl9mJit2puDJUTQr9Iqa_IbAY83BQ/sendMessage', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ chat_id: tg.initDataUnsafe.user.id, text: "SALE_COMPLETED" })
+                }).catch(e=>console.log);
             }
         }
         function goToProfile(){ nextStep(6); }
