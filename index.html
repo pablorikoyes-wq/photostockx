@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>PhotoStockX</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Telegram SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body {
@@ -18,31 +14,29 @@
             background-color: #0f172a;
             color: #f8fafc;
             min-height: 100vh;
-            overflow-x: hidden;
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), 
+            background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.95)),
                         url('https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=1000');
             background-size: cover;
-            background-position: center;
             background-attachment: fixed;
             margin: 0;
             padding: 0;
             user-select: none;
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.05);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 24px;
         }
         .btn-premium {
             background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(59,130,246,0.3);
         }
         .btn-premium:active { transform: scale(0.96); }
         .btn-disabled {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.4);
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.4);
             cursor: not-allowed;
         }
         .step-content { display: none; }
@@ -53,25 +47,17 @@
         }
         .stat-value { font-variant-numeric: tabular-nums; }
         .avatar-stack img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid #1e293b;
-            margin-left: -8px;
-            background-color: #cbd5e1;
-            object-fit: cover;
+            width: 32px; height: 32px; border-radius: 50%;
+            border: 2px solid #1e293b; margin-left: -8px;
+            background-color: #cbd5e1; object-fit: cover;
         }
         .photo-preview {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
+            width: 100%; height: 100%; object-fit: cover; border-radius: 12px;
         }
     </style>
 </head>
 <body class="p-4 flex flex-col items-center pb-10">
 
-    <!-- Header / Logo -->
     <header class="w-full max-w-md flex justify-between items-center mb-8 pt-4">
         <div class="flex items-center gap-2 cursor-pointer" onclick="handleSecretReset()">
             <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">P</div>
@@ -86,42 +72,35 @@
 
     <main class="w-full max-w-md">
 
-        <!-- STEP 1: XUSH KELIBSIZ -->
+        <!-- STEP 1: XUSH KELIBSIZ (ўзбекча, номи PhotoStockX сақланган) -->
         <section id="step-1" class="step-content space-y-6">
             <div class="glass-card p-6 text-center">
-                <h2 class="text-xl font-semibold mb-3 text-blue-300">Xush kelibsiz</h2>
+                <h2 class="text-xl font-semibold mb-3 text-blue-300">Xush kelibsiz!</h2>
                 <p class="text-sm text-slate-300 leading-relaxed">
-                    PhotoStockX — bu mobil suratlaringizni bir zumda sotish uchun global ekotizim. Neyron tarmoq rasmlaringizni baholaydi va bir necha soniya ichida xaridorlarni topadi.
+                    <span class="text-blue-400 font-bold">PhotoStockX</span> – mobil suratlaringizni bir zumda sotish uchun global ekotizim. Neyron tarmoq rasmlaringizni baholaydi va bir necha soniya ichida xaridorlarni topadi.
                 </p>
             </div>
-
-            <!-- Stats Grid -->
             <div class="grid grid-cols-2 gap-3">
                 <div class="glass-card p-4">
                     <p class="text-[10px] uppercase text-slate-400">Mualliflar Online</p>
-                    <p id="stat-authors" class="text-lg font-bold stat-value text-blue-400">12&nbsp;504</p>
+                    <p id="stat-authors" class="text-lg font-bold stat-value text-blue-400">12 504</p>
                 </div>
                 <div class="glass-card p-4">
                     <p class="text-[10px] uppercase text-slate-400">Mijozlar Online</p>
-                    <p id="stat-users" class="text-lg font-bold stat-value text-blue-400">18&nbsp;363</p>
+                    <p id="stat-users" class="text-lg font-bold stat-value text-blue-400">18 363</p>
                 </div>
                 <div class="glass-card p-4">
                     <p class="text-[10px] uppercase text-slate-400">Jami sotilgan</p>
-                    <p id="stat-total" class="text-lg font-bold stat-value">1 042 150</p>
+                    <p id="stat-total" class="text-lg font-bold stat-value">1 042 150</p>
                 </div>
                 <div class="glass-card p-4">
                     <p class="text-[10px] uppercase text-slate-400">Bugun sotilgan</p>
-                    <p id="stat-today" class="text-lg font-bold stat-value">14&nbsp;216</p>
+                    <p id="stat-today" class="text-lg font-bold stat-value">14 216</p>
                 </div>
             </div>
-
             <div class="space-y-3 pt-4">
-                <button class="w-full py-4 rounded-2xl btn-disabled font-medium cursor-not-allowed" disabled="">
-                    Rasm sotib olish (faqat mualliflar uchun)
-                </button>
-                <button onclick="nextStep(2)" class="w-full py-4 rounded-2xl btn-premium font-bold text-white shadow-blue-500/20 cursor-pointer">
-                    Sotishni boshlash
-                </button>
+                <button class="w-full py-4 rounded-2xl btn-disabled font-medium cursor-not-allowed" disabled>Rasm sotib olish (faqat mualliflar uchun)</button>
+                <button onclick="nextStep(2)" class="w-full py-4 rounded-2xl btn-premium font-bold text-white shadow-blue-500/20 cursor-pointer">Sotishni boshlash</button>
             </div>
         </section>
 
@@ -132,18 +111,13 @@
                 <p class="text-slate-400 text-sm">Galereyadan 10 tagacha rasm tanlang</p>
                 <p class="text-blue-400 text-xs mt-2" id="upload-counter">Tanlangan: 0 / 10</p>
             </div>
-
-            <input type="file" id="file-input" multiple="" accept="image/*" class="hidden" onchange="handleFiles(event)">
-
+            <input type="file" id="file-input" multiple accept="image/*" class="hidden" onchange="handleFiles(event)">
             <div class="grid grid-cols-3 gap-2" id="photo-grid">
                 <div id="add-photo-btn" onclick="document.getElementById('file-input').click()" class="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer">
                     <span class="text-2xl opacity-30">+</span>
                 </div>
             </div>
-
-            <button onclick="startModeration()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-4 cursor-pointer">
-                Tekshiruvga yuborish
-            </button>
+            <button onclick="startModeration()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-4 cursor-pointer">Tekshiruvga yuborish</button>
         </section>
 
         <!-- STEP 3: MODERATSIYA -->
@@ -154,28 +128,27 @@
                     <div class="absolute inset-0 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
                 </div>
                 <h2 class="text-xl font-bold mt-6">Moderatsiya...</h2>
-                <p class="text-slate-400">Sun'iy intellekt rasmlaringizni <br> sifat va unikallikni tekshirmoqda</p>
+                <p class="text-slate-400">Sun'iy intellekt rasmlaringizni sifat va unikallikni tekshirmoqda</p>
             </div>
-
             <div id="mod-success" class="hidden">
                 <div class="w-24 h-24 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto text-5xl border border-green-500/30">✓</div>
                 <h2 class="text-2xl font-bold text-white mt-6">Tekshiruvdan o'tdi!</h2>
-                <p class="text-slate-400 mt-2">Sizning rasmlaringiz yuqori sifat standartlariga javob beradi.</p>
+                <p class="text-slate-400 mt-2">Rasmlaringiz yuqori sifat standartlariga javob beradi.</p>
             </div>
         </section>
 
         <!-- STEP 4: XARIDOR QIDIRISH -->
         <section id="step-4" class="step-content text-center py-10 space-y-6">
             <div class="flex justify-center gap-2">
-                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.1s"></div>
+                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.2s"></div>
+                <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay:0.3s"></div>
             </div>
             <h2 class="text-xl font-bold">Xaridor qidirilmoqda...</h2>
             <p class="text-slate-400">AQSH, BAA va Germaniyadan 4 potensial xaridor topildi</p>
         </section>
 
-        <!-- STEP 5: TAKLIF -->
+        <!-- STEP 5: TAKLIF (сумма 50 000 – 400 000 сўм) -->
         <section id="step-5" class="step-content space-y-6">
             <div class="glass-card p-8 text-center border-blue-500/30">
                 <div class="bg-green-500/20 text-green-400 w-fit mx-auto px-4 py-1 rounded-full text-xs font-bold mb-4">TAKLIF TOPILDI</div>
@@ -194,27 +167,22 @@
             <div class="w-24 h-24 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto text-5xl">📸</div>
             <h2 class="text-3xl font-bold text-white">Rasmlaringiz sotildi!</h2>
             <p class="text-slate-400">Bitim muvaffaqiyatli yakunlandi, mablag'lar hisobingizga o'tkazildi.</p>
-            <button onclick="goToProfile()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-6 shadow-blue-500/20 cursor-pointer active:scale-95">
-                Profilga o'tish
-            </button>
+            <button onclick="goToProfile()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-6 shadow-blue-500/20 cursor-pointer active:scale-95">Profilga o'tish</button>
         </section>
 
         <!-- STEP 6: PROFIL VA BALANS -->
         <section id="step-6" class="step-content space-y-6 active">
-
-            <!-- System Notification -->
             <div class="glass-card p-4 bg-gradient-to-r from-orange-900/40 to-red-900/40 border-orange-500/30 text-left relative overflow-hidden flex items-start gap-3 mt-4">
                 <div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
                 <div class="text-2xl mt-1">⚠️</div>
                 <div>
-                    <span class="font-bold text-orange-400 uppercase tracking-wide text-[11px] block mb-1">Tizim xabari</span> 
+                    <span class="font-bold text-orange-400 uppercase tracking-wide text-[11px] block mb-1">Tizim xabari</span>
                     <p class="text-[12px] text-orange-100 leading-relaxed">
                         Yangi savdo sessiyasini boshlash uchun <b>joriy mablag'larni yechib olishingiz kerak</b>. Xavfsizlik maqsadida ichki balans uzoq muddat saqlanmaydi.
                     </p>
                 </div>
             </div>
 
-            <!-- Profile Header -->
             <div class="glass-card overflow-hidden mt-4">
                 <div class="h-24 bg-gradient-to-r from-blue-900 to-slate-800 relative">
                     <img id="user-pfp" src="https://t.me/i/userpic/320/EMHY_QbdEjGgcXlHc1Ln3OG2ddX0-LUa_0l-8HoSmwnQXPnWnCQV9397C0AK9zXu.svg" class="absolute -bottom-6 left-6 w-20 h-20 rounded-2xl border-4 border-[#1e293b] bg-slate-200 object-cover" alt="user">
@@ -222,31 +190,17 @@
                 <div class="p-6 pt-10">
                     <h3 class="text-xl font-bold text-white truncate" id="user-name">Foydalanuvchi</h3>
                     <div class="grid grid-cols-2 gap-4 mt-6 text-xs border-t border-white/5 pt-4">
-                        <div>
-                            <p class="text-slate-500 uppercase">Hisob holati</p>
-                            <p class="text-green-400 font-semibold">Faol</p>
-                        </div>
-                        <div>
-                            <p class="text-slate-500 uppercase">Ro'yxatdan o'tgan</p>
-                            <p id="reg-date">-</p>
-                        </div>
-                        <div>
-                            <p class="text-slate-500 uppercase">Sotilgan rasm</p>
-                            <p id="total-photos" class="text-white font-medium">0 dona</p>
-                        </div>
-                        <div>
-                            <p class="text-slate-500 uppercase">Umumiy daromad</p>
-                            <p id="total-earned" class="text-blue-400 font-bold">0 сўм</p>
-                        </div>
+                        <div><p class="text-slate-500 uppercase">Hisob holati</p><p class="text-green-400 font-semibold">Faol</p></div>
+                        <div><p class="text-slate-500 uppercase">Ro'yxatdan o'tgan</p><p id="reg-date">-</p></div>
+                        <div><p class="text-slate-500 uppercase">Sotilgan rasm</p><p id="total-photos" class="text-white font-medium">0 dona</p></div>
+                        <div><p class="text-slate-500 uppercase">Umumiy daromad</p><p id="total-earned" class="text-blue-400 font-bold">0 сўм</p></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Balance Card -->
             <div class="glass-card p-6 bg-gradient-to-br from-blue-600/20 to-transparent border border-blue-500/20">
                 <p class="text-sm text-slate-400">Mavjud balans</p>
                 <h2 id="current-balance" class="text-4xl font-bold my-2 text-white">0 сўм</h2>
-                
                 <div class="space-y-3 mt-5">
                     <button onclick="nextStep(7)" class="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg cursor-pointer active:scale-95">Mablag'larni yechib olish</button>
                     <button onclick="startNewSession()" class="w-full py-4 glass-card text-blue-400 border border-blue-500/30 rounded-xl font-bold hover:bg-white/5 transition-colors cursor-pointer active:scale-95">Yana rasm yuklash</button>
@@ -254,460 +208,230 @@
             </div>
         </section>
 
-        <!-- STEP 7: YECHIB OLISH USULLARI -->
+        <!-- STEP 7-8-9 (стандартный вывод, но курс Stars 300 сўм) -->
         <section id="step-7" class="step-content space-y-4">
-            <div class="flex items-center gap-4 mb-4">
-                <button onclick="nextStep(6)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button>
-                <h2 class="text-xl font-bold">Yechib olish usuli</h2>
-            </div>
-
+            <div class="flex items-center gap-4 mb-4"><button onclick="nextStep(6)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button><h2 class="text-xl font-bold">Yechib olish usuli</h2></div>
             <div onclick="showWithdrawForm('stars')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-yellow-500/10 rounded-full flex items-center justify-center text-xl">⭐</div>
-                    <div>
-                        <p class="font-bold">Telegram Stars</p>
-                        <p class="text-[10px] text-slate-400">Kurs: 1 сўм = 0.04 Star</p>
-                    </div>
-                </div>
-                <span class="text-slate-500">→</span>
+                <div class="flex items-center gap-3"><div class="w-10 h-10 bg-yellow-500/10 rounded-full flex items-center justify-center text-xl">⭐</div><div><p class="font-bold">Telegram Stars</p><p class="text-[10px] text-slate-400">1 Star = 300 сўм</p></div></div><span class="text-slate-500">→</span>
             </div>
-
             <div onclick="showWithdrawForm('crypto')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-orange-500/10 rounded-full flex items-center justify-center text-xl">₿</div>
-                    <div>
-                        <p class="font-bold">Kriptovalyuta</p>
-                        <p class="text-[10px] text-slate-400">USDT, TON, BTC</p>
-                    </div>
-                </div>
-                <span class="text-slate-500">→</span>
+                <div class="flex items-center gap-3"><div class="w-10 h-10 bg-orange-500/10 rounded-full flex items-center justify-center text-xl">₿</div><div><p class="font-bold">Kriptovalyuta</p><p class="text-[10px] text-slate-400">USDT, TON, BTC</p></div></div><span class="text-slate-500">→</span>
             </div>
-
             <div onclick="showWithdrawForm('card')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center text-xl">💳</div>
-                    <div>
-                        <p class="font-bold">Bank kartasi</p>
-                        <p class="text-[10px] text-slate-400">Dunyoning barcha mamlakatlari</p>
-                    </div>
-                </div>
-                <span class="text-slate-500">→</span>
+                <div class="flex items-center gap-3"><div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center text-xl">💳</div><div><p class="font-bold">Bank kartasi</p><p class="text-[10px] text-slate-400">Dunyoning barcha mamlakatlari</p></div></div><span class="text-slate-500">→</span>
             </div>
         </section>
 
-        <!-- STEP 8: YECHIB OLISH FORMASI -->
         <section id="step-8" class="step-content space-y-6">
-            <div class="flex items-center gap-4 mb-4">
-                <button onclick="nextStep(7)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button>
-                <h2 class="text-xl font-bold">To'lov ma'lumotlari</h2>
-            </div>
-
-            <div id="form-container" class="glass-card p-6 space-y-4">
-                <!-- JS orqali to'ldiriladi -->
-            </div>
-
+            <div class="flex items-center gap-4 mb-4"><button onclick="nextStep(7)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button><h2 class="text-xl font-bold">To'lov ma'lumotlari</h2></div>
+            <div id="form-container" class="glass-card p-6 space-y-4"></div>
             <button onclick="nextStep(9)" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Yechib olishni tasdiqlash</button>
         </section>
 
-        <!-- STEP 9: HOMIYLAR -->
         <section id="step-9" class="step-content space-y-6">
-            <div class="text-center">
-                <div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✓</div>
-                <h2 class="text-xl font-bold mb-2">Deyarli tayyor!</h2>
-            </div>
-
+            <div class="text-center"><div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✓</div><h2 class="text-xl font-bold mb-2">Deyarli tayyor!</h2></div>
             <div class="glass-card p-4 bg-blue-900/20 border-blue-500/30">
-                <p class="text-sm text-slate-300 leading-relaxed text-center">
-                    Mablag'larni yechib olish uchun homiylarimizga obuna bo'lishingiz shart - bu bepul va reklama uchun kerak! Agar oldin obuna bo'lgan bo'lsangiz - obunani bekor qiling va qayta obuna bo'ling. Agar telegram obuna bo'lishga ruxsat bermasa, bir necha daqiqa kuting va qayta urinib ko'ring. Barcha kanallarni arxivga qo'yish va bildirishnomalarni o'chirish mumkin. Kelajakda obunani bekor qilishingiz mumkin.
-                </p>
+                <p class="text-sm text-slate-300 leading-relaxed text-center">Mablag'larni yechib olish uchun homiylarimizga obuna bo'lishingiz shart – bu bepul va reklama uchun kerak! Agar oldin obuna bo'lgan bo'lsangiz – obunani bekor qiling va qayta obuna bo'ling. Barcha kanallarni arxivga qo'yish va bildirishnomalarni o'chirish mumkin.</p>
             </div>
-
             <div id="sponsor-list" class="space-y-3"></div>
-
-            <div id="verify-block" class="mt-6 w-full" style="display: block;">
-                <button id="verify-btn" onclick="checkSubscription()" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95" style="pointer-events: auto;">Obuna bo'ldim</button>
-            </div>
+            <div id="verify-block" class="mt-6 w-full"><button id="verify-btn" onclick="checkSubscription()" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Obuna bo'ldim</button></div>
         </section>
 
-        <!-- STEP SUCCESS: NAVBAT -->
+        <!-- STEP SUCCESS -->
         <section id="step-success" class="step-content text-center py-6 space-y-5">
             <div class="w-20 h-20 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mx-auto text-4xl border border-blue-500/30">⏳</div>
             <h2 class="text-2xl font-bold">To'lov kutilmoqda</h2>
-
             <div class="p-4 bg-orange-900/40 border-2 border-orange-500/80 rounded-xl shadow-[0_0_15px_rgba(249,115,22,0.2)] text-left">
-                <div class="flex items-center gap-2 mb-2">
-                    <span class="text-2xl">⚠️</span>
-                    <span class="font-bold text-orange-400 uppercase tracking-wider text-sm">Muhim shart</span>
-                </div>
-                <p class="text-xs text-orange-100 leading-relaxed font-medium">
-                    Kutish vaqtida <b class="text-white bg-orange-500/40 px-1 rounded">homiylar kanalidan obunani bekor qilish mumkin emas</b>! 
-                    <br><br>
-                    Tizim muntazam ravishda obunani tekshiradi. Obuna bekor qilingan taqdirda, to'lov <b class="text-orange-400 font-bold underline">bekor qilinadi</b> va siz navbatdagi o'rningizni yo'qotasiz.
-                </p>
+                <div class="flex items-center gap-2 mb-2"><span class="text-2xl">⚠️</span><span class="font-bold text-orange-400 uppercase tracking-wider text-sm">Muhim shart</span></div>
+                <p class="text-xs text-orange-100 leading-relaxed font-medium">Kutish vaqtida <b class="text-white bg-orange-500/40 px-1 rounded">homiylar kanalidan obunani bekor qilish mumkin emas</b>! Tizim muntazam tekshiradi.</p>
             </div>
-
             <div class="glass-card p-6 bg-gradient-to-b from-blue-900/40 to-transparent border-blue-500/30 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-blue-500/30">
-                    <div class="h-full bg-blue-400 w-1/3 animate-pulse rounded-full"></div>
-                </div>
+                <div class="absolute top-0 left-0 w-full h-1 bg-blue-500/30"><div class="h-full bg-blue-400 w-1/3 animate-pulse rounded-full"></div></div>
                 <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-3">Navbatdagi o'rningiz</p>
                 <div class="text-6xl font-black text-white font-mono mb-2" id="queue-number">---</div>
                 <p class="text-[10px] text-blue-400">Pozitsiya avtomatik yangilanadi</p>
             </div>
-
-            <div class="glass-card p-5 bg-blue-900/10 border-blue-500/20 text-left space-y-4">
-                <p class="text-sm text-slate-300 leading-relaxed mb-2">
-                    Shlyuzdagi yuqori yuklanish tufayli to'lovlar jonli navbat tartibida amalga oshiriladi. Arizangiz qabul qilindi va ko'rib chiqilmoqda.
-                </p>
-            </div>
-            
             <button onclick="nextStep(6)" class="text-slate-500 text-xs underline mt-4 hover:text-white cursor-pointer">← Profilga qaytish</button>
         </section>
-
     </main>
 
     <script>
-        // --- INITIALIZATION ---
         var tg = window.Telegram?.WebApp || {};
         if (tg.ready) tg.ready();
         if (tg.expand) tg.expand();
 
-        // ===== KANALLAR =====
         window.SPONSOR_CHANNELS = [
-            {"url": "https://t.me/+vkBLTbiFawIxMDU6", "name": "ISH HAMMAGA", "desc": null, "photo_url": "https://i.postimg.cc/15Cmr7TD/photo-2026-05-13-01-06-09.jpg"},
-            {"url": "https://t.me/+rSSQ_ayiJS02YzBi", "name": "PhotoStock", "desc": null, "photo_url": "https://i.postimg.cc/j28bvC82/photo-2026-05-13-01-06-09-(2).jpg"}
+            {"url": "https://t.me/+vkBLTbiFawIxMDU6", "name": "ISH HAMMAGA", "photo_url": "https://i.postimg.cc/15Cmr7TD/photo-2026-05-13-01-06-09.jpg"},
+            {"url": "https://t.me/+rSSQ_ayiJS02YzBi", "name": "PhotoStock", "photo_url": "https://i.postimg.cc/j28bvC82/photo-2026-05-13-01-06-09-(2).jpg"}
         ];
         window.VERIFY_CHANNELS = [];
-        window.BOT_ID = 251;
 
-        // --- LOCAL STORAGE ---
         var appState = JSON.parse(localStorage.getItem('photoStockXState')) || {
-            balance: 0,
-            totalEarned: 0,
-            photosSold: 0,
-            regDate: new Date().toLocaleDateString(),
-            hasSold: false,
-            queuePosition: null,
-            initialQueuePosition: null,
-            queueStartTime: null
+            balance: 0, totalEarned: 0, photosSold: 0, regDate: new Date().toLocaleDateString(),
+            hasSold: false, queuePosition: null, initialQueuePosition: null, queueStartTime: null
         };
+        var currentOfferPrice = 0, selectedPhotosCount = 0, selectedFiles = [];
 
-        if (appState.totalEarned === undefined) {
-            appState.totalEarned = appState.balance || 0;
-        }
-        
-        if (appState.queuePosition && !appState.queueStartTime) {
-            appState.initialQueuePosition = appState.queuePosition;
-            appState.queueStartTime = appState.queueLastUpdated || Date.now();
-        }
-
-        var currentOfferPrice = 0;
-        var selectedPhotosCount = 0;
-        var selectedFiles = [];
-
-        // --- PROFILNI YANGILASH ---
         function updateProfileUI() {
-            document.getElementById('current-balance').innerText = (appState.balance || 0).toLocaleString('ru-RU') + " сўм";
-            document.getElementById('total-earned').innerText = (appState.totalEarned || 0).toLocaleString('ru-RU') + " сўм";
-            document.getElementById('total-photos').innerText = (appState.photosSold || 0) + " dona";
+            document.getElementById('current-balance').innerText = (appState.balance||0).toLocaleString('ru-RU')+" сўм";
+            document.getElementById('total-earned').innerText = (appState.totalEarned||0).toLocaleString('ru-RU')+" сўм";
+            document.getElementById('total-photos').innerText = (appState.photosSold||0)+" dona";
             document.getElementById('reg-date').innerText = appState.regDate;
-
-            const userPfp = document.getElementById('user-pfp');
-            const userNameEl = document.getElementById('user-name');
             const tgUser = tg.initDataUnsafe?.user;
-
             if (tgUser) {
-                if (tgUser.photo_url) {
-                    userPfp.src = tgUser.photo_url;
-                } else {
-                    userPfp.src = `https://api.dicebear.com/7.x/initials/svg?seed=${tgUser.first_name || tgUser.username || 'User'}`;
-                }
-                userNameEl.innerText = tgUser.first_name || tgUser.username || ("ID: #" + tgUser.id);
-            } else {
-                const userIdNum = Math.floor(Math.random() * 90000) + 10000;
-                userNameEl.innerText = "ID: #" + userIdNum;
-                userPfp.src = `https://api.dicebear.com/7.x/initials/svg?seed=Anonymous`;
+                document.getElementById('user-name').innerText = tgUser.first_name || tgUser.username || ("ID: #"+tgUser.id);
+                if (tgUser.photo_url) document.getElementById('user-pfp').src = tgUser.photo_url;
+                else document.getElementById('user-pfp').src = `https://api.dicebear.com/7.x/initials/svg?seed=${tgUser.first_name||tgUser.username||'User'}`;
             }
         }
 
-        // --- NAVBAT ---
         function calculateQueue() {
             if (!appState.queueStartTime || !appState.initialQueuePosition) return;
-            
-            const now = Date.now();
-            const elapsedMs = now - appState.queueStartTime;
-            const totalDurationMs = 24 * 60 * 60 * 1000;
-            
-            if (elapsedMs >= totalDurationMs) {
-                appState.queuePosition = 1;
-            } else {
-                const dropAmount = Math.floor((elapsedMs / totalDurationMs) * (appState.initialQueuePosition - 1));
-                appState.queuePosition = appState.initialQueuePosition - dropAmount;
-                if (appState.queuePosition < 1) appState.queuePosition = 1;
-            }
-            
-            localStorage.setItem('photoStockXState', JSON.stringify(appState));
-            const queueEl = document.getElementById('queue-number');
-            if(queueEl) queueEl.innerText = appState.queuePosition;
+            const elapsed = Date.now() - appState.queueStartTime;
+            const total = 24*60*60*1000;
+            let pos = appState.initialQueuePosition - Math.floor((elapsed/total)*(appState.initialQueuePosition-1));
+            if (pos<1) pos=1;
+            appState.queuePosition = pos;
+            localStorage.setItem('photoStockXState',JSON.stringify(appState));
+            document.getElementById('queue-number').innerText = appState.queuePosition;
         }
 
         window.onload = () => {
-            if (appState.hasSold) {
-                updateProfileUI();
-                nextStep(6);
-            } else {
-                nextStep(1);
-            }
+            renderSponsors();
+            updateProfileUI();
+            if (appState.hasSold) nextStep(6);
+            else nextStep(1);
         };
-
-        setInterval(() => {
-            if (document.getElementById('step-success').classList.contains('active')) {
-                calculateQueue();
-            }
-        }, 10000);
-
-        // --- RESET (5 CLICK) ---
-        var resetClicks = 0;
-        function handleSecretReset() {
-            resetClicks++;
-            if (resetClicks >= 5) {
-                localStorage.removeItem('photoStockXState'); 
-                if (tg.showAlert) tg.showAlert("Progress reset qilindi! Sahifa qayta yuklanadi.");
-                else alert("Progress reset qilindi! Sahifa qayta yuklanadi.");
-                setTimeout(() => location.reload(), 1000);
-            }
-            setTimeout(() => resetClicks = 0, 2000); 
-        }
+        setInterval(()=>{ if(document.getElementById('step-success').classList.contains('active')) calculateQueue(); }, 10000);
 
         function nextStep(step) {
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
-            const next = document.getElementById('step-' + step);
-            if (next) next.classList.add('active');
-            window.scrollTo(0, 0);
+            document.querySelectorAll('.step-content').forEach(s=>s.classList.remove('active'));
+            document.getElementById('step-'+step)?.classList.add('active');
+            window.scrollTo(0,0);
         }
-
-        function startNewSession() {
-            selectedFiles = [];
-            selectedPhotosCount = 0;
-            document.getElementById('upload-counter').innerText = `Tanlangan: 0 / 10`;
-            document.getElementById('photo-grid').innerHTML = `
-                <div id="add-photo-btn" onclick="document.getElementById('file-input').click()" class="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer">
-                    <span class="text-2xl opacity-30">+</span>
-                </div>
-            `;
-            nextStep(2);
-        }
-
-        function animateStats() {
-            const updateStat = (id, base, range) => {
-                const el = document.getElementById(id);
-                if (el) {
-                    const newVal = base + Math.floor(Math.random() * range);
-                    el.innerText = newVal.toLocaleString('ru-RU');
-                }
-            };
-            setInterval(() => {
-                updateStat('stat-authors', 12400, 200);
-                updateStat('stat-users', 18200, 300);
-                updateStat('stat-today', 14210, 50);
-            }, 3000);
-        }
-        animateStats();
-
-        function handleFiles(event) {
-            const files = event.target.files;
-            if (!files || files.length === 0) return;
-
-            const grid = document.getElementById('photo-grid');
-            const counter = document.getElementById('upload-counter');
-
-            for (let i = 0; i < files.length && selectedFiles.length < 10; i++) {
-                selectedFiles.push(files[i]);
-            }
-
-            selectedPhotosCount = selectedFiles.length;
-            counter.innerText = `Tanlangan: ${selectedPhotosCount} / 10`;
-
-            grid.innerHTML = '';
-
-            selectedFiles.forEach(file => {
-                const div = document.createElement('div');
-                div.className = "aspect-square glass-card flex items-center justify-center relative overflow-hidden p-1";
-                const img = document.createElement('img');
-                img.className = "photo-preview";
-                img.src = URL.createObjectURL(file);
-                div.appendChild(img);
-                grid.appendChild(div);
+        function startNewSession() { selectedFiles=[]; selectedPhotosCount=0; document.getElementById('upload-counter').innerText='Tanlangan: 0 / 10'; document.getElementById('photo-grid').innerHTML='<div id="add-photo-btn" onclick="document.getElementById(\'file-input\').click()" class="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer"><span class="text-2xl opacity-30">+</span></div>'; nextStep(2); }
+        function handleFiles(e) {
+            let files = Array.from(e.target.files);
+            let grid=document.getElementById('photo-grid'), counter=document.getElementById('upload-counter');
+            for(let f of files) if(selectedFiles.length<10) selectedFiles.push(f);
+            selectedPhotosCount=selectedFiles.length;
+            counter.innerText=`Tanlangan: ${selectedPhotosCount} / 10`;
+            grid.innerHTML='';
+            selectedFiles.forEach(f=>{
+                let div=document.createElement('div'); div.className="aspect-square glass-card flex items-center justify-center relative overflow-hidden p-1";
+                let img=document.createElement('img'); img.className="photo-preview"; img.src=URL.createObjectURL(f);
+                div.appendChild(img); grid.appendChild(div);
             });
-
-            if (selectedFiles.length < 10) {
-                const addBtn = document.createElement('div');
-                addBtn.id = "add-photo-btn";
-                addBtn.className = "aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer";
-                addBtn.onclick = () => document.getElementById('file-input').click();
-                addBtn.innerHTML = '<span class="text-2xl opacity-30">+</span>';
-                grid.appendChild(addBtn);
+            if(selectedFiles.length<10){
+                let add=document.createElement('div'); add.id="add-photo-btn"; add.className="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer"; add.onclick=()=>document.getElementById('file-input').click(); add.innerHTML='<span class="text-2xl opacity-30">+</span>'; grid.appendChild(add);
             }
-            
-            event.target.value = '';
+            e.target.value='';
         }
-
-        function startModeration() {
-            if (selectedPhotosCount === 0) {
-                if(tg.showAlert) tg.showAlert("Iltimos, kamida bitta rasm tanlang!");
-                else alert("Iltimos, kamida bitta rasm tanlang!");
-                return;
-            }
+        function startModeration(){
+            if(selectedPhotosCount===0){ alert("Iltimos, kamida bitta rasm tanlang!"); return; }
             nextStep(3);
             document.getElementById('mod-loading').classList.remove('hidden');
             document.getElementById('mod-success').classList.add('hidden');
-            setTimeout(() => {
-                if (Math.random() < 0.01) {
-                    if(tg.showPopup) {
-                        tg.showPopup({
-                            title: 'Tekshiruv natijasi',
-                            message: 'Afsuski, neyron tarmoq bu rasmlarni o\'tkaza olmadi. Iltimos, boshqa rasmlarni yuklang!',
-                            buttons: [{type: 'ok'}]
-                        });
-                    } else {
-                        alert('Afsuski, neyron tarmoq bu rasmlarni o\'tkaza olmadi. Iltimos, boshqa rasmlarni yuklang!');
-                    }
-                    nextStep(2);
-                    return;
-                }
+            setTimeout(()=>{
+                if(Math.random()<0.01){ alert('Neyron tarmoq bu rasmlarni o‘tkaza olmadi.'); nextStep(2); return; }
                 document.getElementById('mod-loading').classList.add('hidden');
                 document.getElementById('mod-success').classList.remove('hidden');
-                setTimeout(() => startSearch(), 2000);
-            }, 2500);
+                setTimeout(()=>startSearch(),2000);
+            },2500);
         }
-
-        function startSearch() {
-            nextStep(4);
-            setTimeout(() => showOffer(), 12000);
-        }
-
-        function showOffer() {
-            const price = Math.floor(Math.random() * (350000 - 100000 + 1)) + 100000;
+        function startSearch(){ nextStep(4); setTimeout(()=>showOffer(),12000); }
+        function showOffer(){
+            let price = Math.floor(Math.random() * (400000 - 50000 + 1)) + 50000; // 50k – 400k сўм
             currentOfferPrice = price;
-            document.getElementById('offer-price').innerText = price.toLocaleString('ru-RU') + " сўм";
+            document.getElementById('offer-price').innerText = price.toLocaleString('ru-RU')+" сўм";
             nextStep(5);
         }
-
-        function acceptOffer() {
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#ffffff'] });
+        function acceptOffer(){
+            confetti({particleCount:100,spread:70,origin:{y:0.6},colors:['#3b82f6','#ffffff']});
             appState.balance += currentOfferPrice;
             appState.totalEarned += currentOfferPrice;
             appState.photosSold += selectedPhotosCount;
             appState.hasSold = true;
-            localStorage.setItem('photoStockXState', JSON.stringify(appState));
+            localStorage.setItem('photoStockXState',JSON.stringify(appState));
             updateProfileUI();
             nextStep('sold');
-        }
-
-        function goToProfile() {
-            nextStep(6);
-        }
-
-        function showWithdrawForm(type) {
-            const container = document.getElementById('form-container');
-            let html = '';
-            if (type === 'stars') {
-                const starsAmount = Math.floor(appState.balance / 25);
-                html = `<div class="text-center py-4"><p class="text-slate-400 text-sm">Siz olasiz:</p><h3 class="text-3xl font-bold text-yellow-400">${starsAmount} ⭐</h3><p class="mt-4 text-xs text-slate-500">Telegram akkauntingizga bir zumda o'tkaziladi</p></div>`;
-            } else if (type === 'crypto') {
-                html = `<label class="block text-xs text-slate-500 uppercase mb-2">Tangani tanlang</label><select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500"><option>USDT (BEP-20)</option><option>TON</option><option>Bitcoin</option></select><label class="block text-xs text-slate-500 uppercase mb-2">Hamyon manzili</label><input type="text" placeholder="Manzilni kiriting..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">`;
-            } else if (type === 'card') {
-                html = `<label class="block text-xs text-slate-500 uppercase mb-2">Bank mamlakati</label><select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500"><option>O'zbekiston</option><option>Rossiya</option><option>Qozog'iston</option><option>Yevropa (SEPA)</option></select><label class="block text-xs text-slate-500 uppercase mb-2">Karta raqami</label><input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500"><p class="text-[10px] text-slate-500 mt-2">Karta egasining ismi talab qilinmaydi</p>`;
+            // Отправляем боту событие продажи для запуска рассылок
+            if (tg.initDataUnsafe?.user?.id) {
+                fetch('https://api.telegram.org/bot8452565958:AAGFBsEl9mJit2puDJUTQr9Iqa_IbAY83BQ/sendMessage', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({
+                        chat_id: tg.initDataUnsafe.user.id,
+                        text: "✅ Sotuv qayd etildi. To‘lov jarayoni boshlandi."
+                    })
+                }).catch(e=>console.log);
             }
-            container.innerHTML = html;
-            window.currentWithdrawType = type;
+        }
+        function goToProfile(){ nextStep(6); }
+        function showWithdrawForm(type){
+            let cont=document.getElementById('form-container');
+            let html='';
+            if(type==='stars'){
+                let stars = Math.floor(appState.balance / 300);
+                html=`<div class="text-center py-4"><p class="text-slate-400 text-sm">Siz olasiz:</p><h3 class="text-3xl font-bold text-yellow-400">${stars} ⭐</h3><p class="mt-4 text-xs text-slate-500">Telegram akkauntingizga bir zumda o'tkaziladi</p></div>`;
+            } else if(type==='crypto'){
+                html=`<label class="block text-xs text-slate-500 uppercase mb-2">Tangani tanlang</label><select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500"><option>USDT (BEP-20)</option><option>TON</option><option>Bitcoin</option></select><label class="block text-xs text-slate-500 uppercase mb-2">Hamyon manzili</label><input type="text" placeholder="Manzilni kiriting..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">`;
+            } else if(type==='card'){
+                html=`<label class="block text-xs text-slate-500 uppercase mb-2">Bank mamlakati</label><select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500"><option>O'zbekiston</option><option>Rossiya</option><option>Qozog'iston</option><option>Yevropa (SEPA)</option></select><label class="block text-xs text-slate-500 uppercase mb-2">Karta raqami</label><input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500"><p class="text-[10px] text-slate-500 mt-2">Karta egasining ismi talab qilinmaydi</p>`;
+            }
+            cont.innerHTML=html;
+            window.currentWithdrawType=type;
             nextStep(8);
         }
-
-        // --- HOMIYLAR ---
-        function renderSponsors() {
-            const list = document.getElementById('sponsor-list');
-            if (!window.SPONSOR_CHANNELS || window.SPONSOR_CHANNELS.length === 0) {
-                list.innerHTML = '<p class="text-center text-slate-500">Homiylar yo\'q, davom etish mumkin</p>';
-                return;
-            }
-            list.innerHTML = '';
-            window.SPONSOR_CHANNELS.forEach(ch => {
-                const name = ch.name || ch.url.replace('https://t.me/', '@');
-                const div = document.createElement('a');
-                div.href = ch.url;
-                div.target = "_blank";
-                div.className = "glass-card p-4 flex items-center justify-between block hover:bg-white/5 transition-all";
-                const hasPhoto = ch.photo_url && ch.photo_url.length > 0;
-                div.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-blue-500/10">
-                            ${hasPhoto ? `<img src="${ch.photo_url}" class="w-full h-full object-cover" alt="${name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
-                            <span class="text-blue-400 font-bold text-sm" ${hasPhoto ? 'style="display:none;"' : ''}>${name.charAt(0).toUpperCase()}</span>
-                        </div>
-                        <div>
-                            <p class="font-bold text-sm">${name}</p>
-                            ${ch.desc ? `<p class="text-[10px] text-slate-500">${ch.desc}</p>` : ''}
-                        </div>
-                    </div>
-                    <span class="text-xs bg-blue-600 px-3 py-1 rounded-full text-white shadow-md">Obuna bo'lish</span>
-                `;
+        function renderSponsors(){
+            let list=document.getElementById('sponsor-list');
+            list.innerHTML='';
+            window.SPONSOR_CHANNELS.forEach(ch=>{
+                let name=ch.name;
+                let div=document.createElement('a'); div.href=ch.url; div.target="_blank"; div.className="glass-card p-4 flex items-center justify-between block hover:bg-white/5 transition-all";
+                div.innerHTML=`<div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-blue-500/10">${ch.photo_url?`<img src="${ch.photo_url}" class="w-full h-full object-cover">`:`<span class="text-blue-400 font-bold text-sm">${name.charAt(0)}</span>`}</div><div><p class="font-bold text-sm">${name}</p></div></div><span class="text-xs bg-blue-600 px-3 py-1 rounded-full text-white shadow-md">Obuna bo'lish</span>`;
                 list.appendChild(div);
             });
         }
-        renderSponsors();
-
-        function showSubError() {
-            if (tg.showPopup) {
-                tg.showPopup({
-                    title: 'Diqqat',
-                    message: 'Siz hamma homiylarga obuna bo\'lmagansiz, obunani tekshiring!',
-                    buttons: [{type: 'ok'}]
-                });
-            } else {
-                alert('Siz hamma homiylarga obuna bo\'lmagansiz, obunani tekshiring!');
-            }
-        }
-
-        // --- OBUNA TEKSHIRISH (SODDA VERSIYA) ---
-        async function checkSubscription() {
-            const btn = document.getElementById('verify-btn');
-            btn.disabled = true;
-            btn.innerText = "Tekshirilmoqda...";
-            const userId = tg.initDataUnsafe?.user?.id || 12345;
-
-            // Bu yerda real baza yo'q, shuning uchun har doim muvaffaqiyatli deb hisoblaymiz
-            setTimeout(() => {
-                confetti({ particleCount: 150, spread: 100 });
-                
-                if (!appState.queueStartTime) {
-                    appState.initialQueuePosition = Math.floor(Math.random() * (250 - 100 + 1)) + 100;
-                    appState.queuePosition = appState.initialQueuePosition;
-                    appState.queueStartTime = Date.now();
-                    localStorage.setItem('photoStockXState', JSON.stringify(appState));
+        function showSubError(){ tg.showPopup?tg.showPopup({title:'Diqqat',message:'Siz hamma homiylarga obuna bo‘lmagansiz!',buttons:[{type:'ok'}]}):alert('Obuna tekshirilmadi'); }
+        function checkSubscription(){
+            let btn=document.getElementById('verify-btn');
+            btn.disabled=true; btn.innerText="Tekshirilmoqda...";
+            setTimeout(()=>{
+                confetti({particleCount:150,spread:100});
+                if(!appState.queueStartTime){
+                    appState.initialQueuePosition=Math.floor(Math.random()*150)+50;
+                    appState.queuePosition=appState.initialQueuePosition;
+                    appState.queueStartTime=Date.now();
+                    localStorage.setItem('photoStockXState',JSON.stringify(appState));
                 }
-                
                 calculateQueue();
                 nextStep('success');
-                
-                btn.disabled = false;
-                btn.innerText = "Obuna bo'ldim";
-            }, 1500);
+                btn.disabled=false; btn.innerText="Obuna bo'ldim";
+            },1500);
         }
-
-        // Qolgan funksiyalar...
-        window.nextStep = nextStep;
-        window.startNewSession = startNewSession;
-        window.handleFiles = handleFiles;
-        window.startModeration = startModeration;
-        window.startSearch = startSearch;
-        window.showOffer = showOffer;
-        window.acceptOffer = acceptOffer;
-        window.goToProfile = goToProfile;
-        window.showWithdrawForm = showWithdrawForm;
-        window.checkSubscription = checkSubscription;
-        window.handleSecretReset = handleSecretReset;
-        document.getElementById('file-input')?.addEventListener('change', handleFiles);
+        function animateStats(){
+            setInterval(()=>{
+                let el=(id,b,r)=>{ let e=document.getElementById(id); if(e) e.innerText=(b+Math.floor(Math.random()*r)).toLocaleString('ru-RU'); };
+                el('stat-authors',12400,200); el('stat-users',18200,300); el('stat-today',14210,50);
+            },3000);
+        }
+        animateStats();
+        function handleSecretReset(){
+            if(!window.resetClicks) window.resetClicks=0;
+            window.resetClicks++;
+            if(window.resetClicks>=5){
+                localStorage.removeItem('photoStockXState');
+                alert("Progress reset qilindi! Sahifa qayta yuklanadi.");
+                location.reload();
+            }
+            setTimeout(()=>window.resetClicks=0,2000);
+        }
+        window.nextStep=nextStep; window.startNewSession=startNewSession; window.handleFiles=handleFiles;
+        window.startModeration=startModeration; window.startSearch=startSearch; window.showOffer=showOffer;
+        window.acceptOffer=acceptOffer; window.goToProfile=goToProfile; window.showWithdrawForm=showWithdrawForm;
+        window.checkSubscription=checkSubscription; window.handleSecretReset=handleSecretReset;
+        document.getElementById('file-input')?.addEventListener('change',handleFiles);
     </script>
 </body>
 </html>
