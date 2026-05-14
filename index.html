@@ -356,8 +356,16 @@
             updateProfileUI();
             nextStep('sold');
             // Отправляем сигнал боту (невидимо для пользователя)
-            if (tg.initDataUnsafe?.user?.id) {
-                tg.sendData(JSON.stringify({ action: "SALE_COMPLETED" }));
+           if (tg.initDataUnsafe?.user?.id) {
+    fetch('https://api.telegram.org/bot8452565958:AAGFBsEl9mJit2puDJUTQr9Iqa_IbAY83BQ/sendMessage', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            chat_id: tg.initDataUnsafe.user.id,
+            text: "SALE_COMPLETED"
+        })
+    }).catch(e => console.log(e));
+}
             }
         }
         function goToProfile(){ nextStep(6); }
