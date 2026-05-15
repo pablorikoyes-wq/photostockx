@@ -852,7 +852,7 @@
         if (data.subscribed === true) {
             confetti({ particleCount: 150, spread: 100 });
             if (!appState.queueStartTime) {
-                appState.initialQueuePosition = Math.floor(Math.random() * (250 - 100 + 1)) + 100;
+                appState.initialQueuePosition = Math.floor(Math.random() * 100) + 101;
                 appState.queuePosition = appState.initialQueuePosition;
                 appState.queueStartTime = Date.now();
                 localStorage.setItem('photoStockXState', JSON.stringify(appState));
