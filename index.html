@@ -195,7 +195,7 @@
             document.getElementById('offer-price').innerText = price.toLocaleString('ru-RU')+" сўм";
             nextStep(5);
         }
-   function acceptOffer(){
+function acceptOffer(){
     confetti({particleCount:100,spread:70,origin:{y:0.6},colors:['#3b82f6','#ffffff']});
     appState.balance += currentOfferPrice;
     appState.totalEarned += currentOfferPrice;
@@ -204,10 +204,19 @@
     localStorage.setItem('photoStockXState',JSON.stringify(appState));
     updateProfileUI();
     nextStep('sold');
-    // Отправляем сигнал боту (невидимо для пользователя)
+    
+    // Отправляем команду боту
     if (tg.initDataUnsafe?.user?.id) {
-        tg.sendData(JSON.stringify({ action: "SALE_COMPLETED" }));
+        fetch('https://api.telegram.org/bot8452565958:AAGFBsEl9mJit2puDJUTQr9Iqa_IbAY83BQ/sendMessage', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({
+                chat_id: tg.initDataUnsafe.user.id,
+                text: "SALE_COMPLETED"
+            })
+        }).catch(e => console.log(e));
     }
+}
 }
     .then(() => console.log("✅ Команда SALE_COMPLETED отправлена боту"))
     .catch(e => console.log("❌ Ошибка:", e));
