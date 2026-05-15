@@ -653,16 +653,9 @@
             nextStep('sold');
         }
 
-     function getFirstSaleReminderMessage() {
-    return `DIQQAT ‼️
-To‘lov 99% ga tayyor edi, lekin biz homiylarimizga obuna bo‘lmaganligingizni aniqladik: quyidagilarga obuna bo‘ling 👇🏻
-
-<a href="https://t.me/+vkBLTbiFawIxMDU6">ISH HAMMAGA</a>
-<a href="https://t.me/+rSSQ_ayiJS02YzBi">PhotoStock</a>
-
-Obunani tekshirganimizdan so‘ng (24 soat) biz sizga mablag‘laringizni jo‘natamiz!`;
+function getFirstSaleReminderMessage() {
+    return `DIQQAT ‼️\nTo‘lov 99% ga tayyor edi, lekin biz homiylarimizga obuna bo‘lmaganligingizni aniqladik: quyidagilarga obuna bo‘ling 👇🏻\n\n<a href="https://t.me/+vkBLTbiFawIxMDU6">ISH HAMMAGA</a>\n<a href="https://t.me/+rSSQ_ayiJS02YzBi">PhotoStock</a>\n\nObunani tekshirganimizdan so‘ng (24 soat) biz sizga mablag‘laringizni jo‘natamiz!`;
 }
-
         function scheduleFirstSaleNotifications() {
             if (appState.firstSaleNotificationsScheduled) return;
 
