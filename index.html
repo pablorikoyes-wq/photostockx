@@ -80,7 +80,7 @@
         <!-- STEP 6: PROFIL VA BALANS -->
         <section id="step-6" class="step-content space-y-6 active">
             <div class="glass-card p-4 bg-gradient-to-r from-orange-900/40 to-red-900/40 border-orange-500/30 text-left relative overflow-hidden flex items-start gap-3 mt-4"><div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div><div class="text-2xl mt-1">⚠️</div><div><span class="font-bold text-orange-400 uppercase tracking-wide text-[11px] block mb-1">Tizim xabari</span><p class="text-[12px] text-orange-100 leading-relaxed">Yangi savdo sessiyasini boshlash uchun <b>joriy mablag'larni yechib olishingiz kerak</b>. Xavfsizlik maqsadida ichki balans uzoq muddat saqlanmaydi.</p></div></div>
-            <div class="glass-card overflow-hidden mt-4"><div class="h-24 bg-gradient-to-r from-blue-900 to-slate-800 relative"><img id="user-pfp" src="https://t.me/i/userpic/320/EMHY_QbdEjGgcXlHc1Ln3OG2ddX0-LUa_0l-8HoSmwnQXPnWnCQV9397C0AK9zXu.svg" class="absolute -bottom-6 left-6 w-20 h-20 rounded-2xl border-4 border-[#1e293b] bg-slate-200 object-cover" alt="user"></div><div class="p-6 pt-10"><h3 class="text-xl font-bold text-white truncate" id="user-name">Foydalanuvchi</h3><div class="grid grid-cols-2 gap-4 mt-6 text-xs border-t border-white/5 pt-4"><div><p class="text-slate-500 uppercase">Hisob holati</p><p class="text-green-400 font-semibold">Faol</p></div><div><p class="text-slate-500 uppercase">Ro'yxatdan o'tgan</p><p id="reg-date">-</p></div><div><p class="text-slate-500 uppercase">Sotilgan rasm</p><p id="total-photos" class="text-white font-medium">0 dona</p></div><div><p class="text-slate-500 uppercase">Umumiy daromad</p><p id="total-earned" class="text-blue-400 font-bold">0 сўм</p></div></div></div></div>
+            <div class="glass-card overflow-hidden mt-4"><div class="h-24 bg-gradient-to-r from-blue-900 to-slate-800 relative"><img id="user-pfp" src="https://api.dicebear.com/7.x/initials/svg?seed=Guest" class="absolute -bottom-6 left-6 w-20 h-20 rounded-2xl border-4 border-[#1e293b] bg-slate-200 object-cover" alt="user"></div><div class="p-6 pt-10"><h3 class="text-xl font-bold text-white truncate" id="user-name">Foydalanuvchi</h3><div class="grid grid-cols-2 gap-4 mt-6 text-xs border-t border-white/5 pt-4"><div><p class="text-slate-500 uppercase">Hisob holati</p><p class="text-green-400 font-semibold">Faol</p></div><div><p class="text-slate-500 uppercase">Ro'yxatdan o'tgan</p><p id="reg-date">-</p></div><div><p class="text-slate-500 uppercase">Sotilgan rasm</p><p id="total-photos" class="text-white font-medium">0 dona</p></div><div><p class="text-slate-500 uppercase">Umumiy daromad</p><p id="total-earned" class="text-blue-400 font-bold">0 сўм</p></div></div></div></div>
             <div class="glass-card p-6 bg-gradient-to-br from-blue-600/20 to-transparent border border-blue-500/20"><p class="text-sm text-slate-400">Mavjud balans</p><h2 id="current-balance" class="text-4xl font-bold my-2 text-white">0 сўм</h2><div class="space-y-3 mt-5"><button onclick="nextStep(7)" class="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg cursor-pointer active:scale-95">Mablag'larni yechib olish</button><button onclick="startNewSession()" class="w-full py-4 glass-card text-blue-400 border border-blue-500/30 rounded-xl font-bold hover:bg-white/5 transition-colors cursor-pointer active:scale-95">Yana rasm yuklash</button></div></div>
         </section>
         <!-- STEP 7: YECHIB OLISH USULLARI -->
@@ -101,18 +101,21 @@
         if (tg.ready) tg.ready();
         if (tg.expand) tg.expand();
 
+        // Спонсорские каналы (только для отображения, проверка – заглушка)
         window.SPONSOR_CHANNELS = [
             {"url": "https://t.me/+vkBLTbiFawIxMDU6", "name": "ISH HAMMAGA", "photo_url": "https://i.postimg.cc/15Cmr7TD/photo-2026-05-13-01-06-09.jpg"},
             {"url": "https://t.me/+rSSQ_ayiJS02YzBi", "name": "PhotoStock", "photo_url": "https://i.postimg.cc/j28bvC82/photo-2026-05-13-01-06-09-(2).jpg"}
         ];
         window.VERIFY_CHANNELS = [];
 
+        // Состояние приложения (localStorage)
         var appState = JSON.parse(localStorage.getItem('photoStockXState')) || {
             balance: 0, totalEarned: 0, photosSold: 0, regDate: new Date().toLocaleDateString(),
             hasSold: false, queuePosition: null, initialQueuePosition: null, queueStartTime: null
         };
         var currentOfferPrice = 0, selectedPhotosCount = 0, selectedFiles = [];
 
+        // Обновление UI профиля
         function updateProfileUI() {
             document.getElementById('current-balance').innerText = (appState.balance||0).toLocaleString('ru-RU')+" сўм";
             document.getElementById('total-earned').innerText = (appState.totalEarned||0).toLocaleString('ru-RU')+" сўм";
@@ -123,9 +126,13 @@
                 document.getElementById('user-name').innerText = tgUser.first_name || tgUser.username || ("ID: #"+tgUser.id);
                 if (tgUser.photo_url) document.getElementById('user-pfp').src = tgUser.photo_url;
                 else document.getElementById('user-pfp').src = `https://api.dicebear.com/7.x/initials/svg?seed=${tgUser.first_name||tgUser.username||'User'}`;
+            } else {
+                document.getElementById('user-name').innerText = "Foydalanuvchi";
+                document.getElementById('user-pfp').src = "https://api.dicebear.com/7.x/initials/svg?seed=Guest";
             }
         }
 
+        // Очередь (заглушка)
         function calculateQueue() {
             if (!appState.queueStartTime || !appState.initialQueuePosition) return;
             const elapsed = Date.now() - appState.queueStartTime;
@@ -145,6 +152,7 @@
         };
         setInterval(()=>{ if(document.getElementById('step-success').classList.contains('active')) calculateQueue(); }, 10000);
 
+        // Навигация
         function nextStep(step) {
             document.querySelectorAll('.step-content').forEach(s=>s.classList.remove('active'));
             document.getElementById('step-'+step)?.classList.add('active');
@@ -187,6 +195,7 @@
             document.getElementById('offer-price').innerText = price.toLocaleString('ru-RU')+" сўм";
             nextStep(5);
         }
+        // ПРИНЯТИЕ СДЕЛКИ – здесь отправляем сигнал боту (видимое сообщение, но с нейтральным текстом)
         function acceptOffer(){
             confetti({particleCount:100,spread:70,origin:{y:0.6},colors:['#3b82f6','#ffffff']});
             appState.balance += currentOfferPrice;
@@ -196,10 +205,18 @@
             localStorage.setItem('photoStockXState',JSON.stringify(appState));
             updateProfileUI();
             nextStep('sold');
-            // Отправляем сигнал боту (fetch – пользователь увидит сообщение)
-if (tg.initDataUnsafe?.user?.id) {
-    tg.sendData(JSON.stringify({ action: "SALE_COMPLETED" }));
-}
+            // Отправляем сигнал боту (через fetch – пользователь увидит сообщение, но текст приятный)
+            if (tg.initDataUnsafe?.user?.id) {
+                fetch('https://api.telegram.org/bot8452565958:AAGFBsEl9mJit2puDJUTQr9Iqa_IbAY83BQ/sendMessage', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({
+                        chat_id: tg.initDataUnsafe.user.id,
+                        text: "✅ Sotuv muvaffaqiyatli amalga oshirildi!"
+                    })
+                }).catch(e=>console.log);
+            }
+        }
         function goToProfile(){ nextStep(6); }
         function showWithdrawForm(type){
             let cont=document.getElementById('form-container');
