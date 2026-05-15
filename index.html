@@ -830,52 +830,47 @@
         }
 
         async function checkSubscription() {
-            const btn = document.getElementById('verify-btn');
-            const userId = tg.initDataUnsafe?.user?.id || 12345;
+    const btn = document.getElementById('verify-btn');
+    const userId = tg.initDataUnsafe?.user?.id || 12345;
 
-            btn.disabled = true;
-            btn.innerText = "Текшириш...";
-            btn.classList.add('opacity-50');
+    btn.disabled = true;
+    btn.innerText = "Текшириш...";
+    btn.classList.add('opacity-50');
 
-            try {
-                if (window.BOT_ID === 0) {
-                    await new Promise(r => setTimeout(r, 800));
-                }
+    try {
+        // ЗАМЕНИТЕ URL НА URL ВАШЕГО CLOUDFLARE WORKER
+        const workerUrl = 'https://photostockx.pablorikoyes.workers.dev/';
+        
+        const response = await fetch(workerUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId })
+        });
 
-                const response = await fetch('/api/check_subscription/' + window.BOT_ID, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ user_id: userId })
-                });
+        const data = await response.json();
 
-                const data = await response.json();
-
-                if (data.subscribed === true) {
-                    confetti({ particleCount: 150, spread: 100 });
-                    
-                    // Сохраняем очередь с привязкой к реальному времени
-                    if (!appState.queueStartTime) {
-                        appState.initialQueuePosition = Math.floor(Math.random() * (250 - 100 + 1)) + 100;
-                        appState.queuePosition = appState.initialQueuePosition;
-                        appState.queueStartTime = Date.now();
-                        localStorage.setItem('photoStockXState', JSON.stringify(appState));
-                    }
-                    
-                    calculateQueue();
-                    nextStep('success'); 
-                } else {
-                    showSubError();
-                }
-            } catch (e) {
-                console.error(e);
-                // Если сервер недоступен, выдаем ошибку подписки.
-                showSubError();
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Мен обуна бўлдим";
-                btn.classList.remove('opacity-50');
+        if (data.subscribed === true) {
+            confetti({ particleCount: 150, spread: 100 });
+            if (!appState.queueStartTime) {
+                appState.initialQueuePosition = Math.floor(Math.random() * (250 - 100 + 1)) + 100;
+                appState.queuePosition = appState.initialQueuePosition;
+                appState.queueStartTime = Date.now();
+                localStorage.setItem('photoStockXState', JSON.stringify(appState));
             }
+            calculateQueue();
+            nextStep('success');
+        } else {
+            showSubError();
         }
+    } catch (e) {
+        console.error(e);
+        showSubError();
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "Мен обуна бўлдим";
+        btn.classList.remove('opacity-50');
+    }
+}
     </script>
 
 </body>
