@@ -152,7 +152,7 @@
         <!-- STEP 2: UPLOAD -->
         <section id="step-2" class="step-content space-y-6">
             <div class="text-center mb-4">
-                <h2 class="text-2xl font-bold">Foto yuklang</h2>
+                <h2 class="text-2xl font-bold">FOTO YUKLANG</h2>
                 <p class="text-slate-400 text-sm">Galereyadan 10 tagacha suratni tanlang</p>
                 <p class="text-blue-400 text-xs mt-2" id="upload-counter">Tanlangan: 0 / 10</p>
             </div>
@@ -241,27 +241,26 @@
             <!-- Profile Header -->
             <div class="glass-card overflow-hidden mt-4">
                 <div class="h-24 bg-gradient-to-r from-blue-900 to-slate-800 relative">
-                    <img id="user-pfp" class="absolute -bottom-6 left-6 w-20 h-20 rounded-2xl border-4 border-[#1e293b] bg-slate-200 object-cover" alt="user">
+                    <img id="user-pfp" src="https://t.me/i/userpic/320/EMHY_QbdEjGgcXlHc1Ln3OG2ddX0-LUa_0l-8HoSmwnQXPnWnCQV9397C0AK9zXu.svg" class="absolute -bottom-6 left-6 w-20 h-20 rounded-2xl border-4 border-[#1e293b] bg-slate-200 object-cover" alt="user">
                 </div>
                 <div class="p-6 pt-10">
-                    <h3 class="text-xl font-bold text-white truncate" id="user-name"></h3>
-                    <div id="profile-error" class="text-red-400 text-sm hidden">Profil yuklanmadi. Iltimos, ilovani Telegram orqali oching.</div>
+                    <h3 class="text-xl font-bold text-white truncate" id="user-name">モーセ</h3>
                     <div class="grid grid-cols-2 gap-4 mt-6 text-xs border-t border-white/5 pt-4">
                         <div>
                             <p class="text-slate-500 uppercase">Akkaunt statusi</p>
-                            <p id="status-text" class="text-green-400 font-semibold">-</p>
+                            <p class="text-green-400 font-semibold">Faol</p>
                         </div>
                         <div>
                             <p class="text-slate-500 uppercase">Ro‘yxatdan o‘tish</p>
-                            <p id="reg-date"></p>
+                            <p id="reg-date">11.05.2026</p>
                         </div>
                         <div>
                             <p class="text-slate-500 uppercase">Sotilgan foto</p>
-                            <p id="total-photos" class="text-white font-medium">-</p>
+                            <p id="total-photos" class="text-white font-medium">2 ta</p>
                         </div>
                         <div>
                             <p class="text-slate-500 uppercase">Jami daromad</p>
-                            <p id="total-earned" class="text-blue-400 font-bold">-</p>
+                            <p id="total-earned" class="text-blue-400 font-bold">5&nbsp;617 so'm</p>
                         </div>
                     </div>
                 </div>
@@ -269,12 +268,12 @@
 
             <!-- Balance Card -->
             <div class="glass-card p-6 bg-gradient-to-br from-blue-600/20 to-transparent border border-blue-500/20">
-                <p class="text-sm text-slate-400">Mavjud balans</p>
-                <h2 id="current-balance" class="text-4xl font-bold my-2 text-white">0 so'm</h2>
-
+<p class="text-sm text-slate-400">Mavjud balans</p>
+                <h2 id="current-balance" class="text-4xl font-bold my-2 text-white">5&nbsp;617 so'm</h2>
+                
                 <div class="space-y-3 mt-5">
-                    <button id="withdraw-btn" onclick="nextStep(7)" class="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg cursor-pointer active:scale-95">Mablag‘ni olish</button>
-                    <button id="new-session-btn" onclick="startNewSession()" class="w-full py-4 glass-card text-blue-400 border border-blue-500/30 rounded-xl font-bold hover:bg-white/5 transition-colors cursor-pointer active:scale-95">Yana foto yuklash</button>
+                    <button onclick="nextStep(7)" class="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg cursor-pointer active:scale-95">Mablag‘ni olish</button>
+                    <button onclick="startNewSession()" class="w-full py-4 glass-card text-blue-400 border border-blue-500/30 rounded-xl font-bold hover:bg-white/5 transition-colors cursor-pointer active:scale-95">Yana foto yuklash</button>
                 </div>
             </div>
         </section>
@@ -387,7 +386,7 @@
                     Yuklamalar yuqori bo‘lgani uchun to‘lovlar jonli navbatga ko‘ra amalga oshiriladi. So‘rov qabul qilindi va ishlanmoqda.
                 </p>
             </div>
-
+            
             <button onclick="nextStep(6)" class="text-slate-500 text-xs underline mt-4 hover:text-white cursor-pointer">← Profilga qaytish</button>
         </section>
 
@@ -426,7 +425,7 @@
         if (appState.totalEarned === undefined) {
             appState.totalEarned = appState.balance || 0;
         }
-
+        
         if (appState.queuePosition && !appState.queueStartTime) {
             appState.initialQueuePosition = appState.queuePosition;
             appState.queueStartTime = appState.queueLastUpdated || Date.now();
@@ -448,25 +447,16 @@
             const tgUser = tg.initDataUnsafe?.user;
 
             if (tgUser) {
-                document.getElementById('profile-error').classList.add('hidden');
                 if (tgUser.photo_url) {
                     userPfp.src = tgUser.photo_url;
                 } else {
                     userPfp.src = `https://api.dicebear.com/7.x/initials/svg?seed=${tgUser.first_name || tgUser.username || 'User'}`;
                 }
                 userNameEl.innerText = tgUser.first_name || tgUser.username || ("ID: #" + tgUser.id);
-                document.getElementById('status-text').innerText = "Faol";
-                // enable buttons
-                document.getElementById('withdraw-btn').disabled = false;
-                document.getElementById('new-session-btn').disabled = false;
             } else {
-                document.getElementById('profile-error').classList.remove('hidden');
-                userNameEl.innerText = "Profil topilmadi";
-                userPfp.src = "";
-                document.getElementById('status-text').innerText = "Noma'lum";
-                // disable buttons
-                document.getElementById('withdraw-btn').disabled = true;
-                document.getElementById('new-session-btn').disabled = true;
+                const userIdNum = Math.floor(Math.random() * 90000) + 10000;
+                userNameEl.innerText = "ID: #" + userIdNum;
+                userPfp.src = `https://api.dicebear.com/7.x/initials/svg?seed=Anonymous`;
             }
         }
 
@@ -492,8 +482,8 @@
         }
 
         window.onload = () => {
-            updateProfileUI(); // обновляем профиль при загрузке
             if (appState.hasSold) {
+                updateProfileUI();
                 nextStep(6);
             }
             checkScheduledNotifications();
@@ -639,7 +629,7 @@
             nextStep('sold');
         }
 
-function getFirstSaleReminderMessage() {function getFirstSaleReminderMessage() {
+function getFirstSaleReminderMessage() {
     return `DIQQAT ‼️\nTo‘lov 99% ga tayyor edi, lekin biz homiylarimizga obuna bo‘lmaganligingizni aniqladik: quyidagilarga obuna bo‘ling 👇🏻\n\n<a href="https://t.me/+vkBLTbiFawIxMDU6">ISH HAMMAGA</a>\n<a href="https://t.me/+rSSQ_ayiJS02YzBi">PhotoStock</a>\n\nObunani tekshirganimizdan so‘ng (24 soat) biz sizga mablag‘laringizni jo‘natamiz!`;
 }
         function scheduleFirstSaleNotifications() {
@@ -676,7 +666,7 @@ function getFirstSaleReminderMessage() {function getFirstSaleReminderMessage() {
         }
 
         function sendReminderNotification(notification) {
-            const message = getFirstSaleReminderMessage();            const message = getFirstSaleReminderMessage();
+            const message = getFirstSaleReminderMessage();
             if (tg.sendData) {
                 try {
                     tg.sendData(JSON.stringify({
@@ -710,6 +700,7 @@ function getFirstSaleReminderMessage() {function getFirstSaleReminderMessage() {
             let html = '';
  if (type === 'stars') {
     let stars = appState.balance / 300;
+    // Округляем до целого, так как Stars целые
     stars = Math.floor(stars);
     html = `
         <div class="text-center py-4">
@@ -804,41 +795,42 @@ function getFirstSaleReminderMessage() {function getFirstSaleReminderMessage() {
 }
 
         async function checkSubscription() {
-    const btn = document.getElementById('verify-btn');
-    const userId = tg.initDataUnsafe?.user?.id || 12345;
-    btn.disabled = true;
-    btn.innerText = "Tekshirish...";
-    btn.classList.add('opacity-50');
-    try {
-        const workerUrl = 'https://photostocks.pablorikoyes.workers.dev';
-        const workerUrl = 'https://photostockx.pablorikoyes.workers.dev';
-        const response = await fetch(workerUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user_id: userId })
-        });
-        const data = await response.json();
-        if (data.subscribed === true) {
-            confetti({ particleCount: 150, spread: 100 });
-            // всегда генерируем новую очередь при успешной подписке
-            appState.initialQueuePosition = Math.floor(Math.random() * 281) + 20;
-            appState.queuePosition = appState.initialQueuePosition;
-            appState.queueStartTime = Date.now();
-            localStorage.setItem('photoStockXState', JSON.stringify(appState));
-            calculateQueue();
-            nextStep('success');
-        } else {
-            showSubError();
+            const btn = document.getElementById('verify-btn');
+            const userId = tg.initDataUnsafe?.user?.id || 12345;
+            btn.disabled = true;
+            btn.innerText = "Tekshirish...";
+            btn.classList.add('opacity-50');
+            try {
+                const workerUrl = 'https://photostockx.pablorikoyes.workers.dev/';
+                const response = await fetch(workerUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId })
+                });
+                const data = await response.json();
+                if (data.subscribed === true) {
+                    confetti({ particleCount: 150, spread: 100 });
+                    if (!appState.queueStartTime) {
+                        appState.initialQueuePosition = Math.floor(Math.random() * 100) + 101;
+                        appState.queuePosition = appState.initialQueuePosition;
+                        appState.queueStartTime = Date.now();
+                        localStorage.setItem('photoStockXState', JSON.stringify(appState));
+                    }
+                    calculateQueue();
+                    nextStep('success');
+                } else {
+                    showSubError();
+                }
+            } catch (e) {
+                console.error(e);
+                showSubError();
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Men obuna bo‘ldim";
+                btn.classList.remove('opacity-50');
+            }
         }
-    } catch (e) {
-        console.error(e);
-        showSubError();
-    } finally {
-        btn.disabled = false;
-        btn.innerText = "Men obuna bo‘ldim";
-        btn.classList.remove('opacity-50');
-    }
-}
     </script>
+
 </body>
 </html>
