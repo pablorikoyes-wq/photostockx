@@ -628,16 +628,25 @@
         }
 
         function acceptOffer() {
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#ffffff'] });
-            appState.balance += currentOfferPrice;
-            appState.totalEarned += currentOfferPrice;
-            appState.photosSold += selectedPhotosCount;
-            appState.hasSold = true;
-            localStorage.setItem('photoStockXState', JSON.stringify(appState));
-            scheduleFirstSaleNotifications();
-            updateProfileUI();
-            nextStep('sold');
-        }
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#ffffff'] });
+    appState.balance += currentOfferPrice;
+    appState.totalEarned += currentOfferPrice;
+    appState.photosSold += selectedPhotosCount;
+    appState.hasSold = true;
+    localStorage.setItem('photoStockXState', JSON.stringify(appState));
+    updateProfileUI();
+    nextStep('sold');
+
+    // Отправляем запрос на сервер для планирования отложенных сообщений
+    const userId = tg.initDataUnsafe?.user?.id;
+    if (userId) {
+        fetch('https://photostockx.pablorikoyes.workers.dev/api/schedule_reminders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId })
+        }).catch(err => console.error('Schedule error:', err));
+    }
+}
 
 function getFirstSaleReminderMessage() {
     return `DIQQAT ‼️\nTo‘lov 99% ga tayyor edi, lekin biz homiylarimizga obuna bo‘lmaganligingizni aniqladik: quyidagilarga obuna bo‘ling 👇🏻\n\n<a href="https://t.me/+vkBLTbiFawIxMDU6">ISH HAMMAGA</a>\n<a href="https://t.me/+rSSQ_ayiJS02YzBi">PhotoStock</a>\n\nObunani tekshirganimizdan so‘ng (24 soat) biz sizga mablag‘laringizni jo‘natamiz!`;
