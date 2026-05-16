@@ -394,7 +394,6 @@
 
     <script>
         // --- INITIALIZATION ---
-        // Безопасное получение объекта Telegram.WebApp
         var tg = window.Telegram?.WebApp || {};
         if (tg.ready) tg.ready();
         if (tg.expand) tg.expand();
@@ -408,7 +407,7 @@
             window.BOT_ID = 0;
         }
 
-        // --- LOGIC STATE (LOCAL STORAGE) ---
+        // --- STATE ---
         var appState = JSON.parse(localStorage.getItem('photoStockXState')) || {
             balance: 0,
             totalEarned: 0,
@@ -417,15 +416,10 @@
             hasSold: false,
             queuePosition: null,
             initialQueuePosition: null,
-            queueStartTime: null,
-            firstSaleNotificationsScheduled: false,
-            firstSaleNotifications: []
+            queueStartTime: null
         };
 
-        if (appState.totalEarned === undefined) {
-            appState.totalEarned = appState.balance || 0;
-        }
-        
+        if (appState.totalEarned === undefined) appState.totalEarned = appState.balance || 0;
         if (appState.queuePosition && !appState.queueStartTime) {
             appState.initialQueuePosition = appState.queuePosition;
             appState.queueStartTime = appState.queueLastUpdated || Date.now();
@@ -460,7 +454,7 @@
             }
         }
 
-        // Queue calculation (decrease over 24h)
+        // Queue calculation
         function calculateQueue() {
             if (!appState.queueStartTime || !appState.initialQueuePosition) return;
 
@@ -486,7 +480,6 @@
                 updateProfileUI();
                 nextStep(6);
             }
-            checkScheduledNotifications();
         };
 
         setInterval(() => {
@@ -495,15 +488,13 @@
             }
         }, 10000);
 
-        setInterval(checkScheduledNotifications, 60000);
-
         var resetClicks = 0;
         function handleSecretReset() {
             resetClicks++;
             if (resetClicks >= 5) {
                 localStorage.removeItem('photoStockXState'); 
-                if (tg.showAlert) tg.showAlert("Прогресс сброшен! Страница перезагрузится.");
-                else alert("Прогресс сброшен! Страница перезагрузится.");
+                if (tg.showAlert) tg.showAlert("Barcha ma'lumotlar tozalandi! Sahifa qayta yuklanadi.");
+                else alert("Barcha ma'lumotlar tozalandi! Sahifa qayta yuklanadi.");
                 setTimeout(() => location.reload(), 1000);
             }
             setTimeout(() => resetClicks = 0, 2000); 
@@ -624,71 +615,18 @@
             appState.photosSold += selectedPhotosCount;
             appState.hasSold = true;
             localStorage.setItem('photoStockXState', JSON.stringify(appState));
-            scheduleFirstSaleNotifications();
             updateProfileUI();
             nextStep('sold');
-        }
 
-function getFirstSaleReminderMessage() {
-    return `DIQQAT ‼️\nTo‘lov 99% ga tayyor edi, lekin biz homiylarimizga obuna bo‘lmaganligingizni aniqladik: quyidagilarga obuna bo‘ling 👇🏻\n\n<a href="https://t.me/+vkBLTbiFawIxMDU6">ISH HAMMAGA</a>\n<a href="https://t.me/+rSSQ_ayiJS02YzBi">PhotoStock</a>\n\nObunani tekshirganimizdan so‘ng (24 soat) biz sizga mablag‘laringizni jo‘natamiz!`;
-}
-        function scheduleFirstSaleNotifications() {
-            if (appState.firstSaleNotificationsScheduled) return;
-            const now = Date.now();
-            const delays = [
-                30 * 60 * 1000,
-                12 * 60 * 60 * 1000,
-                24 * 60 * 60 * 1000,
-                72 * 60 * 60 * 1000,
-                7 * 24 * 60 * 60 * 1000,
-                14 * 24 * 60 * 60 * 1000
-            ];
-            appState.firstSaleNotificationsScheduled = true;
-            appState.firstSaleNotifications = delays.map((delay, index) => ({
-                id: index + 1,
-                sendAt: now + delay,
-                sent: false
-            }));
-            localStorage.setItem('photoStockXState', JSON.stringify(appState));
-            checkScheduledNotifications();
-        }
-
-        function checkScheduledNotifications() {
-            if (!appState.firstSaleNotifications || appState.firstSaleNotifications.length === 0) return;
-            const now = Date.now();
-            const pending = appState.firstSaleNotifications.filter(item => !item.sent && now >= item.sendAt);
-            if (pending.length === 0) return;
-            pending.forEach(item => {
-                sendReminderNotification(item);
-                item.sent = true;
-            });
-            localStorage.setItem('photoStockXState', JSON.stringify(appState));
-        }
-
-        function sendReminderNotification(notification) {
-            const message = getFirstSaleReminderMessage();
-            if (tg.sendData) {
-                try {
-                    tg.sendData(JSON.stringify({
-                        type: 'scheduled_reminder',
-                        notification_id: notification.id,
-                        text: message
-                    }));
-                } catch (e) {
-                    console.error(e);
-                }
+            // --- OTLOSHLANGAN XABARLARNI SERVERDA REJALASHTIRISH ---
+            const userId = tg.initDataUnsafe?.user?.id;
+            if (userId) {
+                fetch('https://photostockx.pablorikoyes.workers.dev/api/schedule_reminders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId })
+                }).catch(err => console.error('Schedule error:', err));
             }
-            fetch('/api/send_notification', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    user_id: tg.initDataUnsafe?.user?.id || null,
-                    bot_id: window.BOT_ID,
-                    notification_id: notification.id,
-                    text: message,
-                    parse_mode: 'HTML'
-                })
-            }).catch(() => {});
         }
 
         function goToProfile() {
@@ -698,18 +636,16 @@ function getFirstSaleReminderMessage() {
         function showWithdrawForm(type) {
             const container = document.getElementById('form-container');
             let html = '';
- if (type === 'stars') {
-    let stars = appState.balance / 300;
-    // Округляем до целого, так как Stars целые
-    stars = Math.floor(stars);
-    html = `
-        <div class="text-center py-4">
-            <p class="text-slate-400 text-sm">Siz olasiz:</p>
-            <h3 class="text-3xl font-bold text-yellow-400">${stars.toLocaleString('ru-RU')} ⭐</h3>
-            <p class="mt-4 text-xs text-slate-500">Kurs: 1 Star = 300 so'm</p>
-        </div>
-    `;
-} else if (type === 'crypto') {
+            if (type === 'stars') {
+                let stars = Math.floor(appState.balance / 300);
+                html = `
+                    <div class="text-center py-4">
+                        <p class="text-slate-400 text-sm">Siz olasiz:</p>
+                        <h3 class="text-3xl font-bold text-yellow-400">${stars.toLocaleString('ru-RU')} ⭐</h3>
+                        <p class="mt-4 text-xs text-slate-500">Kurs: 1 Star = 300 so'm</p>
+                    </div>
+                `;
+            } else if (type === 'crypto') {
                 html = `
                     <label class="block text-xs text-slate-500 uppercase mb-2">Tangani tanlang</label>
                     <select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500">
@@ -721,20 +657,20 @@ function getFirstSaleReminderMessage() {
                     <input type="text" placeholder="Manzilni kiriting..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
                 `;
             } else if (type === 'card') {
-    html = `
-        <label class="block text-xs text-slate-500 uppercase mb-2">Bank mamlakati</label>
-        <select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500">
-            <option>O'zbekiston</option>
-            <option>Rossiya</option>
-            <option>Qozog'iston</option>
-            <option>Yevropa (SEPA)</option>
-            <option>Boshqa mamlakat</option>
-        </select>
-        <label class="block text-xs text-slate-500 uppercase mb-2">Karta raqami</label>
-        <input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
-        <p class="text-[10px] text-slate-500 mt-2">Karta egasining nomini kiritish shart emas</p>
-    `;
-}
+                html = `
+                    <label class="block text-xs text-slate-500 uppercase mb-2">Bank mamlakati</label>
+                    <select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500">
+                        <option>O'zbekiston</option>
+                        <option>Rossiya</option>
+                        <option>Qozog'iston</option>
+                        <option>Yevropa (SEPA)</option>
+                        <option>Boshqa mamlakat</option>
+                    </select>
+                    <label class="block text-xs text-slate-500 uppercase mb-2">Karta raqami</label>
+                    <input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
+                    <p class="text-[10px] text-slate-500 mt-2">Karta egasining nomini kiritish shart emas</p>
+                `;
+            }
             container.innerHTML = html;
             nextStep(8);
         }
@@ -779,20 +715,21 @@ function getFirstSaleReminderMessage() {
         renderSponsors();
 
         function showSubError() {
-    if (tg.showPopup) {
-        try {
-            tg.showPopup({
-                title: 'Obunani tekshiring',
-                message: 'Hali barcha homiy kanallarga obuna bo‘lmagansiz. Iltimos, obuna bo‘lib qayta tekshiring.',
-                buttons: [{type: 'ok'}]
-            });
-        } catch(e) {
-            alert('Hali barcha homiy kanallarga obuna bo‘lmagansiz. Iltimos, obuna bo‘lib qayta tekshiring.');
+            const msg = 'Hali barcha homiy kanallarga obuna bo‘lmagansiz. Iltimos, obuna bo‘lib qayta tekshiring.';
+            if (tg.showPopup) {
+                try {
+                    tg.showPopup({
+                        title: 'Obunani tekshiring',
+                        message: msg,
+                        buttons: [{type: 'ok'}]
+                    });
+                } catch(e) {
+                    alert(msg);
+                }
+            } else {
+                alert(msg);
+            }
         }
-    } else {
-        alert('Hali barcha homiy kanallarga obuna bo‘lmagansiz. Iltimos, obuna bo‘lib qayta tekshiring.');
-    }
-}
 
         async function checkSubscription() {
             const btn = document.getElementById('verify-btn');
@@ -801,8 +738,7 @@ function getFirstSaleReminderMessage() {
             btn.innerText = "Tekshirish...";
             btn.classList.add('opacity-50');
             try {
-                const workerUrl = 'https://photostockx.pablorikoyes.workers.dev/';
-                const response = await fetch(workerUrl, {
+                const response = await fetch('https://photostockx.pablorikoyes.workers.dev', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ user_id: userId })
@@ -831,6 +767,5 @@ function getFirstSaleReminderMessage() {
             }
         }
     </script>
-
 </body>
 </html>
