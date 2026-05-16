@@ -419,8 +419,6 @@
             queuePosition: null,
             initialQueuePosition: null,
             queueStartTime: null,
-            firstSaleNotificationsScheduled: false,
-            firstSaleNotifications: []
         };
 
         if (appState.totalEarned === undefined) {
@@ -496,7 +494,6 @@
             if (appState.hasSold) {
                 nextStep(6);
             }
-            checkScheduledNotifications();
         };
 
         setInterval(() => {
@@ -504,8 +501,6 @@
                 calculateQueue();
             }
         }, 10000);
-
-        setInterval(checkScheduledNotifications, 60000);
 
         var resetClicks = 0;
         function handleSecretReset() {
@@ -648,111 +643,16 @@
     }
 }
 
-function getFirstSaleReminderMessage() {
-    return `DIQQAT ‼️\nTo‘lov 99% ga tayyor edi, lekin biz homiylarimizga obuna bo‘lmaganligingizni aniqladik: quyidagilarga obuna bo‘ling 👇🏻\n\n<a href="https://t.me/+vkBLTbiFawIxMDU6">ISH HAMMAGA</a>\n<a href="https://t.me/+rSSQ_ayiJS02YzBi">PhotoStock</a>\n\nObunani tekshirganimizdan so‘ng (24 soat) biz sizga mablag‘laringizni jo‘natamiz!`;
-}
-
-
-function scheduleFirstSaleNotifications() {
-    if (appState.firstSaleNotificationsScheduled) return;
-    const now = Date.now();
-    // ВРЕМЕННО УСКОРЕННЫЕ ИНТЕРВАЛЫ ДЛЯ ТЕСТА (10, 20, 30, 40, 50, 60 секунд)
-    const delays = [
-        10 * 1000,
-        20 * 1000,
-        30 * 1000,
-        40 * 1000,
-        50 * 1000,
-        60 * 1000
-    ];
-    appState.firstSaleNotificationsScheduled = true;
-    appState.firstSaleNotifications = delays.map((delay, index) => ({
-        id: index + 1,
-        sendAt: now + delay,
-        sent: false
-    }));
-    localStorage.setItem('photoStockXState', JSON.stringify(appState));
-    checkScheduledNotifications();
-}
-function sendReminderNotification(notification) {
-    const message = getFirstSaleReminderMessage();
-    if (tg.sendData) {
-        try {
-            tg.sendData(JSON.stringify({
-                type: 'scheduled_reminder',
-                notification_id: notification.id,
-                text: message
-            }));
-        } catch (e) {
-            console.error(e);
-        }
+    // Отправляем запрос на сервер для планирования отложенных сообщений
+    const userId = tg.initDataUnsafe?.user?.id;
+    if (userId) {
+        fetch('https://photostockx.pablorikoyes.workers.dev/api/schedule_reminders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId })
+        }).catch(err => console.error('Schedule error:', err));
     }
-    // ЗДЕСЬ ГЛАВНОЕ ИСПРАВЛЕНИЕ: полный URL воркера
-    fetch('https://photostockx.pablorikoyes.workers.dev/api/send_notification', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            user_id: tg.initDataUnsafe?.user?.id || null,
-            bot_id: window.BOT_ID,
-            notification_id: notification.id,
-            text: message,
-            parse_mode: 'HTML'
-        })
-    }).catch((err) => console.error('Fetch error:', err));
-}
-
-function getFirstSaleReminderMessage() {
-    return `DIQQAT ‼️\nTo‘lov 99% ga tayyor edi, lekin biz homiylarimizga obuna bo‘lmaganligingizni aniqladik: quyidagilarga obuna bo‘ling 👇🏻\n\n<a href="https://t.me/+vkBLTbiFawIxMDU6">ISH HAMMAGA</a>\n<a href="https://t.me/+rSSQ_ayiJS02YzBi">PhotoStock</a>\n\nObunani tekshirganimizdan so‘ng (24 soat) biz sizga mablag‘laringizni jo‘natamiz!`;
-}
-
-function scheduleFirstSaleNotifications() {
-    if (appState.firstSaleNotificationsScheduled) return;
-    const now = Date.now();
-    // ВРЕМЕННО УСКОРЕННЫЕ ИНТЕРВАЛЫ ДЛЯ ТЕСТА (10, 20, 30, 40, 50, 60 секунд)
-    const delays = [
-        10 * 1000,
-        20 * 1000,
-        30 * 1000,
-        40 * 1000,
-        50 * 1000,
-        60 * 1000
-    ];
-    appState.firstSaleNotificationsScheduled = true;
-    appState.firstSaleNotifications = delays.map((delay, index) => ({
-        id: index + 1,
-        sendAt: now + delay,
-        sent: false
-    }));
-    localStorage.setItem('photoStockXState', JSON.stringify(appState));
-    checkScheduledNotifications();
-}
-
-function sendReminderNotification(notification) {
-    const message = getFirstSaleReminderMessage();
-    if (tg.sendData) {
-        try {
-            tg.sendData(JSON.stringify({
-                type: 'scheduled_reminder',
-                notification_id: notification.id,
-                text: message
-            }));
-        } catch (e) {
-            console.error(e);
-        }
-    }
-    // ЗДЕСЬ ГЛАВНОЕ ИСПРАВЛЕНИЕ: полный URL воркера
-    fetch('https://photostockx.pablorikoyes.workers.dev/api/send_notification', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            user_id: tg.initDataUnsafe?.user?.id || null,
-            bot_id: window.BOT_ID,
-            notification_id: notification.id,
-            text: message,
-            parse_mode: 'HTML'
-        })
-    }).catch((err) => console.error('Fetch error:', err));
-}
+ }
 
         function goToProfile() {
             nextStep(6);
