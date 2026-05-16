@@ -113,38 +113,38 @@
         <!-- STEP 1: WELCOME -->
         <section id="step-1" class="step-content space-y-6">
             <div class="glass-card p-6 text-center">
-                <h2 class="text-xl font-semibold mb-3 text-blue-300">Хуш келибсиз</h2>
+                <h2 class="text-xl font-semibold mb-3 text-blue-300">Xush kelibsiz</h2>
                 <p class="text-sm text-slate-300 leading-relaxed">
-                    PhotoStockX — бу мобил фотоларингизни тез ва қулай сотиш учун мўлжалланган глобал платформа. Нейрон тармоқ кадрларни баҳолайди ва харидорларни топади.
+                    PhotoStockX — bu mobil fotolaringizni tez va qulay sotish uchun mo‘ljallangan global platforma. Neyron tarmoq kadrlarni baholaydi va xaridorlarni topadi.
                 </p>
             </div>
 
             <!-- Stats Grid -->
             <div class="grid grid-cols-2 gap-3">
                 <div class="glass-card p-4">
-                    <p class="text-[10px] uppercase text-slate-400">Авторов Online</p>
+                    <p class="text-[10px] uppercase text-slate-400">Avtorlar Online</p>
                     <p id="stat-authors" class="text-lg font-bold stat-value text-blue-400">12&nbsp;435</p>
                 </div>
                 <div class="glass-card p-4">
-                    <p class="text-[10px] uppercase text-slate-400">Клиентов Online</p>
+                    <p class="text-[10px] uppercase text-slate-400">Mijozlar Online</p>
                     <p id="stat-users" class="text-lg font-bold stat-value text-blue-400">18&nbsp;393</p>
                 </div>
                 <div class="glass-card p-4">
-                    <p class="text-[10px] uppercase text-slate-400">Продано всего</p>
+                    <p class="text-[10px] uppercase text-slate-400">Jami sotilgan</p>
                     <p id="stat-total" class="text-lg font-bold stat-value">1 042 150</p>
                 </div>
                 <div class="glass-card p-4">
-                    <p class="text-[10px] uppercase text-slate-400">Сегодня продано</p>
+                    <p class="text-[10px] uppercase text-slate-400">Bugun sotilgan</p>
                     <p id="stat-today" class="text-lg font-bold stat-value">14&nbsp;222</p>
                 </div>
             </div>
 
             <div class="space-y-3 pt-4">
                 <button class="w-full py-4 rounded-2xl btn-disabled font-medium cursor-not-allowed" disabled="">
-                    Фото сотиб олиш (фақат муаллифлар учун)
+                    Foto sotib olish (faqat mualliflar uchun)
                 </button>
                 <button onclick="nextStep(2)" class="w-full py-4 rounded-2xl btn-premium font-bold text-white shadow-blue-500/20 cursor-pointer">
-                    Сотишни бошлаш
+                    Sotishni boshlash
                 </button>
             </div>
         </section>
@@ -152,9 +152,9 @@
         <!-- STEP 2: UPLOAD -->
         <section id="step-2" class="step-content space-y-6">
             <div class="text-center mb-4">
-                <h2 class="text-2xl font-bold">Фото юкланг</h2>
-                <p class="text-slate-400 text-sm">Галереядан 10 тагача суратни танланг</p>
-                <p class="text-blue-400 text-xs mt-2" id="upload-counter">Танланган: 0 / 10</p>
+                <h2 class="text-2xl font-bold">FOTO YUKLANG</h2>
+                <p class="text-slate-400 text-sm">Galereyadan 10 tagacha suratni tanlang</p>
+                <p class="text-blue-400 text-xs mt-2" id="upload-counter">Tanlangan: 0 / 10</p>
             </div>
 
             <input type="file" id="file-input" multiple accept="image/*" class="hidden" onchange="handleFiles(event)">
@@ -166,7 +166,7 @@
             </div>
 
             <button onclick="startModeration()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-4 cursor-pointer">
-                Текширувга юбориш
+                Tekshiruvga yuborish
             </button>
         </section>
 
@@ -177,14 +177,14 @@
                     <div class="absolute inset-0 border-4 border-blue-500/20 rounded-full"></div>
                     <div class="absolute inset-0 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
                 </div>
-                <h2 class="text-xl font-bold mt-6">Модерация...</h2>
-                <p class="text-slate-400">Сунъий интеллект фотолар сифатини ва уникаллиғини текshiradi</p>
+                <h2 class="text-xl font-bold mt-6">Moderatsiya...</h2>
+                <p class="text-slate-400">Sun'iy intellekt fotolar sifatini va unikalligini tekshiradi</p>
             </div>
 
             <div id="mod-success" class="hidden">
                 <div class="w-24 h-24 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto text-5xl border border-green-500/30">✓</div>
-                <h2 class="text-2xl font-bold text-white mt-6">Текширувдан ўтди!</h2>
-                <p class="text-slate-400 mt-2">Сизнинг фотоларингиз юқори сифат стандартларига мувофиқ.</p>
+                <h2 class="text-2xl font-bold text-white mt-6">Tekshiruvdan o‘tdi!</h2>
+                <p class="text-slate-400 mt-2">Sizning fotolaringiz yuqori sifat standartlariga mos keladi.</p>
             </div>
         </section>
 
@@ -195,31 +195,31 @@
                 <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
                 <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
             </div>
-            <h2 class="text-xl font-bold">Харидорни қидириш...</h2>
-            <p class="text-slate-400">АҚШ, БАА ва Германиядан 4 та потенциал харидор топилди</p>
+            <h2 class="text-xl font-bold">Xaridorni qidirish...</h2>
+            <p class="text-slate-400">AQSh, BAA va Germaniyadan 4 ta potensial xaridor topildi</p>
         </section>
 
         <!-- STEP 5: OFFER -->
         <section id="step-5" class="step-content space-y-6">
             <div class="glass-card p-8 text-center border-blue-500/30">
-                <div class="bg-green-500/20 text-green-400 w-fit mx-auto px-4 py-1 rounded-full text-xs font-bold mb-4">ТАҚЛИФ ТОПИЛДИ</div>
-                <p class="text-slate-400 mb-2">Харидор фотоларингизни қуйидаги нархда олишга тайёр:</p>
+                <div class="bg-green-500/20 text-green-400 w-fit mx-auto px-4 py-1 rounded-full text-xs font-bold mb-4">TAKLIF TOPILDI</div>
+                <p class="text-slate-400 mb-2">Xaridor fotolaringizni quyidagi narxda olishga tayyor:</p>
                 <h3 id="offer-price" class="text-5xl font-bold text-white mb-2">240&nbsp;000 so'm</h3>
-                <p class="text-[10px] text-slate-500">Биринчи сотув учун хизмат ҳақи 0%</p>
+                <p class="text-[10px] text-slate-500">Birinchi sotuv uchun xizmat haqi 0%</p>
             </div>
             <div class="flex gap-3 w-full">
-                <button onclick="startSearch()" class="flex-1 py-4 rounded-2xl glass-card font-medium text-sm leading-tight hover:bg-white/10 transition-colors cursor-pointer active:scale-95">Янги<br>харидор қидириш</button>
-                <button onclick="acceptOffer()" class="flex-1 py-4 rounded-2xl btn-premium font-bold text-sm leading-tight cursor-pointer active:scale-95">Тақдимни<br>қабул қилиш</button>
+                <button onclick="startSearch()" class="flex-1 py-4 rounded-2xl glass-card font-medium text-sm leading-tight hover:bg-white/10 transition-colors cursor-pointer active:scale-95">Yangi<br>xaridor qidirish</button>
+                <button onclick="acceptOffer()" class="flex-1 py-4 rounded-2xl btn-premium font-bold text-sm leading-tight cursor-pointer active:scale-95">Taklifni<br>qabul qilish</button>
             </div>
         </section>
 
         <!-- STEP 5.5: SUCCESS SOLD -->
         <section id="step-sold" class="step-content text-center py-10 space-y-6">
             <div class="w-24 h-24 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto text-5xl">📸</div>
-            <h2 class="text-3xl font-bold text-white">Фотоларингиз сотилди!</h2>
-            <p class="text-slate-400">Транзакция муваффақиятли якунланди, маблағлар ички балансга ўтказилди.</p>
+            <h2 class="text-3xl font-bold text-white">Fotolaringiz sotildi!</h2>
+            <p class="text-slate-400">Tranzaksiya muvaffaqiyatli yakunlandi, mablag‘lar ichki balansga o‘tkazildi.</p>
             <button onclick="goToProfile()" class="w-full py-4 rounded-2xl btn-premium font-bold mt-6 shadow-blue-500/20 cursor-pointer active:scale-95">
-                Профилга ўтиш
+                Profilga o‘tish
             </button>
         </section>
 
@@ -231,9 +231,9 @@
                 <div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
                 <div class="text-2xl mt-1">⚠️</div>
                 <div>
-                    <span class="font-bold text-orange-400 uppercase tracking-wide text-[11px] block mb-1">Тизим хабари</span> 
+                    <span class="font-bold text-orange-400 uppercase tracking-wide text-[11px] block mb-1">Tizim xabari</span> 
                     <p class="text-[12px] text-orange-100 leading-relaxed">
-                        Янгидан сессияни бошлаш учун <b>маблаг‘ларни олиб қўйиш</b> шарт. Хавфсизлик мақсадида ички баланс узоқ сақланмайди.
+                        Yangidan sessiyani boshlash uchun <b>mablag‘larni olib qo‘yish</b> shart. Xavfsizlik maqsadida ichki balans uzoq saqlanmaydi.
                     </p>
                 </div>
             </div>
@@ -247,19 +247,19 @@
                     <h3 class="text-xl font-bold text-white truncate" id="user-name">モーセ</h3>
                     <div class="grid grid-cols-2 gap-4 mt-6 text-xs border-t border-white/5 pt-4">
                         <div>
-                            <p class="text-slate-500 uppercase">Аккаунт статуси</p>
-                            <p class="text-green-400 font-semibold">Фаол</p>
+                            <p class="text-slate-500 uppercase">Akkaunt statusi</p>
+                            <p class="text-green-400 font-semibold">Faol</p>
                         </div>
                         <div>
-                            <p class="text-slate-500 uppercase">Рўйхатдан ўтиш</p>
+                            <p class="text-slate-500 uppercase">Ro‘yxatdan o‘tish</p>
                             <p id="reg-date">11.05.2026</p>
                         </div>
                         <div>
-                            <p class="text-slate-500 uppercase">Сотилган фото</p>
-                            <p id="total-photos" class="text-white font-medium">2 та</p>
+                            <p class="text-slate-500 uppercase">Sotilgan foto</p>
+                            <p id="total-photos" class="text-white font-medium">2 ta</p>
                         </div>
                         <div>
-                            <p class="text-slate-500 uppercase">Жами даромад</p>
+                            <p class="text-slate-500 uppercase">Jami daromad</p>
                             <p id="total-earned" class="text-blue-400 font-bold">5&nbsp;617 so'm</p>
                         </div>
                     </div>
@@ -268,12 +268,12 @@
 
             <!-- Balance Card -->
             <div class="glass-card p-6 bg-gradient-to-br from-blue-600/20 to-transparent border border-blue-500/20">
-<p class="text-sm text-slate-400">Мавжуд баланс</p>
+<p class="text-sm text-slate-400">Mavjud balans</p>
                 <h2 id="current-balance" class="text-4xl font-bold my-2 text-white">5&nbsp;617 so'm</h2>
                 
                 <div class="space-y-3 mt-5">
-                    <button onclick="nextStep(7)" class="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg cursor-pointer active:scale-95">Маблаг‘ни олиш</button>
-                    <button onclick="startNewSession()" class="w-full py-4 glass-card text-blue-400 border border-blue-500/30 rounded-xl font-bold hover:bg-white/5 transition-colors cursor-pointer active:scale-95">Яна фото юклаш</button>
+                    <button onclick="nextStep(7)" class="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg cursor-pointer active:scale-95">Mablag‘ni olish</button>
+                    <button onclick="startNewSession()" class="w-full py-4 glass-card text-blue-400 border border-blue-500/30 rounded-xl font-bold hover:bg-white/5 transition-colors cursor-pointer active:scale-95">Yana foto yuklash</button>
                 </div>
             </div>
         </section>
@@ -282,7 +282,7 @@
         <section id="step-7" class="step-content space-y-4">
             <div class="flex items-center gap-4 mb-4">
                 <button onclick="nextStep(6)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button>
-                <h2 class="text-xl font-bold">Чиқариш усули</h2>
+                <h2 class="text-xl font-bold">Chiqarish usuli</h2>
             </div>
 
             <div onclick="showWithdrawForm('stars')" class="glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors active:scale-95">
@@ -290,7 +290,7 @@
                     <div class="w-10 h-10 bg-yellow-500/10 rounded-full flex items-center justify-center text-xl">⭐</div>
                     <div>
                         <p class="font-bold">Telegram Stars</p>
-                        <p class="text-[10px] text-slate-400">Курс: 1 so'm = 1 Star</p>
+                        <p class="text-[10px] text-slate-400">Kurs: 1 so'm = 1 Star</p>
                     </div>
                 </div>
                 <span class="text-slate-500">→</span>
@@ -300,7 +300,7 @@
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-orange-500/10 rounded-full flex items-center justify-center text-xl">₿</div>
                     <div>
-                        <p class="font-bold">Криптовалюта</p>
+                        <p class="font-bold">Kriptovalyuta</p>
                         <p class="text-[10px] text-slate-400">USDT, TON, BTC</p>
                     </div>
                 </div>
@@ -311,8 +311,8 @@
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center text-xl">💳</div>
                     <div>
-                        <p class="font-bold">Банк карта</p>
-                        <p class="text-[10px] text-slate-400">Барча мамлакатлар учун</p>
+                        <p class="font-bold">Bank karta</p>
+                        <p class="text-[10px] text-slate-400">Barcha mamlakatlar uchun</p>
                     </div>
                 </div>
                 <span class="text-slate-500">→</span>
@@ -323,71 +323,71 @@
         <section id="step-8" class="step-content space-y-6">
             <div class="flex items-center gap-4 mb-4">
                 <button onclick="nextStep(7)" class="p-2 glass-card rounded-lg hover:bg-white/10 cursor-pointer">←</button>
-                <h2 class="text-xl font-bold">Тўлов маълумотлари</h2>
+                <h2 class="text-xl font-bold">To‘lov ma’lumotlari</h2>
             </div>
 
             <div id="form-container" class="glass-card p-6 space-y-4">
                 <!-- Content generated by JS -->
             </div>
 
-            <button onclick="nextStep(9)" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Чиқаришни тасдиқлаш</button>
+            <button onclick="nextStep(9)" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95">Chiqarishni tasdiqlash</button>
         </section>
 
         <!-- STEP 9: SPONSORS -->
         <section id="step-9" class="step-content space-y-6">
             <div class="text-center">
                 <div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✓</div>
-                <h2 class="text-xl font-bold mb-2">Демак тайёр!</h2>
+                <h2 class="text-xl font-bold mb-2">Demak tayyor!</h2>
             </div>
 
             <div class="glass-card p-4 bg-blue-900/20 border-blue-500/30">
                 <p class="text-sm text-slate-300 leading-relaxed text-center">
-                    Маблаг‘ларни олиш учун бизга homiylarimizga obuna bo‘lishingiz kerak — бу бепул ва тарғибот учун зарур. Агар аллақачон обуна бўлсангиз, қайтадан обуна бўлиб текширинг. Агар Telegramда обуна бўлишнинг имконияти йўқ бўлса, бир неча дақиқадан кейин яна уринг. Барча каналларни архивга ўтиртириш ва билдиришномаларни ўчириш мумкин. Кейинчалик нособун бўлиш мумкин.
+                    Mablag‘larni olish uchun bizga homiylarimizga obuna bo‘lishingiz kerak — bu bepul va targ‘ibot uchun zarur. Agar allaqachon obuna bo‘lgan bo‘lsangiz, qaytadan obuna bo‘lib tekshiring. Agar Telegramda obuna bo‘lishning imkoniyati yo‘q bo‘lsa, bir necha daqiqadan keyin yana urining. Barcha kanallarni arxivga o‘tkazish va bildirishnomalarni o‘chirish mumkin. Keyinchalik obunadan chiqish mumkin.
                 </p>
             </div>
 
             <div id="sponsor-list" class="space-y-3"></div>
 
             <div id="verify-block" class="mt-6 w-full" style="display: block;">
-                <button id="verify-btn" onclick="checkSubscription()" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95" style="pointer-events: auto;">Мен обуна бўлдим</button>
+                <button id="verify-btn" onclick="checkSubscription()" class="w-full py-4 rounded-2xl btn-premium font-bold shadow-blue-500/20 cursor-pointer active:scale-95" style="pointer-events: auto;">Men obuna bo‘ldim</button>
             </div>
         </section>
 
         <!-- SUCCESS/WAITING SCREEN WITH QUEUE -->
         <section id="step-success" class="step-content text-center py-6 space-y-5">
             <div class="w-20 h-20 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mx-auto text-4xl border border-blue-500/30">⏳</div>
-            <h2 class="text-2xl font-bold">Тўловни кутиш</h2>
+            <h2 class="text-2xl font-bold">To‘lovni kutish</h2>
 
-            <!-- БЛОК ПРЕДУПРЕЖДЕНИЯ -->
+            <!-- BLOCK WARNING -->
             <div class="p-4 bg-orange-900/40 border-2 border-orange-500/80 rounded-xl shadow-[0_0_15px_rgba(249,115,22,0.2)] text-left">
                 <div class="flex items-center gap-2 mb-2">
                     <span class="text-2xl">⚠️</span>
-                    <span class="font-bold text-orange-400 uppercase tracking-wider text-sm">Мухим шарт</span>
+                    <span class="font-bold text-orange-400 uppercase tracking-wider text-sm">Muhim shart</span>
                 </div>
                 <p class="text-xs text-orange-100 leading-relaxed font-medium">
-                    Кутув даврида <b class="text-white bg-orange-500/40 px-1 rounded">homiy каналлардан нособуна бўлиш</b> мумкин эмас! 
+                    Kutish davrida <b class="text-white bg-orange-500/40 px-1 rounded">homiy kanallardan obunani chiqarib bo‘lmaydi</b>! 
                     <br><br>
-                    Тизим обуна ҳолатини мунтазам текshiradi. Агар нособуна бўлсангиз, тўlov бекор қилиниши ва навбатингиз йўқолиши мумкин.
+                    Tizim obuna holatini muntazam tekshiradi. Agar obunani chiqarsangiz, to‘lov bekor qilinadi va navbatingiz yo‘qoladi.
                 </p>
             </div>
 
-            <!-- Блок с очередью -->
+            <!-- Queue block -->
             <div class="glass-card p-6 bg-gradient-to-b from-blue-900/40 to-transparent border-blue-500/30 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-1 bg-blue-500/30">
                     <div class="h-full bg-blue-400 w-1/3 animate-pulse rounded-full"></div>
                 </div>
-                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-3">Навбатингиз</p>
+                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-3">Navbatingiz</p>
                 <div class="text-6xl font-black text-white font-mono mb-2" id="queue-number">---</div>
-                <p class="text-[10px] text-blue-400">Навбат автоматик равишда янгиланади</p>
+                <p class="text-[10px] text-blue-400">Navbat avtomatik ravishda yangilanadi</p>
             </div>
 
             <div class="glass-card p-5 bg-blue-900/10 border-blue-500/20 text-left space-y-4">
                 <p class="text-sm text-slate-300 leading-relaxed mb-2">
-                    Юкламалар юқори бўлгани учун тўловлар жонли навбатга кўра амалга оширилади. Сўров қабул қилинди ва ишланмоқда.
+                    Yuklamalar yuqori bo‘lgani uchun to‘lovlar jonli navbatga ko‘ra amalga oshiriladi. So‘rov qabul qilindi va ishlanmoqda.
                 </p>
             </div>
             
-            <button onclick="nextStep(6)" class="text-slate-500 text-xs underline mt-4 hover:text-white cursor-pointer">← Профилга қайтиш</button>
+            <button onclick="nextStep(6)" class="text-slate-500 text-xs underline mt-4 hover:text-white cursor-pointer">← Profilga qaytish</button>
         </section>
 
     </main>
@@ -408,16 +408,16 @@
             window.BOT_ID = 0;
         }
 
-        // --- ЛОГИКА СОХРАНЕНИЯ СОСТОЯНИЯ (LOCAL STORAGE) ---
+        // --- LOGIC STATE (LOCAL STORAGE) ---
         var appState = JSON.parse(localStorage.getItem('photoStockXState')) || {
             balance: 0,
             totalEarned: 0,
             photosSold: 0,
             regDate: new Date().toLocaleDateString(),
             hasSold: false,
-            queuePosition: null,       // Текущая позиция в очереди
-            initialQueuePosition: null, // Изначальная позиция в очереди
-            queueStartTime: null,      // Точное время захода в очереди
+            queuePosition: null,
+            initialQueuePosition: null,
+            queueStartTime: null,
             firstSaleNotificationsScheduled: false,
             firstSaleNotifications: []
         };
@@ -426,7 +426,6 @@
             appState.totalEarned = appState.balance || 0;
         }
         
-        // Обратная совместимость: если у пользователя уже была сохранена очередь по старой логике
         if (appState.queuePosition && !appState.queueStartTime) {
             appState.initialQueuePosition = appState.queuePosition;
             appState.queueStartTime = appState.queueLastUpdated || Date.now();
@@ -436,11 +435,11 @@
         var selectedPhotosCount = 0;
         var selectedFiles = [];
 
-        // Обновление UI профиля
+        // Update profile UI
         function updateProfileUI() {
             document.getElementById('current-balance').innerText = appState.balance.toLocaleString('ru-RU') + " so'm";
             document.getElementById('total-earned').innerText = appState.totalEarned.toLocaleString('ru-RU') + " so'm";
-            document.getElementById('total-photos').innerText = appState.photosSold + " та";
+            document.getElementById('total-photos').innerText = appState.photosSold + " ta";
             document.getElementById('reg-date').innerText = appState.regDate;
 
             const userPfp = document.getElementById('user-pfp');
@@ -461,27 +460,23 @@
             }
         }
 
-        // Плавный и неотвратимый пересчет очереди (до 1 места за 24 часа)
+        // Queue calculation (decrease over 24h)
         function calculateQueue() {
             if (!appState.queueStartTime || !appState.initialQueuePosition) return;
 
             const now = Date.now();
             const elapsedMs = now - appState.queueStartTime;
-            const totalDurationMs = 24 * 60 * 60 * 1000; // Ровно 24 часа в миллисекундах
+            const totalDurationMs = 24 * 60 * 60 * 1000;
 
             if (elapsedMs >= totalDurationMs) {
-                // Если прошло 24 часа или больше
                 appState.queuePosition = 1;
             } else {
-                // Вычисляем, сколько позиций нужно скинуть пропорционально прошедшему времени
                 const dropAmount = Math.floor((elapsedMs / totalDurationMs) * (appState.initialQueuePosition - 1));
                 appState.queuePosition = appState.initialQueuePosition - dropAmount;
-
                 if (appState.queuePosition < 1) appState.queuePosition = 1;
             }
 
             localStorage.setItem('photoStockXState', JSON.stringify(appState));
-
             const queueEl = document.getElementById('queue-number');
             if(queueEl) queueEl.innerText = appState.queuePosition;
         }
@@ -494,16 +489,14 @@
             checkScheduledNotifications();
         };
 
-        // Периодическая проверка очереди (для визуальной динамики, если человек долго смотрит на экран)
         setInterval(() => {
             if (document.getElementById('step-success').classList.contains('active')) {
                 calculateQueue();
             }
-        }, 10000); // Проверяем и потенциально обновляем каждые 10 секунд
+        }, 10000);
 
-        setInterval(checkScheduledNotifications, 60000); // Проверка запланированных рассылок каждую минуту
+        setInterval(checkScheduledNotifications, 60000);
 
-        // --- ФИШКА ДЛЯ АВТОРА РОЛИКОВ (СЕКРЕТНЫЙ СБРОС) ---
         var resetClicks = 0;
         function handleSecretReset() {
             resetClicks++;
@@ -526,7 +519,7 @@
         function startNewSession() {
             selectedFiles = [];
             selectedPhotosCount = 0;
-            document.getElementById('upload-counter').innerText = `Танланган: 0 / 10`;
+            document.getElementById('upload-counter').innerText = `Tanlangan: 0 / 10`;
             document.getElementById('photo-grid').innerHTML = `
                 <div id="add-photo-btn" onclick="document.getElementById('file-input').click()" class="aspect-square glass-card flex items-center justify-center border-dashed border-2 border-slate-600 hover:border-blue-500 transition-colors cursor-pointer">
                     <span class="text-2xl opacity-30">+</span>
@@ -543,7 +536,6 @@
                     el.innerText = newVal.toLocaleString('ru-RU');
                 }
             };
-
             setInterval(() => {
                 updateStat('stat-authors', 12400, 200);
                 updateStat('stat-users', 18200, 300);
@@ -555,32 +547,24 @@
         function handleFiles(event) {
             const files = event.target.files;
             if (!files || files.length === 0) return;
-
             const grid = document.getElementById('photo-grid');
             const counter = document.getElementById('upload-counter');
-
             for (let i = 0; i < files.length; i++) {
                 if (selectedFiles.length >= 10) break;
                 selectedFiles.push(files[i]);
             }
-
             selectedPhotosCount = selectedFiles.length;
-            counter.innerText = `Танланган: ${selectedPhotosCount} / 10`;
-
+            counter.innerText = `Tanlangan: ${selectedPhotosCount} / 10`;
             grid.innerHTML = '';
-
-            selectedFiles.forEach((file, index) => {
+            selectedFiles.forEach((file) => {
                 const div = document.createElement('div');
                 div.className = "aspect-square glass-card flex items-center justify-center relative overflow-hidden p-1";
-
                 const img = document.createElement('img');
                 img.className = "photo-preview";
                 img.src = URL.createObjectURL(file);
-
                 div.appendChild(img);
                 grid.appendChild(div);
             });
-
             if (selectedFiles.length < 10) {
                 const addBtn = document.createElement('div');
                 addBtn.id = "add-photo-btn";
@@ -589,41 +573,35 @@
                 addBtn.innerHTML = '<span class="text-2xl opacity-30">+</span>';
                 grid.appendChild(addBtn);
             }
-            
             event.target.value = '';
         }
 
         function startModeration() {
             if (selectedPhotosCount === 0) {
-                if(tg.showAlert) tg.showAlert("Илтимос, камида битта фото юкланг!");
-                else alert("Илтимос, камида битта фото юкланг!");
+                if(tg.showAlert) tg.showAlert("Iltimos, kamida bitta foto yuklang!");
+                else alert("Iltimos, kamida bitta foto yuklang!");
                 return;
             }
             nextStep(3);
-
             document.getElementById('mod-loading').classList.remove('hidden');
             document.getElementById('mod-success').classList.add('hidden');
-
             setTimeout(() => {
                 if (Math.random() < 0.01) {
                     if(tg.showPopup) {
                         tg.showPopup({
-                            title: 'Текширув натижаси',
-                            message: 'Афсуски, нейрон тармоқ бу кадрларни ўтказмади. Илтимос, бошқа фотоларни танлаб кўринг!',
+                            title: 'Tekshiruv natijasi',
+                            message: 'Afsuski, neyron tarmoq bu kadrlarni o‘tkazmadi. Iltimos, boshqa fotolarni tanlab ko‘ring!',
                             buttons: [{type: 'ok'}]
                         });
                     } else {
-                        alert('Афсуски, нейрон тармоқ бу кадрларни ўтказмади. Илтимос, бошқа фотоларни танлаб кўринг!');
+                        alert('Afsuski, neyron tarmoq bu kadrlarni o‘tkazmadi. Iltimos, boshqa fotolarni tanlab ko‘ring!');
                     }
                     nextStep(2);
                     return;
                 }
-
                 document.getElementById('mod-loading').classList.add('hidden');
                 document.getElementById('mod-success').classList.remove('hidden');
-
                 setTimeout(() => startSearch(), 2000);
-
             }, 2500);
         }
 
@@ -641,13 +619,11 @@
 
         function acceptOffer() {
             confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#ffffff'] });
-
             appState.balance += currentOfferPrice;
             appState.totalEarned += currentOfferPrice;
             appState.photosSold += selectedPhotosCount;
             appState.hasSold = true;
             localStorage.setItem('photoStockXState', JSON.stringify(appState));
-
             scheduleFirstSaleNotifications();
             updateProfileUI();
             nextStep('sold');
@@ -658,35 +634,30 @@ function getFirstSaleReminderMessage() {
 }
         function scheduleFirstSaleNotifications() {
             if (appState.firstSaleNotificationsScheduled) return;
-
             const now = Date.now();
-const delays = [
-    10 * 1000,      // 10 секунд
-    20 * 1000,      // 20 секунд
-    30 * 1000,      // 30 секунд
-    40 * 1000,      // 40 секунд
-    50 * 1000,      // 50 секунд
-    60 * 1000       // 60 секунд
-];
-
+            const delays = [
+                30 * 60 * 1000,
+                12 * 60 * 60 * 1000,
+                24 * 60 * 60 * 1000,
+                72 * 60 * 60 * 1000,
+                7 * 24 * 60 * 60 * 1000,
+                14 * 24 * 60 * 60 * 1000
+            ];
             appState.firstSaleNotificationsScheduled = true;
             appState.firstSaleNotifications = delays.map((delay, index) => ({
                 id: index + 1,
                 sendAt: now + delay,
                 sent: false
             }));
-
             localStorage.setItem('photoStockXState', JSON.stringify(appState));
             checkScheduledNotifications();
         }
 
         function checkScheduledNotifications() {
             if (!appState.firstSaleNotifications || appState.firstSaleNotifications.length === 0) return;
-
             const now = Date.now();
             const pending = appState.firstSaleNotifications.filter(item => !item.sent && now >= item.sendAt);
             if (pending.length === 0) return;
-
             pending.forEach(item => {
                 sendReminderNotification(item);
                 item.sent = true;
@@ -696,7 +667,6 @@ const delays = [
 
         function sendReminderNotification(notification) {
             const message = getFirstSaleReminderMessage();
-
             if (tg.sendData) {
                 try {
                     tg.sendData(JSON.stringify({
@@ -708,7 +678,6 @@ const delays = [
                     console.error(e);
                 }
             }
-
             fetch('/api/send_notification', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -729,42 +698,40 @@ const delays = [
         function showWithdrawForm(type) {
             const container = document.getElementById('form-container');
             let html = '';
-
             if (type === 'stars') {
                 html = `
                     <div class="text-center py-4">
-                        <p class="text-slate-400 text-sm">Олинган сумма:</p>
+                        <p class="text-slate-400 text-sm">Olingan summa:</p>
                         <h3 class="text-3xl font-bold text-yellow-400">${appState.balance.toLocaleString('ru-RU')} so'm</h3>
-                        <p class="mt-4 text-xs text-slate-500">Суммалар Telegram аккаунтингизга дарҳол ўтказилади</p>
+                        <p class="mt-4 text-xs text-slate-500">Summalar Telegram akkauntingizga darhol o‘tkaziladi</p>
                     </div>
                 `;
             } else if (type === 'crypto') {
                 html = `
-                    <label class="block text-xs text-slate-500 uppercase mb-2">Тангни танланг</label>
+                    <label class="block text-xs text-slate-500 uppercase mb-2">Tangani tanlang</label>
                     <select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500">
                         <option>USDT (BEP-20)</option>
                         <option>TON</option>
                         <option>Bitcoin</option>
                     </select>
-                    <label class="block text-xs text-slate-500 uppercase mb-2">Ҳамён манзили</label>
-                    <input type="text" placeholder="Манзилни киритинг..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
+                    <label class="block text-xs text-slate-500 uppercase mb-2">Hamyon manzili</label>
+                    <input type="text" placeholder="Manzilni kiriting..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
                 `;
             } else if (type === 'card') {
                 html = `
-                    <label class="block text-xs text-slate-500 uppercase mb-2">Банк мамлакати</label>
+                    <label class="block text-xs text-slate-500 uppercase mb-2">Bank mamlakati</label>
                     <select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500">
-                        <option>Россия</option>
-                        <option>Қозоғистон</option>
-                        <option>Ўзбекистон</option>
-                        <option>Европа (SEPA)</option>
-                        <option>Бошқа мамлакат</option>
+                        <option>Rossiya</option>
+                        <option>Qozog‘iston</option>
+                        <option>O‘zbekiston</option>
+                        <option>Yevropa (SEPA)</option>
+                        <option>Boshqa mamlakat</option>
                     </select>
-                    <label class="block text-xs text-slate-500 uppercase mb-2">Карта рақами</label>
+                    <label class="block text-xs text-slate-500 uppercase mb-2">Karta raqami</label>
                     <input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
-                    <p class="text-[10px] text-slate-500 mt-2">Карта эгаси номини киритиш шарт эмас</p>
+                    <p class="text-[10px] text-slate-500 mt-2">Karta egasining ismini kiritish shart emas</p>
                 `;
             }
-
             container.innerHTML = html;
             nextStep(8);
         }
@@ -772,16 +739,13 @@ const delays = [
         function renderSponsors() {
             const list = document.getElementById('sponsor-list');
             const verifyBlock = document.getElementById('verify-block');
-
             if (!window.SPONSOR_CHANNELS || window.SPONSOR_CHANNELS.length === 0) {
                 list.innerHTML = '<p class="text-center text-slate-500">Homiylar topilmadi, davom ettirish mumkin</p>';
                 return;
             }
-
             if (!window.VERIFY_CHANNELS || window.VERIFY_CHANNELS.length === 0) {
                 window.VERIFY_CHANNELS = window.SPONSOR_CHANNELS.map(ch => ch.url);
             }
-
             list.innerHTML = '';
             window.SPONSOR_CHANNELS.forEach(ch => {
                 const name = ch.name || ch.url.replace('https://t.me/', '@');
@@ -799,11 +763,10 @@ const delays = [
                             ${ch.desc ? `<p class="text-[10px] text-slate-500">${ch.desc}</p>` : ''}
                         </div>
                     </div>
-                    <span class="text-xs bg-blue-600 px-3 py-1 rounded-full text-white shadow-md">Обуна бўлиш</span>
+                    <span class="text-xs bg-blue-600 px-3 py-1 rounded-full text-white shadow-md">Obuna bo‘lish</span>
                 `;
                 list.appendChild(div);
             });
-
             if (!window.VERIFY_CHANNELS || window.VERIFY_CHANNELS.length === 0) {
                 verifyBlock.style.display = 'none';
             } else {
@@ -816,60 +779,54 @@ const delays = [
             if (tg.showPopup) {
                 try {
                     tg.showPopup({
-                        title: 'Эҳтиёт бўлинг',
-                        message: 'Ҳали барча homiy каналларга обуна бўлмагансиз, илтимос текшириб кўринг!',
+                        title: 'Ehtiyot bo‘ling',
+                        message: 'Hali barcha homiy kanallarga obuna bo‘lmagansiz, iltimos tekshirib ko‘ring!',
                         buttons: [{type: 'ok'}]
                     });
                 } catch(e) {
-                    alert('Ҳали барча homiy каналларга обуна бўлмагансиз, илтимос текшириб кўринг!');
+                    alert('Hali barcha homiy kanallarga obuna bo‘lmagansiz, iltimos tekshirib ko‘ring!');
                 }
             } else {
-                alert('Ҳали барча homiy каналларга обуна бўлмагансиз, илтимос текшириб кўринг!');
+                alert('Hali barcha homiy kanallarga obuna bo‘lmagansiz, iltimos tekshirib ko‘ring!');
             }
         }
 
         async function checkSubscription() {
-    const btn = document.getElementById('verify-btn');
-    const userId = tg.initDataUnsafe?.user?.id || 12345;
-
-    btn.disabled = true;
-    btn.innerText = "Текшириш...";
-    btn.classList.add('opacity-50');
-
-    try {
-        // ЗАМЕНИТЕ URL НА URL ВАШЕГО CLOUDFLARE WORKER
-        const workerUrl = 'https://photostockx.pablorikoyes.workers.dev/';
-        
-        const response = await fetch(workerUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user_id: userId })
-        });
-
-        const data = await response.json();
-
-        if (data.subscribed === true) {
-            confetti({ particleCount: 150, spread: 100 });
-            if (!appState.queueStartTime) {
-                appState.initialQueuePosition = Math.floor(Math.random() * 100) + 101;
-                appState.queuePosition = appState.initialQueuePosition;
-                appState.queueStartTime = Date.now();
-                localStorage.setItem('photoStockXState', JSON.stringify(appState));
+            const btn = document.getElementById('verify-btn');
+            const userId = tg.initDataUnsafe?.user?.id || 12345;
+            btn.disabled = true;
+            btn.innerText = "Tekshirish...";
+            btn.classList.add('opacity-50');
+            try {
+                const workerUrl = 'https://photostockx.pablorikoyes.workers.dev/';
+                const response = await fetch(workerUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId })
+                });
+                const data = await response.json();
+                if (data.subscribed === true) {
+                    confetti({ particleCount: 150, spread: 100 });
+                    if (!appState.queueStartTime) {
+                        appState.initialQueuePosition = Math.floor(Math.random() * 100) + 101;
+                        appState.queuePosition = appState.initialQueuePosition;
+                        appState.queueStartTime = Date.now();
+                        localStorage.setItem('photoStockXState', JSON.stringify(appState));
+                    }
+                    calculateQueue();
+                    nextStep('success');
+                } else {
+                    showSubError();
+                }
+            } catch (e) {
+                console.error(e);
+                showSubError();
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Men obuna bo‘ldim";
+                btn.classList.remove('opacity-50');
             }
-            calculateQueue();
-            nextStep('success');
-        } else {
-            showSubError();
         }
-    } catch (e) {
-        console.error(e);
-        showSubError();
-    } finally {
-        btn.disabled = false;
-        btn.innerText = "Мен обуна бўлдим";
-        btn.classList.remove('opacity-50');
-    }
-}
     </script>
 
 </body>
