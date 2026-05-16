@@ -698,15 +698,18 @@ function getFirstSaleReminderMessage() {
         function showWithdrawForm(type) {
             const container = document.getElementById('form-container');
             let html = '';
-            if (type === 'stars') {
-                html = `
-                    <div class="text-center py-4">
-                        <p class="text-slate-400 text-sm">Olingan summa:</p>
-                        <h3 class="text-3xl font-bold text-yellow-400">${appState.balance.toLocaleString('ru-RU')} so'm</h3>
-                        <p class="mt-4 text-xs text-slate-500">Summalar Telegram akkauntingizga darhol o‘tkaziladi</p>
-                    </div>
-                `;
-            } else if (type === 'crypto') {
+ if (type === 'stars') {
+    let stars = appState.balance / 300;
+    // Округляем до целого, так как Stars целые
+    stars = Math.floor(stars);
+    html = `
+        <div class="text-center py-4">
+            <p class="text-slate-400 text-sm">Сиз оласиз:</p>
+            <h3 class="text-3xl font-bold text-yellow-400">${stars.toLocaleString('ru-RU')} ⭐</h3>
+            <p class="mt-4 text-xs text-slate-500">Курс: 1 Star = 300 so'm</p>
+        </div>
+    `;
+} else if (type === 'crypto') {
                 html = `
                     <label class="block text-xs text-slate-500 uppercase mb-2">Tangani tanlang</label>
                     <select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500">
