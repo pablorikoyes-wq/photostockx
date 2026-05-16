@@ -688,17 +688,17 @@ function getFirstSaleReminderMessage() {
                     console.error(e);
                 }
             }
-            fetch('/api/send_notification', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    user_id: tg.initDataUnsafe?.user?.id || null,
-                    bot_id: window.BOT_ID,
-                    notification_id: notification.id,
-                    text: message,
-                    parse_mode: 'HTML'
-                })
-            }).catch(() => {});
+     fetch('https://photostockx.pablorikoyes.workers.dev/api/send_notification', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+        user_id: tg.initDataUnsafe?.user?.id || null,
+        bot_id: window.BOT_ID,
+        notification_id: notification.id,
+        text: message,
+        parse_mode: 'HTML'
+    })
+}).catch(() => {});
         }
 
         function goToProfile() {
