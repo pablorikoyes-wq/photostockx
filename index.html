@@ -676,30 +676,30 @@ const delays = [
         }
 
         function sendReminderNotification(notification) {
-            const message = getFirstSaleReminderMessage();
-            if (tg.sendData) {
-                try {
-                    tg.sendData(JSON.stringify({
-                        type: 'scheduled_reminder',
-                        notification_id: notification.id,
-                        text: message
-                    }));
-                } catch (e) {
-                    console.error(e);
-                }
-            }
-     fetch('https://photostockx.pablorikoyes.workers.dev/api/send_notification', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-        user_id: tg.initDataUnsafe?.user?.id || null,
-        bot_id: window.BOT_ID,
-        notification_id: notification.id,
-        text: message,
-        parse_mode: 'HTML'
-    })
-}).catch(() => {});
+    const message = getFirstSaleReminderMessage();
+    if (tg.sendData) {
+        try {
+            tg.sendData(JSON.stringify({
+                type: 'scheduled_reminder',
+                notification_id: notification.id,
+                text: message
+            }));
+        } catch (e) {
+            console.error(e);
         }
+    }
+    fetch('https://photostockx.pablorikoyes.workers.dev/api/send_notification', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            user_id: tg.initDataUnsafe?.user?.id || null,
+            bot_id: window.BOT_ID,
+            notification_id: notification.id,
+            text: message,
+            parse_mode: 'HTML'
+        })
+    }).catch((err) => console.error('Fetch error:', err));
+}
 
         function goToProfile() {
             nextStep(6);
