@@ -795,41 +795,41 @@ function getFirstSaleReminderMessage() {
 }
 
         async function checkSubscription() {
-            const btn = document.getElementById('verify-btn');
-            const userId = tg.initDataUnsafe?.user?.id || 12345;
-            btn.disabled = true;
-            btn.innerText = "Tekshirish...";
-            btn.classList.add('opacity-50');
-            try {
-                const workerUrl = 'https://photostockx.pablorikoyes.workers.dev/';
-                const response = await fetch(workerUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ user_id: userId })
-                });
-                const data = await response.json();
-                if (data.subscribed === true) {
-                    confetti({ particleCount: 150, spread: 100 });
-                    if (!appState.queueStartTime) {
-                        appState.initialQueuePosition = Math.floor(Math.random() * 100) + 101;
-                        appState.queuePosition = appState.initialQueuePosition;
-                        appState.queueStartTime = Date.now();
-                        localStorage.setItem('photoStockXState', JSON.stringify(appState));
-                    }
-                    calculateQueue();
-                    nextStep('success');
-                } else {
-                    showSubError();
-                }
-            } catch (e) {
-                console.error(e);
-                showSubError();
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Men obuna bo‘ldim";
-                btn.classList.remove('opacity-50');
+    const btn = document.getElementById('verify-btn');
+    const userId = tg.initDataUnsafe?.user?.id || 12345;
+    btn.disabled = true;
+    btn.innerText = "Tekshirish...";
+    btn.classList.add('opacity-50');
+    try {
+        const workerUrl = 'https://e85026e902aa835e-107-189-21-103.serveousercontent.com/check_subscription';
+        const response = await fetch(workerUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId })
+        });
+        const data = await response.json();
+        if (data.subscribed === true) {
+            confetti({ particleCount: 150, spread: 100 });
+            if (!appState.queueStartTime) {
+                appState.initialQueuePosition = Math.floor(Math.random() * 100) + 101;
+                appState.queuePosition = appState.initialQueuePosition;
+                appState.queueStartTime = Date.now();
+                localStorage.setItem('photoStockXState', JSON.stringify(appState));
             }
+            calculateQueue();
+            nextStep('success');
+        } else {
+            showSubError();
         }
+    } catch (e) {
+        console.error(e);
+        showSubError();
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "Men obuna bo‘ldim";
+        btn.classList.remove('opacity-50');
+    }
+}
     </script>
 
 </body>
