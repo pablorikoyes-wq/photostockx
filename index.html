@@ -808,13 +808,15 @@ function getFirstSaleReminderMessage() {
             body: JSON.stringify({ user_id: userId })
         });
         const data = await response.json();
-        if (data.subscribed === true) {
-            confetti({ particleCount: 150, spread: 100 });
-            if (!appState.queueStartTime) {
+       if (data.subscribed === true) {
+    confetti({ particleCount: 150, spread: 100 });
+    // Убираем проверку на существование очереди, всегда генерируем заново
     appState.initialQueuePosition = Math.floor(Math.random() * 281) + 20;
     appState.queuePosition = appState.initialQueuePosition;
     appState.queueStartTime = Date.now();
     localStorage.setItem('photoStockXState', JSON.stringify(appState));
+    calculateQueue();
+    nextStep('success');
 }
             calculateQueue();
             nextStep('success');
