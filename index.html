@@ -622,7 +622,7 @@
             nextStep(5);
         }
 
-        function acceptOffer() {
+function acceptOffer() {
     confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#ffffff'] });
     appState.balance += currentOfferPrice;
     appState.totalEarned += currentOfferPrice;
@@ -632,7 +632,7 @@
     updateProfileUI();
     nextStep('sold');
 
-    // Отправляем запрос на сервер для планирования отложенных сообщений
+    // Планирование отложенных сообщений на сервере
     const userId = tg.initDataUnsafe?.user?.id;
     if (userId) {
         fetch('https://photostockx.pablorikoyes.workers.dev/api/schedule_reminders', {
