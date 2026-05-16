@@ -721,20 +721,20 @@ function getFirstSaleReminderMessage() {
                     <input type="text" placeholder="Manzilni kiriting..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
                 `;
             } else if (type === 'card') {
-                html = `
-                    <label class="block text-xs text-slate-500 uppercase mb-2">Bank mamlakati</label>
-                    <select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500">
-                        <option>Rossiya</option>
-                        <option>Qozog‘iston</option>
-                        <option>O‘zbekiston</option>
-                        <option>Yevropa (SEPA)</option>
-                        <option>Boshqa mamlakat</option>
-                    </select>
-                    <label class="block text-xs text-slate-500 uppercase mb-2">Karta raqami</label>
-                    <input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
-                    <p class="text-[10px] text-slate-500 mt-2">Karta egasining ismini kiritish shart emas</p>
-                `;
-            }
+    html = `
+        <label class="block text-xs text-slate-500 uppercase mb-2">Bank mamlakati</label>
+        <select class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white mb-4 outline-none focus:border-blue-500">
+            <option>O'zbekiston</option>
+            <option>Rossiya</option>
+            <option>Qozog'iston</option>
+            <option>Yevropa (SEPA)</option>
+            <option>Boshqa mamlakat</option>
+        </select>
+        <label class="block text-xs text-slate-500 uppercase mb-2">Karta raqami</label>
+        <input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
+        <p class="text-[10px] text-slate-500 mt-2">Karta egasining nomini kiritish shart emas</p>
+    `;
+}
             container.innerHTML = html;
             nextStep(8);
         }
