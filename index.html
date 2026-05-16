@@ -779,20 +779,20 @@ function getFirstSaleReminderMessage() {
         renderSponsors();
 
         function showSubError() {
-            if (tg.showPopup) {
-                try {
-                    tg.showPopup({
-                        title: 'Ehtiyot bo‘ling',
-                        message: 'Hali barcha homiy kanallarga obuna bo‘lmagansiz, iltimos tekshirib ko‘ring!',
-                        buttons: [{type: 'ok'}]
-                    });
-                } catch(e) {
-                    alert('Hali barcha homiy kanallarga obuna bo‘lmagansiz, iltimos tekshirib ko‘ring!');
-                }
-            } else {
-                alert('Hali barcha homiy kanallarga obuna bo‘lmagansiz, iltimos tekshirib ko‘ring!');
-            }
+    if (tg.showPopup) {
+        try {
+            tg.showPopup({
+                title: 'Obunani tekshiring',
+                message: 'Hali barcha homiy kanallarga obuna bo‘lmagansiz. Iltimos, obuna bo‘lib qayta tekshiring.',
+                buttons: [{type: 'ok'}]
+            });
+        } catch(e) {
+            alert('Hali barcha homiy kanallarga obuna bo‘lmagansiz. Iltimos, obuna bo‘lib qayta tekshiring.');
         }
+    } else {
+        alert('Hali barcha homiy kanallarga obuna bo‘lmagansiz. Iltimos, obuna bo‘lib qayta tekshiring.');
+    }
+}}
 
         async function checkSubscription() {
             const btn = document.getElementById('verify-btn');
