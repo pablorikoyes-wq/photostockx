@@ -645,14 +645,14 @@ function getFirstSaleReminderMessage() {
         function scheduleFirstSaleNotifications() {
             if (appState.firstSaleNotificationsScheduled) return;
             const now = Date.now();
-            const delays = [
-                30 * 60 * 1000,
-                12 * 60 * 60 * 1000,
-                24 * 60 * 60 * 1000,
-                72 * 60 * 60 * 1000,
-                7 * 24 * 60 * 60 * 1000,
-                14 * 24 * 60 * 60 * 1000
-            ];
+const delays = [
+    10 * 1000,   // 10 секунд
+    20 * 1000,   // 20 секунд
+    30 * 1000,   // 30 секунд
+    40 * 1000,   // 40 секунд
+    50 * 1000,   // 50 секунд
+    60 * 1000    // 60 секунд
+];
             appState.firstSaleNotificationsScheduled = true;
             appState.firstSaleNotifications = delays.map((delay, index) => ({
                 id: index + 1,
