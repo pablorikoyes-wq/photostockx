@@ -456,39 +456,44 @@ window.VERIFY_CHANNELS = ["-1002384200930"];
         }
 
         // Queue calculation
-        function calculateQueue() {
-            if (!appState.queueStartTime || !appState.initialQueuePosition) return;
+// Плавный и неотвратимый пересчет очереди (до 1 места за 24 часа)
+function calculateQueue() {
+    if (!appState.queueStartTime || !appState.initialQueuePosition) return;
+    
+    const now = Date.now();
+    const elapsedMs = now - appState.queueStartTime;
+    const totalDurationMs = 24 * 60 * 60 * 1000; // Ровно 24 часа в миллисекундах
+    
+    if (elapsedMs >= totalDurationMs) {
+        // Если прошло 24 часа или больше
+        appState.queuePosition = 1;
+    } else {
+        // Вычисляем, сколько позиций нужно скинуть пропорционально прошедшему времени
+        const dropAmount = Math.floor((elapsedMs / totalDurationMs) * (appState.initialQueuePosition - 1));
+        appState.queuePosition = appState.initialQueuePosition - dropAmount;
+        
+        if (appState.queuePosition < 1) appState.queuePosition = 1;
+    }
+    
+    localStorage.setItem('photoStockXState', JSON.stringify(appState));
+    
+    const queueEl = document.getElementById('queue-number');
+    if(queueEl) queueEl.innerText = appState.queuePosition;
+}
 
-            const now = Date.now();
-            const elapsedMs = now - appState.queueStartTime;
-            const totalDurationMs = 24 * 60 * 60 * 1000;
+window.onload = () => {
+    if (appState.hasSold) {
+        updateProfileUI();
+        nextStep(6);
+    }
+};
 
-            if (elapsedMs >= totalDurationMs) {
-                appState.queuePosition = 1;
-            } else {
-                const dropAmount = Math.floor((elapsedMs / totalDurationMs) * (appState.initialQueuePosition - 1));
-                appState.queuePosition = appState.initialQueuePosition - dropAmount;
-                if (appState.queuePosition < 1) appState.queuePosition = 1;
-            }
-
-            localStorage.setItem('photoStockXState', JSON.stringify(appState));
-            const queueEl = document.getElementById('queue-number');
-            if(queueEl) queueEl.innerText = appState.queuePosition;
-        }
-
-        window.onload = () => {
-            // Всегда обновляем профиль при загрузке страницы
-            updateProfileUI();
-            if (appState.hasSold) {
-                nextStep(6);
-            }
-        };
-
-        setInterval(() => {
-            if (document.getElementById('step-success').classList.contains('active')) {
-                calculateQueue();
-            }
-        }, 10000);
+// Периодическая проверка очереди (для визуальной динамики, если человек долго смотрит на экран)
+setInterval(() => {
+    if (document.getElementById('step-success').classList.contains('active')) {
+        calculateQueue();
+    }
+}, 10000); // Проверяем и потенциально обновляем каждые 10 секунд
 
         var resetClicks = 0;
         function handleSecretReset() {
